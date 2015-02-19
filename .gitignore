@@ -2,3 +2,4 @@
 logs/*
 target
 toindex
+src/main/web/sqlbackup
