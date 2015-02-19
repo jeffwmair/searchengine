@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>WebCrawler</groupId>
-    <artifactId>WebCrawler</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>searchengine</groupId>
+    <artifactId>SearchEngine</artifactId>
+    <version>1.0</version>
 
     <dependencies>
         <dependency>
@@ -36,5 +36,82 @@
             <version>4.4.1</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
 
+                <dependencies>
+                    <!-- specify the dependent jdbc driver here -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.6</version>
+                    </dependency>
+                </dependencies>
+
+                <!-- common configuration shared by all executions -->
+                <configuration>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <settingsKey>mysqlauth</settingsKey>
+                    <!--all executions are ignored if -Dmaven.test.skip=true-->
+                    <skip>${maven.test.skip}</skip>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>drop-db-before-test-if-any</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <!-- need another database to drop the targeted one -->
+                            <url>jdbc:mysql://localhost:3306</url>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/sql/DropDatabase.sql</srcFile>
+                            </srcFiles>
+                            <!-- ignore error when database is not avaiable -->
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>create-db</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost:3306</url>
+                            <!-- no transaction -->
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/sql/CreateDatabase.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>create-schema</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost:3306</url>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/sql/DatabaseSchema.sql</srcFile>
+                            </srcFiles>
+                            <delimiterType>row</delimiterType>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

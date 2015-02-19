@@ -34,7 +34,7 @@ private static final String CHAR_SET = "UTF-8";
 		try {
 			String urlParameters = String.format(paramName + "=%s", URLEncoder.encode(paramData, CHAR_SET));
             // see utils.php for corresponding hard coded password
-            String pass = "password goes here";
+            String pass = "searchenginepass";
 			urlParameters += "&pass=" + URLEncoder.encode(pass, CHAR_SET);
 			url = new URL(urlLoc);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -116,7 +116,7 @@ private static final String CHAR_SET = "UTF-8";
 	}
 	
 	private static String getServiceLocation(String host, String phpFunction) {
-		return "http://" + host + "/WebApps/SearchEngine/services/" + phpFunction;
+		return "http://" + host + "/services/" + phpFunction;
 	}
 	
 	public static String cleanUrl(String url) {

@@ -19,7 +19,7 @@ public class Database {
 	}
 	
 	public void updateSummaries(String clientName) {
-		HttpUtils.httpost(_webServiceHost, clientName, "data", "empty", "UpdateSummaries.php", false, _log);
+		HttpUtils.httpPost(_webServiceHost, clientName, "data", "empty", "UpdateSummaries.php", false, _log);
 	}
 	
 	public void addPerformanceStats(String clientName, int workers, int verifications, int crawls, int indexes) {
