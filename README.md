@@ -9,3 +9,6 @@ The project is maven-based.  Have a look in the pom.xml to make note of how the 
 The manual part of the setup is the web site.  Currently I don't have that automated in maven.  So you'll need to copy all the content inside src/main/web into your apache web directory.  The Web Crawler is hard coded to look for the various PHP services at http://localhost/services/... .php.  So you can either change that in the code, or just point apache directly at the above-mentioed src/main/web.  
 
 My full project report, ProjectReport.pdf, can be found at the root of this project. 
+
+## Demo
+![Alt text](/SearchEngine.gif)
