@@ -11,4 +11,6 @@ The manual part of the setup is the web site.  Currently I don't have that autom
 My full project report, ProjectReport.pdf, can be found at the root of this project. 
 
 ## Demo
+
+An instance of the search engine should still be online, though I have disabled indexing of new web pages.  I have indexed a small-ish set of pages.  [See what you find!](http://jefftron.com/WebApps/SearchEngine/WebSearch.php)
 ![Alt text](/SearchEngine.gif)
