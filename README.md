@@ -12,5 +12,5 @@ My full project report, ProjectReport.pdf, can be found at the root of this proj
 
 ## Demo
 
-An instance of the search engine should still be online, though I have disabled indexing of new web pages.  I have indexed a small-ish set of pages.  [See what you find!](http://jefftron.com/WebApps/SearchEngine/WebSearch.php)
+For now, I no longer have the search engine online.
 ![Alt text](/SearchEngine.gif)
