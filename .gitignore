@@ -1,5 +1,6 @@
-.idea
+.idea/
 logs/*
 target
 toindex
+*.iml
 src/main/web/sqlbackup
