@@ -1,12 +1,8 @@
-use searchengine
-;
-
 CREATE TABLE summarydata_i(
 	item VARCHAR(100) NOT NULL,
 	val BIGINT NOT NULL,
 	updatedate DATETIME NOT NULL
-)
-;
+);
 
 CREATE TABLE domains(
 	domainId BIGINT NOT NULL AUTO_INCREMENT,
@@ -17,12 +13,10 @@ CREATE TABLE domains(
 	total_crawls SMALLINT(5) NOT NULL,
 	locked BIT NOT NULL,
 	PRIMARY KEY (domainId, domain)
-)
-;
+);
 
 CREATE UNIQUE INDEX uix_domains
-    ON domains (domain)
-;
+    ON domains (domain);
 
 CREATE TABLE pages(
 	pageId BIGINT NOT NULL AUTO_INCREMENT,
@@ -36,8 +30,7 @@ CREATE TABLE pages(
 	fail_count SMALLINT(5) NOT NULL,
 	PRIMARY KEY(pageId, url),
 	FOREIGN KEY (domainId) REFERENCES domains (domainId)
-)
-;
+);
 
 CREATE TABLE pagesubmissions( 
 	id BIGINT NOT NULL AUTO_INCREMENT,
@@ -125,17 +118,16 @@ CREATE TABLE validextensions (
   extType SMALLINT(5) NOT NULL,
   ext VARCHAR(20) NOT NULL,
   PRIMARY KEY (extensionId)
-)
-;
+);
 
+
+delimiter |
 
 create procedure insert_url(IN pContainingPageUrl varchar(500), IN pDomain varchar(500), IN pUrl varchar(500), IN pCrawlerId int) 
-
 begin
 
-    /* find the domainid or insert it if it is not there */
     set @domainid = (select domainid from domains where domain = pDomain);
-    if @domainid is null then 
+    if @domainid is NULL then 
       insert into domains (domain, status, crawlerId, total_crawls, locked) values (pDomain, 0, pCrawlerId, 0, 0);
       SET @domainid = LAST_INSERT_ID();
     end if;
@@ -150,7 +142,7 @@ begin
     insert into pagelinks (pageId, destPageId) values (@containingPageId, @pageId);
 
 end
-;
+|
 
 
 create procedure insert_terms(IN pPageId int)
@@ -178,116 +170,41 @@ begin
     delete from pageterm_input where pageId = pPageId; 
 		
 end
-;
+|
 
 
+delimiter ;
 
 /* tld's */
 
-insert into validextensions (extType, ext) values (1, '.biz')
-;
-insert into validextensions (extType, ext) values (1, '.com')
-;
-insert into validextensions (extType, ext) values (1, '.edu')
-;
-insert into validextensions (extType, ext) values (1, '.gov')
-;
-insert into validextensions (extType, ext) values (1, '.info')
-;
-insert into validextensions (extType, ext) values (1, '.net')
-;
-insert into validextensions (extType, ext) values (1, '.org')
-;
-insert into validextensions (extType, ext) values (1, '.tv')
-;
-insert into validextensions (extType, ext) values (1, '.io')
-;
-
+insert into validextensions (extType, ext) values (1, '.biz');
+insert into validextensions (extType, ext) values (1, '.com');
+insert into validextensions (extType, ext) values (1, '.edu');
+insert into validextensions (extType, ext) values (1, '.gov');
+insert into validextensions (extType, ext) values (1, '.info');
+insert into validextensions (extType, ext) values (1, '.net');
+insert into validextensions (extType, ext) values (1, '.org');
+insert into validextensions (extType, ext) values (1, '.tv');
+insert into validextensions (extType, ext) values (1, '.io');
 
 /* countries */
-insert into validextensions (extType, ext) values (1, '.at')
-;
-insert into validextensions (extType, ext) values (1, '.ca')
-;
-insert into validextensions (extType, ext) values (1, '.fr')
-;
-insert into validextensions (extType, ext) values (1, '.kr')
-;
-insert into validextensions (extType, ext) values (1, '.uk')
-;
-insert into validextensions (extType, ext) values (1, '.us')
-;
-insert into validextensions (extType, ext) values (1, '.it')
-;
-insert into validextensions (extType, ext) values (1, '.jp')
-;
-insert into validextensions (extType, ext) values (1, '.me')
-;
-insert into validextensions (extType, ext) values (1, '.mu')
-;
-insert into validextensions (extType, ext) values (1, '.no')
-;
-insert into validextensions (extType, ext) values (1, '.se')
-;
+insert into validextensions (extType, ext) values (1, '.at');
+insert into validextensions (extType, ext) values (1, '.ca');
+insert into validextensions (extType, ext) values (1, '.fr');
+insert into validextensions (extType, ext) values (1, '.kr');
+insert into validextensions (extType, ext) values (1, '.uk');
+insert into validextensions (extType, ext) values (1, '.us');
+insert into validextensions (extType, ext) values (1, '.it');
+insert into validextensions (extType, ext) values (1, '.jp');
+insert into validextensions (extType, ext) values (1, '.me');
+insert into validextensions (extType, ext) values (1, '.mu');
+insert into validextensions (extType, ext) values (1, '.no');
+insert into validextensions (extType, ext) values (1, '.se');
 
 
 /* page extensions -- currently not used */
-insert into validextensions (extType, ext) values (2, '.html')
-;
-insert into validextensions (extType, ext) values (2, '.htm')
-;
-insert into validextensions (extType, ext) values (2, '.asp')
-;
-insert into validextensions (extType, ext) values (2, '.aspx')
-;
-insert into validextensions (extType, ext) values (2, '.php')
-;
-
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('jefftron.com', 2, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'http://jefftron.com/', 1, 0, 0)
-;
-
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('theband.hiof.no', 3, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'http://theband.hiof.no/', 1, 0, 0)
-;
-	
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('cbc.ca', 4, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'http://cbc.ca/news/', 1, 0, 0)
-;
-
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('news.ycombinator.com', 5, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'https://news.ycombinator.com/', 1, 0, 0)
-;
-
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('ehow.com', 6, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'http://www.ehow.com/how_6738049_start-consulting-business-ontario.html', 1, 0, 0)
-;
-
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('naver.com', 7, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'http://naver.com/', 1, 0, 0)
-;
-	
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('scs.ryerson.ca', 8, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'http://scs.ryerson.ca', 1, 0, 0)
-;
-
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('owl.english.purdue.edu', 9, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'https://owl.english.purdue.edu/owl/', 1, 0, 0)
-;
-	
-insert into domains(domain, crawlerId, status, total_crawls, locked) values ('www.grey.ca', 10, 1, 0, 0)
-;
-insert into pages(domainid, url, verified, pagerank, fail_count) values (LAST_INSERT_ID(), 'http://www.grey.ca/', 1, 0, 0)
-;
-;
-
-
-
+insert into validextensions (extType, ext) values (2, '.html');
+insert into validextensions (extType, ext) values (2, '.htm');
+insert into validextensions (extType, ext) values (2, '.asp');
+insert into validextensions (extType, ext) values (2, '.aspx');
+insert into validextensions (extType, ext) values (2, '.php');
