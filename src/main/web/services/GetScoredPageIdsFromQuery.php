@@ -199,12 +199,14 @@
 		
 		// now get the term ids and number of instances of the termid in the query -- this is needed for the 
 		// query vector calculation
-		foreach($queryTerms as $term) {
-			$termId = $tempQueryTerms[$term];
-			if (!isset($queryTermIds[$termId])) {
-				$queryTermIds[$termId] = 0;
+		if (count($queryTerms) > 0 && count($tempQueryTerms) > 0) {
+			foreach($queryTerms as $term) {
+				$termId = $tempQueryTerms[$term];
+				if (!isset($queryTermIds[$termId])) {
+					$queryTermIds[$termId] = 0;
+				}
+				$queryTermIds[$termId] = $queryTermIds[$termId] + 1;
 			}
-			$queryTermIds[$termId] = $queryTermIds[$termId] + 1;
 		}
 		
 		return $queryTermIds;
