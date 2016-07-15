@@ -45,7 +45,7 @@ public class IrMain {
 		boolean runCrawlers = false;
 		boolean runRobotChecker = false;
 		boolean runIndexers = false;
-		String host = "localhost";
+		String host = "localhost/searchengine";
 		for(String arg : args) {
 			if (arg.startsWith("--crawl")) {
 				runCrawlers = Boolean.parseBoolean(arg.split("=")[1]);

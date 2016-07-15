@@ -8,6 +8,15 @@ import java.util.Date;
 
 public class Log {
 
+    static {
+
+        File documentDir = new File("logs");
+        if (!documentDir.exists()) {
+            documentDir.mkdir();
+        }
+
+    }
+
 	public synchronized void LogMessage(String name, String message, boolean err)
     {
 
