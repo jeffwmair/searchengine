@@ -40,7 +40,12 @@ setup_db() {
 run_program() {
 	echo "Starting program"
 	cd $JWM_DEV/searchengine/target/
-	java -jar SearchEngine-1.0.jar
+	mkdir flags
+	# create a stop command file already; the test will finish before this is observed, actually.
+	#touch flags/stop.txt
+	# requires a stopwords.txt for now...
+	touch stopwords.txt
+	java -jar SearchEngine-1.0.jar --host=localhost/searchengine --crawl=true --index=true --checkrobots=true --disable_stats 
 }
 
 check_db_state() {

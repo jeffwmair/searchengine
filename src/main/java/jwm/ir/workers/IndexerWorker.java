@@ -67,7 +67,7 @@ public class IndexerWorker implements Runnable {
 				processInputFile(f, _tp);
 			}
 			
-			sleep(10);
+			sleep(2);
 		}
 		
 	}

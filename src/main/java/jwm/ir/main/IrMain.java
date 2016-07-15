@@ -42,10 +42,11 @@ public class IrMain {
 		
 		int workers = 1;
 		int prInterval = 500;
+		boolean disableStats = false;
 		boolean runCrawlers = false;
 		boolean runRobotChecker = false;
 		boolean runIndexers = false;
-		String host = "localhost/searchengine";
+		String host = "localhost";
 		for(String arg : args) {
 			if (arg.startsWith("--crawl")) {
 				runCrawlers = Boolean.parseBoolean(arg.split("=")[1]);
@@ -65,6 +66,9 @@ public class IrMain {
 			else if (arg.startsWith("--pagerank_interval=")) {
 				prInterval = Integer.parseInt(arg.split("=")[1]);
 			}
+			else if (arg.startsWith("--disable_stats")) {
+				disableStats = true;
+			}
 			else {
 				log.LogMessage(LOG_NAME, "Unknown argument: " + arg, true);
 				log.LogMessage(LOG_NAME, "Valid arguments include: --crawl={true/false} --index={true/false} --checkrobots={true/false} --pagerank_interval={int} --numworkers={int} --host={webservername}" + arg, true);
@@ -78,7 +82,8 @@ public class IrMain {
 		log.LogMessage(LOG_NAME, "numworkers=" + Integer.toString(workers), false);
 		log.LogMessage(LOG_NAME, "host=" + host, false);
 		log.LogMessage(LOG_NAME, "pagerank_interval=" + Integer.toString(prInterval), false);
-	
+		log.LogMessage(LOG_NAME, "disable_stats=" + Boolean.toString(disableStats), false);
+
 		
 		Database db = new Database(host, log);
 		
@@ -89,7 +94,7 @@ public class IrMain {
 		// indexed file counter tells Indexer#1 when to run PageRank update
 		AtomicInteger indexCounter = new AtomicInteger(0);
 		
-		PerformanceStatsUpdateWorker performanceWorker = new PerformanceStatsUpdateWorker(db, log, workers, stopApplication);
+		PerformanceStatsUpdateWorker performanceWorker = new PerformanceStatsUpdateWorker(db, log, workers, stopApplication, disableStats);
 				
 		for(int i = 1; i <= workers; i++) {
 			
@@ -137,7 +142,16 @@ public class IrMain {
 		if (!flagsDir.exists()) {
 			flagsDir.mkdir();
 		}
+
 		while (true) {
+
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			File stopFlag = new File("./flags/stop.txt");
 			if (stopFlag.exists()) {
 				stopFlag.delete();
@@ -145,12 +159,7 @@ public class IrMain {
 				stopApplication.set(true);
 				break;				
 			}
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
 		}
 	}
 	

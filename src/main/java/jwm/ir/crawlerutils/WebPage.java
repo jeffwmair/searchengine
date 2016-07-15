@@ -128,20 +128,17 @@ public class WebPage {
 				_log.LogMessage(_client, "Error getHyperlinks(); " + e.toString(), true);
 			}
 			if (url != null)  {
+				_log.LogMessage(_client, "url is:"+url, false);
 				
 				if (!links.containsKey(url) && anchorText.length() > 2) {
-					
+					_log.LogMessage(_client, "url is accepted (not found yet and length > 2)", false);
+
 					boolean isValidUrl = false;
-					try
-					{
 						isValidUrl = UrlUtils.isValidUrl(url, validPageExtensions, validDomainExtensions, _client, _log);
-					}
-					catch(Exception ex)
-					{
-						_log.LogMessage(_client, "Error determining the validity of url: " + url, true);
-					}
-					
+						_log.LogMessage(_client, "url is valid:"+isValidUrl, false);
+
 					if (isValidUrl) {
+						_log.LogMessage(_client, "keeping url", false);
 						links.put(url, anchorText);
 					}
 				}				

@@ -4,10 +4,11 @@
 	
 	// variables
 	$limit = 50;
-	$minDomainCrawlRateMinutes = 120;
+	//$minDomainCrawlRateMinutes = 120;
+	$minDomainCrawlRateMinutes = 0;
 	$failedPagePenaltyInMin = 240;
 	$minPageCrawlRateMinutes = 60 * 24 * 14;
-	
+
 	$conn = connect();
 		
 	/* put the pages into the temp table */

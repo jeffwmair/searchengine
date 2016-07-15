@@ -16,20 +16,24 @@ public class PerformanceStatsUpdateWorker implements Runnable {
 	private AtomicInteger _pagesIndexed = new AtomicInteger();
 	private AtomicBoolean _stopFlag = new AtomicBoolean();
 	private int _workers;
+	private final boolean disabled;
 	
-	public PerformanceStatsUpdateWorker(Database db, Log log, int workers, AtomicBoolean stopFlag) {
+	public PerformanceStatsUpdateWorker(Database db, Log log, int workers, AtomicBoolean stopFlag, boolean disabled) {
 		_db = db;
 		_log = log;
 		_workers = workers;
 		_stopFlag = stopFlag;
+		this.disabled = disabled;
 	}
-	
+
 	public void incrementPagesVerified() { _pagesVerified.addAndGet(1); }
 	public void incrementPagesCrawled() { _pagesCrawled.addAndGet(1); }
 	public void incrementPagesIndexed() { _pagesIndexed.addAndGet(1); }
 	
 	@Override
 	public void run() {
+
+		if (disabled) return;
 		
 		while(true && !_stopFlag.get())
 		{

@@ -12,7 +12,7 @@ public class UrlUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String getDomainFromAbsoluteUrl(String url) throws Exception {
+	public static String getDomainFromAbsoluteUrl(String url) {
 		String domain = null;
 		
 		if (url.startsWith("http://localhost")) {
@@ -20,7 +20,7 @@ public class UrlUtils {
 		}
 		
 		if (url.startsWith(".")) {
-			throw new Exception("The url " + url + " is not an absolute URL!");
+			throw new RuntimeException("The url " + url + " is not an absolute URL!");
 		}
 		
 		if (!url.contains(".")) {
@@ -138,16 +138,21 @@ public class UrlUtils {
 			ArrayList<String> validPageExtensions, 
 			ArrayList<String> validDomainExtensions,
 			String appName,
-			Log log) throws Exception {
+			Log log) {
 		
 		String domain = UrlUtils.getDomainFromAbsoluteUrl(url);
-		if (domain == null || !domain.contains(".")) return false;
+		if (domain == null || (!domain.contains(".") && !domain.equals("localhost"))) {
+			log.LogMessage(appName, "url '"+url+"' is not valid because the domain is:"+domain, false);
+			return false;
+		}
 		
 		/* check that the domain extension is valid */
-		String domainExt = domain.substring(domain.lastIndexOf("."));
-		if(!validDomainExtensions.contains(domainExt)) {
-			log.LogMessage(appName, "Domain extension '"+domainExt+"' was not found in the valid extensions list.  For domain: '"+domain+"'", false);
-			return false;
+		if (domain.contains(".")) {
+			String domainExt = domain.substring(domain.lastIndexOf("."));
+			if (!validDomainExtensions.contains(domainExt)) {
+				log.LogMessage(appName, "Domain extension '" + domainExt + "' was not found in the valid extensions list.  For domain: '" + domain + "'", false);
+				return false;
+			}
 		}
 		
 		/* check the page extension only if it has one, and if full url is different from the domain */

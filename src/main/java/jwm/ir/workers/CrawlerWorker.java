@@ -116,69 +116,61 @@ public class CrawlerWorker implements Runnable {
 	
 	private void mainCrawl() {
 	
-       try
-        {
-    	   
-        	while (true && !_stopApp.get()) {
-        		
-        		waitIfTooManyFilesAreQueued();
-        		
-        		// bring some urls out of the database for crawling
-        		long start = System.currentTimeMillis();
-        		log("Starting populate frontier", false);
-        		populateUrlFrontier(_frontier);
-        		log("Populated URL frontier from database with " + _frontier.size() + " links: " + (System.currentTimeMillis() - start) + "ms", false);
-        
-        		ArrayList<String> tempUrlList = new ArrayList<String>();
-        		for (String url : _frontier) tempUrlList.add(url);
-        	        		
-        		HashMap<String,String> urlsWithAnchorTexts = new HashMap<String, String>();
-        		
-        		for (String url : tempUrlList) {
-        			
-        			if (_stopApp.get()) break;
-        			
-        			WebPage p = new WebPage(getClientName(), url, _log);
-        			String title = null;
-        			String pageDesc = null;
-        			start = System.currentTimeMillis();
-        			boolean success = p.crawl();
-        			if (success) {
-        				// lets say we just count successful crawls with the performance worker
-        				_perfWorker.incrementPagesCrawled();
-        				title = p.getPageTitle();
-        				pageDesc = p.getPageDescription();
-        				boolean[] robotRules = new boolean[2];
-        				p.getRobotMetaRules(robotRules);
-        				boolean noIndex = robotRules[0];
-        				boolean noFollow = robotRules[1];
-        				
-        				if (!noIndex) {
-        					p.writeToFile(getOutputFilePrefix(), _documentDir.getAbsolutePath());
-        				}
-        				
-        				if (!noFollow) {
-        					start = System.currentTimeMillis();
-        					log("Starting add hyperlinks", false);
-        					urlsWithAnchorTexts = p.getHyperlinks(_validPageExtensions, _validDomainExtensions);
-        					/* TODO: add pagelinks in this addUrls call!! */
-        					addUrls(url, urlsWithAnchorTexts);
-        					log("Added "+ urlsWithAnchorTexts.size() +" hyperlinks to database: " + (System.currentTimeMillis() - start) + "ms", false);
-        				}
-        			}
-        			
-        			start = System.currentTimeMillis();
-        			log("Starting add page crawl result", false);
-					_db.addCrawlResult(getClientName(), url, title, pageDesc, new Date(), success);
-					log("Added page crawl result to database (with "+urlsWithAnchorTexts.size()+" outlinks): " + (System.currentTimeMillis() - start) + "ms", false);
-        			_frontier.remove(url);	       
-        		}
-   
-        	}
-        }
-        catch(Exception ex)
-        {
-        	log("main()" + ex.toString(), true);
+        while (true && !_stopApp.get()) {
+
+            waitIfTooManyFilesAreQueued();
+
+            // bring some urls out of the database for crawling
+            long start = System.currentTimeMillis();
+            log("Starting populate frontier", false);
+            populateUrlFrontier(_frontier);
+            log("Populated URL frontier from database with " + _frontier.size() + " links: " + (System.currentTimeMillis() - start) + "ms", false);
+
+            ArrayList<String> tempUrlList = new ArrayList<String>();
+            for (String url : _frontier) tempUrlList.add(url);
+
+            HashMap<String,String> urlsWithAnchorTexts = new HashMap<String, String>();
+
+            for (String url : tempUrlList) {
+
+                if (_stopApp.get()) break;
+
+                WebPage p = new WebPage(getClientName(), url, _log);
+                String title = null;
+                String pageDesc = null;
+                start = System.currentTimeMillis();
+                boolean success = p.crawl();
+                if (success) {
+                    // lets say we just count successful crawls with the performance worker
+                    _perfWorker.incrementPagesCrawled();
+                    title = p.getPageTitle();
+                    pageDesc = p.getPageDescription();
+                    boolean[] robotRules = new boolean[2];
+                    p.getRobotMetaRules(robotRules);
+                    boolean noIndex = robotRules[0];
+                    boolean noFollow = robotRules[1];
+
+                    if (!noIndex) {
+                        p.writeToFile(getOutputFilePrefix(), _documentDir.getAbsolutePath());
+                    }
+
+                    if (!noFollow) {
+                        start = System.currentTimeMillis();
+                        log("Starting add hyperlinks", false);
+                        urlsWithAnchorTexts = p.getHyperlinks(_validPageExtensions, _validDomainExtensions);
+                        /* TODO: add pagelinks in this addUrls call!! */
+                        addUrls(url, urlsWithAnchorTexts);
+                        log("Added "+ urlsWithAnchorTexts.size() +" hyperlinks to database: " + (System.currentTimeMillis() - start) + "ms", false);
+                    }
+                }
+
+                start = System.currentTimeMillis();
+                log("Starting add page crawl result", false);
+                _db.addCrawlResult(getClientName(), url, title, pageDesc, new Date(), success);
+                log("Added page crawl result to database (with "+urlsWithAnchorTexts.size()+" outlinks): " + (System.currentTimeMillis() - start) + "ms", false);
+                _frontier.remove(url);
+            }
+
         }
 	}
 	
@@ -189,12 +181,14 @@ public class CrawlerWorker implements Runnable {
 		frontier.clear();
 		
 		HashMap<String,String> urlsDomains = _db.getNextPagesForCrawling(getClientName(), _id);
+		if (urlsDomains.size() > 0) {
+			log("Retrieved list of domains of size:" + urlsDomains.size(), false);
+		}
 		for(Map.Entry<String, String> items : urlsDomains.entrySet()) {
 			frontier.add(items.getKey());
 		}
 		
 		if (frontier.size() == 0) {
-			log("No domains or urls to crawl, waiting 2s", false);
 			sleep(2);
 //			if (_id > 1) {
 //				_db.overtakeUncrawledDomain(getClientName(), _id);	

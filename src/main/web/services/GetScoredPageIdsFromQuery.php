@@ -108,6 +108,7 @@
 	4 = score (including pr)
 	*/
 	$jsonOut = json_encode($documentScoresLimited);
+	if (!$jsonOut) echo json_last_error();
 	echo $jsonOut;
 	
 	function scorePages($conn, $queryVector, $allTermIds, $pageIds, $numDocs, &$documentScores) {
@@ -141,7 +142,7 @@
 				$d_tf = ($tf == 0) ? 0 : (1 + log($tf, 10));
 				$w_td = $q_idf * $d_tf;
 				// logMsg($conn, 'PageId:' . $pageId . ', TermId:' . $qt . ', Wtd:' . $w_td);
-				if ($interimScores[$pageId] == NULL) {
+				if (count($interimScores) == 0 || $interimScores[$pageId] == NULL) {
 					$pageQtScore = array();
 					$pageQtScore[$qt] = $w_td;
 					$interimScores[$pageId] = $pageQtScore;
@@ -165,6 +166,9 @@
 					// add to the overall score of this page
 					// $documentScores[$pageId] = $nrmlScore + $documentScores[$pageId];
 					// Update 2013-12-28: remoevd the normalization part as it didn't make sense
+					if (count($documentScores) == 0 || $documentScores[$pageId] == null) {
+				        $documentScores[$pageId] = 0;
+					}
 					$documentScores[$pageId] = $documentScores[$pageId] + $score;
 				}
 			}
