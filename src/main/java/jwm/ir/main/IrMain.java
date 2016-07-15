@@ -62,12 +62,12 @@ public class IrMain {
 			else if (arg.startsWith("--host=")) {
 				host = arg.split("=")[1];
 			}
-			else if (arg.startsWith("--printerval=")) {
+			else if (arg.startsWith("--pagerank_interval=")) {
 				prInterval = Integer.parseInt(arg.split("=")[1]);
 			}
 			else {
 				log.LogMessage(LOG_NAME, "Unknown argument: " + arg, true);
-				log.LogMessage(LOG_NAME, "Valid arguments include: --crawl={true/false} --index={true/false} --checkrobots={true/false} --printerval={int} --numworkers={int} --host={webservername}" + arg, true);
+				log.LogMessage(LOG_NAME, "Valid arguments include: --crawl={true/false} --index={true/false} --checkrobots={true/false} --pagerank_interval={int} --numworkers={int} --host={webservername}" + arg, true);
 				System.exit(0);
 			}
 		}
@@ -77,7 +77,7 @@ public class IrMain {
 		log.LogMessage(LOG_NAME, "index=" + Boolean.toString(runIndexers), false);
 		log.LogMessage(LOG_NAME, "numworkers=" + Integer.toString(workers), false);
 		log.LogMessage(LOG_NAME, "host=" + host, false);
-		log.LogMessage(LOG_NAME, "printerval=" + Integer.toString(prInterval), false);
+		log.LogMessage(LOG_NAME, "pagerank_interval=" + Integer.toString(prInterval), false);
 	
 		
 		Database db = new Database(host, log);
