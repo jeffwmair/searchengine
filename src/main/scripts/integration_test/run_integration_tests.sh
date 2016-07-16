@@ -45,7 +45,7 @@ run_program() {
 	#touch flags/stop.txt
 	# requires a stopwords.txt for now...
 	touch stopwords.txt
-	java -jar SearchEngine-1.0.jar --host=localhost/searchengine --crawl=true --index=true --checkrobots=true --disable_stats 
+	java -jar SearchEngine-1.0.jar --host=localhost/searchengine --crawl=true --index=true --checkrobots=true --pagerank_interval=0
 }
 
 check_db_state() {
