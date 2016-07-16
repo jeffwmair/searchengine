@@ -87,6 +87,7 @@ public class IndexerWorker implements Runnable {
 	}
 	
 	private void startSummarizerWorker() {
+		log("Starting summarizer worker", false);
 		if (_updateStatsWorker == null || !_updateStatsWorker.isAlive()) {
 			DatabaseStatsUpdateWorker worker = new DatabaseStatsUpdateWorker(_db, _log);
 			_updateStatsWorker = new Thread(worker);
