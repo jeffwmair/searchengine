@@ -25,7 +25,7 @@ CREATE TABLE pages(
 	title VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
 	description VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL,
 	verified SMALLINT(5) NOT NULL,
-	pagerank FLOAT(10,10) NOT NULL,
+	pagerank FLOAT(10,8) NOT NULL,
 	last_crawl DATETIME NULL,
 	fail_count SMALLINT(5) NOT NULL,
 	PRIMARY KEY(pageId, url),
