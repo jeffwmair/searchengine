@@ -78,10 +78,9 @@ public class IrMain {
 		
 		Database db = new Database(host);
 		
-		ArrayList<String> validPageExtensions = new ArrayList<>();
-		ArrayList<String> validDomainExtensions = new ArrayList<>();
-		db.getValidExtensions(validPageExtensions, validDomainExtensions);
-				
+		ArrayList<String> validPageExtensions = db.getValidPageExtensions();
+		ArrayList<String> validDomainExtensions = db.getValidDomainExtensions();
+
 		// indexed file counter tells Indexer#1 when to run PageRank update
 		AtomicInteger indexCounter = new AtomicInteger(0);
 		

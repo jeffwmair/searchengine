@@ -71,22 +71,49 @@ public class Database {
 			return new ArrayList<String>();
 		}
 	}
-	
-	public void getValidExtensions(ArrayList<String> validPageExtensions, ArrayList<String> validDomainExtensions) {
-		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", "", "GetValidExtensionsAll.php", true);
-		ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
-		for(int i = 0; i < maps.size(); i++) {
-			String extType = maps.get(i).get("extType");
-			String ext = maps.get(i).get("ext");
-			if (extType.equals("1")) {
-				validDomainExtensions.add(ext);
-			}
-			else if (extType.equals("2")){
-				validPageExtensions.add(ext);
+
+	private ArrayList<String> validPageExtensions;
+	private ArrayList<String> validDomainExtensions;
+
+
+	public ArrayList<String> getValidDomainExtensions() {
+
+		if (validDomainExtensions == null) {
+			validDomainExtensions = new ArrayList<>();
+			Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", "", "GetValidExtensionsAll.php", true);
+			ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
+			for(int i = 0; i < maps.size(); i++) {
+				String extType = maps.get(i).get("extType");
+				String ext = maps.get(i).get("ext");
+				if (extType.equals("1")) {
+					validDomainExtensions.add(ext);
+				}
 			}
 		}
+
+		return validDomainExtensions;
 	}
-	
+	public ArrayList<String> getValidPageExtensions() {
+
+		if (validPageExtensions == null) {
+
+			// fetch the page extensions
+			validPageExtensions = new ArrayList<>();
+			Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", "", "GetValidExtensionsAll.php", true);
+			ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
+			for(int i = 0; i < maps.size(); i++) {
+				String extType = maps.get(i).get("extType");
+				String ext = maps.get(i).get("ext");
+				if (extType.equals("2")) {
+					validPageExtensions.add(ext);
+				}
+			}
+
+		}
+
+		return validPageExtensions;
+	}
+
 	public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit) {
 		StringBuilder json = new StringBuilder();
 		json.append("{");

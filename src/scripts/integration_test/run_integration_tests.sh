@@ -9,7 +9,7 @@ build_program() {
 	# build the java program
 	cd "$SEARCH_ENGINE"
 	echo "cleanup old target dir"
-	rm -r target/
+	rm -rf target/
 	echo "build new search-engine"
 	mvn package 
 	cd -
