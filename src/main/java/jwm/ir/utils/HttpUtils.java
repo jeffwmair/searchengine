@@ -81,7 +81,7 @@ private static final String CHAR_SET = "UTF-8";
 		    return json;
 			
 		} catch (Exception e) {
-			log.error("Error during http request: " + e.getMessage());
+			log.error("Error during http request: " + e.getMessage(), e);
 			return null;
 		} 	
 	}
