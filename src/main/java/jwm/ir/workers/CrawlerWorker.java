@@ -54,36 +54,7 @@ public class CrawlerWorker implements Runnable {
 
 	@Override
 	public void run() {
-//    	testGetPagesToCrawl(dbService);
-//    	testUrlCode();
 		mainCrawl();
-	}
-	
-	private void testUrlCode() {
-		try {
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com", "http://jefftron.com/"));
-			System.out.println(UrlUtils.getPathToUrlResource("http://jefftron.com/TestPages/a/TestPage.html"));
-			System.out.println(UrlUtils.getPathToUrlResource("http://jefftron.com/"));
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/TestPages/TestPage.html", "./a/TestPageA1"));
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/TestPages/TestPage.html", "./a/TestPageA1"));
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/TestPages/TestPage.html", "./a/TestPageA1"));
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/TestPages/TestPage.html", "a/TestPageA2"));
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/TestPages/TestPage.html", "../TestPages/a/TestPageA3"));
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/TestPages/a/TestPage.html", "/WebApps/SearchEngine/TestPages/TestPageA4"));
-			
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/Test/a/Page.html", "../../../../Page2.html"));
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/Test/Page.html", "./Page2.html"));
-			System.out.println(UrlUtils.getAbsoluteUrlFromHyperlink("http://jefftron.com/Test/Page.html", "/Page2.html"));
-    		System.out.println(UrlUtils.getLevelDepthOfRelativeLink(0, "../../Page.html"));
-    		System.out.println(UrlUtils.getPathToUrlResource("http://jefftron.com/Test/Page.html"));
-    		System.out.println(UrlUtils.getPathToUrlResource("http://jefftron.com/Test/foo"));
-    		System.out.println(UrlUtils.getPathToUrlResource("http://jefftron.com/Test/foo/"));
-    		System.out.println(UrlUtils.getPathToUrlResource("http://jefftron.com/Test/"));
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	private void waitIfTooManyFilesAreQueued() {

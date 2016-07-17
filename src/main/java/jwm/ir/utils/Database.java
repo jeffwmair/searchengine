@@ -12,8 +12,6 @@ import java.util.Map;
 
 public class Database {
 
-	final private static Logger log = LogManager.getLogger(Database.class);
-
 	private String _webServiceHost;
 	private final int MAX_URLS_FRO_1_DOMAIN_TO_CRAWL = 10;
 	

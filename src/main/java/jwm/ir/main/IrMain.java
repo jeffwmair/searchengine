@@ -214,32 +214,4 @@ public class IrMain {
 		}
 	}
 	
-	private static void testPr(Database _db) {
-		PageRankCalculatorWorker worker = new PageRankCalculatorWorker(_db);
-		Thread t = new Thread(worker);
-		t.start();
-	}
-	
-	private static void test(File documentDir) {
-		File[] files = documentDir.listFiles();
-		int x =0; 
-		for(File f : files) {
-			if (x % 3 ==0) {
-				if (f.getName().contains("crawler1")){
-					f.renameTo(new File(f.getAbsolutePath().replace("crawler1", "crawler2")));
-				}
-			}
-			if (x % 4 ==0) {
-				if (f.getName().contains("crawler1")){
-					f.renameTo(new File(f.getAbsolutePath().replace("crawler1", "crawler3")));
-				}
-			}
-			if (x % 5 ==0) {
-				if (f.getName().contains("crawler1")){
-					f.renameTo(new File(f.getAbsolutePath().replace("crawler1", "crawler4")));
-				}
-			}
-			x++;
-		}
-	}
 }

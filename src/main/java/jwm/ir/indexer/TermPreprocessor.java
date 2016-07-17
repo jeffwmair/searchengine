@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TermPreprocessor {
 	private String _term;
-	ArrayList<String> _stringsToReplace;
+	private ArrayList<String> _stringsToReplace;
 	public TermPreprocessor(ArrayList<String> stringsToReplace) {
 		_stringsToReplace = stringsToReplace;
 	}

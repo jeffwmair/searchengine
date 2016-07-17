@@ -10,25 +10,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class PageRankCalculatorWorker implements Runnable {
+class PageRankCalculatorWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(PageRankCalculatorWorker.class);
 	private Database _db;
-	DirectedSparseGraph<String, Integer> _graph = null;
+	private DirectedSparseGraph<String, Integer> _graph = null;
 	
-	final double TOLERANCE = 0.05;
-	final double ALPHA = 0.15;
-	final int MAX_ITERATIONS = 50;
+	private final double TOLERANCE = 0.05;
+	private final double ALPHA = 0.15;
+	private final int MAX_ITERATIONS = 50;
 
 	public PageRankCalculatorWorker(Database db) {
 		_db = db;
-		_graph = new DirectedSparseGraph<String, Integer>();
+		_graph = new DirectedSparseGraph<>();
 	}
 	
 	@Override
 	public void run() {
-		
-//		 makeSampleGraph();
 		 calculatePageRanks();
 	}
 		
@@ -39,8 +37,8 @@ public class PageRankCalculatorWorker implements Runnable {
 		String lastReceivedPageId = "0";
 		 
 		// get the verticies of the graph
-		String[] jsonPageIds = null;
-		ArrayList<String> allPageIds = new ArrayList<String>();
+		String[] jsonPageIds;
+		ArrayList<String> allPageIds = new ArrayList<>();
 		long start = System.currentTimeMillis();
 		log.info("Beginning to get pageIds for calculating pageRank");
 		while(notDone) {
@@ -71,7 +69,7 @@ public class PageRankCalculatorWorker implements Runnable {
 		 log.info("Beginning to get page-links for calculating pageRank");
 		 while(notDone) {
 			 
-			 ArrayList<String> pageIdsToRequestLinks = new ArrayList<String>();
+			 ArrayList<String> pageIdsToRequestLinks = new ArrayList<>();
 			 for(int j = 0; j < setSize; j++) {
 				 if (j+k >= allPageIds.size()-1) {
 					 notDone = false;
