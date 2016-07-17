@@ -80,7 +80,7 @@ public class RobotWorker implements Runnable {
 				for(String url : pages) {
 					RobotsTxt rbt = getRobot(url, domainRobots);
 					start = System.currentTimeMillis();
-					if (rbt.canCrawl(url, getClientName())) {
+					if (rbt.canCrawl(url)) {
 						_perfWorker.incrementPagesVerified();
 						verificationResults.put(url, 1);
 					}
@@ -143,6 +143,5 @@ public class RobotWorker implements Runnable {
 							
 		}
 	}
-	private String getClientName() { return "Robot#" + Integer.toString(_id); }
 
 }

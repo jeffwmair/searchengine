@@ -66,7 +66,7 @@ public class RobotsTxt {
 		}
 	}
 		
-	public boolean canCrawl(String url, String clientName) {
+	public boolean canCrawl(String url) {
 		
 		if (_disallows.size() == 0) return true;
 		if (_disallows.contains("/")) return false;

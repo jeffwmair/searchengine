@@ -229,8 +229,6 @@ public class CrawlerWorker implements Runnable {
 		}
 	}	
 
-	private String getClientName() { return "Crawler#" + Integer.toString(_id); }
-
 	private String getOutputFilePrefix() {
 		return "crawler" + _id;
 	}

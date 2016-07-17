@@ -205,6 +205,5 @@ public class IndexerWorker implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	private String getClientName() { return "IndexerWorker" + Integer.toString(_id); }
 
 }
