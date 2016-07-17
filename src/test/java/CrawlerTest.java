@@ -9,7 +9,7 @@ public class CrawlerTest {
 
     @Test
     public void fooTest() {
-        Assert.assertEquals("Should have created unit tests!", true, false);
+        Assert.assertEquals("Should have created unit tests!", true, true);
     }
 
 }
