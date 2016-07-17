@@ -128,7 +128,7 @@ begin
 
     set @domainid = (select domainid from domains where domain = pDomain);
     if @domainid is NULL then 
-      insert into domains (domain, status, crawlerId, total_crawls, locked) values (pDomain, 0, pCrawlerId, 0, 0, 0);
+      insert into domains (domain, status, crawlerId, total_crawls, locked) values (pDomain, 0, pCrawlerId, 0, 0);
       SET @domainid = LAST_INSERT_ID();
     end if;
 
