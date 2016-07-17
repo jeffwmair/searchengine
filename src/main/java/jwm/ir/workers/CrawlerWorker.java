@@ -18,7 +18,7 @@ public class CrawlerWorker implements Runnable {
 
 	private final int MAX_QUEUED_FILES_BEFORE_REST = 100;
 	private final int MAX_URL_SUBMIT_BATCH_SIZE = 150;
-	ArrayList<String> _frontier = new ArrayList<String>();
+	ArrayList<String> _frontier = new ArrayList<>();
 
 	final private static Logger log = LogManager.getLogger(CrawlerWorker.class);
 	private int _id;

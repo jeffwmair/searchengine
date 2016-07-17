@@ -23,7 +23,6 @@ public class RobotsTxt {
 		}
 	}
 	
-	public ArrayList<String> getDisallows() { return _disallows; }
 	private String _parserCurAgent = "";
 	public void processRobotTxtLine(String line) {
 		
