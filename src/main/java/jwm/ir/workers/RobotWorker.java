@@ -1,7 +1,7 @@
 package jwm.ir.workers;
 
-import jwm.ir.crawlerutils.RobotsTxt;
-import jwm.ir.crawlerutils.UrlUtils;
+import jwm.ir.crawler.RobotsTxt;
+import jwm.ir.crawler.UrlUtils;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.HttpUtils;
 import org.apache.log4j.LogManager;

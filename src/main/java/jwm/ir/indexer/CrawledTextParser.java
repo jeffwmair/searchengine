@@ -1,4 +1,4 @@
-package jwm.ir.indexerutils;
+package jwm.ir.indexer;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

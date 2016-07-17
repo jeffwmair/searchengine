@@ -1,7 +1,7 @@
 package jwm.ir.workers;
 
-import jwm.ir.indexerutils.CrawledTextParser;
-import jwm.ir.indexerutils.TermPreprocessor;
+import jwm.ir.indexer.CrawledTextParser;
+import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;

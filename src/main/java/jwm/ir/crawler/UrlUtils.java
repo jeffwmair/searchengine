@@ -1,4 +1,4 @@
-package jwm.ir.crawlerutils;
+package jwm.ir.crawler;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

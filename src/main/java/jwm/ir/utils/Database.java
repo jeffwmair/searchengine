@@ -1,6 +1,6 @@
 package jwm.ir.utils;
 
-import jwm.ir.crawlerutils.UrlUtils;
+import jwm.ir.crawler.UrlUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

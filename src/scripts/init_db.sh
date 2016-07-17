@@ -10,7 +10,6 @@ PASS='se_test_user'
 DB='searchengine_test'
 HOST='localhost'
 
-cd "$SEARCH_ENGINE"
 
 drop_db() {
 	echo "Dropping db $DB"
@@ -39,12 +38,14 @@ grant_user_to_db() {
 
 create_tables() {
 	echo "Creating tables in $DB"
-	mysql "$DB" < ../sql/create_tables.sql
+	mysql "$DB" < ./src/sql/create_tables.sql
 }
 
+cd "$SEARCH_ENGINE"
 drop_db
 drop_user
 create_db
 create_user
 grant_user_to_db
 create_tables	
+cd -

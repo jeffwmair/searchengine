@@ -1,4 +1,4 @@
-package jwm.ir.indexerutils;
+package jwm.ir.indexer;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package jwm.ir.main;
 
-import jwm.ir.indexerutils.TermPreprocessor;
+import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
 import jwm.ir.workers.*;
 import org.apache.log4j.LogManager;

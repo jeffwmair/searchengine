@@ -7,7 +7,7 @@ CRAWL_HOST="http://localhost/searchengine_test/"
 
 build_program() {
 	# build the java program
-	cd "$SEARCH_ENGINE/../../../"
+	cd "$SEARCH_ENGINE"
 	echo "cleanup old target dir"
 	rm -r target/
 	echo "build new search-engine"
@@ -18,7 +18,7 @@ build_program() {
 deploy_web_services() {
 	# need to deploy the php services to the apache web dir
 	echo "Updating deployment of php services"
-	rsync -r $SEARCH_ENGINE/../web/* $JWM_PROD/website/searchengine/
+	rsync -r $SEARCH_ENGINE/src/web/* $JWM_PROD/website/searchengine/
 	echo "Updating credentials"
 	cp utils.php $JWM_PROD/website/searchengine/services/
 }
