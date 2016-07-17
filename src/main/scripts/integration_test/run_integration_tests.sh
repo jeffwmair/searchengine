@@ -37,6 +37,7 @@ setup_db() {
 	mysql "searchengine_test" < integration_test1_data.sql
 }
 
+JAVA_PID=''
 run_program() {
 	echo "Starting program"
 	cd $JWM_DEV/searchengine/target/
@@ -45,13 +46,9 @@ run_program() {
 	#touch flags/stop.txt
 	# requires a stopwords.txt for now...
 	touch stopwords.txt
-	java -jar SearchEngine-1.0.jar --host=localhost/searchengine --crawl=true --index=true --checkrobots=true --pagerank_interval=0
-}
-
-check_db_state() {
-	echo "Checking db results"
-	# query the database to check for the correct final state; ie, pages indexed, page rank, etc.
-	RESULT="inconclusive"
+	java -jar SearchEngine-1.0.jar --host=localhost/searchengine --crawl=true --index=true --checkrobots=true --pagerank_interval=0 > /dev/null &
+	JAVA_PID="$!"
+	echo "Started process with pid $JAVA_PID"
 }
 
 tear_down_test_pages() {
@@ -64,18 +61,11 @@ tear_down_db() {
 	mysql --execute="drop database searchengine_test"
 }
 
-print_result() {
-	echo ""
-	echo ">>>>> Test result: $RESULT <<<<<"
-	echo ""
-}
 
 build_program
 deploy_web_services
 setup_test_pages
 setup_db
 run_program
-check_db_state
 #tear_down_test_pages
 #tear_down_db
-print_result
