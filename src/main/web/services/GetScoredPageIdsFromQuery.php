@@ -136,6 +136,7 @@
 			$q_idf = log(($numDocs/ $allTermIds[$qt]), 10);
 			
 			$w_tq = $q_idf * $q_tf;
+			if (count($pageIds) == 0) throw new Exception("No page ids found!");
 			foreach($pageIds as $pageId) {
 				$docTermIds = $docsTermIds[$pageId];
 				$tf = $docTermIds[$qt];
