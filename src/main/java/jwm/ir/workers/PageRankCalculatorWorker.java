@@ -1,29 +1,27 @@
 package jwm.ir.workers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import jwm.ir.utils.Database;
-import jwm.ir.utils.Log;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import jwm.ir.utils.Database;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class PageRankCalculatorWorker implements Runnable {
 
-	Database _db;
-	Log _log;
+	final private static Logger log = LogManager.getLogger(PageRankCalculatorWorker.class);
+	private Database _db;
 	DirectedSparseGraph<String, Integer> _graph = null;
 	
 	final double TOLERANCE = 0.05;
 	final double ALPHA = 0.15;
 	final int MAX_ITERATIONS = 50;
-	final String CLIENT_NAME = "PageRankWorker";
-	
-	public PageRankCalculatorWorker(Database db, Log log) {
+
+	public PageRankCalculatorWorker(Database db) {
 		_db = db;
-		_log = log;
 		_graph = new DirectedSparseGraph<String, Integer>();
 	}
 	
@@ -44,10 +42,10 @@ public class PageRankCalculatorWorker implements Runnable {
 		String[] jsonPageIds = null;
 		ArrayList<String> allPageIds = new ArrayList<String>();
 		long start = System.currentTimeMillis();
-		_log.LogMessage(CLIENT_NAME, "Beginning to get pageIds for calculating pageRank", false);
+		log.info("Beginning to get pageIds for calculating pageRank");
 		while(notDone) {
 			 
-			 jsonPageIds = _db.getPageIdsGreaterThanPageId(lastReceivedPageId, maxPageIdsToGet, CLIENT_NAME, _log);
+			 jsonPageIds = _db.getPageIdsGreaterThanPageId(lastReceivedPageId, maxPageIdsToGet);
 			 
 			 for(String id : jsonPageIds) {
 				 allPageIds.add(id);
@@ -61,7 +59,7 @@ public class PageRankCalculatorWorker implements Runnable {
 				 lastReceivedPageId = jsonPageIds[jsonPageIds.length-1];	 
 			 }
 		 }
-		 _log.LogMessage(CLIENT_NAME, "Finished getting pageIds for calculating pageRank (" + ((System.currentTimeMillis() - start) / 1000.0) + "s)", false);
+		 log.info("Finished getting pageIds for calculating pageRank (" + ((System.currentTimeMillis() - start) / 1000.0) + "s)");
 		 
 		 notDone = true;
 		 		 
@@ -70,7 +68,7 @@ public class PageRankCalculatorWorker implements Runnable {
 		 int setSize = 500000;	// max size of sets of page ids to request links of
 		 int edgeNumber = 1;
 		 start = System.currentTimeMillis();
-		 _log.LogMessage(CLIENT_NAME, "Beginning to get page-links for calculating pageRank", false);
+		 log.info("Beginning to get page-links for calculating pageRank");
 		 while(notDone) {
 			 
 			 ArrayList<String> pageIdsToRequestLinks = new ArrayList<String>();
@@ -84,7 +82,7 @@ public class PageRankCalculatorWorker implements Runnable {
 				 }	 
 			 }
 			 
-			 ArrayList<String> pageIdDestIds = _db.getPageLinks(pageIdsToRequestLinks, CLIENT_NAME, _log);
+			 ArrayList<String> pageIdDestIds = _db.getPageLinks(pageIdsToRequestLinks);
 			 for(int j = 0; j < pageIdDestIds.size(); j++) {
 				 String[] page_dest = pageIdDestIds.get(j).split(",");
 				 _graph.addEdge(edgeNumber++, page_dest[0], page_dest[1]);
@@ -92,37 +90,37 @@ public class PageRankCalculatorWorker implements Runnable {
 			 
 			 k += setSize;
 		 }	
-		 _log.LogMessage(CLIENT_NAME, "Finished getting page-links for calculating pageRank  (" + ((System.currentTimeMillis() - start) / 1000.0) + "s)", false);
+		 log.info("Finished getting page-links for calculating pageRank  (" + ((System.currentTimeMillis() - start) / 1000.0) + "s)");
 		 
 		 // calculate PR
-		 _log.LogMessage(CLIENT_NAME, "Beginning to calculate PageRank on " + allPageIds.size() + " pages", false);
+		 log.info("Beginning to calculate PageRank on " + allPageIds.size() + " pages");
 		 start = System.currentTimeMillis() ;
-		 PageRank<String, Integer> ranker = new PageRank<String, Integer>(_graph, ALPHA);
+		 PageRank<String, Integer> ranker = new PageRank<>(_graph, ALPHA);
 		 ranker.setTolerance(TOLERANCE) ;
 		 ranker.setMaxIterations(MAX_ITERATIONS);
 		 ranker.evaluate();
-		 _log.LogMessage(CLIENT_NAME, "Finished calculating PageRank in " + (System.currentTimeMillis()-start) / 1000.0 + "s", false);
+		 log.info("Finished calculating PageRank in " + (System.currentTimeMillis()-start) / 1000.0 + "s");
 		 
 		 double prSum = 0.0;
 		 int maxPrsToSendAtOnce = 50000;
-		 _log.LogMessage(CLIENT_NAME, "Beginning to send PageRanks to the Database", false);
-		 HashMap<Integer, Double> pageRanks = new HashMap<Integer, Double>();
+		 log.info("Beginning to send PageRanks to the Database");
+		 HashMap<Integer, Double> pageRanks = new HashMap<>();
 		 for(int i = 1; i <= allPageIds.size(); i++) {
 			 String pageId = allPageIds.get(i-1);
 			 double pr = ranker.getVertexScore(pageId);
 			 pageRanks.put(Integer.parseInt(pageId), pr);
 			 if (i % maxPrsToSendAtOnce == 0) {
 				 // send 'em
-				 _db.updatePageRanks(pageRanks, CLIENT_NAME, _log);
-				 _log.LogMessage(CLIENT_NAME, "A batch of PageRanks was sent to the Database", false);
+				 _db.updatePageRanks(pageRanks);
+				 log.info("A batch of PageRanks was sent to the Database");
 				 pageRanks.clear();
 			 }
 			 prSum += pr;
 		 }
 		 
-		 _db.updatePageRanks(pageRanks, CLIENT_NAME, _log);				 
+		 _db.updatePageRanks(pageRanks);
 		 pageRanks.clear();		 
-		 _log.LogMessage(CLIENT_NAME, "Finished calculating PageRank on all pages; sum of all PR scores was: " + prSum, false);
+		 log.info("Finished calculating PageRank on all pages; sum of all PR scores was: " + prSum);
 	}
 	
 	private void makeSampleGraph() {
@@ -141,10 +139,10 @@ public class PageRankCalculatorWorker implements Runnable {
 		ranker.setMaxIterations(MAX_ITERATIONS);
 
 		ranker.evaluate();
-		_log.LogMessage(CLIENT_NAME, "PageRank computed in " + (System.currentTimeMillis()-start) + " ms", false);
+		log.info("PageRank computed in " + (System.currentTimeMillis()-start) + " ms");
        
 		for(int i = 0; i < verticies.length; i++) {
-			_log.LogMessage(CLIENT_NAME, verticies[i] + " = " + Double.toString(ranker.getVertexScore(verticies[i])), false);	 
+			log.info(verticies[i] + " = " + Double.toString(ranker.getVertexScore(verticies[i])));
 		}  
 	}	
 }

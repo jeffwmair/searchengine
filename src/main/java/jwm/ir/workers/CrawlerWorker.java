@@ -1,5 +1,11 @@
 package jwm.ir.workers;
 
+import jwm.ir.crawlerutils.UrlUtils;
+import jwm.ir.crawlerutils.WebPage;
+import jwm.ir.utils.Database;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,19 +13,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import jwm.ir.crawlerutils.UrlUtils;
-import jwm.ir.crawlerutils.WebPage;
-import jwm.ir.utils.Database;
-import jwm.ir.utils.Log;
-
-
 
 public class CrawlerWorker implements Runnable {
 
 	private final int MAX_QUEUED_FILES_BEFORE_REST = 100;
 	private final int MAX_URL_SUBMIT_BATCH_SIZE = 150;
 	ArrayList<String> _frontier = new ArrayList<String>();
-	private Log _log = null;
+
+	final private static Logger log = LogManager.getLogger(CrawlerWorker.class);
 	private int _id;
 	private ArrayList<String> _validPageExtensions;
 	private ArrayList<String> _validDomainExtensions;
@@ -35,18 +36,16 @@ public class CrawlerWorker implements Runnable {
 	public CrawlerWorker(int crawlerNum, 
 			ArrayList<String> validPageExtensions,
 			ArrayList<String> validDomainExtensions,
-			Log log,
 			Database db,
 			File documentDir, 
 			boolean indexersRunning,
 			PerformanceStatsUpdateWorker perfWorker,
 			AtomicBoolean stopApp) {
 		_id = crawlerNum;
-		_log = log;
 		_db = db;
 		_documentDir = documentDir;
 		_indexersRunning = indexersRunning;
-		log("Starting...", false);
+		log.info("Starting...");
 		_validPageExtensions = validPageExtensions;
 		_validDomainExtensions = validDomainExtensions;
 		_perfWorker = perfWorker;
@@ -89,7 +88,7 @@ public class CrawlerWorker implements Runnable {
 	
 	private void waitIfTooManyFilesAreQueued() {
 		while(tooManyFilesAreQueued()) {
-			log("*** WAITING *** More than " + MAX_QUEUED_FILES_BEFORE_REST + " files have been downloaded by this crawler, so resting...", false);
+			log.info("*** WAITING *** More than " + MAX_QUEUED_FILES_BEFORE_REST + " files have been downloaded by this crawler, so resting...");
 			sleep(30);
 		}
 	}
@@ -122,9 +121,9 @@ public class CrawlerWorker implements Runnable {
 
             // bring some urls out of the database for crawling
             long start = System.currentTimeMillis();
-            log("Starting populate frontier", false);
+            log.info("Starting populate frontier");
             populateUrlFrontier(_frontier);
-            log("Populated URL frontier from database with " + _frontier.size() + " links: " + (System.currentTimeMillis() - start) + "ms", false);
+            log.info("Populated URL frontier from database with " + _frontier.size() + " links: " + (System.currentTimeMillis() - start) + "ms");
 
             ArrayList<String> tempUrlList = new ArrayList<String>();
             for (String url : _frontier) tempUrlList.add(url);
@@ -135,7 +134,7 @@ public class CrawlerWorker implements Runnable {
 
                 if (_stopApp.get()) break;
 
-                WebPage p = new WebPage(getClientName(), url, _log);
+                WebPage p = new WebPage(url);
                 String title = null;
                 String pageDesc = null;
                 start = System.currentTimeMillis();
@@ -156,18 +155,18 @@ public class CrawlerWorker implements Runnable {
 
                     if (!noFollow) {
                         start = System.currentTimeMillis();
-                        log("Starting add hyperlinks", false);
+                        log.info("Starting add hyperlinks");
                         urlsWithAnchorTexts = p.getHyperlinks(_validPageExtensions, _validDomainExtensions);
                         /* TODO: add pagelinks in this addUrls call!! */
                         addUrls(url, urlsWithAnchorTexts);
-                        log("Added "+ urlsWithAnchorTexts.size() +" hyperlinks to database: " + (System.currentTimeMillis() - start) + "ms", false);
+                        log.info("Added "+ urlsWithAnchorTexts.size() +" hyperlinks to database: " + (System.currentTimeMillis() - start) + "ms");
                     }
                 }
 
                 start = System.currentTimeMillis();
-                log("Starting add page crawl result", false);
-                _db.addCrawlResult(getClientName(), url, title, pageDesc, new Date(), success);
-                log("Added page crawl result to database (with "+urlsWithAnchorTexts.size()+" outlinks): " + (System.currentTimeMillis() - start) + "ms", false);
+                log.info("Starting add page crawl result");
+                _db.addCrawlResult(url, title, pageDesc, new Date(), success);
+                log.info("Added page crawl result to database (with "+urlsWithAnchorTexts.size()+" outlinks): " + (System.currentTimeMillis() - start) + "ms");
                 _frontier.remove(url);
             }
 
@@ -180,9 +179,9 @@ public class CrawlerWorker implements Runnable {
 		
 		frontier.clear();
 		
-		HashMap<String,String> urlsDomains = _db.getNextPagesForCrawling(getClientName(), _id);
+		HashMap<String,String> urlsDomains = _db.getNextPagesForCrawling(_id);
 		if (urlsDomains.size() > 0) {
-			log("Retrieved list of domains of size:" + urlsDomains.size(), false);
+			log.info("Retrieved list of domains of size:" + urlsDomains.size());
 		}
 		for(Map.Entry<String, String> items : urlsDomains.entrySet()) {
 			frontier.add(items.getKey());
@@ -217,24 +216,21 @@ public class CrawlerWorker implements Runnable {
 				batchSize++;
 				
 				if (batchSize == MAX_URL_SUBMIT_BATCH_SIZE) {
-					_db.addNewUrls(_id, foundInPage, urls, getClientName());
+					_db.addNewUrls(_id, foundInPage, urls);
 					urls.clear();
 					batchSize = 0;
 				}
 			}
-			if (urls.size() > 0) _db.addNewUrls(_id, foundInPage, urls, getClientName()); 	// add the last batch
+			if (urls.size() > 0) _db.addNewUrls(_id, foundInPage, urls); 	// add the last batch
 		}
 		catch(Exception ex)
 		{
-			log("Error in addUrls():" + ex.toString(), true);
+			log.error("Error in addUrls():" + ex.toString());
 		}
 	}	
 
 	private String getClientName() { return "Crawler#" + Integer.toString(_id); }
-	private void log(String msg, boolean err) {
-		_log.LogMessage(getClientName(), msg, err);
-	}
-	
+
 	private String getOutputFilePrefix() {
 		return "crawler" + _id;
 	}

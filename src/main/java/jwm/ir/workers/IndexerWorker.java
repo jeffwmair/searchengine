@@ -1,25 +1,25 @@
 package jwm.ir.workers;
 
+import jwm.ir.indexerutils.CrawledTextParser;
+import jwm.ir.indexerutils.TermPreprocessor;
+import jwm.ir.utils.Database;
+import jwm.ir.utils.JsonUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.lang.Thread.State;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jwm.ir.indexerutils.CrawledTextParser;
-import jwm.ir.indexerutils.TermPreprocessor;
-import jwm.ir.utils.Database;
-import jwm.ir.utils.JsonUtils;
-import jwm.ir.utils.Log;
-
 public class IndexerWorker implements Runnable {
-	
+
+	final private static Logger log = LogManager.getLogger(IndexerWorker.class);
 	private int _id;
-	private Log _log;
 	private File _dir;
 	private ArrayList<String> _stopwords;
 	private Database _db;
@@ -31,13 +31,12 @@ public class IndexerWorker implements Runnable {
 	private Thread _updateStatsWorker;
 	private PerformanceStatsUpdateWorker _perfWorker;
 	
-	public IndexerWorker(File directory, Database db, ArrayList<String> stopwords, PerformanceStatsUpdateWorker perfWorker, Log l, int id, 
+	public IndexerWorker(File directory, Database db, ArrayList<String> stopwords, PerformanceStatsUpdateWorker perfWorker, int id,
 			AtomicInteger indexCount, 
 			int indexesBeforePrUpdate,
 			TermPreprocessor tp,
 			AtomicBoolean stopApplication) {
 		_id = id;
-		_log = l;
 		_dir = directory;
 		_stopwords = stopwords;
 		_db = db;
@@ -50,13 +49,13 @@ public class IndexerWorker implements Runnable {
 	
 	@Override
 	public void run() {
-		log("Started", false);
+		log.info("Started");
 		
 		while (true && !_stopApp.get()) {
 			
 			/* have one indexer responsible for starting the PR thread */
 			if (_indexCount.get() >= _indexesBeforePrUpdate && this._id == 1) {
-				log("We have indexed " + _indexCount.get() + " files, now starting PageRankUpdater", false);
+				log.info("We have indexed " + _indexCount.get() + " files, now starting PageRankUpdater");
 				startPageRankWorker();
 				startSummarizerWorker();
 				_indexCount.set(0);
@@ -77,24 +76,24 @@ public class IndexerWorker implements Runnable {
 	 */
 	private void startPageRankWorker() {
 		if (_threadPageRankWorker == null || !_threadPageRankWorker.isAlive()) {
-			PageRankCalculatorWorker worker = new PageRankCalculatorWorker(_db, _log);
+			PageRankCalculatorWorker worker = new PageRankCalculatorWorker(_db);
 			_threadPageRankWorker = new Thread(worker);
 			_threadPageRankWorker.start();
 		}
 		else {
-			log("Not starting PageRank worker as it is already running", false);
+			log.info("Not starting PageRank worker as it is already running");
 		}
 	}
 	
 	private void startSummarizerWorker() {
-		log("Starting summarizer worker", false);
+		log.info("Starting summarizer worker");
 		if (_updateStatsWorker == null || !_updateStatsWorker.isAlive()) {
-			DatabaseStatsUpdateWorker worker = new DatabaseStatsUpdateWorker(_db, _log);
+			DatabaseStatsUpdateWorker worker = new DatabaseStatsUpdateWorker(_db);
 			_updateStatsWorker = new Thread(worker);
 			_updateStatsWorker.start();
 		}
 		else {
-			log("Not starting StatsUpdate worker as it is already running", false);
+			log.info("Not starting StatsUpdate worker as it is already running");
 		}
 	}
 	
@@ -108,11 +107,11 @@ public class IndexerWorker implements Runnable {
 			return;
 		}
 	
-		log("Beginning processing of " + file.getName(), false);
+		log.info("Beginning processing of " + file.getName());
 		
 		boolean useStemming = false;
 		boolean useStopwords = true;
-		CrawledTextParser parser = new CrawledTextParser(useStemming, useStopwords, _stopwords, tp, _log);
+		CrawledTextParser parser = new CrawledTextParser(useStemming, useStopwords, _stopwords, tp);
 		BufferedReader br = null;
 		try
 		{
@@ -120,7 +119,7 @@ public class IndexerWorker implements Runnable {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(file.getAbsolutePath()), "UTF-8"));
 			String line;
 			String urlLine = br.readLine();
-			int pageId = _db.getPageIdFromUrl(getClientName(), urlLine);
+			int pageId = _db.getPageIdFromUrl(urlLine);
 			if (pageId < 1) {
 				br.close();
 				file.delete();
@@ -131,7 +130,7 @@ public class IndexerWorker implements Runnable {
 				parser.processInput(line);
 			} 
 			br.close();
-			log("Finished parsing the file, beginning to construct JSON", false);
+			log.info("Finished parsing the file, beginning to construct JSON");
 
 			final String JSON_PAGE_ID = "p";
 			final String JSON_TERMS = "ts";
@@ -162,8 +161,8 @@ public class IndexerWorker implements Runnable {
 					
 					// send it
 					long start = System.currentTimeMillis();
-					_db.addDocumentTerms(getClientName(), json.toString(), pageId);
-					log("Sent an intermediate batch of JSON: " + (System.currentTimeMillis() - start) + "ms", false);
+					_db.addDocumentTerms(json.toString(), pageId);
+					log.info("Sent an intermediate batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
 					
 					json = new StringBuilder();
 					json.append("{\""+JSON_PAGE_ID+"\":\""+pageId+"\",\""+JSON_TERMS+"\":[");
@@ -174,8 +173,8 @@ public class IndexerWorker implements Runnable {
 				
 				// send the last of it
 				long start = System.currentTimeMillis();
-				_db.addDocumentTerms(getClientName(), json.toString(), pageId);
-				log("Sent the last batch of JSON: " + (System.currentTimeMillis() - start) + "ms", false);
+				_db.addDocumentTerms(json.toString(), pageId);
+				log.info("Sent the last batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
 			}
 			
 			// delete when done processing
@@ -183,7 +182,7 @@ public class IndexerWorker implements Runnable {
 			_perfWorker.incrementPagesIndexed();
 		}
 		catch(Exception ex) {
-			_log.LogMessage(getClientName(), "Error parsing content from " + file.getName(), true);
+			log.error("Error parsing content from " + file.getName());
 			moveFileToErrorFolder(file);
 		}
 		finally{
@@ -205,9 +204,6 @@ public class IndexerWorker implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	private void log(String msg, boolean error) {
-		_log.LogMessage(getClientName(), msg, error);
 	}
 	private String getClientName() { return "IndexerWorker" + Integer.toString(_id); }
 

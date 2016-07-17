@@ -1,25 +1,24 @@
 package jwm.ir.workers;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import jwm.ir.utils.Database;
-import jwm.ir.utils.Log;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PerformanceStatsUpdateWorker implements Runnable {
 
+	final private static Logger log = LogManager.getLogger(PerformanceStatsUpdateWorker.class);
 	private Database _db;
-	private Log _log;
-	private String CLIENT_NAME = "PerformanceStatsWorker";
 	private AtomicInteger _pagesVerified = new AtomicInteger();
 	private AtomicInteger _pagesCrawled = new AtomicInteger();
 	private AtomicInteger _pagesIndexed = new AtomicInteger();
 	private AtomicBoolean _stopFlag = new AtomicBoolean();
 	private int _workers;
 
-	public PerformanceStatsUpdateWorker(Database db, Log log, int workers, AtomicBoolean stopFlag) {
+	public PerformanceStatsUpdateWorker(Database db, int workers, AtomicBoolean stopFlag) {
 		_db = db;
-		_log = log;
 		_workers = workers;
 		_stopFlag = stopFlag;
 	}
@@ -43,8 +42,8 @@ public class PerformanceStatsUpdateWorker implements Runnable {
 			int pagesCrawled = _pagesCrawled.getAndSet(0);
 			int pagesIndexed = _pagesIndexed.getAndSet(0);
 			
-			_log.LogMessage(CLIENT_NAME, "Beginning to run performance stats updater, PagesVerified: "+pagesVerified+", PagesCrawled: "+pagesCrawled+", PagesIndexed: " + pagesIndexed, false);
-			_db.addPerformanceStats(CLIENT_NAME, _workers, pagesVerified, pagesCrawled, pagesIndexed);		
+			log.info("Beginning to run performance stats updater, PagesVerified: "+pagesVerified+", PagesCrawled: "+pagesCrawled+", PagesIndexed: " + pagesIndexed);
+			_db.addPerformanceStats(_workers, pagesVerified, pagesCrawled, pagesIndexed);
 		}
 		
 	}

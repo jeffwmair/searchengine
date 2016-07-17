@@ -2,6 +2,8 @@ package jwm.ir.utils;
 
 import com.codesnippets4all.json.parsers.JSONParser;
 import com.codesnippets4all.json.parsers.JsonParserFactory;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -19,14 +21,13 @@ public class HttpUtils {
 	
 private static final String CHAR_SET = "UTF-8";
 
+	final private static Logger log = LogManager.getLogger(HttpUtils.class);
 
 	public static Map httpPost(String host, 
-			String clientName, 
-			String paramName, 
+			String paramName,
 			String paramData, 
-			String phpFunction, 
-			boolean returnJson, 
-			Log log) {
+			String phpFunction,
+			boolean returnJson) {
 		
 		String urlLoc = getServiceLocation(host, phpFunction);
 		
@@ -67,25 +68,25 @@ private static final String CHAR_SET = "UTF-8";
 					json = parser.parseJson(httpResponseBody.toString());	
 		    	}
 		    	catch(Exception e) {
-		    		log.LogMessage(clientName, "Error parsing HTTP json: " + httpResponseBody.toString(), true);
+		    		log.error("Error parsing HTTP json: " + httpResponseBody.toString());
 		    	}
 		    	
 		    }
 		    else {
 		    	if (httpResponseBody.length() > 0 && !httpResponseBody.toString().trim().equals("[]")) {
-		    		log.LogMessage(clientName, "Message returned from HttpPost: " + httpResponseBody.toString() + "\n" + paramName + "=" + paramData.toString(), false);
+		    		log.info("Message returned from HttpPost: " + httpResponseBody.toString() + "\n" + paramName + "=" + paramData.toString());
 		    	}
 		    }
 		    
 		    return json;
 			
 		} catch (Exception e) {
-			log.LogMessage(clientName, "Error during http request: " + e.getMessage(), true);
+			log.error("Error during http request: " + e.getMessage());
 			return null;
 		} 	
 	}
 	
-	public static ArrayList<String> getRobotTxtFromDomain(String domain, String clientName, Log log ) {
+	public static ArrayList<String> getRobotTxtFromDomain(String domain) {
 		
 		ArrayList<String> output = new ArrayList<String>();
 		if (!domain.endsWith("/")) domain += "/";
@@ -103,7 +104,7 @@ private static final String CHAR_SET = "UTF-8";
 			    in.close();	
 		    }
 		    catch(Exception rex) {
-		    	log.LogMessage(clientName, "Error parsing robots.txt for " + domain + "-> " + rex.getMessage() + "input line:" + inputLine, true);
+		    	log.error("Error parsing robots.txt for " + domain + "-> " + rex.getMessage() + "input line:" + inputLine );
 		    }
 		}
 		catch(Exception ex) {

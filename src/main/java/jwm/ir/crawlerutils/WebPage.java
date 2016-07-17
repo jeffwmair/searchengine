@@ -1,6 +1,14 @@
 package jwm.ir.crawlerutils;
 
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.jsoup.Connection.Response;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,25 +19,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-import jwm.ir.utils.Log;
-
-import org.jsoup.*;
-import org.jsoup.Connection.Response;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 
 public class WebPage {
-	
+
+	final private static Logger log = LogManager.getLogger(WebPage.class);
 	private String _url;
-	private Log _log;
 	private Document _page;
-	private String _client;
-	public WebPage(String clientName, String url, Log log) {
+	public WebPage(String url) {
 		_url = url;
-		_log = log;
-		_client = clientName;
 	}
 	
 	public boolean crawl() {
@@ -48,7 +45,7 @@ public class WebPage {
 				return true;
 			}
 			else if (code < 400 && code > 499) {
-				_log.LogMessage(_client, "HTTP " + code + ": " + _url, true);
+				log.error("HTTP " + code + ": " + _url);
 				return false;
 			}
 			else {
@@ -58,7 +55,7 @@ public class WebPage {
 			
 		}
 		catch(Exception ex) {
-			_log.LogMessage(_client, "Error loading web page: " + _url +  ex.toString(), true);
+			log.error("Error loading web page: " + _url +  ex.toString());
 			return false;
 		}
 	}
@@ -117,7 +114,7 @@ public class WebPage {
 	
 	public HashMap<String,String> getHyperlinks(ArrayList<String> validPageExtensions, ArrayList<String> validDomainExtensions) {
 		
-		HashMap<String, String> links = new HashMap<String, String>();
+		HashMap<String, String> links = new HashMap<>();
 		Elements linkElements = _page.select("a");
 		for(Element el : linkElements)  {
 			String anchorText = el.text();
@@ -125,20 +122,20 @@ public class WebPage {
 			try {
 				url = UrlUtils.getAbsoluteUrlFromHyperlink(_url, el.attr("href"));
 			} catch (Exception e) {
-				_log.LogMessage(_client, "Error getHyperlinks(); " + e.toString(), true);
+				log.error("Error getHyperlinks(); " + e.toString());
 			}
 			if (url != null)  {
-				_log.LogMessage(_client, "url is:"+url, false);
-				
+				log.info("url is:"+url);
+
 				if (!links.containsKey(url) && anchorText.length() > 2) {
-					_log.LogMessage(_client, "url is accepted (not found yet and length > 2)", false);
+					log.info("url is accepted (not found yet and length > 2)");
 
 					boolean isValidUrl = false;
-						isValidUrl = UrlUtils.isValidUrl(url, validPageExtensions, validDomainExtensions, _client, _log);
-						_log.LogMessage(_client, "url is valid:"+isValidUrl, false);
+						isValidUrl = UrlUtils.isValidUrl(url, validPageExtensions, validDomainExtensions);
+						log.info("url is valid:"+isValidUrl);
 
 					if (isValidUrl) {
-						_log.LogMessage(_client, "keeping url", false);
+						log.info("keeping url");
 						links.put(url, anchorText);
 					}
 				}				
@@ -162,7 +159,7 @@ public class WebPage {
 		} 
         catch (IOException e) 
         {
-        	_log.LogMessage(_client, "Error writing url to file " + _url, true);
+        	log.error("Error writing url to file " + _url);
 			e.printStackTrace();
 		}        
 	}

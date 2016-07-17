@@ -1,5 +1,11 @@
 package jwm.ir.main;
 
+import jwm.ir.indexerutils.TermPreprocessor;
+import jwm.ir.utils.Database;
+import jwm.ir.workers.*;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,20 +13,11 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jwm.ir.indexerutils.TermPreprocessor;
-import jwm.ir.utils.Database;
-import jwm.ir.utils.Log;
-import jwm.ir.workers.CrawlerWorker;
-import jwm.ir.workers.IndexerWorker;
-import jwm.ir.workers.PageRankCalculatorWorker;
-import jwm.ir.workers.PerformanceStatsUpdateWorker;
-import jwm.ir.workers.RobotWorker;
-
 
 public class IrMain {
 
-	private static final String LOG_NAME = "IRSYSTEM-MAIN";
-	
+	final private static Logger log = LogManager.getLogger(IrMain.class);
+
 	/**
 	 * @param args
 	 */
@@ -34,7 +31,6 @@ public class IrMain {
 		
 		AtomicBoolean stopApplication = new AtomicBoolean(false);
 				
-		Log log = new Log();
 		File documentDir = new File("toindex");
 		if (!documentDir.exists()) {
 			documentDir.mkdir();
@@ -66,30 +62,30 @@ public class IrMain {
 				prInterval = Integer.parseInt(arg.split("=")[1]);
 			}
 			else {
-				log.LogMessage(LOG_NAME, "Unknown argument: " + arg, true);
-				log.LogMessage(LOG_NAME, "Valid arguments include: --crawl={true/false} --index={true/false} --checkrobots={true/false} --pagerank_interval={int} --numworkers={int} --host={webservername}" + arg, true);
+				log.error("Unknown argument: " + arg);
+				log.error("Valid arguments include: --crawl={true/false} --index={true/false} --checkrobots={true/false} --pagerank_interval={int} --numworkers={int} --host={webservername}" + arg);
 				System.exit(0);
 			}
 		}
 		
-		log.LogMessage(LOG_NAME, "crawl=" + Boolean.toString(runCrawlers), false);
-		log.LogMessage(LOG_NAME, "checkrobots=" + Boolean.toString(runRobotChecker), false);
-		log.LogMessage(LOG_NAME, "index=" + Boolean.toString(runIndexers), false);
-		log.LogMessage(LOG_NAME, "numworkers=" + Integer.toString(workers), false);
-		log.LogMessage(LOG_NAME, "host=" + host, false);
-		log.LogMessage(LOG_NAME, "pagerank_interval=" + Integer.toString(prInterval), false);
+		log.info("crawl=" + Boolean.toString(runCrawlers));
+		log.info("checkrobots=" + Boolean.toString(runRobotChecker));
+		log.info("index=" + Boolean.toString(runIndexers));
+		log.info("numworkers=" + Integer.toString(workers));
+		log.info("host=" + host);
+		log.info("pagerank_interval=" + Integer.toString(prInterval));
 
 		
-		Database db = new Database(host, log);
+		Database db = new Database(host);
 		
-		ArrayList<String> validPageExtensions = new ArrayList<String>();
-		ArrayList<String> validDomainExtensions = new ArrayList<String>();
-		db.getValidExtensions(LOG_NAME, validPageExtensions, validDomainExtensions, log);
+		ArrayList<String> validPageExtensions = new ArrayList<>();
+		ArrayList<String> validDomainExtensions = new ArrayList<>();
+		db.getValidExtensions(validPageExtensions, validDomainExtensions);
 				
 		// indexed file counter tells Indexer#1 when to run PageRank update
 		AtomicInteger indexCounter = new AtomicInteger(0);
 		
-		PerformanceStatsUpdateWorker performanceWorker = new PerformanceStatsUpdateWorker(db, log, workers, stopApplication);
+		PerformanceStatsUpdateWorker performanceWorker = new PerformanceStatsUpdateWorker(db, workers, stopApplication);
 				
 		for(int i = 1; i <= workers; i++) {
 			
@@ -97,14 +93,14 @@ public class IrMain {
 			
 			if (runCrawlers) {
 				
-				CrawlerWorker c1 = new CrawlerWorker(i, validPageExtensions, validDomainExtensions, log, db, documentDir, runIndexers, performanceWorker, stopApplication);
+				CrawlerWorker c1 = new CrawlerWorker(i, validPageExtensions, validDomainExtensions, db, documentDir, runIndexers, performanceWorker, stopApplication);
 				Thread t = new Thread(c1, "Crawler#" + num);
 				t.start();
 			}
 			
 			if (runRobotChecker) {
 				
-				RobotWorker r = new RobotWorker(i, stopApplication, performanceWorker, log, db);
+				RobotWorker r = new RobotWorker(i, stopApplication, performanceWorker, db);
 				Thread robotThread = new Thread(r, "RobotWorker#" + num);
 				robotThread.start();
 				
@@ -114,10 +110,9 @@ public class IrMain {
 			
 				IndexerWorker indexer = new IndexerWorker(documentDir, 
 						db, 
-						getStopwordsFromFile(log), 
+						getStopwordsFromFile(),
 						performanceWorker,
-						log, 
-						i, 
+						i,
 						indexCounter, 
 						prInterval,
 						getTermProcessor(),
@@ -150,7 +145,7 @@ public class IrMain {
 			File stopFlag = new File("./flags/stop.txt");
 			if (stopFlag.exists()) {
 				stopFlag.delete();
-				log.LogMessage(LOG_NAME, "Found flags/stop.txt,  so stopping the application", false);
+				log.info("Found flags/stop.txt,  so stopping the application");
 				stopApplication.set(true);
 				break;				
 			}
@@ -195,16 +190,16 @@ public class IrMain {
 		return tp;
 	}
 
-	private static ArrayList<String> getStopwordsFromFile(Log l) {
+	private static ArrayList<String> getStopwordsFromFile() {
 		String fname = "./stopwords.txt";
 		File inputFile = new File(fname);
 		if (!inputFile.exists()) {
-			l.LogMessage(LOG_NAME, "Could not find stopwords file", true);
+			log.error("Could not find stopwords file");
 			return new ArrayList<String>();
 		}
 		
 		BufferedReader br = null;
-		ArrayList<String> stopwords = new ArrayList<String>();
+		ArrayList<String> stopwords = new ArrayList<>();
 		try {
 			br = new BufferedReader(new FileReader(fname));
 			String line;
@@ -214,13 +209,13 @@ public class IrMain {
 			br.close();
 			return stopwords;	
 		} catch (Exception e) {
-			l.LogMessage(LOG_NAME, "Error loading stopwords file", true);
+			log.error("Error loading stopwords file");
 			return new ArrayList<String>();			
 		}
 	}
 	
-	private static void testPr(Database _db, Log _log) {
-		PageRankCalculatorWorker worker = new PageRankCalculatorWorker(_db, _log);
+	private static void testPr(Database _db) {
+		PageRankCalculatorWorker worker = new PageRankCalculatorWorker(_db);
 		Thread t = new Thread(worker);
 		t.start();
 	}

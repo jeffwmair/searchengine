@@ -1,27 +1,27 @@
 package jwm.ir.indexerutils;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import jwm.ir.utils.Log;
 
 public class CrawledTextParser {
 
+	final private static Logger log = LogManager.getLogger(CrawledTextParser.class);
 	private ArrayList<String> _stopwords;
 	private boolean _useStemming;
 	private boolean _useStopwords;
 	private HashMap<String, Integer> _termFrequencies;
 	private TermPreprocessor _tp;
-	private Log _log;
-	public CrawledTextParser(boolean useStemming, 
+	public CrawledTextParser(boolean useStemming,
 			boolean useStopwords, 
 			ArrayList<String> stopwords, 
-			TermPreprocessor tp,
-			Log l) {
-		_log = l;
+			TermPreprocessor tp) {
 		_useStemming = useStemming;
 		_useStopwords = useStopwords;
 		_stopwords = stopwords;
-		_termFrequencies = new HashMap<String, Integer>();
+		_termFrequencies = new HashMap<>();
 		_tp = tp;
 	}
 	
@@ -64,7 +64,7 @@ public class CrawledTextParser {
 				_termFrequencies.put(_tp.getOutput(), ++tf);
 			}
 			catch(Exception e) {
-				_log.LogMessage("CrawledTextparser", "Error parsing '"+term+"': " + e.toString(), true);
+				log.error("Error parsing '"+term+"': " + e.toString());
 			}
 
 		}

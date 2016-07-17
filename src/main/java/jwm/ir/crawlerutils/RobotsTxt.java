@@ -1,14 +1,16 @@
 package jwm.ir.crawlerutils;
 
-import java.util.ArrayList;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
-import jwm.ir.utils.Log;
+import java.util.ArrayList;
 
 
 public class RobotsTxt {
 
+	final private static Logger log = LogManager.getLogger(RobotsTxt.class);
 	private ArrayList<String> _disallows;
-	String _domain;
+	private String _domain;
 	public RobotsTxt(String domain) {
 		_domain = domain;
 		_disallows = new ArrayList<String>();
@@ -23,7 +25,7 @@ public class RobotsTxt {
 	
 	public ArrayList<String> getDisallows() { return _disallows; }
 	private String _parserCurAgent = "";
-	public void processRobotTxtLine(String line, Log l, String client) {
+	public void processRobotTxtLine(String line) {
 		
 		if (line.startsWith("#") || line.length() == 0) {
 			return;
@@ -64,14 +66,14 @@ public class RobotsTxt {
 		}
 	}
 		
-	public boolean canCrawl(String url, String clientName, Log log) {
+	public boolean canCrawl(String url, String clientName) {
 		
 		if (_disallows.size() == 0) return true;
 		if (_disallows.contains("/")) return false;
 		 
 		int httpPrefixLength = 7;
 		if (_domain.startsWith("http://")) {
-			log.LogMessage("Robot", "unexpected domain starting with http: " + _domain, true);
+			log.error("unexpected domain starting with http: " + _domain);
 		}
 		
 		String resourceOnly = url.substring(httpPrefixLength + _domain.length()).toLowerCase();

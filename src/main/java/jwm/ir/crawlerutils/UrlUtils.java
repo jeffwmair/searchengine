@@ -1,10 +1,13 @@
 package jwm.ir.crawlerutils;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 
-import jwm.ir.utils.Log;
-
 public class UrlUtils {
+
+	final private static Logger log = LogManager.getLogger(UrlUtils.class);
 
 	/**
 	 * Get the domain from the url.  Domains here never have trailing slashes
@@ -136,13 +139,11 @@ public class UrlUtils {
 
 	public static boolean isValidUrl(String url, 
 			ArrayList<String> validPageExtensions, 
-			ArrayList<String> validDomainExtensions,
-			String appName,
-			Log log) {
+			ArrayList<String> validDomainExtensions ) {
 		
 		String domain = UrlUtils.getDomainFromAbsoluteUrl(url);
 		if (domain == null || (!domain.contains(".") && !domain.equals("localhost"))) {
-			log.LogMessage(appName, "url '"+url+"' is not valid because the domain is:"+domain, false);
+			log.info( "url '"+url+"' is not valid because the domain is:"+domain);
 			return false;
 		}
 		
@@ -150,7 +151,7 @@ public class UrlUtils {
 		if (domain.contains(".")) {
 			String domainExt = domain.substring(domain.lastIndexOf("."));
 			if (!validDomainExtensions.contains(domainExt)) {
-				log.LogMessage(appName, "Domain extension '" + domainExt + "' was not found in the valid extensions list.  For domain: '" + domain + "'", false);
+				log.info( "Domain extension '" + domainExt + "' was not found in the valid extensions list.  For domain: '" + domain + "'");
 				return false;
 			}
 		}
@@ -163,7 +164,7 @@ public class UrlUtils {
 //		if (!urlWithoutTrailingSlashString.equals(domainWithHttp) && urlWithoutDomain.contains(".")) {
 //			String pageExtension = urlWithoutDomain.substring(urlWithoutDomain.lastIndexOf("."));
 //			if (!validPageExtensions.contains(pageExtension)) {
-//				log.LogMessage(appName, "Page extension '"+pageExtension+"' was not found in the valid extensions list.  For url: '"+url+"'", false);
+//				log.info( "Page extension '"+pageExtension+"' was not found in the valid extensions list.  For url: '"+url+"'", false);
 //				return false;
 //			}
 //		}

@@ -1,28 +1,31 @@
 package jwm.ir.utils;
 
+import jwm.ir.crawlerutils.UrlUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import jwm.ir.crawlerutils.UrlUtils;
-
 public class Database {
-	private Log _log;
+
+	final private static Logger log = LogManager.getLogger(Database.class);
+
 	private String _webServiceHost;
 	private final int MAX_URLS_FRO_1_DOMAIN_TO_CRAWL = 10;
 	
-	public Database(String webserviceHost, Log log) {
-		_log = log;
+	public Database(String webserviceHost) {
 		_webServiceHost = webserviceHost;
 	}
 	
-	public void updateSummaries(String clientName) {
-		HttpUtils.httpPost(_webServiceHost, clientName, "data", "empty", "UpdateSummaries.php", false, _log);
+	public void updateSummaries() {
+		HttpUtils.httpPost(_webServiceHost, "data", "empty", "UpdateSummaries.php", false);
 	}
 	
-	public void addPerformanceStats(String clientName, int workers, int verifications, int crawls, int indexes) {
+	public void addPerformanceStats(int workers, int verifications, int crawls, int indexes) {
 		StringBuilder json = new StringBuilder();
 		json.append("{");
 		json.append(JsonUtils.getJsonItem("verifications", verifications) + ",");
@@ -30,20 +33,20 @@ public class Database {
 		json.append(JsonUtils.getJsonItem("indexes", indexes) + ",");
 		json.append(JsonUtils.getJsonItem("workers", workers));
 		json.append("}");
-		HttpUtils.httpPost(_webServiceHost, clientName, "data", json.toString(), "AddPerformanceStats.php", false, _log);
+		HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "AddPerformanceStats.php", false);
 	}
 	
 	
-	public synchronized void addDocumentTerms(String clientName, String json, int pageId) {
+	public synchronized void addDocumentTerms(String json, int pageId) {
 		
 		/* TODO: could improve performance if I can get the indexers indexing concurrently -- ie, don't make this method synchronized;
 		 * I made it synchronized because the indexers were deadlocking in the insert_terms mysql procedure.
 		 * 
 		 */
-		HttpUtils.httpPost(_webServiceHost, clientName, "data", json, "AddDocumentTerms.php", false, _log);
+		HttpUtils.httpPost(_webServiceHost, "data", json, "AddDocumentTerms.php", false);
 	}
 	
-	public ArrayList<String> getPageLinks(ArrayList<String> pageIds, String clientName, Log log) {
+	public ArrayList<String> getPageLinks(ArrayList<String> pageIds) {
 
 		StringBuilder json = new StringBuilder();
 		json.append("[");
@@ -55,7 +58,7 @@ public class Database {
 		}
 		json.append("]");
 		
-		Map jsonOut = HttpUtils.httpPost(_webServiceHost, clientName, "data", json.toString(), "GetPageOutLinkPageIds.php", true, log);
+		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "GetPageOutLinkPageIds.php", true);
 		if (jsonOut != null && jsonOut.size() > 0) {
 			ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
 			ArrayList<String> pageLinks = new ArrayList<String>();
@@ -71,8 +74,8 @@ public class Database {
 		}
 	}
 	
-	public void getValidExtensions(String clientName, ArrayList<String> validPageExtensions, ArrayList<String> validDomainExtensions, Log log) {
-		Map jsonOut = HttpUtils.httpPost(_webServiceHost, clientName, "data", "", "GetValidExtensionsAll.php", true, log);
+	public void getValidExtensions(ArrayList<String> validPageExtensions, ArrayList<String> validDomainExtensions) {
+		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", "", "GetValidExtensionsAll.php", true);
 		ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
 		for(int i = 0; i < maps.size(); i++) {
 			String extType = maps.get(i).get("extType");
@@ -86,13 +89,13 @@ public class Database {
 		}
 	}
 	
-	public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit, String clientName, Log log) {
+	public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit) {
 		StringBuilder json = new StringBuilder();
 		json.append("{");
 		json.append(JsonUtils.getJsonItem("pageIdReceived", lagePageReceived) + ",");
 		json.append(JsonUtils.getJsonItem("limit", Integer.toString(limit)));
 		json.append("}");
-		Map jsonOut = HttpUtils.httpPost(_webServiceHost, clientName, "data", json.toString(), "GetPageIdsGreaterThanPageId.php", true, log);
+		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "GetPageIdsGreaterThanPageId.php", true);
 		if (jsonOut != null && jsonOut.size() > 0) {
 			ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
 			String[] ids = new String[maps.size()];
@@ -106,7 +109,7 @@ public class Database {
 		}
 	}
 	
-	public void updatePageRanks(HashMap<Integer,Double> pageRanks, String clientName, Log log) {
+	public void updatePageRanks(HashMap<Integer,Double> pageRanks) {
 		
 		if (pageRanks.size() == 0) return;
 		
@@ -121,17 +124,17 @@ public class Database {
 		}
 		json.append("]");
 		
-		HttpUtils.httpPost(_webServiceHost, clientName, "data", json.toString(), "UpdatePageRanks.php", false, log);
+		HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "UpdatePageRanks.php", false);
 	}
 	
-	public int getPageIdFromUrl(String clientName, String url) {
+	public int getPageIdFromUrl(String url) {
 		url = HttpUtils.cleanUrl(url);
-		Map json = HttpUtils.httpPost(_webServiceHost, clientName, "url", url, "GetPageIdFromUrl.php", true, _log);
+		Map json = HttpUtils.httpPost(_webServiceHost, "url", url, "GetPageIdFromUrl.php", true);
 		String id_s = json.get("pageId").toString();
 		return Integer.parseInt(id_s);
 	}
 	
-	public void setVerificationStatusForUrls(String clientName, HashMap<String, Integer> urlVerificationResults) {
+	public void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults) {
 			
 		if (urlVerificationResults.size() == 0) return;
 		
@@ -146,12 +149,12 @@ public class Database {
 		}
 		json.append("]");
 		
-		HttpUtils.httpPost(_webServiceHost, clientName, "data", 
+		HttpUtils.httpPost(_webServiceHost, "data",
 				json.toString(), 
-				"SetUrlVerificationStatusMultiple.php", false, _log);
+				"SetUrlVerificationStatusMultiple.php", false);
 	}
 	
-	public void addCrawlResult(String clientName, String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful) {
+	public void addCrawlResult(String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful) {
 		url = HttpUtils.cleanUrl(url);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		StringBuilder json = new StringBuilder();
@@ -167,15 +170,15 @@ public class Database {
 		json.append(JsonUtils.getJsonItem("success", (successful) ? "1" : "0"));
 		json.append("}");
 		
-		HttpUtils.httpPost(_webServiceHost, clientName,
+		HttpUtils.httpPost(_webServiceHost,
 				"data", 
 				json.toString(), 
 				"AddCrawlResult.php",
-				false, _log);
+				false);
 
 	}
 	
-	public void  addNewUrls(int crawlerId, String containingPage, ArrayList<String> urls, String clientName) throws Exception {
+	public void  addNewUrls(int crawlerId, String containingPage, ArrayList<String> urls) throws Exception {
 		
 		StringBuilder json = new StringBuilder();
 		json.append("{"+JsonUtils.getJsonItem("containingPage", containingPage)+",\"links\":[");
@@ -205,20 +208,20 @@ public class Database {
 		}	
 		json.append("]}");
 		
-		HttpUtils.httpPost(_webServiceHost, clientName,
+		HttpUtils.httpPost(_webServiceHost,
 				"data", 
 				json.toString(), 
 				"AddNewUrls.php", 
-				false, _log);
+				false);
 	}
 	
-	public ArrayList<String> getUnverifiedPagesForVerification(String clientName, int robotId) {
+	public ArrayList<String> getUnverifiedPagesForVerification(int robotId) {
 		
-		Map json = HttpUtils.httpPost(_webServiceHost, clientName,
+		Map json = HttpUtils.httpPost(_webServiceHost,
 				"crawlerid", 
 				Integer.toString(robotId),
 				"GetUnverifiedPages.php",
-				true, _log);
+				true);
 		
 		ArrayList<String> pages = new ArrayList<String>();
 		if (json == null) return pages;
@@ -236,17 +239,17 @@ public class Database {
 		
 	}
 
-	public HashMap<String, String> getNextPagesForCrawling(String clientName, int crawlerId) {
+	public HashMap<String, String> getNextPagesForCrawling(int crawlerId) {
 		
-		Map json = HttpUtils.httpPost(_webServiceHost, clientName,
+		Map json = HttpUtils.httpPost(_webServiceHost,
 				"crawlerid", 
 				Integer.toString(crawlerId),
 				"GetPagesToCrawl.php",
-				true, _log);
+				true);
 		
 		
-		HashMap<String, Integer> domainPageCounter = new HashMap<String, Integer>();
-		HashMap<String, String> retVal = new HashMap<String, String>();
+		HashMap<String, Integer> domainPageCounter = new HashMap<>();
+		HashMap<String, String> retVal = new HashMap<>();
 		
 		if (json == null) return retVal;
 		

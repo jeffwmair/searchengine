@@ -1,27 +1,29 @@
 package jwm.ir.workers;
 
+import jwm.ir.crawlerutils.RobotsTxt;
+import jwm.ir.crawlerutils.UrlUtils;
+import jwm.ir.utils.Database;
+import jwm.ir.utils.HttpUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import jwm.ir.crawlerutils.RobotsTxt;
-import jwm.ir.crawlerutils.UrlUtils;
-import jwm.ir.utils.*;
-
 
 public class RobotWorker implements Runnable {
 
+	final private static Logger log = LogManager.getLogger(RobotWorker.class);
 
 	private final int MAX_ROBOT_CACHE_SIZE = 250;
 	private Database _db;
-	private Log _log;
 	private int _id;
 	private AtomicBoolean _stopApp;
 	private PerformanceStatsUpdateWorker _perfWorker;
-	public RobotWorker(int robotNum, AtomicBoolean stopApp, PerformanceStatsUpdateWorker perfWorker, Log log, Database db) {
+	public RobotWorker(int robotNum, AtomicBoolean stopApp, PerformanceStatsUpdateWorker perfWorker, Database db) {
 		_id = robotNum;
-		_log = log;
 		_db = db;
 		_stopApp = stopApp;
 		_perfWorker = perfWorker;
@@ -47,7 +49,7 @@ public class RobotWorker implements Runnable {
 				// trim it down
 				HashMap<String, RobotsTxt> temp = new HashMap<String, RobotsTxt>();
 				int i = 0;
-				log("DomainRobot size is > MAX_ROBOT_CACHE_SIZE, so trimming now...", false);
+				log.info("DomainRobot size is > MAX_ROBOT_CACHE_SIZE, so trimming now...");
 				for(Map.Entry<String, RobotsTxt> item : domainRobots.entrySet()) {
 					temp.put(item.getKey(), item.getValue());
 					i++;
@@ -58,15 +60,15 @@ public class RobotWorker implements Runnable {
 				for(Map.Entry<String, RobotsTxt> item : temp.entrySet()) {
 					domainRobots.put(item.getKey(), item.getValue());
 				}
-				log("DomainRobot size is now " + domainRobots.size(), false);
+				log.info("DomainRobot size is now " + domainRobots.size());
 			}
 			
 			long start = System.currentTimeMillis();
-			log("Starting to get urls to verify", false);
-			ArrayList<String> pages = _db.getUnverifiedPagesForVerification(getClientName(), _id);
-			log("Got urls to verify:" + (System.currentTimeMillis() - start) + "ms", false);
+			log.info("Starting to get urls to verify");
+			ArrayList<String> pages = _db.getUnverifiedPagesForVerification(_id);
+			log.info("Got urls to verify:" + (System.currentTimeMillis() - start) + "ms");
 			if (pages.size() == 0) {
-				log("No unverified pages found", false);
+				log.info("No unverified pages found");
 				sleep(10);
 				continue;
 			}
@@ -78,20 +80,20 @@ public class RobotWorker implements Runnable {
 				for(String url : pages) {
 					RobotsTxt rbt = getRobot(url, domainRobots);
 					start = System.currentTimeMillis();
-					if (rbt.canCrawl(url, getClientName(), _log)) {
+					if (rbt.canCrawl(url, getClientName())) {
 						_perfWorker.incrementPagesVerified();
 						verificationResults.put(url, 1);
 					}
 				}
 				
 				start = System.currentTimeMillis();
-				log("Starting to update verification status", false);
-				_db.setVerificationStatusForUrls(getClientName(), verificationResults);
-				log("Updated verification status in database for " + pages.size() + " pages:" + (System.currentTimeMillis() - start) + "ms", false);
+				log.info("Starting to update verification status");
+				_db.setVerificationStatusForUrls(verificationResults);
+				log.info("Updated verification status in database for " + pages.size() + " pages:" + (System.currentTimeMillis() - start) + "ms");
 				
 			} 
 			catch (Exception ex) {
-				log("Error in robotWorker:" + ex.toString() + "\n Line:" + Thread.currentThread().getStackTrace()[0].getLineNumber(), true);
+				log.error("Error in robotWorker:" + ex.toString() + "\n Line:" + Thread.currentThread().getStackTrace()[0].getLineNumber());
 			}
 						
 			// sleep to allow for more pages to be collected
@@ -115,15 +117,15 @@ public class RobotWorker implements Runnable {
 		
 		if (domain == null) {
 			rbt = new RobotsTxt(false);
-			log("Error getting domain from url, so will be excluded " + url, true);
+			log.error("Error getting domain from url, so will be excluded " + url);
 		}
 		else {
 			rbt = domainRobots.get(domain);
 			if (rbt == null) {
 				rbt = new RobotsTxt(domain);
-				ArrayList<String> robotText = HttpUtils.getRobotTxtFromDomain(domain, getClientName(), _log);
+				ArrayList<String> robotText = HttpUtils.getRobotTxtFromDomain(domain);
 				for(String s : robotText) {
-					rbt.processRobotTxtLine(s, _log, getClientName());
+					rbt.processRobotTxtLine(s);
 				}
 				domainRobots.put(domain, rbt);
 			}
@@ -142,8 +144,5 @@ public class RobotWorker implements Runnable {
 		}
 	}
 	private String getClientName() { return "Robot#" + Integer.toString(_id); }
-	private void log(String msg, boolean err) {
-		_log.LogMessage(getClientName(), msg, err);
-	}
 
 }
