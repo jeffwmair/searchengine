@@ -1,8 +1,6 @@
 package jwm.ir.utils;
 
 import jwm.ir.crawler.UrlUtils;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

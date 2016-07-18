@@ -6,7 +6,6 @@ import jwm.ir.utils.Database;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,7 +24,6 @@ public class CrawlerWorker implements Runnable {
 	private ArrayList<String> _validPageExtensions;
 	private ArrayList<String> _validDomainExtensions;
 	Database _db;
-	File _documentDir;
 	boolean _indexersRunning;
 	AtomicBoolean _stopApp;
 	PerformanceStatsUpdateWorker _perfWorker;

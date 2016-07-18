@@ -1,8 +1,13 @@
 package jwm.ir.main;
 
-import jwm.ir.indexer.*;
+import jwm.ir.indexer.IndexQueue;
+import jwm.ir.indexer.IndexQueueFactory;
+import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
-import jwm.ir.workers.*;
+import jwm.ir.workers.CrawlerWorker;
+import jwm.ir.workers.IndexerWorker;
+import jwm.ir.workers.PerformanceStatsUpdateWorker;
+import jwm.ir.workers.RobotWorker;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
