@@ -1,7 +1,7 @@
 package jwm.ir.workers;
 
-import jwm.ir.crawler.UrlUtils;
 import jwm.ir.crawler.WebPage;
+import jwm.ir.indexer.IndexQueue;
 import jwm.ir.utils.Database;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -29,18 +29,22 @@ public class CrawlerWorker implements Runnable {
 	boolean _indexersRunning;
 	AtomicBoolean _stopApp;
 	PerformanceStatsUpdateWorker _perfWorker;
+	private final IndexQueue indexQueue;
 	
 	/**
 	 * @param args
 	 */
-	public CrawlerWorker(int crawlerNum, 
-			ArrayList<String> validPageExtensions,
-			ArrayList<String> validDomainExtensions,
-			Database db,
-			File documentDir, 
-			boolean indexersRunning,
-			PerformanceStatsUpdateWorker perfWorker,
-			AtomicBoolean stopApp) {
+	public CrawlerWorker(int crawlerNum,
+						 ArrayList<String> validPageExtensions,
+						 ArrayList<String> validDomainExtensions,
+						 Database db,
+						 IndexQueue indexQueue,
+						 File documentDir,
+						 boolean indexersRunning,
+						 PerformanceStatsUpdateWorker perfWorker,
+						 AtomicBoolean stopApp) {
+		if (indexQueue == null) throw new IllegalArgumentException("Must provide indexQueue");
+		this.indexQueue = indexQueue;
 		_id = crawlerNum;
 		_db = db;
 		_documentDir = documentDir;
@@ -67,21 +71,8 @@ public class CrawlerWorker implements Runnable {
 	private boolean tooManyFilesAreQueued() {
 		
 		if (!_indexersRunning) return false;
-		
-		File[] filesInDir = _documentDir.listFiles();
-		int countFilesByThisCrawler = 0;
-		boolean timeForARest = false;
-		for(File f : filesInDir) {
-			if (f.getName().startsWith(getOutputFilePrefix())) {
-				countFilesByThisCrawler++;
-				if (countFilesByThisCrawler > MAX_QUEUED_FILES_BEFORE_REST) {
-					timeForARest = true;
-					break;
-				}
-			}
-		}
-		
-		return timeForARest;
+		return indexQueue.getSize(_id) > MAX_QUEUED_FILES_BEFORE_REST;
+
 	}
 	
 	private void mainCrawl() {
@@ -121,7 +112,7 @@ public class CrawlerWorker implements Runnable {
                     boolean noFollow = robotRules[1];
 
                     if (!noIndex) {
-                        p.writeToFile(getOutputFilePrefix(), _documentDir.getAbsolutePath());
+						indexQueue.put(_id, p.getParsedPage());
                     }
 
                     if (!noFollow) {
@@ -200,10 +191,6 @@ public class CrawlerWorker implements Runnable {
 		}
 	}	
 
-	private String getOutputFilePrefix() {
-		return "crawler" + _id;
-	}
-	
 	private void sleep(int seconds) {
 		try {
 			Thread.sleep(seconds * 1000);

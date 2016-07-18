@@ -1,6 +1,6 @@
 package jwm.ir.main;
 
-import jwm.ir.indexer.TermPreprocessor;
+import jwm.ir.indexer.*;
 import jwm.ir.utils.Database;
 import jwm.ir.workers.*;
 import org.apache.log4j.LogManager;
@@ -85,14 +85,23 @@ public class IrMain {
 		AtomicInteger indexCounter = new AtomicInteger(0);
 		
 		PerformanceStatsUpdateWorker performanceWorker = new PerformanceStatsUpdateWorker(db, workers, stopApplication);
-				
+		IndexQueue queue = IndexQueueFactory.getQueue("toindex");
+
 		for(int i = 1; i <= workers; i++) {
 			
 			String num = Integer.toString(i);
-			
+
 			if (runCrawlers) {
 				
-				CrawlerWorker c1 = new CrawlerWorker(i, validPageExtensions, validDomainExtensions, db, documentDir, runIndexers, performanceWorker, stopApplication);
+				CrawlerWorker c1 = new CrawlerWorker(i,
+						validPageExtensions,
+						validDomainExtensions,
+						db,
+						queue,
+						documentDir,
+						runIndexers,
+						performanceWorker,
+						stopApplication);
 				Thread t = new Thread(c1, "Crawler#" + num);
 				t.start();
 			}
@@ -107,7 +116,8 @@ public class IrMain {
 
 			if (runIndexers) {
 			
-				IndexerWorker indexer = new IndexerWorker(documentDir, 
+				IndexerWorker indexer = new IndexerWorker(queue,
+						documentDir,
 						db, 
 						getStopwordsFromFile(),
 						performanceWorker,

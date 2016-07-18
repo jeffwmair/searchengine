@@ -1,6 +1,8 @@
 package jwm.ir.crawler;
 
 
+import jwm.ir.indexer.ParsedWebPage;
+import jwm.ir.indexer.ParsedWebPageImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jsoup.Connection.Response;
@@ -144,26 +146,14 @@ public class WebPage {
 		return links;
 		
 	}
-	
-	public void writeToFile(String filenamePrefix, String folder) {
-		
-	    Format formatter = new SimpleDateFormat("yyyy_M_dd HHmmssSSS");
-	    String dateFormatted = formatter.format(new Date());
-		
-        try 
-        {
-        	BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(folder + "/" + filenamePrefix + "_" + dateFormatted + ".txt"), "UTF-8"));
-            out.write(_url + "\n");
-    		out.write(_page.text().replace("\\\"", "\""));	
-            out.close();
-		} 
-        catch (IOException e) 
-        {
-        	log.error("Error writing url to file " + _url);
-			e.printStackTrace();
-		}        
+
+	/**
+	 * Get a ParsedWebPage instance
+	 * @return
+     */
+	public ParsedWebPage getParsedPage() {
+		return new ParsedWebPageImpl(_url, _page.text());
 	}
-	
 	
 
 }

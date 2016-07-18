@@ -1,6 +1,7 @@
 package jwm.ir.workers;
 
 import jwm.ir.indexer.CrawledTextParser;
+import jwm.ir.indexer.IndexQueue;
 import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.JsonUtils;
@@ -31,11 +32,16 @@ public class IndexerWorker implements Runnable {
 	private Thread _updateStatsWorker;
 	private PerformanceStatsUpdateWorker _perfWorker;
 	
-	public IndexerWorker(File directory, Database db, ArrayList<String> stopwords, PerformanceStatsUpdateWorker perfWorker, int id,
-			AtomicInteger indexCount, 
-			int indexesBeforePrUpdate,
-			TermPreprocessor tp,
-			AtomicBoolean stopApplication) {
+	public IndexerWorker(IndexQueue indexQueue,
+						 File directory,
+						 Database db,
+						 ArrayList<String> stopwords,
+						 PerformanceStatsUpdateWorker perfWorker,
+						 int id,
+						 AtomicInteger indexCount,
+						 int indexesBeforePrUpdate,
+						 TermPreprocessor tp,
+						 AtomicBoolean stopApplication) {
 		_id = id;
 		_dir = directory;
 		_stopwords = stopwords;

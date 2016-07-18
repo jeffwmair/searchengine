@@ -1,32 +1,38 @@
 package jwm.ir.indexer;
 
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 /**
  * File-system implementation of IndexQueue
  * Created by Jeff on 2016-07-17.
  */
-public class IndexQueueFileSysImpl implements IndexQueue {
+class IndexQueueFileSysImpl implements IndexQueue {
 
+    final private static Logger log = LogManager.getLogger(IndexQueueFileSysImpl.class);
 
-    private final int workerId;
     private final IndexFileSys indexFileSys;
-    public IndexQueueFileSysImpl(int workerId, IndexFileSys indexFileSys) {
+    IndexQueueFileSysImpl(IndexFileSys indexFileSys) {
         if (indexFileSys == null) throw new IllegalArgumentException("Must provide indexFileSys");
-        this.workerId = workerId;
         this.indexFileSys = indexFileSys;
     }
 
     @Override
-    public void put(ParsedWebPage page) {
+    public synchronized void put(int workerId, ParsedWebPage page) {
+        log.debug("Putting page into the queue:"+page.getUrl()+"; worker:"+workerId);
         indexFileSys.writeToDisk(workerId, page);
     }
 
     @Override
-    public ParsedWebPage pop() {
-        return indexFileSys.readFromDisk(workerId);
+    public synchronized ParsedWebPage pop(int workerId) {
+        ParsedWebPage page = indexFileSys.readFromDisk(workerId);
+        log.debug("Popping page from the queue:"+page.getUrl()+"; worker:"+workerId);
+        return page;
     }
 
     @Override
-    public int getSize() {
+    public synchronized int getSize(int workerId) {
         return indexFileSys.countFiles(workerId);
     }
 }
