@@ -64,7 +64,7 @@ public class IndexFileSysImpl implements IndexFileSys {
      * @return
      */
     @Override
-    public synchronized ParsedWebPage readFromDisk(int workerId) {
+    public synchronized ParsedWebPage readFromDiskAndDelete(int workerId) {
 
         ArrayList<File> files = getFilesForWorker(workerId);
         if (files.size() == 0) {
@@ -109,6 +109,11 @@ public class IndexFileSysImpl implements IndexFileSys {
                     e.printStackTrace();
                 }
             }
+
+            String fname = nextFile.getName();
+            boolean deleted = nextFile.delete();
+            log.debug("File '"+fname+"' deleted after reading.  Delete operation success:"+deleted);
+
         }
 
         return new ParsedWebPageImpl(url, content);

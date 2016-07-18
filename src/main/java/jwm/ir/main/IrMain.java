@@ -31,11 +31,6 @@ public class IrMain {
 		
 		AtomicBoolean stopApplication = new AtomicBoolean(false);
 				
-		File documentDir = new File("toindex");
-		if (!documentDir.exists()) {
-			documentDir.mkdir();
-		}
-		
 		int workers = 1;
 		int prInterval = 500;
 		boolean runCrawlers = false;
@@ -98,7 +93,6 @@ public class IrMain {
 						validDomainExtensions,
 						db,
 						queue,
-						documentDir,
 						runIndexers,
 						performanceWorker,
 						stopApplication);
@@ -117,8 +111,7 @@ public class IrMain {
 			if (runIndexers) {
 			
 				IndexerWorker indexer = new IndexerWorker(queue,
-						documentDir,
-						db, 
+						db,
 						getStopwordsFromFile(),
 						performanceWorker,
 						i,

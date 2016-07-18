@@ -39,7 +39,6 @@ public class CrawlerWorker implements Runnable {
 						 ArrayList<String> validDomainExtensions,
 						 Database db,
 						 IndexQueue indexQueue,
-						 File documentDir,
 						 boolean indexersRunning,
 						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicBoolean stopApp) {
@@ -47,7 +46,6 @@ public class CrawlerWorker implements Runnable {
 		this.indexQueue = indexQueue;
 		_id = crawlerNum;
 		_db = db;
-		_documentDir = documentDir;
 		_indexersRunning = indexersRunning;
 		log.info("Starting...");
 		_validPageExtensions = validPageExtensions;

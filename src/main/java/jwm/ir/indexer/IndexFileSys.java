@@ -5,6 +5,6 @@ package jwm.ir.indexer;
  */
 public interface IndexFileSys {
     void writeToDisk(int workerId, ParsedWebPage parsedWebPage);
-    ParsedWebPage readFromDisk(int workerId);
+    ParsedWebPage readFromDiskAndDelete(int workerId);
     int countFiles(int workerId);
 }

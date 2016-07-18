@@ -26,9 +26,8 @@ class IndexQueueFileSysImpl implements IndexQueue {
 
     @Override
     public synchronized ParsedWebPage pop(int workerId) {
-        ParsedWebPage page = indexFileSys.readFromDisk(workerId);
-        log.debug("Popping page from the queue:"+page.getUrl()+"; worker:"+workerId);
-        return page;
+        log.debug("Popping page from the queue for worker:"+workerId);
+        return indexFileSys.readFromDiskAndDelete(workerId);
     }
 
     @Override
