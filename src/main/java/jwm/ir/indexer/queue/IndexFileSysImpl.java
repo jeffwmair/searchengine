@@ -1,5 +1,8 @@
-package jwm.ir.indexer;
+package jwm.ir.indexer.queue;
 
+import jwm.ir.indexer.ParsedWebPage;
+import jwm.ir.indexer.ParsedWebPageImpl;
+import jwm.ir.indexer.ParsedWebPageNoneImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -15,12 +18,12 @@ import java.util.Date;
  *
  * Created by Jeff on 2016-07-17.
  */
-public class IndexFileSysImpl implements IndexFileSys {
+class IndexFileSysImpl implements IndexFileSys {
 
     final private static Logger log = LogManager.getLogger(IndexFileSysImpl.class);
     private final File documentDir;
 
-    public IndexFileSysImpl(String directory) {
+    IndexFileSysImpl(String directory) {
 
         if (directory == null || directory.isEmpty()) throw new IllegalArgumentException("Must provide a valid directory");
 

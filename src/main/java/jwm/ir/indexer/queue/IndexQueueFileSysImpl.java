@@ -1,6 +1,7 @@
-package jwm.ir.indexer;
+package jwm.ir.indexer.queue;
 
 
+import jwm.ir.indexer.ParsedWebPage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

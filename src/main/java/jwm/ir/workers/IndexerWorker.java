@@ -1,6 +1,7 @@
 package jwm.ir.workers;
 
 import jwm.ir.indexer.*;
+import jwm.ir.indexer.queue.IndexQueue;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;

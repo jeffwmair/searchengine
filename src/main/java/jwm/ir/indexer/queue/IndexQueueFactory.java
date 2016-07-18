@@ -1,4 +1,4 @@
-package jwm.ir.indexer;
+package jwm.ir.indexer.queue;
 
 /**
  * Created by Jeff on 2016-07-17.

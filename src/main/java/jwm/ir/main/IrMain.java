@@ -1,7 +1,7 @@
 package jwm.ir.main;
 
-import jwm.ir.indexer.IndexQueue;
-import jwm.ir.indexer.IndexQueueFactory;
+import jwm.ir.indexer.queue.IndexQueue;
+import jwm.ir.indexer.queue.IndexQueueFactory;
 import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
 import jwm.ir.workers.CrawlerWorker;

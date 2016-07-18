@@ -1,7 +1,7 @@
 package jwm.ir.workers;
 
 import jwm.ir.crawler.WebPage;
-import jwm.ir.indexer.IndexQueue;
+import jwm.ir.indexer.queue.IndexQueue;
 import jwm.ir.utils.Database;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -45,11 +45,12 @@ public class CrawlerWorker implements Runnable {
 		_id = crawlerNum;
 		_db = db;
 		_indexersRunning = indexersRunning;
-		log.info("Starting...");
 		_validPageExtensions = validPageExtensions;
 		_validDomainExtensions = validDomainExtensions;
 		_perfWorker = perfWorker;
 		_stopApp = stopApp;
+
+		log.info("Starting...");
 	}
 
 	@Override
@@ -95,7 +96,6 @@ public class CrawlerWorker implements Runnable {
                 WebPage p = new WebPage(url);
                 String title = null;
                 String pageDesc = null;
-                start = System.currentTimeMillis();
                 boolean success = p.crawl();
                 if (success) {
                     // lets say we just count successful crawls with the performance worker
