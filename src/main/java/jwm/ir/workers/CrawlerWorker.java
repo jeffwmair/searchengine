@@ -1,7 +1,7 @@
 package jwm.ir.workers;
 
 import jwm.ir.crawler.WebPage;
-import jwm.ir.indexer.queue.IndexQueue;
+import jwm.ir.indexer.ParsedWebPage;
 import jwm.ir.utils.Database;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -27,16 +28,13 @@ public class CrawlerWorker implements Runnable {
 	boolean _indexersRunning;
 	AtomicBoolean _stopApp;
 	PerformanceStatsUpdateWorker _perfWorker;
-	private final IndexQueue indexQueue;
+	private final BlockingQueue<ParsedWebPage> indexQueue;
 	
-	/**
-	 * @param args
-	 */
 	public CrawlerWorker(int crawlerNum,
 						 ArrayList<String> validPageExtensions,
 						 ArrayList<String> validDomainExtensions,
 						 Database db,
-						 IndexQueue indexQueue,
+						 BlockingQueue<ParsedWebPage> indexQueue,
 						 boolean indexersRunning,
 						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicBoolean stopApp) {
@@ -68,7 +66,7 @@ public class CrawlerWorker implements Runnable {
 	private boolean tooManyFilesAreQueued() {
 		
 		if (!_indexersRunning) return false;
-		return indexQueue.getSize(_id) > MAX_QUEUED_FILES_BEFORE_REST;
+		return indexQueue.size() > MAX_QUEUED_FILES_BEFORE_REST;
 
 	}
 	
@@ -108,7 +106,8 @@ public class CrawlerWorker implements Runnable {
                     boolean noFollow = robotRules[1];
 
                     if (!noIndex) {
-						indexQueue.put(_id, p.getParsedPage());
+						log.info("Adding page to queue:"+p.getPageTitle());
+						indexQueue.add(p.getParsedPage());
                     }
 
                     if (!noFollow) {

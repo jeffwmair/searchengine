@@ -1,7 +1,6 @@
 package jwm.ir.main;
 
-import jwm.ir.indexer.queue.IndexQueue;
-import jwm.ir.indexer.queue.IndexQueueFactory;
+import jwm.ir.indexer.ParsedWebPage;
 import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
 import jwm.ir.workers.CrawlerWorker;
@@ -15,6 +14,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -85,7 +86,7 @@ public class IrMain {
 		AtomicInteger indexCounter = new AtomicInteger(0);
 		
 		PerformanceStatsUpdateWorker performanceWorker = new PerformanceStatsUpdateWorker(db, workers, stopApplication);
-		IndexQueue queue = IndexQueueFactory.getQueue("toindex");
+		BlockingQueue<ParsedWebPage> queue = new LinkedBlockingQueue<>();
 
 		for(int i = 1; i <= workers; i++) {
 			

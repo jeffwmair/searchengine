@@ -16,9 +16,9 @@ public class IndexQueueFileSysImplTest {
 
         // arrange
         int workerId = 1;
-        IndexFileSys fileSys = mock(IndexFileSys.class);
-        IndexQueueFileSysImpl sut = new IndexQueueFileSysImpl(fileSys);
-        ParsedWebPage parsedWebPage = new ParsedWebPageImpl("url", "content");
+//        IndexFileSys fileSys = mock(IndexFileSys.class);
+//        IndexQueueFileSysImpl sut = new IndexQueueFileSysImpl(fileSys);
+//        ParsedWebPage parsedWebPage = new ParsedWebPageImpl("url", "content");
 
         // act
 //        sut.put(parsedWebPage);

@@ -41,7 +41,7 @@ public class RobotWorker implements Runnable {
 //		return;
 		
 		
-		HashMap<String, RobotsTxt> domainRobots = new HashMap<String, RobotsTxt>();
+		HashMap<String, RobotsTxt> domainRobots = new HashMap<>();
 		
 		while (true && !_stopApp.get()) {
 			
@@ -69,7 +69,7 @@ public class RobotWorker implements Runnable {
 			log.info("Got urls to verify:" + (System.currentTimeMillis() - start) + "ms");
 			if (pages.size() == 0) {
 				log.info("No unverified pages found");
-				sleep(10);
+				sleep(1);
 				continue;
 			}
 			

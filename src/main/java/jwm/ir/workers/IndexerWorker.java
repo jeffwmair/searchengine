@@ -1,7 +1,9 @@
 package jwm.ir.workers;
 
-import jwm.ir.indexer.*;
-import jwm.ir.indexer.queue.IndexQueue;
+import jwm.ir.indexer.CrawledTextParser;
+import jwm.ir.indexer.ParsedWebPage;
+import jwm.ir.indexer.ParsedWebPageNoneImpl;
+import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;
@@ -9,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -25,9 +28,9 @@ public class IndexerWorker implements Runnable {
 	private Thread _threadPageRankWorker;
 	private Thread _updateStatsWorker;
 	private PerformanceStatsUpdateWorker _perfWorker;
-	private final IndexQueue indexQueue;
+	private final BlockingQueue<ParsedWebPage> indexQueue;
 	
-	public IndexerWorker(IndexQueue indexQueue,
+	public IndexerWorker(BlockingQueue<ParsedWebPage> indexQueue,
 						 Database db,
 						 ArrayList<String> stopwords,
 						 PerformanceStatsUpdateWorker perfWorker,
@@ -62,10 +65,18 @@ public class IndexerWorker implements Runnable {
 				startSummarizerWorker();
 				_indexCount.set(0);
 			}
-			
-			processInputFile(indexQueue.pop(_id), _tp);
 
-			sleep(2);
+			ParsedWebPage parsedWebPage = null;
+			try {
+				parsedWebPage = indexQueue.take();
+			} catch (InterruptedException e) {
+				log.error(e.getMessage(), e);
+				Thread.interrupted();
+				return;
+			}
+			log.info("Received new page to process:"+parsedWebPage.getUrl());
+			processInputFile(parsedWebPage, _tp);
+
 		}
 		
 	}
@@ -171,15 +182,6 @@ public class IndexerWorker implements Runnable {
 
 
 		
-	}
-	
-	private void sleep(int seconds) {
-		try {
-			Thread.sleep(seconds*1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }
