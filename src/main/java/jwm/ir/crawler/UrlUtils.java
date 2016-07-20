@@ -79,7 +79,7 @@ public class UrlUtils {
 		}
 		
 		if (hyperLink.startsWith("./")) {
-			// same folder, just remove the current page resource, append what comes after ./
+			// same folder, just remove the current page resource, appendLine what comes after ./
 			url = getPathToUrlResource(currentPageAbsoluteURL) + hyperLink.substring(2); 
 		}
 		else if (hyperLink.startsWith("..")) {
