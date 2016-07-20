@@ -1,12 +1,12 @@
-package jwm.ir.indexer;
+package jwm.ir.message;
 
 /**
  * Created by Jeff on 2016-07-17.
  */
-public class ParsedWebPageImpl implements ParsedWebPage {
+public class WebResourcePageImpl implements WebResource {
 
     private final String url, content;
-    public ParsedWebPageImpl(String url, String content) {
+    public WebResourcePageImpl(String url, String content) {
 
         if (url == null || url.isEmpty()) throw new IllegalArgumentException("Must provide url");
         if (content == null || content.isEmpty()) throw new IllegalArgumentException("Must provide content");
@@ -21,7 +21,7 @@ public class ParsedWebPageImpl implements ParsedWebPage {
     }
 
     @Override
-    public String getPageContent() {
+    public String getContent() {
         return content;
     }
 }

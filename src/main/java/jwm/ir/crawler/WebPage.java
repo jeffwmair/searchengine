@@ -1,8 +1,8 @@
 package jwm.ir.crawler;
 
 
-import jwm.ir.indexer.ParsedWebPage;
-import jwm.ir.indexer.ParsedWebPageImpl;
+import jwm.ir.message.WebResource;
+import jwm.ir.message.WebResourcePageImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jsoup.Connection.Response;
@@ -144,8 +144,8 @@ public class WebPage {
 	 * Get a ParsedWebPage instance
 	 * @return
      */
-	public ParsedWebPage getParsedPage() {
-		return new ParsedWebPageImpl(_url, _page.text());
+	public WebResource getWebResource() {
+		return new WebResourcePageImpl(_url, _page.text());
 	}
 	
 

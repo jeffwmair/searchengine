@@ -1,16 +1,29 @@
 package jwm.ir.robotverifier;
 
 
+import jwm.ir.utils.Clock;
 import jwm.ir.utils.StringBuilderWithNewline;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by Jeff on 2016-07-19.
  */
 public class RobotTxtParserTest {
+
+    private RobotTxtParser sut;
+    private Clock clock;
+
+    @Before
+    public void setup() {
+        clock = mock(Clock.class);
+        sut = new RobotTxtParser(clock);
+    }
 
     @Test
     public void getDisallowValueTest() {
@@ -21,11 +34,10 @@ public class RobotTxtParserTest {
         sb.appendLine("Disallow: /abc");
 
         // act
-        RobotTxtParser parser = new RobotTxtParser(sb.toString());
-        List<RobotUserAgent> agents = parser.parseAgents();
+        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
 
         // assert
-        RobotUserAgent agent = agents.get(0);
+        RobotUserAgentImpl agent = agents.get(0);
         List<String> disallows = agent.getDisallows();
 
         Assert.assertEquals(1, disallows.size());
@@ -42,8 +54,7 @@ public class RobotTxtParserTest {
         sb.appendLine("Disallow: /");
 
         // act
-        RobotTxtParser parser = new RobotTxtParser(sb.toString());
-        List<RobotUserAgent> agents = parser.parseAgents();
+        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
 
         // assert
         Assert.assertEquals(1, agents.size());
@@ -61,8 +72,7 @@ public class RobotTxtParserTest {
         sb.appendLine("Disallow: /");
 
         // act
-        RobotTxtParser parser = new RobotTxtParser(sb.toString());
-        List<RobotUserAgent> agents = parser.parseAgents();
+        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
 
         // assert
         Assert.assertEquals(2, agents.size());
@@ -81,8 +91,7 @@ public class RobotTxtParserTest {
         sb.appendLine("Disallow: /");
 
         // act
-        RobotTxtParser parser = new RobotTxtParser(sb.toString());
-        List<RobotUserAgent> agents = parser.parseAgents();
+        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
 
         // assert
         Assert.assertEquals(2, agents.size());
@@ -96,8 +105,7 @@ public class RobotTxtParserTest {
         String content = "";
 
         // act
-        RobotTxtParser parser = new RobotTxtParser(content);
-        List<RobotUserAgent> agents = parser.parseAgents();
+        List<RobotUserAgentImpl> agents = sut.parseAgents(content);
 
         // assert
         Assert.assertEquals(0, agents.size());
@@ -112,8 +120,7 @@ public class RobotTxtParserTest {
         sb.appendLine("DISALLOW: /");
 
         // act
-        RobotTxtParser parser = new RobotTxtParser(sb.toString());
-        List<RobotUserAgent> agents = parser.parseAgents();
+        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
 
         // assert
         Assert.assertEquals(1, agents.size());

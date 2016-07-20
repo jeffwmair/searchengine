@@ -1,7 +1,7 @@
 package jwm.ir.workers;
 
 import jwm.ir.crawler.WebPage;
-import jwm.ir.indexer.ParsedWebPage;
+import jwm.ir.message.WebResource;
 import jwm.ir.utils.Database;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -27,13 +27,13 @@ public class CrawlerWorker implements Runnable {
 	boolean _indexersRunning;
 	AtomicBoolean _stopApp;
 	PerformanceStatsUpdateWorker _perfWorker;
-	private final BlockingQueue<ParsedWebPage> indexQueue;
+	private final BlockingQueue<WebResource> indexQueue;
 	
 	public CrawlerWorker(int crawlerNum,
 						 ArrayList<String> validPageExtensions,
 						 ArrayList<String> validDomainExtensions,
 						 Database db,
-						 BlockingQueue<ParsedWebPage> indexQueue,
+						 BlockingQueue<WebResource> indexQueue,
 						 boolean indexersRunning,
 						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicBoolean stopApp) {
@@ -90,7 +90,7 @@ public class CrawlerWorker implements Runnable {
 
                     if (!noIndex) {
 						log.info("Adding page to queue:"+p.getPageTitle());
-						indexQueue.add(p.getParsedPage());
+						indexQueue.add(p.getWebResource());
                     }
 
                     if (!noFollow) {

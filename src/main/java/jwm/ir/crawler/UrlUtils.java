@@ -1,5 +1,6 @@
 package jwm.ir.crawler;
 
+import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -9,6 +10,21 @@ public class UrlUtils {
 
 	final private static Logger log = LogManager.getLogger(UrlUtils.class);
 
+	public static final String ROBOTS_TXT = "robots.txt";
+
+	public static String getRobotsTxtUrl(String webpageUrl) {
+		return getDomainFromAbsoluteUrl(webpageUrl) + "/" + ROBOTS_TXT;
+	}
+
+	/**
+	 * Is this a domain?
+	 * @param url
+	 * @return
+     */
+	public static boolean isDomain(String url) {
+		return url.equals(getDomainFromAbsoluteUrl(url));
+	}
+
 	/**
 	 * Get the domain from the url.  Domains here never have trailing slashes
 	 * @param url
@@ -16,35 +32,21 @@ public class UrlUtils {
 	 * @throws Exception
 	 */
 	public static String getDomainFromAbsoluteUrl(String url) {
-		String domain = null;
-		
-		if (url.startsWith("http://localhost")) {
-			return "localhost";
-		}
-		
-		if (url.startsWith(".")) {
-			throw new RuntimeException("The url " + url + " is not an absolute URL!");
-		}
-		
-		if (!url.contains(".")) {
-			return null;
-		}
-		
-		if (!url.contains("/")) {
-			return null;
-		}
-		
+
+		AssertUtils.notEmpty(url, "must provide a url");
+		AssertUtils.failState(url.startsWith("."), "The url " + url +" is not an absolute url");
+		AssertUtils.failState(!url.contains("."), "The url " + url +" is missing an extension");
+
+		String domain;
 		if (url.toLowerCase().startsWith("http")) {
 			domain = url.split("/")[2];
 		}
-		else 
+		else
 		{
 			domain = url.split("/")[0];
-		}			
-		
-		if (!domain.contains(".")) {
-			return null;
 		}
+
+		if (domain.startsWith("www.")) domain = domain.substring(4);
 		
 		return domain.trim();
 		

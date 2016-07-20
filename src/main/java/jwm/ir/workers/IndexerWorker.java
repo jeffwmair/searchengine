@@ -1,8 +1,8 @@
 package jwm.ir.workers;
 
 import jwm.ir.indexer.CrawledTextParser;
-import jwm.ir.indexer.ParsedWebPage;
-import jwm.ir.indexer.ParsedWebPageNoneImpl;
+import jwm.ir.message.WebResource;
+import jwm.ir.message.WebResourceNoneImpl;
 import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.JsonUtils;
@@ -28,9 +28,9 @@ public class IndexerWorker implements Runnable {
 	private Thread _threadPageRankWorker;
 	private Thread _updateStatsWorker;
 	private PerformanceStatsUpdateWorker _perfWorker;
-	private final BlockingQueue<ParsedWebPage> indexQueue;
+	private final BlockingQueue<WebResource> indexQueue;
 	
-	public IndexerWorker(BlockingQueue<ParsedWebPage> indexQueue,
+	public IndexerWorker(BlockingQueue<WebResource> indexQueue,
 						 Database db,
 						 ArrayList<String> stopwords,
 						 PerformanceStatsUpdateWorker perfWorker,
@@ -66,7 +66,7 @@ public class IndexerWorker implements Runnable {
 				_indexCount.set(0);
 			}
 
-			ParsedWebPage parsedWebPage = null;
+			WebResource parsedWebPage = null;
 			try {
 				parsedWebPage = indexQueue.take();
 			} catch (InterruptedException e) {
@@ -109,11 +109,10 @@ public class IndexerWorker implements Runnable {
 	
 	/**
 	 * Process an input crawled file
-	 * @param file
 	 */
-	private void processInputFile(ParsedWebPage page, TermPreprocessor tp) {
+	private void processInputFile(WebResource page, TermPreprocessor tp) {
 
-		if (page instanceof ParsedWebPageNoneImpl) {
+		if (page instanceof WebResourceNoneImpl) {
 			// this is not a page, its a null object, so ignore
 			return;
 		}
@@ -129,7 +128,7 @@ public class IndexerWorker implements Runnable {
 		boolean useStemming = false;
 		boolean useStopwords = true;
 		CrawledTextParser parser = new CrawledTextParser(useStemming, useStopwords, _stopwords, tp);
-		parser.processInput(page.getPageContent());
+		parser.processInput(page.getContent());
 		log.info("Finished parsing the file, beginning to construct JSON");
 		final String JSON_PAGE_ID = "p";
 		final String JSON_TERMS = "ts";

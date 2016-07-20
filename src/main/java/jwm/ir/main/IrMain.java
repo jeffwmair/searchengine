@@ -1,7 +1,7 @@
 package jwm.ir.main;
 
-import jwm.ir.indexer.ParsedWebPage;
 import jwm.ir.indexer.TermPreprocessor;
+import jwm.ir.message.WebResource;
 import jwm.ir.utils.Database;
 import jwm.ir.workers.CrawlerWorker;
 import jwm.ir.workers.IndexerWorker;
@@ -86,7 +86,7 @@ public class IrMain {
 		AtomicInteger indexCounter = new AtomicInteger(0);
 		
 		PerformanceStatsUpdateWorker performanceWorker = new PerformanceStatsUpdateWorker(db, workers, stopApplication);
-		BlockingQueue<ParsedWebPage> queue = new LinkedBlockingQueue<>();
+		BlockingQueue<WebResource> queue = new LinkedBlockingQueue<>();
 
 		for(int i = 1; i <= workers; i++) {
 			
