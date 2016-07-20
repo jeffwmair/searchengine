@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CrawlerWorker implements Runnable {
 
-	private final int MAX_QUEUED_FILES_BEFORE_REST = 100;
 	private final int MAX_URL_SUBMIT_BATCH_SIZE = 150;
 	ArrayList<String> _frontier = new ArrayList<>();
 
@@ -56,25 +55,9 @@ public class CrawlerWorker implements Runnable {
 		mainCrawl();
 	}
 	
-	private void waitIfTooManyFilesAreQueued() {
-		while(tooManyFilesAreQueued()) {
-			log.info("*** WAITING *** More than " + MAX_QUEUED_FILES_BEFORE_REST + " files have been downloaded by this crawler, so resting...");
-			sleep(30);
-		}
-	}
-	
-	private boolean tooManyFilesAreQueued() {
-		
-		if (!_indexersRunning) return false;
-		return indexQueue.size() > MAX_QUEUED_FILES_BEFORE_REST;
-
-	}
-	
 	private void mainCrawl() {
 	
         while (true && !_stopApp.get()) {
-
-            waitIfTooManyFilesAreQueued();
 
             // bring some urls out of the database for crawling
             long start = System.currentTimeMillis();

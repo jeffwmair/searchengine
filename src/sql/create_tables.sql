@@ -164,8 +164,13 @@ begin
 		order by pageTermInputId;
 
     /* update the doc frequencies */
+
+    /*
+    problem here: we keep adding to the document_frequency if we re-index the same page (which we should be careful of
+    anyway)
+    */
     update terms set document_frequency = document_frequency + 1 where termId in (select termId from pageterms where pageId = pPageId order by termId);
-	
+
     /* clear the input table */
     delete from pageterm_input where pageId = pPageId; 
 		

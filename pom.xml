@@ -70,6 +70,9 @@
 		</resources>
 		<plugins>
 			<plugin>
+				<!--
+				Surefire plugin for unit & integration testing
+				-->
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.11</version>
 				<configuration>
@@ -77,6 +80,7 @@
 					<skip>true</skip>
 				</configuration>
 				<executions>
+
 					<execution>
 						<id>run-unit-test</id>
 						<phase>test</phase>
@@ -93,6 +97,7 @@
 							</includes>
 						</configuration>
 					</execution>
+
 					<execution>
 						<id>run-integration-test</id>
 						<phase>integration-test</phase>
@@ -106,6 +111,7 @@
 							</includes>
 						</configuration>
 					</execution>
+
 				</executions>
 			</plugin>
 			<plugin>
