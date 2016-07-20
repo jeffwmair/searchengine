@@ -1,10 +1,6 @@
 package jwm.ir.indexer.queue;
 
-import jwm.ir.indexer.ParsedWebPage;
-import jwm.ir.indexer.ParsedWebPageImpl;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
 
 /**
  * Created by Jeff on 2016-07-17.
