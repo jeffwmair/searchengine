@@ -1,15 +1,10 @@
 package jwm.ir.robotverifier;
 
 
-import jwm.ir.utils.Clock;
 import jwm.ir.utils.StringBuilderWithNewline;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
-
-import static org.mockito.Mockito.mock;
 
 /**
  * Created by Jeff on 2016-07-19.
@@ -17,12 +12,10 @@ import static org.mockito.Mockito.mock;
 public class RobotTxtParserTest {
 
     private RobotTxtParser sut;
-    private Clock clock;
 
     @Before
     public void setup() {
-        clock = mock(Clock.class);
-        sut = new RobotTxtParser(clock);
+        sut = new RobotTxtParser();
     }
 
     @Test
@@ -34,30 +27,11 @@ public class RobotTxtParserTest {
         sb.appendLine("Disallow: /abc");
 
         // act
-        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
+		RobotDisallows disallows = sut.getDisallows(sb.toString());
 
         // assert
-        RobotUserAgentImpl agent = agents.get(0);
-        List<String> disallows = agent.getDisallows();
-
-        Assert.assertEquals(1, disallows.size());
-        Assert.assertEquals("/abc", disallows.get(0));
-
-    }
-
-    @Test
-    public void getSingleUserAgentTest() {
-
-        // arrange
-        StringBuilderWithNewline sb = new StringBuilderWithNewline();
-        sb.appendLine("User-agent: *");
-        sb.appendLine("Disallow: /");
-
-        // act
-        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
-
-        // assert
-        Assert.assertEquals(1, agents.size());
+        Assert.assertEquals(1, disallows.getList().size());
+        Assert.assertEquals("/abc", disallows.getList().get(0));
 
     }
 
@@ -67,34 +41,36 @@ public class RobotTxtParserTest {
         // arrange
         StringBuilderWithNewline sb = new StringBuilderWithNewline();
         sb.appendLine("User-agent: fooo");
-        sb.appendLine("Disallow: /");
+        sb.appendLine("Disallow: /a");
         sb.appendLine("User-agent: *");
-        sb.appendLine("Disallow: /");
+        sb.appendLine("Disallow: /b");
 
         // act
-        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
+        RobotDisallows disallows = sut.getDisallows(sb.toString());
 
         // assert
-        Assert.assertEquals(2, agents.size());
+        Assert.assertEquals(1, disallows.getList().size());
+        Assert.assertEquals("/b", disallows.getList().get(0));
 
     }
 
     @Test
-    public void get2AgentsSeparatedByNewline() {
+    public void hasTwoAgentsOnlyCareAbout2nd() {
 
         // arrange
         StringBuilderWithNewline sb = new StringBuilderWithNewline();
         sb.appendLine("User-agent: fooo");
-        sb.appendLine("Disallow: /");
+        sb.appendLine("Disallow: /a");
         sb.appendLine("");
         sb.appendLine("User-agent: *");
-        sb.appendLine("Disallow: /");
+        sb.appendLine("Disallow: /b");
 
         // act
-        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
+        RobotDisallows disallows = sut.getDisallows(sb.toString());
 
         // assert
-        Assert.assertEquals(2, agents.size());
+        Assert.assertEquals(1, disallows.getList().size());
+        Assert.assertEquals("/b", disallows.getList().get(0));
 
     }
 
@@ -105,10 +81,10 @@ public class RobotTxtParserTest {
         String content = "";
 
         // act
-        List<RobotUserAgentImpl> agents = sut.parseAgents(content);
+        RobotDisallows disallows = sut.getDisallows(content);
 
         // assert
-        Assert.assertEquals(0, agents.size());
+        Assert.assertEquals(0, disallows.getList().size());
     }
 
     @Test
@@ -116,14 +92,14 @@ public class RobotTxtParserTest {
 
         // arrange
         StringBuilderWithNewline sb = new StringBuilderWithNewline();
-        sb.appendLine("USER-AGENT: fooo");
+        sb.appendLine("USER-AGENT: *");
         sb.appendLine("DISALLOW: /");
 
         // act
-        List<RobotUserAgentImpl> agents = sut.parseAgents(sb.toString());
+        RobotDisallows disallows = sut.getDisallows(sb.toString());
 
         // assert
-        Assert.assertEquals(1, agents.size());
+        Assert.assertEquals(1, disallows.getList().size());
 
     }
 

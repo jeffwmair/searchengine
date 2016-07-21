@@ -5,6 +5,7 @@ import jwm.ir.utils.AssertUtils;
 import jwm.ir.utils.Cleanable;
 import jwm.ir.utils.Clock;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class RobotUserAgentCache implements Cleanable {
 
     // 72 hrs
     private final long MAX_TIME_IN_CACHE_MILLISECONDS = 259200000;
-    private final Map<String, RobotUserAgentDateWrapper> cache;
+    private final Map<String, RobotDisallowsDateWrapper> cache;
     private final Clock clock;
 
     public RobotUserAgentCache(Clock clock) {
@@ -28,24 +29,28 @@ public class RobotUserAgentCache implements Cleanable {
 
     /**
      * Get an item from the cache
-     * @param allegedDomain
+     * @param domain
      * @return
      */
-    public synchronized RobotUserAgent get(String allegedDomain) {
-        if (!cache.containsKey(allegedDomain)) {
-            return new RobotUserAgentNone();
+    public synchronized RobotDisallows get(String domain) {
+        if (!cache.containsKey(domain)) {
+            return new RobotDisallows(new ArrayList<String>());
         }
-        return cache.get(allegedDomain).getAgent();
+        return cache.get(domain).getDisallows();
     }
+
+	public synchronized boolean contains(String domain) {
+		return cache.containsKey(domain);
+	}
 
     /**
      * Add an item to the cache
      * @param url
      * @param item
      */
-    public synchronized void add(String url, RobotUserAgent item) {
+    public synchronized void add(String url, RobotDisallows item) {
         AssertUtils.failState(!UrlUtils.isDomain(url), "Must provide a domain, but was provided with:"+url);
-        cache.put(url, new RobotUserAgentDateWrapper(clock.getTime(), item));
+        cache.put(url, new RobotDisallowsDateWrapper(clock.getTime(), item));
     }
 
     @Override
@@ -54,8 +59,8 @@ public class RobotUserAgentCache implements Cleanable {
         Iterator<String> it = cache.keySet().iterator();
         while (it.hasNext()) {
             String domain = it.next();
-            RobotUserAgentDateWrapper agent = cache.get(domain);
-            long timePassed = clock.getTime() - agent.getTime();
+            RobotDisallowsDateWrapper disallowsWrapper = cache.get(domain);
+            long timePassed = clock.getTime() - disallowsWrapper.getTime();
             if (timePassed >= MAX_TIME_IN_CACHE_MILLISECONDS) {
                 it.remove();
             }

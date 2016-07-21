@@ -1,5 +1,7 @@
 package jwm.ir.message;
 
+import jwm.ir.utils.AssertUtils;
+
 /**
  * Created by Jeff on 2016-07-17.
  */
@@ -8,8 +10,8 @@ public class WebResourcePageImpl implements WebResource {
     private final String url, content;
     public WebResourcePageImpl(String url, String content) {
 
-        if (url == null || url.isEmpty()) throw new IllegalArgumentException("Must provide url");
-        if (content == null || content.isEmpty()) throw new IllegalArgumentException("Must provide content");
+        AssertUtils.notEmpty(url, "Must provide url");
+        AssertUtils.notNull(content, "Must provide content");
         this.url = url;
         this.content = content;
 

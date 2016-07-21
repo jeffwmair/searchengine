@@ -121,7 +121,7 @@ public class UrlUtils {
 		return newDepth;
 	}
 
-	public static String getPathToUrlResource(String absoluteUrl) throws Exception {
+	public static String getPathToUrlResource(String absoluteUrl) {
 		
 		String url = absoluteUrl;
 				

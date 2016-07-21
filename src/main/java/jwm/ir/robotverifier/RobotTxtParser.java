@@ -1,8 +1,5 @@
 package jwm.ir.robotverifier;
 
-import jwm.ir.utils.AssertUtils;
-import jwm.ir.utils.Clock;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,16 +10,7 @@ import java.util.List;
  */
 public class RobotTxtParser {
 
-    private final Clock clock;
-    public RobotTxtParser(Clock clock) {
-
-        AssertUtils.notNull(clock, "provide a clock!");
-        this.clock = clock;
-
-
-    }
-
-    private void storeAgent(List<RobotUserAgentImpl> agents, String agentName, List<String> disallows) {
+    private void storeAgent(List<RobotUserAgent> agents, String agentName, List<String> disallows) {
         agents.add(new RobotUserAgentImpl(agentName, disallows));
     }
 
@@ -30,14 +18,28 @@ public class RobotTxtParser {
         return line.split(":")[1].trim();
     }
 
+	public RobotDisallows getDisallows(String robotsTxtContent) {
+		List<RobotUserAgent> agents = parseAgents(robotsTxtContent);
+		List<String> disallows = new ArrayList<>();
+		for( RobotUserAgent agent : agents ) {
+			if (agent.getAgentName().equals("*")) {
+               return new RobotDisallows(agent.getDisallows());
+			}
+		}
+
+        return new RobotDisallows(new ArrayList<String>());
+
+	}
+
+
     /**
      * Get list of agents
      * @return
      */
-    public List<RobotUserAgentImpl> parseAgents(String robotsTxtContent) {
+    private List<RobotUserAgent> parseAgents(String robotsTxtContent) {
 
         List<String> lines = Arrays.asList(robotsTxtContent.split("\n"));
-        List<RobotUserAgentImpl> agents = new ArrayList<>();
+        List<RobotUserAgent> agents = new ArrayList<>();
         List<String> disallowsList = null;
 
         String agentName = null;
