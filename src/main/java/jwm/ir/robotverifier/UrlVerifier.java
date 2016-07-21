@@ -24,7 +24,10 @@ public class UrlVerifier implements Runnable {
     private final RobotUserAgentCache cache;
     private final BlockingQueue<String> outputQueue;
 
-    public UrlVerifier(String url, ResourceFetcher fetcher, RobotUserAgentCache cache, BlockingQueue<String> outputQueue) {
+    public UrlVerifier(String url,
+					   ResourceFetcher fetcher,
+					   RobotUserAgentCache cache,
+					   BlockingQueue<String> outputQueue) {
 		AssertUtils.notEmpty(url, "Must provide a url");
         AssertUtils.notNull(fetcher, "Must provide non-null fetcher");
         AssertUtils.notNull(cache, "Must provide non-null cache");

@@ -1,6 +1,7 @@
 package jwm.ir.robotverifier;
 
 import java.util.concurrent.*;
+
 import jwm.ir.utils.AssertUtils;
 
 /**
@@ -11,20 +12,31 @@ import jwm.ir.utils.AssertUtils;
 public class UrlVerifierMessageReceiver {
 
 	private final BlockingQueue<String> input;
-	private final BlockingQueue<String> outputSuccess;
-	private final BlockingQueue<String> outputDiscard;
-    public UrlVerifierMessageReceiver(BlockingQueue<String> input, 
-			BlockingQueue<String> outputSuccess, 
-			BlockingQueue<String> outputDiscard) {
+	private final Executor urlVerifierExecutor;
+	private final UrlVerifierFactory urlVerifierFactory;
+
+    public UrlVerifierMessageReceiver(Executor urlVerifierExecutor,
+									  BlockingQueue<String> input,
+									  UrlVerifierFactory urlVerifierFactory ) {
 
 		AssertUtils.notNull(input, "must provide input queue");
-		AssertUtils.notNull(outputSuccess, "must provide output-success queue");
-		AssertUtils.notNull(outputDiscard, "must provide output-discard queue");
+		AssertUtils.notNull(urlVerifierExecutor, "must provide executor");
 
+		this.urlVerifierFactory = urlVerifierFactory;
 		this.input = input;
-		this.outputSuccess = outputSuccess;
-		this.outputDiscard = outputDiscard;
+		this.urlVerifierExecutor = urlVerifierExecutor;
     }
+
+	/**
+	 * Listen on the input queue for a url to verify
+	 * @throws InterruptedException
+     */
+	public void run() throws InterruptedException {
+		while (true) {
+			String url = input.take();
+			urlVerifierExecutor.execute(urlVerifierFactory.newUrlVerifier(url));
+		}
+	}
 
 
 
