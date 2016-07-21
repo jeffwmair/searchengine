@@ -1,12 +1,13 @@
 package jwm.ir.robotverifier;
 
-import java.util.concurrent.*;
-
 import jwm.ir.crawler.ResourceFetcher;
 import jwm.ir.utils.Clock;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.mockito.Mockito.mock;
 
@@ -34,6 +35,8 @@ public class UrlVerifierMessageReceiverTest {
 		BlockingQueue<String> outputQueueSuccess = new LinkedBlockingQueue<>();
 		UrlVerifierFactory factory = new UrlVerifierFactory(fetcher, cache, outputQueueSuccess);
 		UrlVerifierMessageReceiver sut = new UrlVerifierMessageReceiver(executor, inputQueue, factory);
+
+		// need to do integration testing on this
 
 	}
 

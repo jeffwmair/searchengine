@@ -1,8 +1,9 @@
 package jwm.ir.robotverifier;
 
-import java.util.concurrent.*;
-
 import jwm.ir.utils.AssertUtils;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executor;
 
 /**
  * Responsible for receiving a url message, and passing it

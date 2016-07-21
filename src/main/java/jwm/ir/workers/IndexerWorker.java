@@ -1,9 +1,9 @@
 package jwm.ir.workers;
 
 import jwm.ir.indexer.CrawledTextParser;
+import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourceNoneImpl;
-import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;

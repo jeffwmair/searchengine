@@ -1,6 +1,5 @@
 package jwm.ir.crawler;
 
-import jwm.ir.message.WebResource;
 import org.junit.Test;
 
 /**

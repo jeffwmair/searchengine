@@ -7,10 +7,7 @@ import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * Responsible for verifying if url can be fetched and indexed.
@@ -24,7 +21,7 @@ public class UrlVerifier implements Runnable {
     private final RobotUserAgentCache cache;
     private final BlockingQueue<String> outputQueue;
 
-    public UrlVerifier(String url,
+    UrlVerifier(String url,
 					   ResourceFetcher fetcher,
 					   RobotUserAgentCache cache,
 					   BlockingQueue<String> outputQueue) {
