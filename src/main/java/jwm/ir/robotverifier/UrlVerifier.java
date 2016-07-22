@@ -41,7 +41,7 @@ public class UrlVerifier implements Runnable {
         String domainUrl = UrlUtils.getDomainFromAbsoluteUrl(url);
 		if (!cache.contains(domainUrl)) {
 			// fetch it, put in the cache	
-        	WebResource robots_txt = fetcher.fetch(UrlUtils.getRobotsTxtUrl(url));
+        	WebResource robots_txt = fetcher.getWebResource(UrlUtils.getRobotsTxtUrl(url));
 			RobotTxtParser robotsParser = new RobotTxtParser();
 			RobotDisallows disallows = robotsParser.getDisallows(robots_txt.getContent());
 			cache.add(domainUrl, disallows);

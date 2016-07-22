@@ -36,7 +36,7 @@ public class UrlVerifierTest {
 
 		String url = "http://foobar.com/searchengine_test/page1.html";
         WebResourcePageImpl resource = new WebResourcePageImpl("foobar.com/robots.txt", "User-agent:*\nDisallow:/");
-        when(fetcher.fetch("foobar.com/robots.txt")).thenReturn(resource);
+        when(fetcher.getWebResource("foobar.com/robots.txt")).thenReturn(resource);
         UrlVerifier sut = verifierFactory.newUrlVerifier(url);
 		sut.run();
 
@@ -49,7 +49,7 @@ public class UrlVerifierTest {
 
 		String url = "http://foobar.com/searchengine_test/page1.html";
         WebResourcePageImpl resource = new WebResourcePageImpl("foobar.com/robots.txt", "");
-        when(fetcher.fetch("foobar.com/robots.txt")).thenReturn(resource);
+        when(fetcher.getWebResource("foobar.com/robots.txt")).thenReturn(resource);
         UrlVerifier sut = verifierFactory.newUrlVerifier(url);
 		sut.run();
 
