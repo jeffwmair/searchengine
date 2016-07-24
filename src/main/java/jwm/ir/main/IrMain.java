@@ -3,6 +3,7 @@ package jwm.ir.main;
 import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.utils.Database;
+import jwm.ir.utils.HibernateUtil;
 import jwm.ir.workers.CrawlerWorker;
 import jwm.ir.workers.IndexerWorker;
 import jwm.ir.workers.PerformanceStatsUpdateWorker;
@@ -36,6 +37,7 @@ public class IrMain {
 	private static void start(String[] args) {
 		
 		AtomicBoolean stopApplication = new AtomicBoolean(false);
+		HibernateUtil.getSessionFactory();
 				
 		int workers = 1;
 		int prInterval = 500;
