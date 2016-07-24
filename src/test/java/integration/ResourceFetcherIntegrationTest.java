@@ -19,11 +19,4 @@ public class ResourceFetcherIntegrationTest extends IntegrationTestBase {
         Assert.assertTrue("content was:"+robotsTxt.getContent(), robotsTxt.getContent().equals("User-agent:*\nDisallow:/private"));
     }
 
-    @Test
-    public void fetchGoogleRobotsTxt() {
-
-        ResourceFetcher fetcher = new ResourceFetcher();
-        WebResource robotsTxt = fetcher.getWebResource("http://google.com/robots.txt");
-        System.out.println(robotsTxt.getContent());
-    }
 }
