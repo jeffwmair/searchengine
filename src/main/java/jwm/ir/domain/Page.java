@@ -1,12 +1,27 @@
 package jwm.ir.domain;
 
+import java.util.Date;
+
 /**
  * Created by Jeff on 2016-07-23.
  */
 public class Page {
-    private long id;
-    private long domainId;
-    private String title, description;
+    private long id, domainId;
+    private String title, description, url;
+    private int verified, failCount;
+    private float pageRank;
+    private Date lastCrawl;
+
+    public Date getLastCrawl() {
+        return lastCrawl;
+    }
+
+    public void setLastCrawl(Date lastCrawl) {
+        this.lastCrawl = lastCrawl;
+    }
+
+    public Page() {
+    }
 
     public long getId() {
         return id;
@@ -40,8 +55,57 @@ public class Page {
         this.description = description;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getVerified() {
+        return verified;
+    }
+
+    public void setVerified(int verified) {
+        this.verified = verified;
+    }
+
+    public int getFailCount() {
+        return failCount;
+    }
+
+    public void setFailCount(int failCount) {
+        this.failCount = failCount;
+    }
+
+    public float getPageRank() {
+        return pageRank;
+    }
+
+    public void setPageRank(float pageRank) {
+        this.pageRank = pageRank;
+    }
+
+    public Page(int domainId, String url, float page_rank) {
+        this.domainId = domainId;
+        this.url = url;
+        this.pageRank = page_rank;
+    }
+
     @Override
     public String toString() {
-        return "id:'"+id+"', domainId:'"+domainId+"', title:'"+title+"', desc:'"+description+"'";
+        return "Page{" +
+                "id=" + id +
+                ", domainId=" + domainId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", verified=" + verified +
+                ", failCount=" + failCount +
+                ", pageRank=" + pageRank +
+                ", lastCrawl=" + lastCrawl +
+                '}';
     }
 }
+

@@ -25,6 +25,5 @@ public class HibernateIntegrationTest {
             System.out.println(p);
         }
 
-
     }
 }
