@@ -25,7 +25,7 @@ public class Page {
     @Column
     private String description;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String url;
 
     @Column

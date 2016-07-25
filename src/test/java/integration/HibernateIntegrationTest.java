@@ -1,9 +1,6 @@
 package integration;
 
-import jwm.ir.domain.Domain;
-import jwm.ir.domain.Page;
-import jwm.ir.domain.PageLink;
-import jwm.ir.domain.PageSubmission;
+import jwm.ir.domain.*;
 import jwm.ir.utils.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -19,6 +16,7 @@ public class HibernateIntegrationTest {
 
     @Test
     public void startupWithHibernateTest() {
+
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
 
@@ -31,6 +29,7 @@ public class HibernateIntegrationTest {
         for (PageSubmission p : pageSubmissions) System.out.println(p);
         for (Domain p : domains) System.out.println(p);
         for (PageLink p : pageLinks) System.out.println(p);
+
     }
 
 }

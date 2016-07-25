@@ -33,10 +33,15 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">update</property>
 
-		<mapping class="jwm.ir.domain.Page" />
-		<mapping class="jwm.ir.domain.PageSubmission" />
 		<mapping class="jwm.ir.domain.Domain" />
+		<mapping class="jwm.ir.domain.Page" />
 		<mapping class="jwm.ir.domain.PageLink" />
+		<mapping class="jwm.ir.domain.PageTermInput" />
+		<mapping class="jwm.ir.domain.PageTerm" />
+		<mapping class="jwm.ir.domain.PageSubmission" />
+		<mapping class="jwm.ir.domain.SummaryData" />
+		<mapping class="jwm.ir.domain.Term" />
+		<mapping class="jwm.ir.domain.ValidExtension" />
 	</session-factory>
 
 </hibernate-configuration>
