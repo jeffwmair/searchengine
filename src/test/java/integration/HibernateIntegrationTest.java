@@ -3,6 +3,7 @@ package integration;
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageLink;
+import jwm.ir.domain.PageSubmission;
 import jwm.ir.utils.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -21,16 +22,13 @@ public class HibernateIntegrationTest {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
 
-        Criteria criteriaPages = session.createCriteria(Page.class);
-        List<Page> pages = criteriaPages.list();
-
-        Criteria criteriaDomains = session.createCriteria(Domain.class);
-        List<Domain> domains = criteriaDomains.list();
-
-        Criteria criterialPageLinks = session.createCriteria(PageLink.class);
-        List<PageLink> pageLinks = criterialPageLinks.list();
+        List<Page> pages = session.createCriteria(Page.class).list();
+        List<PageSubmission> pageSubmissions = session.createCriteria(PageSubmission.class).list();
+        List<Domain> domains = session.createCriteria(Domain.class).list();
+        List<PageLink> pageLinks = session.createCriteria(PageLink.class).list();
 
         for (Page p : pages) System.out.println(p);
+        for (PageSubmission p : pageSubmissions) System.out.println(p);
         for (Domain p : domains) System.out.println(p);
         for (PageLink p : pageLinks) System.out.println(p);
     }

@@ -1,14 +1,14 @@
 package jwm.ir.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by Jeff on 2016-07-24.
  */
-
 @Entity
-@Table(name="pagelinks")
-public class PageLink {
+@Table(name = "pagesubmissions")
+public class PageSubmission {
 
     @Id
     @Column
@@ -19,25 +19,25 @@ public class PageLink {
     @JoinColumn(name = "pageId")
     private Page page;
 
-    @ManyToOne
-    @JoinColumn(name = "destPageId")
-    private Page destinationPage;
+    @Column
+    private Date submitDate;
 
     @Override
     public String toString() {
-        return "PageLink{" +
+        return "PageSubmission{" +
                 "id=" + id +
                 ", page=" + page +
-                ", destinationPage=" + destinationPage +
+                ", submitDate=" + submitDate +
+                ", Ip='" + Ip + '\'' +
                 '}';
     }
 
-    public Page getDestinationPage() {
-        return destinationPage;
+    public String getIp() {
+        return Ip;
     }
 
-    public void setDestinationPage(Page destinationPage) {
-        this.destinationPage = destinationPage;
+    public void setIp(String ip) {
+        Ip = ip;
     }
 
     public long getId() {
@@ -56,4 +56,14 @@ public class PageLink {
         this.page = page;
     }
 
+    public Date getSubmitDate() {
+        return submitDate;
+    }
+
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    @Column
+    private String Ip;
 }

@@ -1,14 +1,36 @@
 package jwm.ir.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Jeff on 2016-07-24.
  */
+@Entity
+@Table(name="domains")
 public class Domain {
+
+    @Id
+    @Column(name="domainId")
+    @GeneratedValue
     private long id;
+
+    @Column
     private String domain;
-    private int status, crawlerId, totalCrawls, locked;
+
+    @Column
+    private int status;
+
+    @Column
+    private int crawlerId;
+
+    @Column(name="total_crawls")
+    private int totalCrawls;
+
+    @Column
+    private int locked;
+
+    @Column(name="last_crawl")
     private Date lastCrawl;
 
     @Override

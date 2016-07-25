@@ -1,16 +1,43 @@
 package jwm.ir.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Jeff on 2016-07-23.
  */
+@Entity
+@Table(name="pages")
 public class Page {
+
+    @Id
+    @Column(name="pageId")
+    @GeneratedValue
     private long id;
+
+    @ManyToOne
+    @JoinColumn(name="domainId")
     private Domain domain;
-    private String title, description, url;
-    private int verified, failCount;
+
+    @Column
+    private String title;
+
+    @Column
+    private String description;
+
+    @Column
+    private String url;
+
+    @Column
+    private int verified;
+
+    @Column(name = "fail_count")
+    private int failCount;
+
+    @Column
     private float pageRank;
+
+    @Column(name="last_crawl")
     private Date lastCrawl;
 
     public Date getLastCrawl() {
