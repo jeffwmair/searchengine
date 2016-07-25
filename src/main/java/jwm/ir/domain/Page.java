@@ -6,7 +6,8 @@ import java.util.Date;
  * Created by Jeff on 2016-07-23.
  */
 public class Page {
-    private long id, domainId;
+    private long id;
+    private Domain domain;
     private String title, description, url;
     private int verified, failCount;
     private float pageRank;
@@ -31,12 +32,12 @@ public class Page {
         this.id = id;
     }
 
-    public long getDomainId() {
-        return domainId;
+    public Domain getDomain() {
+        return domain;
     }
 
-    public void setDomainId(long domainId) {
-        this.domainId = domainId;
+    public void setDomain(Domain domain) {
+        this.domain = domain;
     }
 
     public String getTitle() {
@@ -87,17 +88,11 @@ public class Page {
         this.pageRank = pageRank;
     }
 
-    public Page(int domainId, String url, float page_rank) {
-        this.domainId = domainId;
-        this.url = url;
-        this.pageRank = page_rank;
-    }
-
     @Override
     public String toString() {
         return "Page{" +
                 "id=" + id +
-                ", domainId=" + domainId +
+                ", domain=" + domain +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", url='" + url + '\'' +

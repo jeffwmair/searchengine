@@ -8,7 +8,7 @@
 		<id name="id" column="pageId">
 			<generator class="native"/>
 		</id>
-		<property name="domainId" />
+		<many-to-one name="domain" column="domainId" class="Domain" not-null="true"/>
 		<property name="title" />
 		<property name="description" />
 		<property name="url" />

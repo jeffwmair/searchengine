@@ -34,6 +34,8 @@
 		<property name="hbm2ddl.auto">update</property>
 
 		<mapping resource="Page.hbm.xml" />
+		<mapping resource="Domain.hbm.xml" />
+		<mapping resource="PageLink.hbm.xml" />
 	</session-factory>
 
 </hibernate-configuration>
