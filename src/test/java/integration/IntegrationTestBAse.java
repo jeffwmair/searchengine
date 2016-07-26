@@ -20,8 +20,6 @@ abstract class IntegrationTestBase {
 
         Domain domainLocalhost = new Domain("localhost", 1);
         Page page1 = new Page(domainLocalhost, "http://localhost/searchengine_test/page1.html");
-        Page page2 = new Page(domainLocalhost, "http://localhost/searchengine_test/page2.html");
-        Page page3 = new Page(domainLocalhost, "http://localhost/searchengine_test/page3.html");
 
         Transaction tx = session.beginTransaction();
         session.save(domainLocalhost);

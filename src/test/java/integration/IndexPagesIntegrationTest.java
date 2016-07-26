@@ -12,10 +12,11 @@ public class IndexPagesIntegrationTest extends IntegrationTestBase {
 
         // arrange
         setupDb();
+
 //        deployPhpServicesToApache();
 //        deployWebPagesToBeIndexed();
 //        deployRobotsTxtFile(RobotTxtState.Accept);
-        startProgram(RunCrawler.Yes, RunIndexer.Yes);
+        //startProgram(RunCrawler.Yes, RunIndexer.Yes);
 
         // assert
 

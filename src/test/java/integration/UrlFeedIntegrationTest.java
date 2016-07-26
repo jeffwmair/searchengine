@@ -25,6 +25,7 @@ public class UrlFeedIntegrationTest {
     public void testUrlFeed() {
 
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        if (sessionFactory.isClosed()) sessionFactory.openSession();
 
         // add some dummy db records
         int crawlerId = 1;
@@ -53,6 +54,7 @@ public class UrlFeedIntegrationTest {
             Assert.fail("should throw a NPE; only 2 items in the queue");
         }
         catch (NoSuchElementException ex) { }
+
 
     }
 }
