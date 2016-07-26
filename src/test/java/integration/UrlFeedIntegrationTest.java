@@ -1,6 +1,7 @@
 package integration;
 
 import jwm.ir.crawler.UrlFeed;
+import jwm.ir.crawler.UrlFeedRunner;
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.utils.Db;
@@ -14,7 +15,9 @@ import org.junit.Test;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * Created by Jeff on 2016-07-25.
@@ -55,6 +58,37 @@ public class UrlFeedIntegrationTest {
         }
         catch (NoSuchElementException ex) { }
 
+    }
 
+    /**
+     * Not an integration test per se; can just be run manually
+     * to try out the UrlFeed/Runner
+     * @param args
+     */
+    public static void main(String[] args) {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Db db = new DbImpl(sessionFactory);
+        final BlockingQueue<String> out = new LinkedBlockingQueue<>();
+        UrlFeed feeder = new UrlFeed(db, out);
+        UrlFeedRunner x = new UrlFeedRunner(executorService, feeder);
+        x.start();
+
+
+        Runnable listener = new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
+                    try {
+                        System.out.println(out.take());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        Thread t = new Thread(listener);
+        t.start();
     }
 }
