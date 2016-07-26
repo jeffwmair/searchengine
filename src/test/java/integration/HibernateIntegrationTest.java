@@ -1,6 +1,6 @@
 package integration;
 
-import jwm.ir.domain.*;
+import jwm.ir.domain.Domain;
 import jwm.ir.utils.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;

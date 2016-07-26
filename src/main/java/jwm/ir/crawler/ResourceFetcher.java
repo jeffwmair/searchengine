@@ -2,7 +2,6 @@ package jwm.ir.crawler;
 
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourcePageImpl;
-import jwm.ir.utils.StringBuilderWithNewline;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
