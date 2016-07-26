@@ -26,7 +26,7 @@ public class UrlFeedTest {
         List<String> urls = new ArrayList<>();
         urls.add("url1");
         urls.add("url2");
-        when(db.getUrls()).thenReturn(urls);
+        when(db.popUrls()).thenReturn(urls);
         UrlFeed sut = new UrlFeed(db, output);
 
         sut.process();

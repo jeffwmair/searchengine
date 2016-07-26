@@ -29,7 +29,11 @@ public class UrlFeed {
      * Get all the urls from the DB and put them on a queue for someone else.
      */
     public void process() {
-        List<String> urls = db.getUrls();
+
+
+        log.debug("Fetching urls from the db.  Putting onto the queue.");
+        List<String> urls = db.popUrls();
+        log.debug("Fetched "+urls.size()+" urls from the db.  Putting onto the queue.");
         for(String url : urls) {
             try {
                 output.put(url);
