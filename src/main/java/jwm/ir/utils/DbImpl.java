@@ -45,7 +45,7 @@ public class DbImpl implements Db {
         List<String> urls = new ArrayList<>();
         for(Page p : pages) {
             urls.add(p.getUrl());
-            //session.delete(p);
+            session.delete(p);
         }
 
         tx.commit();
