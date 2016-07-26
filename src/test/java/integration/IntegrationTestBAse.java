@@ -1,17 +1,32 @@
 package integration;
 
+import jwm.ir.domain.Domain;
+import jwm.ir.domain.Page;
+import jwm.ir.utils.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 /**
  * Created by Jeff on 2016-07-19.
  */
 abstract class IntegrationTestBase {
 
-    enum IntegrationDbScript { Standard };
     enum RunCrawler { Yes, No };
     enum RunIndexer { Yes, No };
     enum RobotTxtState { Deny, Accept };
 
-    void setupDb(IntegrationDbScript script) {
-        throw new RuntimeException("Not implemented");
+    void setupDb() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Domain domainLocalhost = new Domain("localhost", 1);
+        Page page1 = new Page(domainLocalhost, "http://localhost/searchengine_test/page1.html");
+        Page page2 = new Page(domainLocalhost, "http://localhost/searchengine_test/page2.html");
+        Page page3 = new Page(domainLocalhost, "http://localhost/searchengine_test/page3.html");
+
+        Transaction tx = session.beginTransaction();
+        session.save(domainLocalhost);
+        session.save(page1);
+        tx.commit();
     }
 
     void deployPhpServicesToApache() {
@@ -27,6 +42,6 @@ abstract class IntegrationTestBase {
     }
 
     void startProgram(RunCrawler runCrawler, RunIndexer runIndexer) {
-        throw new RuntimeException("Not impl");
+
     }
 }

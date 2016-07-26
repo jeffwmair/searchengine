@@ -19,16 +19,9 @@ public class HibernateIntegrationTest {
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
-
-        List<Page> pages = session.createCriteria(Page.class).list();
-        List<PageSubmission> pageSubmissions = session.createCriteria(PageSubmission.class).list();
-        List<Domain> domains = session.createCriteria(Domain.class).list();
-        List<PageLink> pageLinks = session.createCriteria(PageLink.class).list();
-
-        for (Page p : pages) System.out.println(p);
-        for (PageSubmission p : pageSubmissions) System.out.println(p);
-        for (Domain p : domains) System.out.println(p);
-        for (PageLink p : pageLinks) System.out.println(p);
+        Criteria domainCrit = session.createCriteria(Domain.class);
+        List<Domain> domains = domainCrit.list();
+        for (Domain x : domains) { System.out.println(x); }
 
     }
 

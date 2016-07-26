@@ -33,6 +33,12 @@ public class Domain {
     @Column(name="last_crawl")
     private Date lastCrawl;
 
+    public Domain() { }
+    public Domain(String domain, int crawlerId) {
+        this.domain = domain;
+        this.crawlerId = crawlerId;
+    }
+
     @Override
     public String toString() {
         return "Domain{" +

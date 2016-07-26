@@ -11,10 +11,10 @@ public class IndexPagesIntegrationTest extends IntegrationTestBase {
     public void indexThreePagesTest() {
 
         // arrange
-        setupDb(IntegrationDbScript.Standard);
-        deployPhpServicesToApache();
-        deployWebPagesToBeIndexed();
-        deployRobotsTxtFile(RobotTxtState.Accept);
+        setupDb();
+//        deployPhpServicesToApache();
+//        deployWebPagesToBeIndexed();
+//        deployRobotsTxtFile(RobotTxtState.Accept);
         startProgram(RunCrawler.Yes, RunIndexer.Yes);
 
         // assert
@@ -25,7 +25,7 @@ public class IndexPagesIntegrationTest extends IntegrationTestBase {
     public void doNotIndexPagesBecauseRobotTxtRestrictsItTest() {
 
         // arrange
-        setupDb(IntegrationDbScript.Standard);
+        setupDb();
         deployPhpServicesToApache();
         deployWebPagesToBeIndexed();
         deployRobotsTxtFile(RobotTxtState.Deny);
@@ -35,5 +35,8 @@ public class IndexPagesIntegrationTest extends IntegrationTestBase {
 
         // asserts
     }
+
+
+
 
 }

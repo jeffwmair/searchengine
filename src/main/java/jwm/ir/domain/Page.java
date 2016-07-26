@@ -40,6 +40,11 @@ public class Page {
     @Column(name="last_crawl")
     private Date lastCrawl;
 
+    public Page(Domain domain, String pageUrl) {
+        this.domain = domain;
+        this.url = pageUrl;
+    }
+
     public Date getLastCrawl() {
         return lastCrawl;
     }
