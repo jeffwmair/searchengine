@@ -125,6 +125,7 @@
 							<goal>test</goal>
 						</goals>
 						<configuration>
+							<forkMode>always</forkMode>
 							<skip>false</skip>
 							<includes>
 								<include>**/*IntegrationTest.java</include>
