@@ -34,7 +34,11 @@ setup_db() {
 	../init_db.sh
 
 	echo "Inserting seed data"
-	mysql "searchengine_test" < integration_test1_data.sql
+	#mysql "searchengine_test" < integration_test1_data.sql
+	# the following startup mode should setup integration data then exit
+	cd $JWM_DEV/searchengine/target/
+	java -jar SearchEngine-1.0.jar integration_test
+	cd -
 }
 
 JAVA_PID=''

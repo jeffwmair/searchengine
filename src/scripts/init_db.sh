@@ -47,5 +47,5 @@ drop_user
 create_db
 create_user
 grant_user_to_db
-create_tables	
+#create_tables	
 cd -

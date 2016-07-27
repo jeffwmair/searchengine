@@ -1,5 +1,7 @@
 package jwm.ir.utils;
 
+import jwm.ir.domain.Page;
+
 import java.util.List;
 
 /**
@@ -7,4 +9,6 @@ import java.util.List;
  */
 public interface Db {
     List<String> popUrls();
+    void save(Page page);
+    Page getPage(String url);
 }

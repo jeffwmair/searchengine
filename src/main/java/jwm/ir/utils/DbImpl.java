@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,24 @@ public class DbImpl implements Db {
     public DbImpl(SessionFactory sessionFactory) {
         AssertUtils.notNull(sessionFactory, "Must provide a sessionFactory");
         this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public Page getPage(String url) {
+        Session session = sessionFactory.openSession();
+        Criteria criteria = session.createCriteria(Page.class);
+        criteria.add(Restrictions.eq("url", url));
+        return (Page)criteria.uniqueResult();
+    }
+
+    @Override
+    public void save(Page page) {
+
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(page.getDomain());
+        session.save(page);
+        tx.commit();
     }
 
     @Override

@@ -4,6 +4,7 @@ import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.HibernateUtil;
+import jwm.ir.utils.IntegrationTestDataSetup;
 import jwm.ir.workers.CrawlerWorker;
 import jwm.ir.workers.IndexerWorker;
 import jwm.ir.workers.PerformanceStatsUpdateWorker;
@@ -25,16 +26,13 @@ public class IrMain {
 
 	final private static Logger log = LogManager.getLogger(IrMain.class);
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-				
-		start(args);
-//		test();
-	}
-	
-	private static void start(String[] args) {
+
+		// hack -
+		if (IntegrationTestDataSetup.setup(args)) {
+			log.info("Integration data setup is complete.  Shutting down.");
+			return;
+		}
 		
 		AtomicBoolean stopApplication = new AtomicBoolean(false);
 		HibernateUtil.getSessionFactory();

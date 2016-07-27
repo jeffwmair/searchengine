@@ -121,6 +121,22 @@ public class Page {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Page page = (Page) o;
+
+        return url.equals(page.url);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return url.hashCode();
+    }
+
+    @Override
     public String toString() {
         return "Page{" +
                 "id=" + id +
