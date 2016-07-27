@@ -77,7 +77,7 @@ private static final String CHAR_SET = "UTF-8";
 		    		log.info("Message returned from HttpPost: " + httpResponseBody.toString() + "\n" + paramName + "=" + paramData.toString());
 		    	}
 		    }
-		    
+
 		    return json;
 			
 		} catch (Exception e) {

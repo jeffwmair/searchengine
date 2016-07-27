@@ -16,6 +16,14 @@ public class ValidExtension {
     @Column(nullable = false)
     private int extType;
 
+    @Column(nullable = false)
+    private String ext;
+
+    public ValidExtension(int extType, String ext) {
+        this.ext = ext;
+        this.extType = extType;
+    }
+
     public String getExt() {
         return ext;
     }
@@ -40,6 +48,4 @@ public class ValidExtension {
         this.extType = extType;
     }
 
-    @Column(nullable = false)
-    private String ext;
 }

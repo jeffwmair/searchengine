@@ -33,13 +33,13 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public void save(Page page) {
+    public void save(Object entity) {
 
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        session.save(page.getDomain());
-        session.save(page);
+        session.save(entity);
         tx.commit();
+        session.close();
     }
 
     @Override

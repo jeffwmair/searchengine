@@ -14,6 +14,7 @@ public class DbImpl_SaveNewPage_IntegrationTest extends DbTestBase {
 
         Domain domain = new Domain("localhost/searchengine_test", 1);
         Page page = new Page(domain, "http://localhost/searchengine_test/page1.html");
+        db.save(domain);
         db.save(page);
 
     }

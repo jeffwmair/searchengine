@@ -15,6 +15,7 @@ public class DbImpl_FetchPage_IntegrationTest extends DbTestBase {
         Domain domain = new Domain("localhost/searchengine_test", 1);
         String pageUrl = "http://localhost/searchengine_test/page1.html";
         Page page = new Page(domain, pageUrl);
+        db.save(domain);
         db.save(page);
 
         Page p = db.getPage(pageUrl);

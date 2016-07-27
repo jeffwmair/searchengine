@@ -55,21 +55,9 @@ run_program() {
 	echo "Started process with pid $JAVA_PID"
 }
 
-tear_down_test_pages() {
-	echo "Removing integration test pages"
-	rm -rf "$WEB_TEST_DIR"
-}
-
-tear_down_db() {
-	echo "Removing integration test database"
-	mysql --execute="drop database searchengine_test"
-}
-
 
 build_program
 deploy_web_services
 setup_test_pages
 setup_db
 run_program
-#tear_down_test_pages
-#tear_down_db
