@@ -1,7 +1,6 @@
 package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
-import jwm.ir.domain.ValidExtension;
 
 import java.util.List;
 
@@ -10,6 +9,7 @@ import java.util.List;
  */
 public interface Db {
     List<String> popUrls();
+    List<String> getValidDomainExtensions();
     void save(Object entity);
     Page getPage(String url);
 }

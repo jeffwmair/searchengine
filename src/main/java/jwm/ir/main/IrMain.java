@@ -77,8 +77,7 @@ public class IrMain {
 		
 		Database db = new Database(host);
 		
-		ArrayList<String> validPageExtensions = db.getValidPageExtensions();
-		ArrayList<String> validDomainExtensions = db.getValidDomainExtensions();
+		ArrayList<String> domainExtensions = db.getValidDomainExtensions();
 
 		// indexed file counter tells Indexer#1 when to run PageRank update
 		AtomicInteger indexCounter = new AtomicInteger(0);
@@ -93,8 +92,7 @@ public class IrMain {
 			if (runCrawlers) {
 				
 				CrawlerWorker c1 = new CrawlerWorker(i,
-						validPageExtensions,
-						validDomainExtensions,
+						domainExtensions,
 						db,
 						queue,
 						runIndexers,

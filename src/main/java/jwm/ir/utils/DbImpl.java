@@ -70,4 +70,9 @@ public class DbImpl implements Db {
         session.close();
         return urls;
     }
+
+    @Override
+    public List<String> getValidDomainExtensions() {
+        throw new RuntimeException("");
+    }
 }

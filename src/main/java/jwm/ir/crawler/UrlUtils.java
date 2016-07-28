@@ -140,7 +140,6 @@ public class UrlUtils {
 	}
 
 	public static boolean isValidUrl(String url, 
-			ArrayList<String> validPageExtensions, 
 			ArrayList<String> validDomainExtensions ) {
 		
 		String domain = UrlUtils.getDomainFromAbsoluteUrl(url);

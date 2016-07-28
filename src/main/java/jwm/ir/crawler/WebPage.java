@@ -107,7 +107,7 @@ public class WebPage {
 		}
 	}
 	
-	public HashMap<String,String> getHyperlinks(ArrayList<String> validPageExtensions, ArrayList<String> validDomainExtensions) {
+	public HashMap<String,String> getHyperlinks(ArrayList<String> validDomainExtensions) {
 		
 		HashMap<String, String> links = new HashMap<>();
 		Elements linkElements = _page.select("a");
@@ -126,7 +126,7 @@ public class WebPage {
 					log.info("url is accepted (not found yet and length > 2)");
 
 					boolean isValidUrl = false;
-						isValidUrl = UrlUtils.isValidUrl(url, validPageExtensions, validDomainExtensions);
+						isValidUrl = UrlUtils.isValidUrl(url, validDomainExtensions);
 						log.info("url is valid:"+isValidUrl);
 
 					if (isValidUrl) {

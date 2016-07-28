@@ -91,26 +91,6 @@ public class Database {
 
 		return validDomainExtensions;
 	}
-	public ArrayList<String> getValidPageExtensions() {
-
-		if (validPageExtensions == null) {
-
-			// fetch the page extensions
-			validPageExtensions = new ArrayList<>();
-			Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", "", "GetValidExtensionsAll.php", true);
-			ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
-			for(int i = 0; i < maps.size(); i++) {
-				String extType = maps.get(i).get("extType");
-				String ext = maps.get(i).get("ext");
-				if (extType.equals("2")) {
-					validPageExtensions.add(ext);
-				}
-			}
-
-		}
-
-		return validPageExtensions;
-	}
 
 	public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit) {
 		StringBuilder json = new StringBuilder();

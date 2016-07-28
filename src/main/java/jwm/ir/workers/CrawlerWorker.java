@@ -21,7 +21,6 @@ public class CrawlerWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(CrawlerWorker.class);
 	private int _id;
-	private ArrayList<String> _validPageExtensions;
 	private ArrayList<String> _validDomainExtensions;
 	Database _db;
 	boolean _indexersRunning;
@@ -30,7 +29,6 @@ public class CrawlerWorker implements Runnable {
 	private final BlockingQueue<WebResource> indexQueue;
 	
 	public CrawlerWorker(int crawlerNum,
-						 ArrayList<String> validPageExtensions,
 						 ArrayList<String> validDomainExtensions,
 						 Database db,
 						 BlockingQueue<WebResource> indexQueue,
@@ -42,7 +40,6 @@ public class CrawlerWorker implements Runnable {
 		_id = crawlerNum;
 		_db = db;
 		_indexersRunning = indexersRunning;
-		_validPageExtensions = validPageExtensions;
 		_validDomainExtensions = validDomainExtensions;
 		_perfWorker = perfWorker;
 		_stopApp = stopApp;
@@ -96,7 +93,7 @@ public class CrawlerWorker implements Runnable {
                     if (!noFollow) {
                         start = System.currentTimeMillis();
                         log.info("Starting add hyperlinks");
-                        urlsWithAnchorTexts = p.getHyperlinks(_validPageExtensions, _validDomainExtensions);
+                        urlsWithAnchorTexts = p.getHyperlinks(_validDomainExtensions);
                         /* TODO: add pagelinks in this addUrls call!! */
                         addUrls(url, urlsWithAnchorTexts);
                         log.info("Added "+ urlsWithAnchorTexts.size() +" hyperlinks to database: " + (System.currentTimeMillis() - start) + "ms");
