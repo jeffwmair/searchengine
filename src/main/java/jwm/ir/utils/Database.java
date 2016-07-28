@@ -44,7 +44,7 @@ public class Database implements Db {
 	}
 
 	@Override
-	public ArrayList<String> getPageLinks(ArrayList<String> pageIds) {
+	public List<String> getPageLinks(List<String> pageIds) {
 
 		StringBuilder json = new StringBuilder();
 		json.append("[");
@@ -58,8 +58,8 @@ public class Database implements Db {
 		
 		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "GetPageOutLinkPageIds.php", true);
 		if (jsonOut != null && jsonOut.size() > 0) {
-			ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
-			ArrayList<String> pageLinks = new ArrayList<String>();
+			List<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
+			List<String> pageLinks = new ArrayList<String>();
 			for(int i = 0; i < maps.size(); i++) {
 				String pageId = maps.get(i).get("id");
 				String destPageId = maps.get(i).get("destId");
@@ -68,14 +68,14 @@ public class Database implements Db {
 			return pageLinks;
 		}
 		else {
-			return new ArrayList<String>();
+			return new ArrayList<>();
 		}
 	}
 
-	private ArrayList<String> validDomainExtensions;
+	private List<String> validDomainExtensions;
 
 	@Override
-	public ArrayList<String> getValidDomainExtensions() {
+	public List<String> getValidDomainExtensions() {
 
 		if (validDomainExtensions == null) {
 			validDomainExtensions = new ArrayList<>();
@@ -198,7 +198,7 @@ public class Database implements Db {
 	}
 
 	@Override
-	public void  addNewUrls(String containingPage, ArrayList<String> urls) throws Exception {
+	public void addNewUrls(String containingPage, List<String> urls) throws Exception {
 		
 		StringBuilder json = new StringBuilder();
 		json.append("{"+JsonUtils.getJsonItem("containingPage", containingPage)+",\"links\":[");

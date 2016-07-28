@@ -1,6 +1,5 @@
 package jwm.ir.utils;
 
-import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.ValidExtension;
 import org.apache.log4j.LogManager;
@@ -55,11 +54,12 @@ public class IntegrationTestDataSetup {
     }
 
     private static void setupPages() {
-        Domain domain = new Domain("localhost/searchengine_test", 1);
-        Page page = new Page(domain, "http://localhost/searchengine_test/page1.html");
+        //Domain domain = new Domain("localhost/searchengine_test");
+        //Page page = new Page(domain, "http://localhost/searchengine_test/page1.html");
+        Page page = Page.create("http://localhost/searchengine_test/page1.html");
         page.setVerified(1);
         log.info("Adding page to db:"+page);
-        db.save(domain);
+        db.save(page.getDomain());
         db.save(page);
     }
 

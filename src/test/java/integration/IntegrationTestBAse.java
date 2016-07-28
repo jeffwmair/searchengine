@@ -1,6 +1,5 @@
 package integration;
 
-import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.utils.HibernateUtil;
 import org.hibernate.Session;
@@ -18,11 +17,10 @@ abstract class IntegrationTestBase {
     void setupDb() {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        Domain domainLocalhost = new Domain("localhost", 1);
-        Page page1 = new Page(domainLocalhost, "http://localhost/searchengine_test/page1.html");
+        Page page1 = Page.create("http://localhost/searchengine_test/page1.html");
 
         Transaction tx = session.beginTransaction();
-        session.save(domainLocalhost);
+        session.save(page1.getDomain());
         session.save(page1);
         tx.commit();
     }

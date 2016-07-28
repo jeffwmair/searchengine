@@ -1,6 +1,5 @@
 package integration;
 
-import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import org.junit.Test;
 
@@ -12,9 +11,8 @@ public class DbImpl_SaveNewPage_IntegrationTest extends DbTestBase {
     @Test
     public void test_save_new_page() {
 
-        Domain domain = new Domain("localhost/searchengine_test", 1);
-        Page page = new Page(domain, "http://localhost/searchengine_test/page1.html");
-        db.save(domain);
+        Page page = Page.create("http://localhost/searchengine_test/page1.html");
+        db.save(page.getDomain());
         db.save(page);
 
     }

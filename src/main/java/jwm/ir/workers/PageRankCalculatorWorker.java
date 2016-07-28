@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 class PageRankCalculatorWorker implements Runnable {
@@ -81,7 +82,7 @@ class PageRankCalculatorWorker implements Runnable {
 				 }	 
 			 }
 			 
-			 ArrayList<String> pageIdDestIds = _db.getPageLinks(pageIdsToRequestLinks);
+			 List<String> pageIdDestIds = _db.getPageLinks(pageIdsToRequestLinks);
 			 for(int j = 0; j < pageIdDestIds.size(); j++) {
 				 String[] page_dest = pageIdDestIds.get(j).split(",");
 				 _graph.addEdge(edgeNumber++, page_dest[0], page_dest[1]);

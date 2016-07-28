@@ -1,5 +1,7 @@
 package jwm.ir.domain;
 
+import jwm.ir.crawler.UrlUtils;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,6 +11,8 @@ import java.util.Date;
 @Entity
 @Table(name="domains")
 public class Domain {
+
+    private static final int CRAWLER_ID = 1;
 
     @Id
     @Column(name="domainId")
@@ -34,9 +38,9 @@ public class Domain {
     private Date lastCrawl;
 
     public Domain() { }
-    public Domain(String domain, int crawlerId) {
+    public Domain(String domain) {
         this.domain = domain;
-        this.crawlerId = crawlerId;
+        this.crawlerId = CRAWLER_ID;
     }
 
     @Override
@@ -107,4 +111,14 @@ public class Domain {
     public void setLastCrawl(Date lastCrawl) {
         this.lastCrawl = lastCrawl;
     }
+
+    /**
+     * Create a new instance from a full page url.
+     * @param url
+     * @return
+     */
+    public static Domain createFromUrl(String url) {
+        return new Domain(UrlUtils.getDomainFromAbsoluteUrl(url));
+    }
+
 }

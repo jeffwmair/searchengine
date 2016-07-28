@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -64,7 +65,7 @@ public class RobotWorker implements Runnable {
 			
 			long start = System.currentTimeMillis();
 			log.info("Starting to get urls to verify");
-			ArrayList<String> pages = _db.getUnverifiedPagesForVerification();
+			List<String> pages = _db.getUnverifiedPagesForVerification();
 			log.info("Got urls to verify:" + (System.currentTimeMillis() - start) + "ms");
 			if (pages.size() == 0) {
 				log.info("No unverified pages found");

@@ -10,6 +10,26 @@ import java.util.Date;
 @Table(name="pages")
 public class Page {
 
+    /**
+     * Create a new page object from a given url
+     * @param url
+     * @return
+     */
+    public static Page create(String url) {
+        Page p = new Page();
+        p.setUrl(url);
+        Domain d = Domain.createFromUrl(url);
+        p.setDomain(d);
+        return p;
+    }
+
+    public static Page create(Domain domain, String url) {
+        Page p = new Page();
+        p.setUrl(url);
+        p.setDomain(domain);
+        return p;
+    }
+
     @Id
     @Column(name="pageId")
     @GeneratedValue
@@ -39,11 +59,6 @@ public class Page {
 
     @Column(name="last_crawl")
     private Date lastCrawl;
-
-    public Page(Domain domain, String pageUrl) {
-        this.domain = domain;
-        this.url = pageUrl;
-    }
 
     public Date getLastCrawl() {
         return lastCrawl;

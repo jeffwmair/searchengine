@@ -10,6 +10,13 @@ import javax.persistence.*;
 @Table(name="pagelinks")
 public class PageLink {
 
+    public static PageLink create(Page parent, Page page) {
+        PageLink pl = new PageLink();
+        pl.setPage(parent);
+        pl.setDestinationPage(page);
+        return pl;
+    }
+
     @Id
     @Column
     @GeneratedValue

@@ -1,6 +1,7 @@
 package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
+import jwm.ir.domain.PageLink;
 import jwm.ir.domain.ValidExtension;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -35,7 +36,9 @@ public class DbImpl implements Db {
         Session session = sessionFactory.openSession();
         Criteria criteria = session.createCriteria(Page.class);
         criteria.add(Restrictions.eq("url", url));
-        return (Page)criteria.uniqueResult();
+        Object result = criteria.uniqueResult();
+        AssertUtils.notNull(result, "Page with url '"+url+"' could not be found in the database!");
+        return (Page)result;
     }
 
     @Override
@@ -54,8 +57,25 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public ArrayList<String> getPageLinks(ArrayList<String> pageIds) {
-        return phpDb.getPageLinks(pageIds);
+    public List<String> getPageLinks(List<String> pageIds) {
+
+        // todo: change the interface to ids (long), or better yet (maybe) urls
+        List<Long> pageIds_long = new ArrayList<>();
+        for (String s : pageIds) {
+            pageIds_long.add(Long.parseLong(s));
+        }
+
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        List<String> allLinks = new ArrayList<>();
+        Criteria crit = session.createCriteria(PageLink.class);
+        List<PageLink> pageLinks = crit.add(Restrictions.in("page.id", pageIds_long)).list();
+        for (PageLink pl : pageLinks) {
+            allLinks.add(pl.getDestinationPage().getUrl());
+        }
+        tx.commit();
+        session.close();
+        return allLinks;
     }
 
     @Override
@@ -84,12 +104,12 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public void addNewUrls(String containingPage, ArrayList<String> urls) throws Exception {
+    public void addNewUrls(String containingPage, List<String> urls) throws Exception {
         phpDb.addNewUrls(containingPage, urls);
     }
 
     @Override
-    public ArrayList<String> getUnverifiedPagesForVerification() {
+    public List<String> getUnverifiedPagesForVerification() {
         return phpDb.getUnverifiedPagesForVerification();
     }
 

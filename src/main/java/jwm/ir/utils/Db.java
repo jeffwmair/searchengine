@@ -18,12 +18,12 @@ public interface Db {
     void addPerformanceStats(int verifications, int crawls, int indexes);
     void updateSummaries();
     void addDocumentTerms(String json, int pageId);
-    ArrayList<String> getPageLinks(ArrayList<String> pageIds);
+    List<String> getPageLinks(List<String> pageIds);
     String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit);
     void updatePageRanks(HashMap<Integer,Double> pageRanks);
     int getPageIdFromUrl(String url);
     void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults);
     void addCrawlResult(String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful);
-    void  addNewUrls(String containingPage, ArrayList<String> urls) throws Exception;
-    ArrayList<String> getUnverifiedPagesForVerification();
+    void  addNewUrls(String containingPage, List<String> urls) throws Exception;
+    List<String> getUnverifiedPagesForVerification();
 }

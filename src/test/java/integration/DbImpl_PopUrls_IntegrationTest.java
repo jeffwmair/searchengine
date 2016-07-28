@@ -21,9 +21,9 @@ public class DbImpl_PopUrls_IntegrationTest extends DbTestBase {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
-        Domain domain = new Domain("localhost", 1);
-        Page page1 = new Page(domain, "foobar.html");
-        Page page2 = new Page(domain, "foobar2.html");
+        Domain domain = Domain.createFromUrl("http://localhost/foobar.html");
+        Page page1 = Page.create(domain, "foobar.html");
+        Page page2 = Page.create(domain, "foobar2.html");
         session.save(domain);
         session.save(page1);
         session.save(page2);

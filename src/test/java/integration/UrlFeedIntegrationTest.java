@@ -31,10 +31,9 @@ public class UrlFeedIntegrationTest {
         if (sessionFactory.isClosed()) sessionFactory.openSession();
 
         // add some dummy db records
-        int crawlerId = 1;
-        Domain domain = new Domain("localhost", crawlerId);
-        Page page1 = new Page(domain, "http://localhost/searchengine_test/page1.html");
-        Page page2 = new Page(domain, "http://localhost/searchengine_test/page2.html");
+        Domain domain = Domain.createFromUrl("localhost");
+        Page page1 = Page.create(domain, "http://localhost/searchengine_test/page1.html");
+        Page page2 = Page.create(domain, "http://localhost/searchengine_test/page2.html");
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(domain);
