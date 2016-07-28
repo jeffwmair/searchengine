@@ -33,12 +33,12 @@ setup_db() {
 	echo "Creating db"
 	../init_db.sh
 
-	echo "Inserting seed data"
+	#echo "Inserting seed data"
 	#mysql "searchengine_test" < integration_test1_data.sql
 	# the following startup mode should setup integration data then exit
-	cd $JWM_DEV/searchengine/target/
-	java -jar SearchEngine-1.0.jar integration_test
-	cd -
+	#cd $JWM_DEV/searchengine/target/
+	#java -jar SearchEngine-1.0.jar integration_test
+	#cd -
 }
 
 JAVA_PID=''
@@ -50,7 +50,7 @@ run_program() {
 	#touch flags/stop.txt
 	# requires a stopwords.txt for now...
 	touch stopwords.txt
-	java -jar SearchEngine-1.0.jar --host=localhost/searchengine --crawl=true --index=true --checkrobots=true --pagerank_interval=0 > /dev/null &
+	java -jar SearchEngine-1.0.jar --integration_test --host=localhost/searchengine --crawl=true --index=true --checkrobots=true --pagerank_interval=0 > /dev/null &
 	JAVA_PID="$!"
 	echo "Started process with pid $JAVA_PID"
 }

@@ -36,9 +36,9 @@ grant_user_to_db() {
 	mysql --execute="grant all on $DB.* to '$USER'@'$HOST';"
 }
 
-create_tables() {
-	echo "Creating tables in $DB"
-	mysql "$DB" < ./src/sql/create_tables.sql
+create_procedures() {
+	echo "Creating procs in $DB"
+	mysql "$DB" < ./src/sql/create_procedures.sql
 }
 
 cd "$SEARCH_ENGINE"
@@ -47,5 +47,5 @@ drop_user
 create_db
 create_user
 grant_user_to_db
-#create_tables	
+create_procedures	
 cd -

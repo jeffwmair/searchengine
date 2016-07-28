@@ -11,23 +11,10 @@ import org.apache.log4j.Logger;
  */
 public class IntegrationTestDataSetup {
     final private static Logger log = LogManager.getLogger(IntegrationTestDataSetup.class);
-    public static boolean setup(String[] args) {
-
-        boolean doSetup = false;
-        for (String s : args) {
-            if (s.contains("integration_test")) {
-                doSetup = true;
-                break;
-            }
-        }
-
-        if (!doSetup) return false;
-
+    public static void setup() {
+        log.info("Doing integration-test setup");
         setupPages();
         setupValidExtensions();
-
-        log.info("Page saved.");
-        return true;
     }
     private static void setupValidExtensions() {
         String[] validExtesions = {
@@ -74,7 +61,6 @@ public class IntegrationTestDataSetup {
         log.info("Adding page to db:"+page);
         db.save(domain);
         db.save(page);
-
     }
 
     private static Db db = getDb();

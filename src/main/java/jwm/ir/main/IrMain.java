@@ -28,12 +28,6 @@ public class IrMain {
 
 	public static void main(String[] args) {
 
-		// hack -
-		if (IntegrationTestDataSetup.setup(args)) {
-			log.info("Integration data setup is complete.  Shutting down.");
-			return;
-		}
-		
 		AtomicBoolean stopApplication = new AtomicBoolean(false);
 		HibernateUtil.getSessionFactory();
 				
@@ -58,6 +52,10 @@ public class IrMain {
 			}
 			else if (arg.startsWith("--host=")) {
 				host = arg.split("=")[1];
+			}
+			else if (arg.startsWith("--integration_test")) {
+				// hack!
+				IntegrationTestDataSetup.setup();
 			}
 			else if (arg.startsWith("--pagerank_interval=")) {
 				prInterval = Integer.parseInt(arg.split("=")[1]);
