@@ -3,6 +3,7 @@ package jwm.ir.workers;
 import jwm.ir.crawler.RobotsTxt;
 import jwm.ir.crawler.UrlUtils;
 import jwm.ir.utils.Database;
+import jwm.ir.utils.Db;
 import jwm.ir.utils.HttpUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -18,12 +19,10 @@ public class RobotWorker implements Runnable {
 	final private static Logger log = LogManager.getLogger(RobotWorker.class);
 
 	private final int MAX_ROBOT_CACHE_SIZE = 250;
-	private Database _db;
-	private int _id;
+	private final Db _db;
 	private AtomicBoolean _stopApp;
 	private PerformanceStatsUpdateWorker _perfWorker;
-	public RobotWorker(int robotNum, AtomicBoolean stopApp, PerformanceStatsUpdateWorker perfWorker, Database db) {
-		_id = robotNum;
+	public RobotWorker(AtomicBoolean stopApp, PerformanceStatsUpdateWorker perfWorker, Db db) {
 		_db = db;
 		_stopApp = stopApp;
 		_perfWorker = perfWorker;
@@ -65,7 +64,7 @@ public class RobotWorker implements Runnable {
 			
 			long start = System.currentTimeMillis();
 			log.info("Starting to get urls to verify");
-			ArrayList<String> pages = _db.getUnverifiedPagesForVerification(_id);
+			ArrayList<String> pages = _db.getUnverifiedPagesForVerification();
 			log.info("Got urls to verify:" + (System.currentTimeMillis() - start) + "ms");
 			if (pages.size() == 0) {
 				log.info("No unverified pages found");

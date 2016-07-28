@@ -5,6 +5,7 @@ import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourceNoneImpl;
 import jwm.ir.utils.Database;
+import jwm.ir.utils.Db;
 import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -18,9 +19,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class IndexerWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(IndexerWorker.class);
-	private int _id;
 	private ArrayList<String> _stopwords;
-	private Database _db;
+	private final Db _db;
 	private AtomicInteger _indexCount;
 	private int _indexesBeforePrUpdate;
 	private TermPreprocessor _tp;
@@ -31,10 +31,9 @@ public class IndexerWorker implements Runnable {
 	private final BlockingQueue<WebResource> indexQueue;
 	
 	public IndexerWorker(BlockingQueue<WebResource> indexQueue,
-						 Database db,
+						 Db db,
 						 ArrayList<String> stopwords,
 						 PerformanceStatsUpdateWorker perfWorker,
-						 int id,
 						 AtomicInteger indexCount,
 						 int indexesBeforePrUpdate,
 						 TermPreprocessor tp,
@@ -42,7 +41,6 @@ public class IndexerWorker implements Runnable {
 
 		if (indexQueue == null) throw new RuntimeException("Must provide non-null indexQueue");
 		this.indexQueue = indexQueue;
-		_id = id;
 		_stopwords = stopwords;
 		_db = db;
 		_indexCount = indexCount;
@@ -59,7 +57,7 @@ public class IndexerWorker implements Runnable {
 		while (true && !_stopApp.get()) {
 			
 			/* have one indexer responsible for starting the PR thread */
-			if (_indexCount.get() >= _indexesBeforePrUpdate && this._id == 1) {
+			if (_indexCount.get() >= _indexesBeforePrUpdate) {
 				log.info("We have indexed " + _indexCount.get() + " files, now starting PageRankUpdater");
 				startPageRankWorker();
 				startSummarizerWorker();

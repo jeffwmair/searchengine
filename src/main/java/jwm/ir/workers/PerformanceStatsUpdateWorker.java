@@ -1,6 +1,7 @@
 package jwm.ir.workers;
 
 import jwm.ir.utils.Database;
+import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -10,16 +11,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PerformanceStatsUpdateWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(PerformanceStatsUpdateWorker.class);
-	private Database _db;
+	private Db _db;
 	private AtomicInteger _pagesVerified = new AtomicInteger();
 	private AtomicInteger _pagesCrawled = new AtomicInteger();
 	private AtomicInteger _pagesIndexed = new AtomicInteger();
 	private AtomicBoolean _stopFlag = new AtomicBoolean();
-	private int _workers;
 
-	public PerformanceStatsUpdateWorker(Database db, int workers, AtomicBoolean stopFlag) {
+	public PerformanceStatsUpdateWorker(Db db, AtomicBoolean stopFlag) {
 		_db = db;
-		_workers = workers;
 		_stopFlag = stopFlag;
 	}
 
@@ -43,7 +42,7 @@ public class PerformanceStatsUpdateWorker implements Runnable {
 			int pagesIndexed = _pagesIndexed.getAndSet(0);
 			
 			log.info("Beginning to run performance stats updater, PagesVerified: "+pagesVerified+", PagesCrawled: "+pagesCrawled+", PagesIndexed: " + pagesIndexed);
-			_db.addPerformanceStats(_workers, pagesVerified, pagesCrawled, pagesIndexed);
+			_db.addPerformanceStats(pagesVerified, pagesCrawled, pagesIndexed);
 		}
 		
 	}

@@ -3,13 +3,11 @@ package jwm.ir.workers;
 import jwm.ir.crawler.WebPage;
 import jwm.ir.message.WebResource;
 import jwm.ir.utils.Database;
+import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -20,24 +18,21 @@ public class CrawlerWorker implements Runnable {
 	ArrayList<String> _frontier = new ArrayList<>();
 
 	final private static Logger log = LogManager.getLogger(CrawlerWorker.class);
-	private int _id;
-	private ArrayList<String> _validDomainExtensions;
-	Database _db;
+	private final List<String> _validDomainExtensions;
+	Db _db;
 	boolean _indexersRunning;
 	AtomicBoolean _stopApp;
 	PerformanceStatsUpdateWorker _perfWorker;
 	private final BlockingQueue<WebResource> indexQueue;
 	
-	public CrawlerWorker(int crawlerNum,
-						 ArrayList<String> validDomainExtensions,
-						 Database db,
+	public CrawlerWorker( List<String> validDomainExtensions,
+						 Db db,
 						 BlockingQueue<WebResource> indexQueue,
 						 boolean indexersRunning,
 						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicBoolean stopApp) {
 		if (indexQueue == null) throw new IllegalArgumentException("Must provide indexQueue");
 		this.indexQueue = indexQueue;
-		_id = crawlerNum;
 		_db = db;
 		_indexersRunning = indexersRunning;
 		_validDomainExtensions = validDomainExtensions;
@@ -116,12 +111,12 @@ public class CrawlerWorker implements Runnable {
 		
 		frontier.clear();
 		
-		HashMap<String,String> urlsDomains = _db.getNextPagesForCrawling(_id);
+		List<String> urlsDomains = _db.popUrls();
 		if (urlsDomains.size() > 0) {
 			log.info("Retrieved list of domains of size:" + urlsDomains.size());
 		}
-		for(Map.Entry<String, String> items : urlsDomains.entrySet()) {
-			frontier.add(items.getKey());
+		for(String item : urlsDomains) {
+			frontier.add(item);
 		}
 		
 		if (frontier.size() == 0) {
@@ -153,12 +148,12 @@ public class CrawlerWorker implements Runnable {
 				batchSize++;
 				
 				if (batchSize == MAX_URL_SUBMIT_BATCH_SIZE) {
-					_db.addNewUrls(_id, foundInPage, urls);
+					_db.addNewUrls(foundInPage, urls);
 					urls.clear();
 					batchSize = 0;
 				}
 			}
-			if (urls.size() > 0) _db.addNewUrls(_id, foundInPage, urls); 	// add the last batch
+			if (urls.size() > 0) _db.addNewUrls(foundInPage, urls); 	// add the last batch
 		}
 		catch(Exception ex)
 		{

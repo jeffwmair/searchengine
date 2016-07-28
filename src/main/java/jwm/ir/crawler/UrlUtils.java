@@ -5,6 +5,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UrlUtils {
 
@@ -140,7 +141,7 @@ public class UrlUtils {
 	}
 
 	public static boolean isValidUrl(String url, 
-			ArrayList<String> validDomainExtensions ) {
+			List<String> validDomainExtensions ) {
 		
 		String domain = UrlUtils.getDomainFromAbsoluteUrl(url);
 		if (domain == null || (!domain.contains(".") && !domain.equals("localhost"))) {

@@ -1,38 +1,39 @@
 package jwm.ir.utils;
 
 import jwm.ir.crawler.UrlUtils;
+import jwm.ir.domain.Page;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class Database {
+public class Database implements Db {
 
 	private String _webServiceHost;
 	private final int MAX_URLS_FRO_1_DOMAIN_TO_CRAWL = 10;
-	
+
 	public Database(String webserviceHost) {
 		_webServiceHost = webserviceHost;
 	}
-	
+
+	@Override
 	public void updateSummaries() {
 		HttpUtils.httpPost(_webServiceHost, "data", "empty", "UpdateSummaries.php", false);
 	}
-	
-	public void addPerformanceStats(int workers, int verifications, int crawls, int indexes) {
+
+	@Override
+	public void addPerformanceStats(int verifications, int crawls, int indexes) {
 		StringBuilder json = new StringBuilder();
 		json.append("{");
 		json.append(JsonUtils.getJsonItem("verifications", verifications) + ",");
 		json.append(JsonUtils.getJsonItem("crawls", crawls) + ",");
 		json.append(JsonUtils.getJsonItem("indexes", indexes) + ",");
-		json.append(JsonUtils.getJsonItem("workers", workers));
+		int hardcodedWorkers = 1; /// now just single threaded
+		json.append(JsonUtils.getJsonItem("workers", hardcodedWorkers));
 		json.append("}");
 		HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "AddPerformanceStats.php", false);
 	}
-	
-	
+
+	@Override
 	public synchronized void addDocumentTerms(String json, int pageId) {
 		
 		/* TODO: could improve performance if I can get the indexers indexing concurrently -- ie, don't make this method synchronized;
@@ -41,7 +42,8 @@ public class Database {
 		 */
 		HttpUtils.httpPost(_webServiceHost, "data", json, "AddDocumentTerms.php", false);
 	}
-	
+
+	@Override
 	public ArrayList<String> getPageLinks(ArrayList<String> pageIds) {
 
 		StringBuilder json = new StringBuilder();
@@ -70,10 +72,9 @@ public class Database {
 		}
 	}
 
-	private ArrayList<String> validPageExtensions;
 	private ArrayList<String> validDomainExtensions;
 
-
+	@Override
 	public ArrayList<String> getValidDomainExtensions() {
 
 		if (validDomainExtensions == null) {
@@ -92,6 +93,17 @@ public class Database {
 		return validDomainExtensions;
 	}
 
+	@Override
+	public void save(Object entity) {
+
+	}
+
+	@Override
+	public Page getPage(String url) {
+		return null;
+	}
+
+	@Override
 	public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit) {
 		StringBuilder json = new StringBuilder();
 		json.append("{");
@@ -111,7 +123,8 @@ public class Database {
 			return new String[0];
 		}
 	}
-	
+
+	@Override
 	public void updatePageRanks(HashMap<Integer,Double> pageRanks) {
 		
 		if (pageRanks.size() == 0) return;
@@ -129,14 +142,16 @@ public class Database {
 		
 		HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "UpdatePageRanks.php", false);
 	}
-	
+
+	@Override
 	public int getPageIdFromUrl(String url) {
 		url = HttpUtils.cleanUrl(url);
 		Map json = HttpUtils.httpPost(_webServiceHost, "url", url, "GetPageIdFromUrl.php", true);
 		String id_s = json.get("pageId").toString();
 		return Integer.parseInt(id_s);
 	}
-	
+
+	@Override
 	public void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults) {
 			
 		if (urlVerificationResults.size() == 0) return;
@@ -156,7 +171,8 @@ public class Database {
 				json.toString(), 
 				"SetUrlVerificationStatusMultiple.php", false);
 	}
-	
+
+	@Override
 	public void addCrawlResult(String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful) {
 		url = HttpUtils.cleanUrl(url);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -180,8 +196,9 @@ public class Database {
 				false);
 
 	}
-	
-	public void  addNewUrls(int crawlerId, String containingPage, ArrayList<String> urls) throws Exception {
+
+	@Override
+	public void  addNewUrls(String containingPage, ArrayList<String> urls) throws Exception {
 		
 		StringBuilder json = new StringBuilder();
 		json.append("{"+JsonUtils.getJsonItem("containingPage", containingPage)+",\"links\":[");
@@ -189,8 +206,10 @@ public class Database {
 			
 			String sourcePageDomain = UrlUtils.getDomainFromAbsoluteUrl(containingPage);
 			String domain = UrlUtils.getDomainFromAbsoluteUrl(url);
-			
-			int crawlerIdToAssign = crawlerId;
+
+			// temp
+			int crawlerId = 1;
+			int crawlerIdToAssign = 1;
 			if (crawlerId == 1) {
 				/* crawler 1 is for user-submitted urls only
 				 * and it should only assign itself crawled urls from the same domain;
@@ -200,7 +219,7 @@ public class Database {
 					crawlerIdToAssign = 2;
 				}
 			}
-			
+
 			if (json.toString().endsWith("}")) json.append(",");
 			json.append("{");
 			json.append(JsonUtils.getJsonItem("domain", domain) + ",");
@@ -217,12 +236,13 @@ public class Database {
 				"AddNewUrls.php", 
 				false);
 	}
-	
-	public ArrayList<String> getUnverifiedPagesForVerification(int robotId) {
+
+	@Override
+	public ArrayList<String> getUnverifiedPagesForVerification() {
 		
 		Map json = HttpUtils.httpPost(_webServiceHost,
-				"crawlerid", 
-				Integer.toString(robotId),
+				"crawlerid",
+				"1", // worker id - just 1
 				"GetUnverifiedPages.php",
 				true);
 		
@@ -242,17 +262,18 @@ public class Database {
 		
 	}
 
-	public HashMap<String, String> getNextPagesForCrawling(int crawlerId) {
-		
+	@Override
+	public List<String> popUrls() {
+
 		Map json = HttpUtils.httpPost(_webServiceHost,
-				"crawlerid", 
-				Integer.toString(crawlerId),
+				"crawlerid",
+				"1",
 				"GetPagesToCrawl.php",
 				true);
 		
 		
 		HashMap<String, Integer> domainPageCounter = new HashMap<>();
-		HashMap<String, String> retVal = new HashMap<>();
+		List<String> retVal = new ArrayList<>();
 		
 		if (json == null) return retVal;
 		
@@ -276,7 +297,7 @@ public class Database {
 				domainPageCounter.put(domain, domainPageCount);
 				
 				if (domainPageCount < MAX_URLS_FRO_1_DOMAIN_TO_CRAWL) {
-					retVal.put(pageUrl, domain);
+					retVal.add(pageUrl);
 				}
 			}
 		}

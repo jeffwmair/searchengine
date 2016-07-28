@@ -1,14 +1,15 @@
 package jwm.ir.workers;
 
 import jwm.ir.utils.Database;
+import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 class DatabaseStatsUpdateWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(DatabaseStatsUpdateWorker.class);
-	private Database _db;
-	public DatabaseStatsUpdateWorker(Database db) {
+	private Db _db;
+	public DatabaseStatsUpdateWorker(Db db) {
 		_db = db;
 	}
 	

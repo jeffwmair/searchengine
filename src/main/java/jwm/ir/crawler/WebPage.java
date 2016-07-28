@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class WebPage {
@@ -107,7 +108,7 @@ public class WebPage {
 		}
 	}
 	
-	public HashMap<String,String> getHyperlinks(ArrayList<String> validDomainExtensions) {
+	public HashMap<String,String> getHyperlinks(List<String> validDomainExtensions) {
 		
 		HashMap<String, String> links = new HashMap<>();
 		Elements linkElements = _page.select("a");

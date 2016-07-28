@@ -3,6 +3,7 @@ package jwm.ir.workers;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import jwm.ir.utils.Database;
+import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -13,14 +14,14 @@ import java.util.HashMap;
 class PageRankCalculatorWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(PageRankCalculatorWorker.class);
-	private Database _db;
+	private Db _db;
 	private DirectedSparseGraph<String, Integer> _graph = null;
 	
 	private final double TOLERANCE = 0.05;
 	private final double ALPHA = 0.15;
 	private final int MAX_ITERATIONS = 50;
 
-	public PageRankCalculatorWorker(Database db) {
+	public PageRankCalculatorWorker(Db db) {
 		_db = db;
 		_graph = new DirectedSparseGraph<>();
 	}
