@@ -1,6 +1,7 @@
 package jwm.ir.workers;
 
 import jwm.ir.indexer.CrawledTextParser;
+import jwm.ir.indexer.StopwordsFileLoader;
 import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourceNoneImpl;
@@ -11,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -19,35 +21,70 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class IndexerWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(IndexerWorker.class);
-	private ArrayList<String> _stopwords;
+	private final List<String> _stopwords;
 	private final Db _db;
-	private AtomicInteger _indexCount;
-	private int _indexesBeforePrUpdate;
-	private TermPreprocessor _tp;
-	private AtomicBoolean _stopApp;
+	private final AtomicInteger _indexCount;
+	private final int _indexesBeforePrUpdate;
+	private final TermPreprocessor _tp;
+	private final AtomicBoolean _stopApp;
 	private Thread _threadPageRankWorker;
 	private Thread _updateStatsWorker;
-	private PerformanceStatsUpdateWorker _perfWorker;
+	private final PerformanceStatsUpdateWorker _perfWorker;
 	private final BlockingQueue<WebResource> indexQueue;
 	
 	public IndexerWorker(BlockingQueue<WebResource> indexQueue,
 						 Db db,
-						 ArrayList<String> stopwords,
+						 StopwordsFileLoader stopwordsFileLoader,
 						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicInteger indexCount,
 						 int indexesBeforePrUpdate,
-						 TermPreprocessor tp,
 						 AtomicBoolean stopApplication) {
 
 		if (indexQueue == null) throw new RuntimeException("Must provide non-null indexQueue");
 		this.indexQueue = indexQueue;
-		_stopwords = stopwords;
+		_stopwords = stopwordsFileLoader.getStopwordsFromFile();
 		_db = db;
 		_indexCount = indexCount;
 		_indexesBeforePrUpdate = indexesBeforePrUpdate;
-		_tp = tp;
+		_tp = getTermProcessor();
 		_perfWorker = perfWorker;
 		_stopApp = stopApplication;
+	}
+		private static TermPreprocessor getTermProcessor() {
+
+		ArrayList<String> toReplace = new ArrayList<String>();
+		toReplace.add("$");
+		toReplace.add("@");
+		toReplace.add("\"");
+		toReplace.add("/");
+		toReplace.add(":");
+		toReplace.add("#");
+		toReplace.add("%");
+		toReplace.add("_");
+		toReplace.add(".");
+		toReplace.add(",");
+		toReplace.add(";");
+		toReplace.add("(");
+		toReplace.add(")");
+		toReplace.add("'");
+		toReplace.add("*");
+		toReplace.add("+");
+		toReplace.add("-");
+		toReplace.add(">");
+		toReplace.add("<");
+		toReplace.add("!");
+		toReplace.add("&");
+		toReplace.add("=");
+		toReplace.add("[");
+		toReplace.add("]");
+		toReplace.add("`");
+		toReplace.add("~");
+		toReplace.add("?");
+		toReplace.add("|");
+		toReplace.add("{");
+		toReplace.add("}");
+		TermPreprocessor tp = new TermPreprocessor(toReplace);
+		return tp;
 	}
 	
 	@Override

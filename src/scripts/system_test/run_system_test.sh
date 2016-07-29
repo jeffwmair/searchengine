@@ -43,7 +43,7 @@ run_program() {
 	#touch flags/stop.txt
 	# requires a stopwords.txt for now...
 	touch stopwords.txt
-	java -jar SearchEngine-1.0.jar --integration_test --host=localhost/searchengine --crawl=true --index=true --checkrobots=true --pagerank_interval=0 > /dev/null &
+	java -jar SearchEngine-1.0.jar --integration_test --host=localhost/searchengine --pagerank_interval=0 > /dev/null &
 	JAVA_PID="$!"
 	echo "Started process with pid $JAVA_PID"
 }

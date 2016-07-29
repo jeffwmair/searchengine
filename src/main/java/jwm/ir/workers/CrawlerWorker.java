@@ -20,7 +20,6 @@ public class CrawlerWorker implements Runnable {
 	final private static Logger log = LogManager.getLogger(CrawlerWorker.class);
 	private final List<String> _validDomainExtensions;
 	Db _db;
-	boolean _indexersRunning;
 	AtomicBoolean _stopApp;
 	PerformanceStatsUpdateWorker _perfWorker;
 	private final BlockingQueue<WebResource> indexQueue;
@@ -28,13 +27,11 @@ public class CrawlerWorker implements Runnable {
 	public CrawlerWorker( List<String> validDomainExtensions,
 						 Db db,
 						 BlockingQueue<WebResource> indexQueue,
-						 boolean indexersRunning,
 						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicBoolean stopApp) {
 		if (indexQueue == null) throw new IllegalArgumentException("Must provide indexQueue");
 		this.indexQueue = indexQueue;
 		_db = db;
-		_indexersRunning = indexersRunning;
 		_validDomainExtensions = validDomainExtensions;
 		_perfWorker = perfWorker;
 		_stopApp = stopApp;

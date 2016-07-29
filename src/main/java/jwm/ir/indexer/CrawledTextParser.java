@@ -5,18 +5,19 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class CrawledTextParser {
 
 	final private static Logger log = LogManager.getLogger(CrawledTextParser.class);
-	private ArrayList<String> _stopwords;
+	private List<String> _stopwords;
 	private boolean _useStemming;
 	private boolean _useStopwords;
 	private HashMap<String, Integer> _termFrequencies;
 	private TermPreprocessor _tp;
 	public CrawledTextParser(boolean useStemming,
 			boolean useStopwords, 
-			ArrayList<String> stopwords, 
+			List<String> stopwords,
 			TermPreprocessor tp) {
 		_useStemming = useStemming;
 		_useStopwords = useStopwords;
