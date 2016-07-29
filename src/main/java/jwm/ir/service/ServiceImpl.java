@@ -20,6 +20,8 @@ public class ServiceImpl implements Service {
     @Override
     public void addUrlForCrawling(String url, String parentUrl) {
 
+        // todo: this needs to be changed to be transactional
+
         Page page = Page.create(url);
         Page parentPage = Page.create(parentUrl);
         PageLink pageLink = PageLink.create(parentPage, page);
