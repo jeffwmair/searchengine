@@ -1,6 +1,5 @@
 package integration;
 
-import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.DbImpl;
 import jwm.ir.utils.HibernateUtil;

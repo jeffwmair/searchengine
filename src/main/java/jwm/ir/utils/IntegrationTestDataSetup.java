@@ -1,5 +1,7 @@
 package jwm.ir.utils;
 
+import jwm.ir.domain.DomainRepository;
+import jwm.ir.domain.DomainRepositoryImpl;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.ValidExtension;
 import org.apache.log4j.LogManager;
@@ -56,7 +58,9 @@ public class IntegrationTestDataSetup {
     private static void setupPages() {
         //Domain domain = new Domain("localhost/searchengine_test");
         //Page page = new Page(domain, "http://localhost/searchengine_test/page1.html");
-        Page page = Page.create("http://localhost/searchengine_test/page1.html");
+
+        DomainRepository domainRepository = new DomainRepositoryImpl(HibernateUtil.getSessionFactory());
+        Page page = Page.create("http://localhost/searchengine_test/page1.html", domainRepository);
         page.setVerified(1);
         log.info("Adding page to db:"+page);
         db.save(page.getDomain());

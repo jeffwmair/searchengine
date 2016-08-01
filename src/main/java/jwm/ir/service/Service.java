@@ -5,6 +5,6 @@ package jwm.ir.service;
  */
 public interface Service {
 
-    void addUrlForCrawling(String url, String parentUrl);
+    AddUrlForCrawlingDto addUrlForCrawling(String url, String parentUrl);
 
 }

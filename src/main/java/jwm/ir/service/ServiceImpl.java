@@ -6,6 +6,9 @@ import jwm.ir.utils.AssertUtils;
 import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +21,29 @@ public class ServiceImpl implements Service {
 
     private static final Logger log = LogManager.getLogger(ServiceImpl.class);
     private final Db db;
-    public ServiceImpl(Db db) {
+    private final Service innerService;
+    private final SessionFactory sessionFactory;
+    public ServiceImpl(Db db, Service innerService, SessionFactory sessionFactory) {
         AssertUtils.notNull(db, "Must provide a db instance");
+        AssertUtils.notNull(db, "Must provide a sessionFactory instance");
         this.db = db;
+        this.sessionFactory = sessionFactory;
+        this.innerService = innerService;
     }
 
     @Override
-    public void addUrlForCrawling(String url, String parentUrl) {
+    public AddUrlForCrawlingDto addUrlForCrawling(String url, String parentUrl) {
 
-        Page page = Page.create(url);
-        Page parentPage = Page.create(parentUrl);
-        PageLink pageLink = PageLink.create(parentPage, page);
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
 
-        // send each entity to the db to be saved
-        db.saveEach(page.getDomain(), page, parentPage.getDomain(), parentPage, pageLink);
+        AddUrlForCrawlingDto dto = innerService.addUrlForCrawling(url, parentUrl);
 
+        // persist here?
+
+        tx.commit();
+        session.close();
+
+        return null;
     }
 }

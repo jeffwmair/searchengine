@@ -8,7 +8,7 @@ import org.junit.Test;
 /**
  * Created by Jeff on 2016-07-21.
  */
-public class ResourceFetcherIntegrationTest extends IntegrationTestBase {
+public class ResourceFetcherIntegrationTest {
 
     @Test
     public void fetchLocalPageSynchronouslyTest() {

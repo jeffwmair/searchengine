@@ -1,5 +1,7 @@
 package jwm.ir.domain;
 
+import jwm.ir.crawler.UrlUtils;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -15,10 +17,17 @@ public class Page {
      * @param url
      * @return
      */
-    public static Page create(String url) {
+    public static Page create(String url, DomainRepository domainRepository) {
         Page p = new Page();
         p.setUrl(url);
-        Domain d = Domain.createFromUrl(url);
+        String domainName = UrlUtils.getDomainFromAbsoluteUrl(url);
+        Domain d;
+        if (domainRepository.domainExists(domainName)) {
+            d = domainRepository.getDomain(domainName);
+        }
+        else {
+            d = Domain.createFromUrl(url);
+        }
         p.setDomain(d);
         return p;
     }
