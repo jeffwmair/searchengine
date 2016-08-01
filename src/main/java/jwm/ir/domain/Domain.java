@@ -19,7 +19,7 @@ public class Domain {
     @GeneratedValue
     private long id;
 
-    @Column
+    @Column(unique = true)
     private String domain;
 
     @Column

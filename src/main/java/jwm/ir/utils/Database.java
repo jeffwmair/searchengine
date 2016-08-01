@@ -94,7 +94,22 @@ public class Database implements Db {
 	}
 
 	@Override
+	public void startTransaction() {
+
+	}
+
+	@Override
+	public void commitTransaction() {
+
+	}
+
+	@Override
 	public void save(Object entity) {
+
+	}
+
+	@Override
+	public void saveEach(Object... entities) {
 
 	}
 

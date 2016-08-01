@@ -2,7 +2,6 @@ package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,10 @@ import java.util.List;
 public interface Db {
     List<String> popUrls();
     List<String> getValidDomainExtensions();
+    void startTransaction();
+    void commitTransaction();
     void save(Object entity);
+    void saveEach(Object... entities);
     Page getPage(String url);
     void addPerformanceStats(int verifications, int crawls, int indexes);
     void updateSummaries();

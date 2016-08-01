@@ -1,8 +1,10 @@
 package jwm.ir.utils;
 
+import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageLink;
 import jwm.ir.domain.ValidExtension;
+import jwm.ir.service.Service;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -22,9 +24,9 @@ import java.util.List;
 public class DbImpl implements Db {
 
     private final Db phpDb;
-
     private static final Logger log = LogManager.getLogger(DbImpl.class);
     private final SessionFactory sessionFactory;
+
     public DbImpl(SessionFactory sessionFactory) {
         AssertUtils.notNull(sessionFactory, "Must provide a sessionFactory");
         this.sessionFactory = sessionFactory;
@@ -106,6 +108,10 @@ public class DbImpl implements Db {
     @Override
     public void addNewUrls(String containingPage, List<String> urls) throws Exception {
         phpDb.addNewUrls(containingPage, urls);
+        //for(String url : urls) {
+         //   service.addUrlForCrawling(containingPage, url);
+        //}
+
     }
 
     @Override
@@ -119,6 +125,22 @@ public class DbImpl implements Db {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         session.save(entity);
+        tx.commit();
+        session.close();
+    }
+
+    /**
+     * Save all the provided objects, in order
+     * @param entities
+     */
+    @Override
+    public void saveEach(Object... entities) {
+        AssertUtils.notNull(entities, "Must provide non-null entities to save");
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        for(Object entity : entities) {
+            session.save(entity);
+        }
         tx.commit();
         session.close();
     }
@@ -162,5 +184,38 @@ public class DbImpl implements Db {
         tx.commit();
         session.close();
         return domains;
+    }
+
+    private Session currentSession;
+    private Transaction currentTransaction;
+    @Override
+    public void startTransaction() {
+
+        if (currentSession != null && currentSession.isOpen()) {
+            throw new IllegalStateException("Cannot open new transaction because there is already an open session");
+        }
+
+        if (currentTransaction != null && currentTransaction.isActive()) {
+            throw new IllegalStateException("Cannot open the transaction because the transaction is already active!");
+        }
+        this.currentSession = sessionFactory.openSession();
+        this.currentTransaction = currentSession.beginTransaction();
+    }
+
+    @Override
+    public void commitTransaction() {
+        if (currentSession == null || !currentSession.isOpen()) {
+            throw new IllegalStateException("Cannot commmit the transaction because the session was never opened!");
+        }
+
+        if (!currentTransaction.isActive()) {
+            throw new IllegalStateException("Cannot commmit the transaction because the transaction is not active!");
+        }
+
+        log.debug("Attempting to commit the transaction");
+        currentTransaction.commit();
+        log.debug("Attempting to close the session");
+        currentSession.close();
+        log.debug("Transaction committed, session closed");
     }
 }

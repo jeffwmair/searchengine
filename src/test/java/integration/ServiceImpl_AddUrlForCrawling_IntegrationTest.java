@@ -18,7 +18,7 @@ import static org.mockito.Mockito.mock;
 /**
  * Created by Jeff on 2016-07-27.
  */
-public class DbImpl_AddUrlForCrawling_IntegrationTest {
+public class ServiceImpl_AddUrlForCrawling_IntegrationTest {
     private ServiceImpl sut;
     private Db db;
 
