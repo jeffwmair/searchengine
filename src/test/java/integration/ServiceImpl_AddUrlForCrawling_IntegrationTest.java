@@ -5,6 +5,7 @@ import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.DbImpl;
 import jwm.ir.utils.HibernateUtil;
+import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +20,7 @@ public class ServiceImpl_AddUrlForCrawling_IntegrationTest {
     private ServiceImpl sut;
     private Db db;
 
+    @Test
     public void test_add_url_to_be_crawled() {
 
         // arrange
@@ -44,7 +46,8 @@ public class ServiceImpl_AddUrlForCrawling_IntegrationTest {
 
     @Before
     public void setup() {
-        db = new DbImpl(HibernateUtil.getSessionFactory());
-        //sut = new ServiceImpl(db);
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        db = new DbImpl(sessionFactory);
+        sut = new ServiceImpl(sessionFactory);
     }
 }

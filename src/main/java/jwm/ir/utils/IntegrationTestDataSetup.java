@@ -59,7 +59,7 @@ public class IntegrationTestDataSetup {
         //Domain domain = new Domain("localhost/searchengine_test");
         //Page page = new Page(domain, "http://localhost/searchengine_test/page1.html");
 
-        DomainRepository domainRepository = new DomainRepositoryImpl(HibernateUtil.getSessionFactory());
+        DomainRepository domainRepository = new DomainRepositoryImpl(HibernateUtil.getSessionFactory().openSession());
         Page page = Page.create("http://localhost/searchengine_test/page1.html", domainRepository);
         page.setVerified(1);
         log.info("Adding page to db:"+page);

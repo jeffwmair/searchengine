@@ -2,7 +2,6 @@ package jwm.ir.domain;
 
 import jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -10,32 +9,28 @@ import org.hibernate.criterion.Restrictions;
  */
 public class DomainRepositoryImpl implements DomainRepository {
 
-    private final SessionFactory sessionFactory;
+    private final Session session;
 
-    public DomainRepositoryImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public DomainRepositoryImpl(Session session) {
+        this.session = session;
     }
 
     @Override
     public boolean domainExists(String domain) {
-        Session session = sessionFactory.openSession();
         Object domainObject = session
                 .createCriteria(Domain.class)
                 .add(Restrictions.eq("domain", domain))
                 .uniqueResult();
-        session.close();
 
         return domainObject != null;
     }
 
     @Override
     public Domain getDomain(String domain) {
-        Session session = sessionFactory.openSession();
         Object domainObject = session
                 .createCriteria(Domain.class)
                 .add(Restrictions.eq("domain", domain))
                 .uniqueResult();
-        session.close();
 
         AssertUtils.notNull(domainObject, "Could not find domain object with name '"+domain+"'");
         return (Domain)domainObject;

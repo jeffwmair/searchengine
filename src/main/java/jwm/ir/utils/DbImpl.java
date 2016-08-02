@@ -1,10 +1,8 @@
 package jwm.ir.utils;
 
-import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageLink;
 import jwm.ir.domain.ValidExtension;
-import jwm.ir.service.Service;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;

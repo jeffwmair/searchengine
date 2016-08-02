@@ -15,7 +15,7 @@ public class ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_a
     private ServiceImpl sut;
     private Db db;
 
-//    @Test
+    @Test
     public void add_url_for_crawling_domain_already_exists_should_not_add_again() {
 
         // arrange

@@ -26,6 +26,6 @@ public class DomainRepositoryImpl_get_domain_not_exists_throws {
 
     @Before
     public void setup() {
-        sut = new DomainRepositoryImpl(HibernateUtil.getSessionFactory());
+        sut = new DomainRepositoryImpl(HibernateUtil.getSessionFactory().openSession());
     }
 }

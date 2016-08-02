@@ -1,6 +1,5 @@
 package jwm.ir.workers;
 
-import jwm.ir.utils.Database;
 import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
