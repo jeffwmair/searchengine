@@ -11,42 +11,42 @@ public class UrlUtilsTest {
 
     @Test
     public void getUrlFromHttpDomainOnlyTest() {
-        assertGetDomainAndRobots("http://domain.com");
+        assertGetDomainAndRobots("http://jwm.ir.domain.com");
     }
 
     @Test
     public void getUrlFromDomainOnlyTest() {
-        assertGetDomainAndRobots("domain.com");
+        assertGetDomainAndRobots("jwm.ir.domain.com");
     }
 
     @Test
     public void getUrlFromWwwDomainOnlyTest() {
-        assertGetDomainAndRobots("www.domain.com");
+        assertGetDomainAndRobots("www.jwm.ir.domain.com");
     }
 
     @Test
     public void getFromPageUrlTest() {
-        assertGetDomainAndRobots("http://domain.com/foo.html");
+        assertGetDomainAndRobots("http://jwm.ir.domain.com/foo.html");
     }
 
     @Test
     public void getFromTrailingSlashDomain() {
-        assertGetDomainAndRobots("http://domain.com/");
+        assertGetDomainAndRobots("http://jwm.ir.domain.com/");
     }
 
     @Test
     public void getFromTrailingSlashDomainPlusPage() {
-        assertGetDomainAndRobots("http://domain.com/foo/");
+        assertGetDomainAndRobots("http://jwm.ir.domain.com/foo/");
     }
 
     @Test
     public void getFromHttpsProtocol() {
-        assertGetDomainAndRobots("https://domain.com/foo/bar/page.html");
+        assertGetDomainAndRobots("https://jwm.ir.domain.com/foo/bar/page.html");
     }
 
     @Test
     public void getFromThreeDeepPage() {
-        assertGetDomainAndRobots("http://domain.com/foo/bar/page.html");
+        assertGetDomainAndRobots("http://jwm.ir.domain.com/foo/bar/page.html");
     }
 
     @Test
@@ -69,7 +69,7 @@ public class UrlUtilsTest {
 
 
     private void assertGetDomainAndRobots(String url) {
-        Assert.assertEquals("domain.com", UrlUtils.getDomainFromAbsoluteUrl(url));
-        Assert.assertEquals("domain.com/robots.txt", UrlUtils.getRobotsTxtUrl(url));
+        Assert.assertEquals("jwm.ir.domain.com", UrlUtils.getDomainFromAbsoluteUrl(url));
+        Assert.assertEquals("jwm.ir.domain.com/robots.txt", UrlUtils.getRobotsTxtUrl(url));
     }
 }

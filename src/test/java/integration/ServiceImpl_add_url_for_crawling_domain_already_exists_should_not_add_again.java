@@ -33,6 +33,5 @@ public class ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_a
     @Before
     public void setup() {
         db = new DbImpl(HibernateUtil.getSessionFactory());
-        //sut = new ServiceImpl(db);
     }
 }

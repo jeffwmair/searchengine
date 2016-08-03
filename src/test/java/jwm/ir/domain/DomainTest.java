@@ -1,6 +1,5 @@
-package domain;
+package jwm.ir.domain;
 
-import jwm.ir.domain.Domain;
 import org.junit.Assert;
 import org.junit.Test;
 

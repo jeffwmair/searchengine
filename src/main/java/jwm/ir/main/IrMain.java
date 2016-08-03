@@ -2,6 +2,9 @@ package jwm.ir.main;
 
 import jwm.ir.indexer.StopwordsFileLoader;
 import jwm.ir.message.WebResource;
+import jwm.ir.service.Service;
+import jwm.ir.service.ServiceImpl;
+import jwm.ir.service.UrlAddService;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.HibernateUtil;
@@ -27,7 +30,6 @@ public class IrMain {
 	public static void main(String[] args) {
 
 		AtomicBoolean stopApplication = new AtomicBoolean(false);
-		HibernateUtil.getSessionFactory();
 
 		int prInterval = 500;
 		String host = "localhost";
@@ -53,11 +55,13 @@ public class IrMain {
 		log.info("pagerank_interval=" + Integer.toString(prInterval));
 
 		Db db = new Database(host);
+		UrlAddService urlAddService = new UrlAddService();
+		Service service = new ServiceImpl(HibernateUtil.getSessionFactory(), urlAddService);
 
 		List<String> domainExtensions = db.getValidDomainExtensions();
 		if (log.isDebugEnabled()) {
 			for (String s : domainExtensions) {
-				log.debug("Valid domain:" + s);
+				log.debug("Valid jwm.ir.domain:" + s);
 			}
 		}
 
@@ -69,6 +73,7 @@ public class IrMain {
 
 		CrawlerWorker c1 = new CrawlerWorker(domainExtensions,
 				db,
+				service,
 				queue,
 				performanceWorker,
 				stopApplication);

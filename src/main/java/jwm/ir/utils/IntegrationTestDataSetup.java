@@ -4,6 +4,7 @@ import jwm.ir.domain.DomainRepository;
 import jwm.ir.domain.DomainRepositoryImpl;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.ValidExtension;
+import jwm.ir.service.UnitOfWork;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -56,10 +57,8 @@ public class IntegrationTestDataSetup {
     }
 
     private static void setupPages() {
-        //Domain domain = new Domain("localhost/searchengine_test");
-        //Page page = new Page(domain, "http://localhost/searchengine_test/page1.html");
-
-        DomainRepository domainRepository = new DomainRepositoryImpl(HibernateUtil.getSessionFactory().openSession());
+        UnitOfWork unitOfWork = new UnitOfWork(HibernateUtil.getSessionFactory().openSession());
+        DomainRepository domainRepository = new DomainRepositoryImpl(unitOfWork);
         Page page = Page.create("http://localhost/searchengine_test/page1.html", domainRepository);
         page.setVerified(1);
         log.info("Adding page to db:"+page);

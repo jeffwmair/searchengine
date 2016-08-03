@@ -2,6 +2,8 @@ package jwm.ir.workers;
 
 import jwm.ir.crawler.WebPage;
 import jwm.ir.message.WebResource;
+import jwm.ir.service.Service;
+import jwm.ir.utils.AssertUtils;
 import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -17,6 +19,7 @@ public class CrawlerWorker implements Runnable {
 	ArrayList<String> _frontier = new ArrayList<>();
 
 	final private static Logger log = LogManager.getLogger(CrawlerWorker.class);
+	private final Service service;
 	private final List<String> _validDomainExtensions;
 	Db _db;
 	AtomicBoolean _stopApp;
@@ -25,11 +28,14 @@ public class CrawlerWorker implements Runnable {
 	
 	public CrawlerWorker( List<String> validDomainExtensions,
 						 Db db,
+						  Service service,
 						 BlockingQueue<WebResource> indexQueue,
 						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicBoolean stopApp) {
-		if (indexQueue == null) throw new IllegalArgumentException("Must provide indexQueue");
+		AssertUtils.notNull(indexQueue, "must provide indexQueue");
+		AssertUtils.notNull(service, "must provide service");
 		this.indexQueue = indexQueue;
+		this.service = service;
 		_db = db;
 		_validDomainExtensions = validDomainExtensions;
 		_perfWorker = perfWorker;
@@ -124,7 +130,7 @@ public class CrawlerWorker implements Runnable {
 		}
 	}
 			
-	private void addUrls(String foundInPage, HashMap<String,String> urlsWithAnchorText) {
+	private void addUrls(String parentUrl, HashMap<String,String> urlsWithAnchorText) {
 
 		if (urlsWithAnchorText == null || urlsWithAnchorText.size() == 0) {
 			return;
@@ -136,26 +142,34 @@ public class CrawlerWorker implements Runnable {
 		/* this submits batches of urls to the database */
 		try
 		{
-			ArrayList<String> urls = new ArrayList<String>();
+			ArrayList<String> urls = new ArrayList<>();
 			int batchSize = 0;
 			for(Map.Entry<String, String> entry : urlsWithAnchorText.entrySet()) {
-			
+
 				urls.add(entry.getKey());
 				batchSize++;
-				
+
 				if (batchSize == MAX_URL_SUBMIT_BATCH_SIZE) {
-					_db.addNewUrls(foundInPage, urls);
+					for (String url : urls) {
+						service.addUrlForCrawling(url, parentUrl);
+					}
+					//_db.addNewUrls(foundInPage, urls);
 					urls.clear();
 					batchSize = 0;
 				}
 			}
-			if (urls.size() > 0) _db.addNewUrls(foundInPage, urls); 	// add the last batch
+			if (urls.size() > 0) {
+				// send the last batch
+				for (String url : urls) {
+					service.addUrlForCrawling(url, parentUrl);
+				}
+			}
 		}
 		catch(Exception ex)
 		{
-			log.error("Error in addUrls():" + ex.toString());
+			log.error("Error in addUrls():" + ex.toString(), ex);
 		}
-	}	
+	}
 
 	private void sleep(int seconds) {
 		try {

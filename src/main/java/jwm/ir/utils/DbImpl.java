@@ -105,7 +105,8 @@ public class DbImpl implements Db {
 
     @Override
     public void addNewUrls(String containingPage, List<String> urls) throws Exception {
-        phpDb.addNewUrls(containingPage, urls);
+        throw new RuntimeException("No longer implemented");
+        //phpDb.addNewUrls(containingPage, urls);
         //for(String url : urls) {
          //   service.addUrlForCrawling(containingPage, url);
         //}

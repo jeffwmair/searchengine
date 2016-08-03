@@ -49,7 +49,7 @@ public class RobotUserAgentCache implements Cleanable {
      * @param item
      */
     public synchronized void add(String url, RobotDisallows item) {
-        AssertUtils.failState(!UrlUtils.isDomain(url), "Must provide a domain, but was provided with:"+url);
+        AssertUtils.failState(!UrlUtils.isDomain(url), "Must provide a jwm.ir.domain, but was provided with:"+url);
         cache.put(url, new RobotDisallowsDateWrapper(clock.getTime(), item));
     }
 

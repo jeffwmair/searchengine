@@ -2,6 +2,7 @@ package integration;
 
 import jwm.ir.domain.DomainRepository;
 import jwm.ir.domain.DomainRepositoryImpl;
+import jwm.ir.service.UnitOfWork;
 import jwm.ir.utils.HibernateUtil;
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,6 +27,7 @@ public class DomainRepositoryImpl_get_domain_not_exists_throws {
 
     @Before
     public void setup() {
-        sut = new DomainRepositoryImpl(HibernateUtil.getSessionFactory().openSession());
+        UnitOfWork unitOfWork = new UnitOfWork(HibernateUtil.getSessionFactory().openSession());
+        sut = new DomainRepositoryImpl(unitOfWork);
     }
 }

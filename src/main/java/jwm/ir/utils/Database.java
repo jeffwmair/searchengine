@@ -227,7 +227,7 @@ public class Database implements Db {
 			int crawlerIdToAssign = 1;
 			if (crawlerId == 1) {
 				/* crawler 1 is for user-submitted urls only
-				 * and it should only assign itself crawled urls from the same domain;
+				 * and it should only assign itself crawled urls from the same jwm.ir.domain;
 				 * outside domains can be assigned to crawler 2
 				 */
 				if (!sourcePageDomain.contains(domain)) {

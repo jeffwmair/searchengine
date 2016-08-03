@@ -116,7 +116,7 @@ public class RobotWorker implements Runnable {
 		
 		if (domain == null) {
 			rbt = new RobotsTxt(false);
-			log.error("Error getting domain from url, so will be excluded " + url);
+			log.error("Error getting jwm.ir.domain from url, so will be excluded " + url);
 		}
 		else {
 			rbt = domainRobots.get(domain);
