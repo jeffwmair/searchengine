@@ -26,6 +26,5 @@ public interface Db {
     int getPageIdFromUrl(String url);
     void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults);
     void addCrawlResult(String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful);
-    void  addNewUrls(String containingPage, List<String> urls) throws Exception;
     List<String> getUnverifiedPagesForVerification();
 }

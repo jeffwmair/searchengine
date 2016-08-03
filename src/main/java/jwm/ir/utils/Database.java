@@ -213,46 +213,6 @@ public class Database implements Db {
 	}
 
 	@Override
-	public void addNewUrls(String containingPage, List<String> urls) throws Exception {
-		
-		StringBuilder json = new StringBuilder();
-		json.append("{"+JsonUtils.getJsonItem("containingPage", containingPage)+",\"links\":[");
-		for(String url : urls) {
-			
-			String sourcePageDomain = UrlUtils.getDomainFromAbsoluteUrl(containingPage);
-			String domain = UrlUtils.getDomainFromAbsoluteUrl(url);
-
-			// temp
-			int crawlerId = 1;
-			int crawlerIdToAssign = 1;
-			if (crawlerId == 1) {
-				/* crawler 1 is for user-submitted urls only
-				 * and it should only assign itself crawled urls from the same jwm.ir.domain;
-				 * outside domains can be assigned to crawler 2
-				 */
-				if (!sourcePageDomain.contains(domain)) {
-					crawlerIdToAssign = 2;
-				}
-			}
-
-			if (json.toString().endsWith("}")) json.append(",");
-			json.append("{");
-			json.append(JsonUtils.getJsonItem("domain", domain) + ",");
-			json.append(JsonUtils.getJsonItem("crawlerid", crawlerIdToAssign) + ",");
-			json.append(JsonUtils.getJsonItem("url", url));
-			json.append("}");
-			
-		}	
-		json.append("]}");
-		
-		HttpUtils.httpPost(_webServiceHost,
-				"data", 
-				json.toString(), 
-				"AddNewUrls.php", 
-				false);
-	}
-
-	@Override
 	public ArrayList<String> getUnverifiedPagesForVerification() {
 		
 		Map json = HttpUtils.httpPost(_webServiceHost,

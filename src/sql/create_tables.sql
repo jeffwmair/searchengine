@@ -123,28 +123,6 @@ CREATE TABLE validextensions (
 
 delimiter |
 
-create procedure insert_url(IN pContainingPageUrl varchar(500), IN pDomain varchar(500), IN pUrl varchar(500), IN pCrawlerId int) 
-begin
-
-    set @domainid = (select domainid from domains where domain = pDomain);
-    if @domainid is NULL then 
-      insert into domains (domain, status, crawlerId, total_crawls, locked) values (pDomain, 0, pCrawlerId, 0, 0);
-      SET @domainid = LAST_INSERT_ID();
-    end if;
-
-    /* insert the new url */
-    insert ignore into pages (domainId, verified, url, pagerank, fail_count) values (@domainid, 0, pUrl, 0, 0);
-    set @pageId = (select pageId from pages where url = pUrl);
-
-    set @containingPageId = (select pageid from pages where url = pContainingPageUrl);
-    
-    /* add to the page links table for PageRank calculation */
-    insert into pagelinks (pageId, destPageId) values (@containingPageId, @pageId);
-
-end
-|
-
-
 create procedure insert_terms(IN pPageId int)
 	
 begin

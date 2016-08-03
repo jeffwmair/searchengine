@@ -153,7 +153,6 @@ public class CrawlerWorker implements Runnable {
 					for (String url : urls) {
 						service.addUrlForCrawling(url, parentUrl);
 					}
-					//_db.addNewUrls(foundInPage, urls);
 					urls.clear();
 					batchSize = 0;
 				}

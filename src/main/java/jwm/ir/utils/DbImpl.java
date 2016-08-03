@@ -104,16 +104,6 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public void addNewUrls(String containingPage, List<String> urls) throws Exception {
-        throw new RuntimeException("No longer implemented");
-        //phpDb.addNewUrls(containingPage, urls);
-        //for(String url : urls) {
-         //   service.addUrlForCrawling(containingPage, url);
-        //}
-
-    }
-
-    @Override
     public List<String> getUnverifiedPagesForVerification() {
         return phpDb.getUnverifiedPagesForVerification();
     }
