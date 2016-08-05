@@ -1,10 +1,10 @@
 package jwm.ir.main;
 
+import jwm.ir.domain.RepositoryFactory;
 import jwm.ir.indexer.StopwordsFileLoader;
 import jwm.ir.message.WebResource;
 import jwm.ir.service.Service;
 import jwm.ir.service.ServiceImpl;
-import jwm.ir.service.UrlAddService;
 import jwm.ir.utils.Database;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.HibernateUtil;
@@ -55,8 +55,8 @@ public class IrMain {
 		log.info("pagerank_interval=" + Integer.toString(prInterval));
 
 		Db db = new Database(host);
-		UrlAddService urlAddService = new UrlAddService();
-		Service service = new ServiceImpl(HibernateUtil.getSessionFactory(), urlAddService);
+		RepositoryFactory repositoryFactory = new RepositoryFactory();
+		Service service = new ServiceImpl(HibernateUtil.getSessionFactory(), repositoryFactory);
 
 		List<String> domainExtensions = db.getValidDomainExtensions();
 		if (log.isDebugEnabled()) {

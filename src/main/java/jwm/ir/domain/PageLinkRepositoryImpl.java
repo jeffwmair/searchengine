@@ -1,16 +1,15 @@
 package jwm.ir.domain;
 
-import jwm.ir.service.Operation;
-import jwm.ir.service.UnitOfWork;
+import org.hibernate.Session;
 
 /**
  * Created by Jeff on 2016-08-02.
  */
 public class PageLinkRepositoryImpl implements PageLinkRepository {
 
-    private final UnitOfWork unitOfWork;
-    public PageLinkRepositoryImpl(UnitOfWork unitOfWork) {
-        this.unitOfWork = unitOfWork;
+    private final Session session;
+    public PageLinkRepositoryImpl(Session session) {
+        this.session = session;
     }
 
     @Override
@@ -18,7 +17,7 @@ public class PageLinkRepositoryImpl implements PageLinkRepository {
         PageLink pl = new PageLink();
         pl.setPage(referant);
         pl.setDestinationPage(page);
-        unitOfWork.add(pl, Operation.OperationType.Save);
+        session.save(pl);
         return pl;
     }
 }

@@ -1,8 +1,7 @@
 package jwm.ir.domain;
 
-import jwm.ir.service.Operation;
-import jwm.ir.service.UnitOfWork;
 import jwm.ir.utils.AssertUtils;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -10,10 +9,10 @@ import org.hibernate.criterion.Restrictions;
  */
 public class DomainRepositoryImpl implements DomainRepository {
 
-    private final UnitOfWork unitOfWork;
+    private final Session session;
 
-    public DomainRepositoryImpl(UnitOfWork unitOfWork) {
-        this.unitOfWork = unitOfWork;
+    public DomainRepositoryImpl(Session session) {
+        this.session = session;
     }
 
     @Override
@@ -31,12 +30,12 @@ public class DomainRepositoryImpl implements DomainRepository {
     @Override
     public Domain create(String pageDomainName) {
         Domain domain = Domain.createFromUrl(pageDomainName);
-        unitOfWork.add(domain, Operation.OperationType.Save);
+        session.save(domain);
         return domain;
     }
 
     private Object getByDomainName(String domainName) {
-         Object domainObject = unitOfWork.getSession()
+         Object domainObject = session
                 .createCriteria(Domain.class)
                 .add(Restrictions.eq("domain", domainName))
                 .uniqueResult();

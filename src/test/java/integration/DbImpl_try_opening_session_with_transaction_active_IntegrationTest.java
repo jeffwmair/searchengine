@@ -10,7 +10,7 @@ import org.junit.Test;
 /**
  * Created by Jeff on 2016-07-31.
  */
-public class DbImpl_try_opening_session_with_transaction_active {
+public class DbImpl_try_opening_session_with_transaction_active_IntegrationTest {
 
     private Db sut;
 

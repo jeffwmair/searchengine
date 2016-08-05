@@ -1,5 +1,6 @@
 package jwm.ir.service;
 
+import jwm.ir.crawler.UrlUtils;
 import jwm.ir.domain.*;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
@@ -13,14 +14,14 @@ import org.hibernate.Transaction;
  */
 public class ServiceImpl implements Service {
 
-
     private static final Logger log = LogManager.getLogger(ServiceImpl.class);
     private final SessionFactory sessionFactory;
-    private final UrlAddService urlAddService;
-    public ServiceImpl(SessionFactory sessionFactory, UrlAddService urlAddService) {
+    private final RepositoryFactory repositoryFactory;
+    public ServiceImpl(SessionFactory sessionFactory,
+                       RepositoryFactory repositoryFactory) {
         AssertUtils.notNull(sessionFactory, "Must provide sessionFactory");
         this.sessionFactory = sessionFactory;
-        this.urlAddService = urlAddService;
+        this.repositoryFactory = repositoryFactory;
     }
 
     @Override
@@ -34,20 +35,34 @@ public class ServiceImpl implements Service {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
-        UnitOfWork unitOfWork = new UnitOfWork(session);
-        DomainRepository domainRepository = new DomainRepositoryImpl(unitOfWork);
-        PageRepository pageRepository = new PageRepositoryImpl(unitOfWork);
-        PageLinkRepository pageLinkRepository = new PageLinkRepositoryImpl(unitOfWork);
+
+        DomainRepository domainRepository = repositoryFactory.createDomainRepository(session);
+        PageRepository pageRepository = repositoryFactory.createPageRepository(session);
+        PageLinkRepository pageLinkRepository = repositoryFactory.createPageLinkRepository(session);
 
         // only run if the page doesn't exist
-        if (!pageRepository.pageExists(url)) {
-            urlAddService.addUrlForCrawling(url, parentUrl,
-                    pageRepository,
-                    domainRepository,
-                    pageLinkRepository);
+        if (pageRepository.pageExists(url)) {
+            log.warn("Page with url '"+url+"' already exists in the database, so not adding");
+            tx.rollback();
+            return;
         }
 
-        unitOfWork.persist();
+        Page page = pageRepository.create(url, domainRepository);
+        Domain pageDomain;
+        final String pageDomainName = UrlUtils.getDomainFromAbsoluteUrl(url);
+        if (domainRepository.domainExists(pageDomainName)) {
+            pageDomain = domainRepository.getDomain(pageDomainName);
+        }
+        else {
+            pageDomain = domainRepository.create(pageDomainName);
+        }
+
+        page.setDomain(pageDomain);
+
+        // we assume that the parent page must have already been indexed; how else can it be the parent?
+        Page referantPage = pageRepository.getPage(parentUrl);
+
+        pageLinkRepository.create(page, referantPage);
 
         tx.commit();
         session.close();

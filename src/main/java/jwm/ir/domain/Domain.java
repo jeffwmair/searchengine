@@ -47,7 +47,7 @@ public class Domain {
     public String toString() {
         return "Domain{" +
                 "id=" + id +
-                ", domain='" + domain + '\'' +
+                ", domaiv='" + domain + '\'' +
                 ", status=" + status +
                 ", crawlerId=" + crawlerId +
                 ", totalCrawls=" + totalCrawls +

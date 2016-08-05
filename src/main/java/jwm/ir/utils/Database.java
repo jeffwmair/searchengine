@@ -1,6 +1,5 @@
 package jwm.ir.utils;
 
-import jwm.ir.crawler.UrlUtils;
 import jwm.ir.domain.Page;
 
 import java.text.SimpleDateFormat;

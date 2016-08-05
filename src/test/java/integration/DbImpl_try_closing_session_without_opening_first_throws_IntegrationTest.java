@@ -10,7 +10,7 @@ import org.junit.Test;
 /**
  * Created by Jeff on 2016-07-31.
  */
-public class DbImpl_try_closing_session_without_opening_first_throws {
+public class DbImpl_try_closing_session_without_opening_first_throws_IntegrationTest {
 
     private Db sut;
 

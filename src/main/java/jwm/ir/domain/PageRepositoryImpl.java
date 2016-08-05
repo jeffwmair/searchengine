@@ -1,8 +1,7 @@
 package jwm.ir.domain;
 
-import jwm.ir.service.Operation;
-import jwm.ir.service.UnitOfWork;
 import jwm.ir.utils.AssertUtils;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -10,10 +9,10 @@ import org.hibernate.criterion.Restrictions;
  */
 public class PageRepositoryImpl implements PageRepository {
 
-    private final UnitOfWork unitOfWork;
+    private final Session session;
 
-    public PageRepositoryImpl(UnitOfWork unitOfWork) {
-        this.unitOfWork = unitOfWork;
+    public PageRepositoryImpl(Session session) {
+        this.session = session;
     }
 
     @Override
@@ -32,12 +31,12 @@ public class PageRepositoryImpl implements PageRepository {
     @Override
     public Page create(String url, DomainRepository domainRepository) {
         Page p = Page.create(url, domainRepository);
-        unitOfWork.add(p, Operation.OperationType.Save);
+        session.save(p);
         return p;
     }
 
     private Object getByUrl(String url) {
-        Object obj = unitOfWork.getSession()
+        Object obj = session
                 .createCriteria(Page.class)
                 .add(Restrictions.eq("url", url))
                 .uniqueResult();
