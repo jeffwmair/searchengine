@@ -108,11 +108,6 @@ public class Database implements Db {
 	}
 
 	@Override
-	public void saveEach(Object... entities) {
-
-	}
-
-	@Override
 	public Page getPage(String url) {
 		return null;
 	}

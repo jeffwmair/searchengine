@@ -118,22 +118,6 @@ public class DbImpl implements Db {
         session.close();
     }
 
-    /**
-     * Save all the provided objects, in order
-     * @param entities
-     */
-    @Override
-    public void saveEach(Object... entities) {
-        AssertUtils.notNull(entities, "Must provide non-null entities to save");
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        for(Object entity : entities) {
-            session.save(entity);
-        }
-        tx.commit();
-        session.close();
-    }
-
     @Override
     public List<String> popUrls() {
 

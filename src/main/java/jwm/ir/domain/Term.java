@@ -29,18 +29,18 @@ public class Term {
         this.termId = termId;
     }
 
-    public int getDocument_frequency() {
-        return document_frequency;
+    public int getDocumentFrequency() {
+        return documentFrequency;
     }
 
-    public void setDocument_frequency(int document_frequency) {
-        this.document_frequency = document_frequency;
+    public void setDocumentFrequency(int documentFrequency) {
+        this.documentFrequency = documentFrequency;
     }
 
     @Column(nullable = false, unique = true)
     private String term;
 
-    @Column(nullable = false)
-    private int document_frequency;
+    @Column(nullable = false, name = "document_frequency")
+    private int documentFrequency;
 
 }

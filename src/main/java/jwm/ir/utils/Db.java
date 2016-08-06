@@ -15,7 +15,6 @@ public interface Db {
     void startTransaction();
     void commitTransaction();
     void save(Object entity);
-    void saveEach(Object... entities);
     Page getPage(String url);
     void addPerformanceStats(int verifications, int crawls, int indexes);
     void updateSummaries();

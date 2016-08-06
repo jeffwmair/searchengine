@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.Map;
+
 /**
  * Created by Jeff on 2016-07-27.
  */
@@ -66,10 +68,51 @@ public class ServiceImpl implements Service {
 
         tx.commit();
         session.close();
+
         if (log.isDebugEnabled()) {
             log.debug("Completed to add url for crawling:" + url);
         }
 
+    }
+
+    @Override
+    public void addDocumentTerms(long pageId, Map<String, Integer> termFrequences) {
+
+        log.warn("Using old deprecated php service");
+        for (Map.Entry<String, Integer> e : termFrequences.entrySet()) {
+
+            String term = e.getKey();
+            String tf = Integer.toString(e.getValue());
+
+            //if (!json.toString().endsWith(":[")) json.append(",");
+
+//            json.append("{");
+//            json.append(JsonUtils.getJsonItem(JSON_TERM, term) + ",");
+//            json.append(JsonUtils.getJsonItem(JSON_TERM_FREQ, tf));
+//            json.append("}");
+
+//            if (json.length() > MAX_JSON_GET_LENGTH) {
+
+                // close off the json
+//                json.append("]}");
+
+                // send it
+//                long start = System.currentTimeMillis();
+//                _db.addDocumentTerms(json.toString(), pageId);
+//                log.info("Sent an intermediate batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
+
+//                json = new StringBuilder();
+//                json.append("{\"" + JSON_PAGE_ID + "\":\"" + pageId + "\",\"" + JSON_TERMS + "\":[");
+//            }
+        }
+//        if (json.length() > 0) {
+//            json.append("]}");
+//
+//             send the last of it
+//            long start = System.currentTimeMillis();
+//            _db.addDocumentTerms(json.toString(), pageId);
+//            log.info("Sent the last batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
+//        }
     }
 
 }

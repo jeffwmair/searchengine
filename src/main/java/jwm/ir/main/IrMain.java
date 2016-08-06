@@ -87,6 +87,7 @@ public class IrMain {
 		StopwordsFileLoader stopwordsFileLoader = new StopwordsFileLoader("./stopwords.txt");
 		IndexerWorker indexer = new IndexerWorker(queue,
 				db,
+				service,
 				stopwordsFileLoader,
 				performanceWorker,
 				indexCounter,

@@ -5,6 +5,7 @@ import jwm.ir.indexer.StopwordsFileLoader;
 import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourceNoneImpl;
+import jwm.ir.service.Service;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;
@@ -30,9 +31,11 @@ public class IndexerWorker implements Runnable {
 	private Thread _updateStatsWorker;
 	private final PerformanceStatsUpdateWorker _perfWorker;
 	private final BlockingQueue<WebResource> indexQueue;
+	private final Service service;
 	
 	public IndexerWorker(BlockingQueue<WebResource> indexQueue,
 						 Db db,
+						 Service service,
 						 StopwordsFileLoader stopwordsFileLoader,
 						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicInteger indexCount,
@@ -41,6 +44,7 @@ public class IndexerWorker implements Runnable {
 
 		if (indexQueue == null) throw new RuntimeException("Must provide non-null indexQueue");
 		this.indexQueue = indexQueue;
+		this.service = service;
 		_stopwords = stopwordsFileLoader.getStopwordsFromFile();
 		_db = db;
 		_indexCount = indexCount;
@@ -173,40 +177,48 @@ public class IndexerWorker implements Runnable {
 		StringBuilder json = new StringBuilder();
 		json.append("{\""+ JSON_PAGE_ID +"\":\""+pageId+"\",\""+JSON_TERMS+"\":[");
 
+		boolean useNewCode = true;
 
-		for(Map.Entry<String, Integer> e : parser.getTermFrequencies().entrySet()) {
+		if (useNewCode) {
+			log.warn("Using new service.addDocumentTerms!");
+			service.addDocumentTerms(pageId, parser.getTermFrequencies());
+		}
+		else {
+			log.warn("Using old deprecated php service");
+			for (Map.Entry<String, Integer> e : parser.getTermFrequencies().entrySet()) {
 
-			String term = e.getKey();
-			String tf = Integer.toString(e.getValue());
+				String term = e.getKey();
+				String tf = Integer.toString(e.getValue());
 
-			if (!json.toString().endsWith(":[")) json.append(",");
+				if (!json.toString().endsWith(":[")) json.append(",");
 
-			json.append("{");
-			json.append(JsonUtils.getJsonItem(JSON_TERM, term) + ",");
-			json.append(JsonUtils.getJsonItem(JSON_TERM_FREQ, tf));
-			json.append("}");
+				json.append("{");
+				json.append(JsonUtils.getJsonItem(JSON_TERM, term) + ",");
+				json.append(JsonUtils.getJsonItem(JSON_TERM_FREQ, tf));
+				json.append("}");
 
-			if (json.length() > MAX_JSON_GET_LENGTH) {
+				if (json.length() > MAX_JSON_GET_LENGTH) {
 
-				// close off the json
+					// close off the json
+					json.append("]}");
+
+					// send it
+					long start = System.currentTimeMillis();
+					_db.addDocumentTerms(json.toString(), pageId);
+					log.info("Sent an intermediate batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
+
+					json = new StringBuilder();
+					json.append("{\"" + JSON_PAGE_ID + "\":\"" + pageId + "\",\"" + JSON_TERMS + "\":[");
+				}
+			}
+			if (json.length() > 0) {
 				json.append("]}");
 
-				// send it
+				// send the last of it
 				long start = System.currentTimeMillis();
 				_db.addDocumentTerms(json.toString(), pageId);
-				log.info("Sent an intermediate batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
-
-				json = new StringBuilder();
-				json.append("{\""+JSON_PAGE_ID+"\":\""+pageId+"\",\""+JSON_TERMS+"\":[");
+				log.info("Sent the last batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
 			}
-		}
-		if (json.length() > 0) {
-			json.append("]}");
-
-			// send the last of it
-			long start = System.currentTimeMillis();
-			_db.addDocumentTerms(json.toString(), pageId);
-			log.info("Sent the last batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
 		}
 
 		// delete when done processing
