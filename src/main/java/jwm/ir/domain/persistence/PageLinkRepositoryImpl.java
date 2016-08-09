@@ -1,5 +1,7 @@
-package jwm.ir.domain;
+package jwm.ir.domain.persistence;
 
+import jwm.ir.domain.Page;
+import jwm.ir.domain.PageLink;
 import org.hibernate.Session;
 
 /**

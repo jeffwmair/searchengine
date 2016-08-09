@@ -1,5 +1,6 @@
 package jwm.ir.domain;
 
+import jwm.ir.domain.persistence.DomainRepository;
 import org.junit.Assert;
 import org.junit.Test;
 

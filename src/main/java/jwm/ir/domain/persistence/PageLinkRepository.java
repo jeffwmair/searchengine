@@ -1,4 +1,7 @@
-package jwm.ir.domain;
+package jwm.ir.domain.persistence;
+
+import jwm.ir.domain.Page;
+import jwm.ir.domain.PageLink;
 
 /**
  * Created by Jeff on 2016-08-02.

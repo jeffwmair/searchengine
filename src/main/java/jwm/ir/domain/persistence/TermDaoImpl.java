@@ -1,0 +1,51 @@
+package jwm.ir.domain.persistence;
+
+import jwm.ir.domain.Term;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+
+/**
+ * Created by Jeff on 2016-08-05.
+ */
+public class TermDaoImpl implements TermDao {
+
+    private final Session session;
+
+    public TermDaoImpl(Session session) {
+        this.session = session;
+    }
+
+    @Override
+    public Term createOrIncrementTermFrequency(String termValue) {
+        Term term;
+        if (exists(termValue)) {
+            term = getTerm(termValue);
+        }
+        else {
+            term = new Term(termValue);
+        }
+
+        term.incrementDocumentFrequency();
+        session.saveOrUpdate(term);
+        return term;
+    }
+
+    @Override
+    public Term getTerm(String term) {
+        return (Term)getTermObject(term);
+    }
+
+    @Override
+    public boolean exists(String term) {
+        return getTermObject(term) != null;
+    }
+
+    @Override
+    public void update(Term term) {
+        session.saveOrUpdate(term);
+    }
+
+    private Object getTermObject(String term) {
+        return session.createCriteria(Term.class).add(Restrictions.eq("term", term)).uniqueResult();
+    }
+}

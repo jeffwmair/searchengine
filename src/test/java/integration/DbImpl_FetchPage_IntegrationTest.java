@@ -1,6 +1,6 @@
 package integration;
 
-import jwm.ir.domain.DomainRepository;
+import jwm.ir.domain.persistence.DomainRepository;
 import jwm.ir.domain.Page;
 import org.junit.Assert;
 import org.junit.Test;

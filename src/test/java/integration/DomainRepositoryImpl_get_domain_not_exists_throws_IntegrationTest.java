@@ -1,7 +1,7 @@
 package integration;
 
-import jwm.ir.domain.DomainRepository;
-import jwm.ir.domain.DomainRepositoryImpl;
+import jwm.ir.domain.persistence.DomainRepository;
+import jwm.ir.domain.persistence.DomainRepositoryImpl;
 import jwm.ir.utils.HibernateUtil;
 import org.junit.Assert;
 import org.junit.Before;

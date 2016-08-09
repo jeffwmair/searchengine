@@ -1,6 +1,7 @@
 package jwm.ir.domain;
 
 import jwm.ir.crawler.UrlUtils;
+import jwm.ir.domain.persistence.DomainRepository;
 
 import javax.persistence.*;
 import java.util.Date;

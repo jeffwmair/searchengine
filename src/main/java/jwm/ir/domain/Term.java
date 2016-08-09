@@ -13,6 +13,12 @@ public class Term {
     @GeneratedValue
     private long termId;
 
+    public Term() { }
+    public Term(String term) {
+        this.term = term;
+    }
+
+
     public String getTerm() {
         return term;
     }
@@ -43,4 +49,7 @@ public class Term {
     @Column(nullable = false, name = "document_frequency")
     private int documentFrequency;
 
+    public void incrementDocumentFrequency() {
+        this.documentFrequency++;
+    }
 }

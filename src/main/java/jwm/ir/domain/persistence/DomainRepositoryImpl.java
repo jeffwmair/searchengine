@@ -1,5 +1,6 @@
-package jwm.ir.domain;
+package jwm.ir.domain.persistence;
 
+import jwm.ir.domain.Domain;
 import jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;

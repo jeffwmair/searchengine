@@ -1,9 +1,9 @@
 package jwm.ir.utils;
 
-import jwm.ir.domain.DomainRepository;
-import jwm.ir.domain.DomainRepositoryImpl;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.ValidExtension;
+import jwm.ir.domain.persistence.DomainRepository;
+import jwm.ir.domain.persistence.DomainRepositoryImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

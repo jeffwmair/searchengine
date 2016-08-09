@@ -1,12 +1,18 @@
 package jwm.ir.service;
 
 import jwm.ir.domain.*;
+import jwm.ir.domain.persistence.DomainRepository;
+import jwm.ir.domain.persistence.PageLinkRepository;
+import jwm.ir.domain.persistence.PageRepository;
+import jwm.ir.domain.persistence.PageTermDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
@@ -20,7 +26,26 @@ public class ServiceImplTest {
 	private DomainRepository domainRepository;
 	private SessionFactory sessionFactory;
 	private RepositoryFactory repositoryFactory;
+	private Session session;
 
+	@Test
+	public void test_add_document_term_when_term_does_not_exist_should_add_term_too() {
+
+		ServiceImpl sut = new ServiceImpl(sessionFactory, repositoryFactory);
+
+		PageTermDao pageTermDao = mock(PageTermDao.class);
+		when(repositoryFactory.createPageTermDao(session)).thenReturn(pageTermDao);
+
+		long pageId = 1;
+		Map<String, Integer> terms = new HashMap<>();
+		terms.put("hello", 1);
+		terms.put("world", 2);
+
+		sut.addDocumentTerms(pageId, terms);
+
+		verify(pageTermDao).create(1, "hello", 1);
+		verify(pageTermDao).create(1, "world", 2);
+	}
 
 	@Test
 	public void test_page_already_exists_do_not_throw() {
@@ -71,7 +96,7 @@ public class ServiceImplTest {
 	@Before
 	public void setup() {
 		sessionFactory = mock(SessionFactory.class);
-		Session session = mock(Session.class);
+		session = mock(Session.class);
 		when(sessionFactory.openSession()).thenReturn(session);
 		Transaction tx = mock(Transaction.class);
 		when(session.beginTransaction()).thenReturn(tx);

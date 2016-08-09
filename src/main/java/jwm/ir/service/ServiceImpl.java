@@ -1,7 +1,13 @@
 package jwm.ir.service;
 
 import jwm.ir.crawler.UrlUtils;
-import jwm.ir.domain.*;
+import jwm.ir.domain.Domain;
+import jwm.ir.domain.Page;
+import jwm.ir.domain.RepositoryFactory;
+import jwm.ir.domain.persistence.DomainRepository;
+import jwm.ir.domain.persistence.PageLinkRepository;
+import jwm.ir.domain.persistence.PageRepository;
+import jwm.ir.domain.persistence.PageTermDao;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -78,41 +84,22 @@ public class ServiceImpl implements Service {
     @Override
     public void addDocumentTerms(long pageId, Map<String, Integer> termFrequences) {
 
-        log.warn("Using old deprecated php service");
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        PageTermDao pageTermDao = repositoryFactory.createPageTermDao(session);
+
         for (Map.Entry<String, Integer> e : termFrequences.entrySet()) {
 
-            String term = e.getKey();
-            String tf = Integer.toString(e.getValue());
+            String termValue = e.getKey();
+            int tf = e.getValue();
+            pageTermDao.create(pageId, termValue, tf);
 
-            //if (!json.toString().endsWith(":[")) json.append(",");
-
-//            json.append("{");
-//            json.append(JsonUtils.getJsonItem(JSON_TERM, term) + ",");
-//            json.append(JsonUtils.getJsonItem(JSON_TERM_FREQ, tf));
-//            json.append("}");
-
-//            if (json.length() > MAX_JSON_GET_LENGTH) {
-
-                // close off the json
-//                json.append("]}");
-
-                // send it
-//                long start = System.currentTimeMillis();
-//                _db.addDocumentTerms(json.toString(), pageId);
-//                log.info("Sent an intermediate batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
-
-//                json = new StringBuilder();
-//                json.append("{\"" + JSON_PAGE_ID + "\":\"" + pageId + "\",\"" + JSON_TERMS + "\":[");
-//            }
         }
-//        if (json.length() > 0) {
-//            json.append("]}");
-//
-//             send the last of it
-//            long start = System.currentTimeMillis();
-//            _db.addDocumentTerms(json.toString(), pageId);
-//            log.info("Sent the last batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
-//        }
+
+        tx.commit();
+        session.close();
+
+
     }
 
 }

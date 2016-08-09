@@ -36,7 +36,6 @@
 		<mapping class="jwm.ir.domain.Domain" />
 		<mapping class="jwm.ir.domain.Page" />
 		<mapping class="jwm.ir.domain.PageLink" />
-		<mapping class="jwm.ir.domain.PageTermInput" />
 		<mapping class="jwm.ir.domain.PageTerm" />
 		<mapping class="jwm.ir.domain.PageSubmission" />
 		<mapping class="jwm.ir.domain.SummaryData" />

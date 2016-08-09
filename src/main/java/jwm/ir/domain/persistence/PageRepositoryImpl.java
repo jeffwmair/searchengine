@@ -1,5 +1,6 @@
-package jwm.ir.domain;
+package jwm.ir.domain.persistence;
 
+import jwm.ir.domain.Page;
 import jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -26,6 +27,11 @@ public class PageRepositoryImpl implements PageRepository {
         Object obj = getByUrl(url);
         AssertUtils.notNull(obj, "Could not find page object with url '"+url+"'");
         return (Page)obj;
+    }
+
+    @Override
+    public Page getPage(long pageId) {
+        return (Page)session.get(Page.class, pageId);
     }
 
     @Override

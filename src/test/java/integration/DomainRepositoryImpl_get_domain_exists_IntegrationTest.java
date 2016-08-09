@@ -1,8 +1,8 @@
 package integration;
 
 import jwm.ir.domain.Domain;
-import jwm.ir.domain.DomainRepository;
-import jwm.ir.domain.DomainRepositoryImpl;
+import jwm.ir.domain.persistence.DomainRepository;
+import jwm.ir.domain.persistence.DomainRepositoryImpl;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.DbImpl;
 import jwm.ir.utils.HibernateUtil;

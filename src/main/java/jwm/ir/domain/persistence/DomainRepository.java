@@ -1,4 +1,6 @@
-package jwm.ir.domain;
+package jwm.ir.domain.persistence;
+
+import jwm.ir.domain.Domain;
 
 /**
  * Created by Jeff on 2016-07-31.
