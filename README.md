@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jeffwmair/searchengine.svg?branch=v2)](https://travis-ci.org/jeffwmair/searchengine)
+
 # Vector Space Search Engine
 
 This is a search engine that I created as part of a university course assignment.  At the moment I am not planning on improving or maintaining it.
