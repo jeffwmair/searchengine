@@ -88,6 +88,11 @@ public class ServiceImpl implements Service {
         Transaction tx = session.beginTransaction();
         PageTermDao pageTermDao = repositoryFactory.createPageTermDao(session);
 
+        if (pageTermDao.termsAlreadyExist(pageId)) {
+            log.warn("Page terms already exist for page with id '"+pageId+"', so not indexing again");
+            return;
+        }
+
         for (Map.Entry<String, Integer> e : termFrequences.entrySet()) {
 
             String termValue = e.getKey();

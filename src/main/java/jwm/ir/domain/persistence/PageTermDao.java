@@ -5,4 +5,5 @@ package jwm.ir.domain.persistence;
  */
 public interface PageTermDao {
     void create(long pageId, String termValue, int termFrequency);
+    boolean termsAlreadyExist(long pageId);
 }

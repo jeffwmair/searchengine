@@ -5,6 +5,8 @@ import jwm.ir.domain.persistence.DomainRepository;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Jeff on 2016-07-23.
@@ -48,6 +50,14 @@ public class Page {
     @ManyToOne
     @JoinColumn(name="domainId")
     private Domain domain;
+
+    @OneToMany
+    @JoinColumn(name = "pageId")
+    private Set<PageTerm> postingTermId;
+
+    public Set<PageTerm> getPageTerms() {
+        return postingTermId;
+    }
 
     @Column
     private String title;
