@@ -26,9 +26,7 @@ public class PageTermDaoImpl implements PageTermDao {
         Term term = termDao.createOrIncrementTermFrequency(termValue);
         Page page = pageRepository.getPage(pageId);
         PageTerm pt = new PageTerm(page, term, termFrequency);
-        //page.getPageTerms().add(pt);
         session.save(pt);
-        //session.saveOrUpdate(page);
     }
 
     @Override
