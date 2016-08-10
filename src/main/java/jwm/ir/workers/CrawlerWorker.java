@@ -123,10 +123,7 @@ public class CrawlerWorker implements Runnable {
 		
 		if (frontier.size() == 0) {
 			sleep(2);
-//			if (_id > 1) {
-//				_db.overtakeUncrawledDomain(getClientName(), _id);	
-//			}
-			populateUrlFrontier(frontier);			
+			populateUrlFrontier(frontier);
 		}
 	}
 			
