@@ -23,8 +23,7 @@ public class ServiceImpl implements Service {
     private static final Logger log = LogManager.getLogger(ServiceImpl.class);
     private final SessionFactory sessionFactory;
     private final RepositoryFactory repositoryFactory;
-    public ServiceImpl(SessionFactory sessionFactory,
-                       RepositoryFactory repositoryFactory) {
+    public ServiceImpl(SessionFactory sessionFactory, RepositoryFactory repositoryFactory) {
         AssertUtils.notNull(sessionFactory, "Must provide sessionFactory");
         this.sessionFactory = sessionFactory;
         this.repositoryFactory = repositoryFactory;

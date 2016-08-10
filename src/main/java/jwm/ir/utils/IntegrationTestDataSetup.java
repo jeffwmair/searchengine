@@ -1,9 +1,12 @@
 package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
+import jwm.ir.domain.RepositoryFactory;
 import jwm.ir.domain.ValidExtension;
 import jwm.ir.domain.persistence.DomainRepository;
 import jwm.ir.domain.persistence.DomainRepositoryImpl;
+import jwm.ir.service.Service;
+import jwm.ir.service.ServiceImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -67,6 +70,13 @@ public class IntegrationTestDataSetup {
     }
 
     private static Db db = getDb();
+    private static Service service = getService();
+    private static Service getService() {
+        if (service == null) {
+            service = new ServiceImpl(HibernateUtil.getSessionFactory(), new RepositoryFactory());
+        }
+        return service;
+    }
     private static Db getDb() {
         if (db == null) {
             db = new DbImpl(HibernateUtil.getSessionFactory());
