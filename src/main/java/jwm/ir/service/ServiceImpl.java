@@ -4,10 +4,7 @@ import jwm.ir.crawler.UrlUtils;
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.RepositoryFactory;
-import jwm.ir.domain.persistence.DomainRepository;
-import jwm.ir.domain.persistence.PageLinkRepository;
-import jwm.ir.domain.persistence.PageRepository;
-import jwm.ir.domain.persistence.PageTermDao;
+import jwm.ir.domain.persistence.*;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -15,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -79,6 +77,15 @@ public class ServiceImpl implements Service {
             log.debug("Completed to add url for crawling:" + url);
         }
 
+    }
+
+    @Override
+    public List<String> getValidDomainExtensions() {
+        Session session = sessionFactory.openSession();
+        ExtensionDao dao = repositoryFactory.createExtensionDao(session);
+        List<String> extensions = dao.getAllValidExtensions();
+        session.close();
+        return extensions;
     }
 
     @Override

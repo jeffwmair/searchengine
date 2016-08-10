@@ -58,7 +58,7 @@ public class IrMain {
 		RepositoryFactory repositoryFactory = new RepositoryFactory();
 		Service service = new ServiceImpl(HibernateUtil.getSessionFactory(), repositoryFactory);
 
-		List<String> domainExtensions = db.getValidDomainExtensions();
+		List<String> domainExtensions = service.getValidDomainExtensions();
 		if (log.isDebugEnabled()) {
 			for (String s : domainExtensions) {
 				log.debug("Valid jwm.ir.domain:" + s);

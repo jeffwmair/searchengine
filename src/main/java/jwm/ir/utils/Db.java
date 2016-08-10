@@ -11,9 +11,6 @@ import java.util.List;
  */
 public interface Db {
     List<String> popUrls();
-    List<String> getValidDomainExtensions();
-    void startTransaction();
-    void commitTransaction();
     void save(Object entity);
     Page getPage(String url);
     void addPerformanceStats(int verifications, int crawls, int indexes);

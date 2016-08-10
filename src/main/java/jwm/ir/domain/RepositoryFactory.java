@@ -27,4 +27,8 @@ public class RepositoryFactory {
     public PageTermDao createPageTermDao(Session session) {
         return new PageTermDaoImpl(createTermDao(session), createPageRepository(session), session);
     }
+
+    public ExtensionDao createExtensionDao(Session session) {
+        return new ExtensionDaoImpl(session);
+    }
 }

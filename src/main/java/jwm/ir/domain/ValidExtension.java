@@ -19,6 +19,8 @@ public class ValidExtension {
     @Column(nullable = false)
     private String ext;
 
+    public ValidExtension() {}
+
     public ValidExtension(int extType, String ext) {
         this.ext = ext;
         this.extType = extType;
