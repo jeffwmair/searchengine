@@ -88,7 +88,7 @@ private static final String CHAR_SET = "UTF-8";
 	
 	public static ArrayList<String> getRobotTxtFromDomain(String domain) {
 		
-		ArrayList<String> output = new ArrayList<String>();
+		ArrayList<String> output = new ArrayList<>();
 		if (!domain.endsWith("/")) domain += "/";
 		if (!domain.startsWith("http://")) domain = "http://" + domain;
 		try {

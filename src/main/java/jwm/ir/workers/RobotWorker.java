@@ -46,7 +46,7 @@ public class RobotWorker implements Runnable {
 			
 			if (domainRobots.size() > MAX_ROBOT_CACHE_SIZE) {
 				// trim it down
-				HashMap<String, RobotsTxt> temp = new HashMap<String, RobotsTxt>();
+				HashMap<String, RobotsTxt> temp = new HashMap<>();
 				int i = 0;
 				log.info("DomainRobot size is > MAX_ROBOT_CACHE_SIZE, so trimming now...");
 				for(Map.Entry<String, RobotsTxt> item : domainRobots.entrySet()) {
@@ -72,7 +72,7 @@ public class RobotWorker implements Runnable {
 				continue;
 			}
 			
-				HashMap<String, Integer> verificationResults = new HashMap<String, Integer>();
+				HashMap<String, Integer> verificationResults = new HashMap<>();
 			
 			try 
 			{

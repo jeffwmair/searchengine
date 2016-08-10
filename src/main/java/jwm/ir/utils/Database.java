@@ -47,10 +47,10 @@ public class Database implements Db {
 
 		StringBuilder json = new StringBuilder();
 		json.append("[");
-		for(int i = 0; i < pageIds.size(); i++) {
+		for (String pageId1 : pageIds) {
 			if (!json.toString().equals("[")) json.append(",");
 			json.append("{");
-			json.append(JsonUtils.getJsonItem("id", pageIds.get(i)));
+			json.append(JsonUtils.getJsonItem("id", pageId1));
 			json.append("}");
 		}
 		json.append("]");
@@ -58,10 +58,10 @@ public class Database implements Db {
 		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "GetPageOutLinkPageIds.php", true);
 		if (jsonOut != null && jsonOut.size() > 0) {
 			List<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
-			List<String> pageLinks = new ArrayList<String>();
-			for(int i = 0; i < maps.size(); i++) {
-				String pageId = maps.get(i).get("id");
-				String destPageId = maps.get(i).get("destId");
+			List<String> pageLinks = new ArrayList<>();
+			for (HashMap<String, String> map : maps) {
+				String pageId = map.get("id");
+				String destPageId = map.get("destId");
 				pageLinks.add(pageId + "," + destPageId);
 			}
 			return pageLinks;
@@ -70,8 +70,6 @@ public class Database implements Db {
 			return new ArrayList<>();
 		}
 	}
-
-	private List<String> validDomainExtensions;
 
 	public void save(Object entity) {
 
@@ -185,7 +183,7 @@ public class Database implements Db {
 				"GetUnverifiedPages.php",
 				true);
 		
-		ArrayList<String> pages = new ArrayList<String>();
+		ArrayList<String> pages = new ArrayList<>();
 		if (json == null) return pages;
 		int pageCount = json.size();
 		for(int i = 1; i <= pageCount; i++) {

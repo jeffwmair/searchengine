@@ -59,10 +59,10 @@ public class CrawlerWorker implements Runnable {
             populateUrlFrontier(_frontier);
             log.info("Populated URL frontier from database with " + _frontier.size() + " links: " + (System.currentTimeMillis() - start) + "ms");
 
-            ArrayList<String> tempUrlList = new ArrayList<String>();
+            ArrayList<String> tempUrlList = new ArrayList<>();
             for (String url : _frontier) tempUrlList.add(url);
 
-            HashMap<String,String> urlsWithAnchorTexts = new HashMap<String, String>();
+            HashMap<String,String> urlsWithAnchorTexts = new HashMap<>();
 
             for (String url : tempUrlList) {
 

@@ -13,12 +13,12 @@ public class RobotsTxt {
 	private String _domain;
 	public RobotsTxt(String domain) {
 		_domain = domain;
-		_disallows = new ArrayList<String>();
+		_disallows = new ArrayList<>();
 	}
 	
 	public RobotsTxt(boolean allow) {
 		if (!allow) {
-			_disallows = new ArrayList<String>();
+			_disallows = new ArrayList<>();
 			_disallows.add("/");
 		}
 	}

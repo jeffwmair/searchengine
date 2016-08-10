@@ -18,8 +18,6 @@ import java.net.URL;
  */
 public class ResourceFetcher {
 
-	final private static Logger log = LogManager.getLogger(ResourceFetcher.class);
-
 	public ResourceFetcher() {
 
 
@@ -58,8 +56,6 @@ public class ResourceFetcher {
 				sb.append(line);
 			}
 
-		} catch (MalformedURLException mue) {
-			mue.printStackTrace();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		} finally {

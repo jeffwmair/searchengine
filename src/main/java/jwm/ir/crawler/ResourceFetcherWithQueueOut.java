@@ -11,7 +11,6 @@ import java.util.concurrent.BlockingQueue;
  */
 public class ResourceFetcherWithQueueOut implements Runnable {
 
-    final private static Logger log = LogManager.getLogger(ResourceFetcherWithQueueOut.class);
     private final ResourceFetcher fetcher;
     private final BlockingQueue<WebResource> output;
     private final String url;

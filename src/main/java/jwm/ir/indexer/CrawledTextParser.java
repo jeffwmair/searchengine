@@ -33,11 +33,11 @@ public class CrawledTextParser {
 		String terms[] = line.trim().toLowerCase().split("\\s+"); 
 		
 		/* we just care about the title, abstract, and authors for term extraction */
-		for(int i = 0; i < terms.length; i++) {
-			
+		for (String term1 : terms) {
+
 			String term = null;
-			try{
-				term = terms[i].trim();
+			try {
+				term = term1.trim();
 				_tp.setTerm(term);
 		
 				/* PRE-PROCESSING: Jeff - cleanup of punctuation */
@@ -47,24 +47,23 @@ public class CrawledTextParser {
 				
 				/* PRE-PROCESSING: filter out stopwords */
 				if (_useStopwords && _stopwords.contains(_tp.getOutput())) {
-					continue;	// skip this term
+					continue;    // skip this term
 				}
 				
 				/* PRE-PROCESSING: stemming */
 				if (_useStemming) {
 					_tp.stemTerm();
 				}
-				
+
 				Integer tf = _termFrequencies.get(_tp.getOutput());
 				if (tf == null) {
 					tf = 0;
 				}
-				
-				String t = _tp.getOutput();			
+
+				String t = _tp.getOutput();
 				_termFrequencies.put(_tp.getOutput(), ++tf);
-			}
-			catch(Exception e) {
-				log.error("Error parsing '"+term+"': " + e.toString());
+			} catch (Exception e) {
+				log.error("Error parsing '" + term + "': " + e.toString());
 			}
 
 		}

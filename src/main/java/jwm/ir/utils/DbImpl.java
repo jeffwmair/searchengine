@@ -2,9 +2,6 @@ package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageLink;
-import jwm.ir.domain.RepositoryFactory;
-import jwm.ir.domain.ValidExtension;
-import jwm.ir.domain.persistence.ExtensionDao;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -126,7 +123,7 @@ public class DbImpl implements Db {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Criteria criteria = session.createCriteria(Page.class);
-        List<Page> pages = null;
+        List<Page> pages;
 
         try {
 

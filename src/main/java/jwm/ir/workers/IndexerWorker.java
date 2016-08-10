@@ -55,7 +55,7 @@ public class IndexerWorker implements Runnable {
 	}
 		private static TermPreprocessor getTermProcessor() {
 
-		ArrayList<String> toReplace = new ArrayList<String>();
+		ArrayList<String> toReplace = new ArrayList<>();
 		toReplace.add("$");
 		toReplace.add("@");
 		toReplace.add("\"");

@@ -26,7 +26,7 @@ public class StopwordsFileLoader {
         File inputFile = new File(filename);
         if (!inputFile.exists()) {
             log.error("Could not find stopwords file");
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
 
         BufferedReader br = null;
@@ -41,7 +41,7 @@ public class StopwordsFileLoader {
             return stopwords;
         } catch (Exception e) {
             log.error("Error loading stopwords file");
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
     }
 

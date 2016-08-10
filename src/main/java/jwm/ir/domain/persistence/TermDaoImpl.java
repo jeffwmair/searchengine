@@ -30,19 +30,12 @@ public class TermDaoImpl implements TermDao {
         return term;
     }
 
-    @Override
-    public Term getTerm(String term) {
+    private Term getTerm(String term) {
         return (Term)getTermObject(term);
     }
 
-    @Override
-    public boolean exists(String term) {
+    private boolean exists(String term) {
         return getTermObject(term) != null;
-    }
-
-    @Override
-    public void update(Term term) {
-        session.saveOrUpdate(term);
     }
 
     private Object getTermObject(String term) {

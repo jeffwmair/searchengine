@@ -7,8 +7,4 @@ import jwm.ir.domain.Term;
  */
 public interface TermDao {
     Term createOrIncrementTermFrequency(String term);
-    Term getTerm(String term);
-    boolean exists(String term);
-    void update(Term term);
-
 }

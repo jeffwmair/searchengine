@@ -82,8 +82,8 @@ class PageRankCalculatorWorker implements Runnable {
 			 }
 			 
 			 List<String> pageIdDestIds = _db.getPageLinks(pageIdsToRequestLinks);
-			 for(int j = 0; j < pageIdDestIds.size(); j++) {
-				 String[] page_dest = pageIdDestIds.get(j).split(",");
+			 for (String pageIdDestId : pageIdDestIds) {
+				 String[] page_dest = pageIdDestId.split(",");
 				 _graph.addEdge(edgeNumber++, page_dest[0], page_dest[1]);
 			 }
 			 
@@ -133,15 +133,15 @@ class PageRankCalculatorWorker implements Runnable {
 		_graph.addEdge(4, "a", "c");
 		
 		long start = System.currentTimeMillis() ;
-		PageRank<String, Integer> ranker = new PageRank<String, Integer>(_graph, ALPHA);
+		PageRank<String, Integer> ranker = new PageRank<>(_graph, ALPHA);
 		ranker.setTolerance(TOLERANCE) ;
 		ranker.setMaxIterations(MAX_ITERATIONS);
 
 		ranker.evaluate();
 		log.info("PageRank computed in " + (System.currentTimeMillis()-start) + " ms");
-       
-		for(int i = 0; i < verticies.length; i++) {
-			log.info(verticies[i] + " = " + Double.toString(ranker.getVertexScore(verticies[i])));
+
+		for (String verticy : verticies) {
+			log.info(verticy + " = " + Double.toString(ranker.getVertexScore(verticy)));
 		}  
 	}	
 }
