@@ -6,6 +6,7 @@ import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourceNoneImpl;
 import jwm.ir.service.Service;
+import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;
@@ -92,7 +93,8 @@ public class IndexerWorker implements Runnable {
 	
 	@Override
 	public void run() {
-		log.info("Started");
+
+		log.info("Started indexer.");
 		
 		while (true && !_stopApp.get()) {
 			
@@ -106,14 +108,21 @@ public class IndexerWorker implements Runnable {
 
 			WebResource parsedWebPage = null;
 			try {
+				log.info("waiting on queue");
 				parsedWebPage = indexQueue.take();
+				log.info("rec'd from queue new page to process:"+parsedWebPage.getUrl());
 			} catch (InterruptedException e) {
 				log.error(e.getMessage(), e);
 				Thread.interrupted();
 				return;
 			}
-			log.info("Received new page to process:"+parsedWebPage.getUrl());
+
+			try {
 			processInputFile(parsedWebPage, _tp);
+			}
+			catch(Exception ex) {
+				log.error(ex.getMessage(), ex);
+			}
 
 		}
 		
@@ -156,7 +165,8 @@ public class IndexerWorker implements Runnable {
 		}
 
 		log.info("Beginning processing of " + page.getUrl());
-		int pageId = _db.getPageIdFromUrl(page.getUrl());
+		long pageId = _db.getPageIdFromUrl(page.getUrl());
+		log.info("Page id '"+pageId+"' found for:"+page.getUrl());
 		if (pageId < 1) {
 			// ignore this page because the crawler didn't create a db record for it
 			return;

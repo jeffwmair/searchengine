@@ -33,7 +33,7 @@ public class Database implements Db {
 	}
 
 	@Override
-	public synchronized void addDocumentTerms(String json, int pageId) {
+	public synchronized void addDocumentTerms(String json, long pageId) {
 		
 		/* TODO: could improve performance if I can get the indexers indexing concurrently -- ie, don't make this method synchronized;
 		 * I made it synchronized because the indexers were deadlocking in the insert_terms mysql procedure.
@@ -121,7 +121,7 @@ public class Database implements Db {
 	}
 
 	@Override
-	public int getPageIdFromUrl(String url) {
+	public long getPageIdFromUrl(String url) {
 		url = HttpUtils.cleanUrl(url);
 		Map json = HttpUtils.httpPost(_webServiceHost, "url", url, "GetPageIdFromUrl.php", true);
 		String id_s = json.get("pageId").toString();

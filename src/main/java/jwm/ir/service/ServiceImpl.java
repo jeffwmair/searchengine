@@ -33,13 +33,11 @@ public class ServiceImpl implements Service {
     public void addUrlForCrawling(String url, String parentUrl) {
 
         if (log.isDebugEnabled()) {
-            log.debug("Beginning to add url for crawling:"+url);
+            log.debug("Beginning to add url for crawling:"+url+"; parentUrl"+parentUrl);
         }
-
 
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-
 
         DomainRepository domainRepository = repositoryFactory.createDomainRepository(session);
         PageRepository pageRepository = repositoryFactory.createPageRepository(session);
@@ -56,9 +54,11 @@ public class ServiceImpl implements Service {
         Domain pageDomain;
         final String pageDomainName = UrlUtils.getDomainFromAbsoluteUrl(url);
         if (domainRepository.domainExists(pageDomainName)) {
+            log.debug("Domain exists:"+pageDomainName);
             pageDomain = domainRepository.getDomain(pageDomainName);
         }
         else {
+            log.debug("Domain does not exist, so creating:"+pageDomainName);
             pageDomain = domainRepository.create(pageDomainName);
         }
 

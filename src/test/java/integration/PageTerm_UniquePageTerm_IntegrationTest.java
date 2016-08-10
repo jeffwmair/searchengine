@@ -4,7 +4,6 @@ import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageTerm;
 import jwm.ir.domain.Term;
-import jwm.ir.utils.AssertUtils;
 import jwm.ir.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

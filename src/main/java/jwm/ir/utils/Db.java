@@ -15,11 +15,11 @@ public interface Db {
     Page getPage(String url);
     void addPerformanceStats(int verifications, int crawls, int indexes);
     void updateSummaries();
-    void addDocumentTerms(String json, int pageId);
+    void addDocumentTerms(String json, long pageId);
     List<String> getPageLinks(List<String> pageIds);
     String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit);
     void updatePageRanks(HashMap<Integer,Double> pageRanks);
-    int getPageIdFromUrl(String url);
+    long getPageIdFromUrl(String url);
     void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults);
     void addCrawlResult(String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful);
     List<String> getUnverifiedPagesForVerification();

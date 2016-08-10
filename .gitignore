@@ -4,3 +4,4 @@ target
 toindex
 *.iml
 src/main/web/sqlbackup
+*.swp

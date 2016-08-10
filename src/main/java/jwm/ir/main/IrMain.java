@@ -1,20 +1,20 @@
 package jwm.ir.main;
 
+import jwm.ir.domain.Page;
 import jwm.ir.domain.RepositoryFactory;
 import jwm.ir.indexer.StopwordsFileLoader;
 import jwm.ir.message.WebResource;
 import jwm.ir.service.Service;
 import jwm.ir.service.ServiceImpl;
-import jwm.ir.utils.Database;
-import jwm.ir.utils.Db;
-import jwm.ir.utils.HibernateUtil;
-import jwm.ir.utils.IntegrationTestDataSetup;
+import jwm.ir.utils.*;
 import jwm.ir.workers.CrawlerWorker;
 import jwm.ir.workers.IndexerWorker;
 import jwm.ir.workers.PerformanceStatsUpdateWorker;
 import jwm.ir.workers.RobotWorker;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -54,9 +54,10 @@ public class IrMain {
 		log.info("host=" + host);
 		log.info("pagerank_interval=" + Integer.toString(prInterval));
 
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Db db = new Database(host);
-		RepositoryFactory repositoryFactory = new RepositoryFactory();
-		Service service = new ServiceImpl(HibernateUtil.getSessionFactory(), repositoryFactory);
+		//Db db = new DbImpl(sessionFactory);
+		Service service = new ServiceImpl(sessionFactory, new RepositoryFactory());
 
 		List<String> domainExtensions = service.getValidDomainExtensions();
 		if (log.isDebugEnabled()) {

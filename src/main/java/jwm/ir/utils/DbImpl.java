@@ -2,6 +2,8 @@ package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageLink;
+import jwm.ir.domain.RepositoryFactory;
+import jwm.ir.domain.persistence.PageRepository;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -51,16 +53,23 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public void addDocumentTerms(String json, int pageId) {
+    public void addDocumentTerms(String json, long pageId) {
         phpDb.addDocumentTerms(json, pageId);
     }
 
     @Override
     public List<String> getPageLinks(List<String> pageIds) {
 
+        if (pageIds.isEmpty()) {
+            log.warn("getPageLinks: Empty list of pageIds provided, so returning empty list");
+            return new ArrayList<>();
+        }
+
         // todo: change the interface to ids (long), or better yet (maybe) urls
+        log.debug("getPageLinks for pageIds:"+pageIds.toString());
         List<Long> pageIds_long = new ArrayList<>();
         for (String s : pageIds) {
+            log.debug("\tgetPageLinks for pageId:"+s);
             pageIds_long.add(Long.parseLong(s));
         }
 
@@ -68,7 +77,9 @@ public class DbImpl implements Db {
         Transaction tx = session.beginTransaction();
         List<String> allLinks = new ArrayList<>();
         Criteria crit = session.createCriteria(PageLink.class);
+        log.debug("creating criteria");
         List<PageLink> pageLinks = crit.add(Restrictions.in("page.id", pageIds_long)).list();
+        log.debug("listed objects");
         for (PageLink pl : pageLinks) {
             allLinks.add(pl.getDestinationPage().getUrl());
         }
@@ -88,8 +99,9 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public int getPageIdFromUrl(String url) {
-        return phpDb.getPageIdFromUrl(url);
+    public long getPageIdFromUrl(String url) {
+        log.debug("Getting pageIdFromUrl '"+url+"'");
+        return getPage(url).getId();
     }
 
     @Override

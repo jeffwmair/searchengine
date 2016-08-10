@@ -10,6 +10,7 @@ import jwm.ir.service.ServiceImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  * Created by Jeff on 2016-07-26.
@@ -65,8 +66,17 @@ public class IntegrationTestDataSetup {
         Page page = Page.create("http://localhost/searchengine_test/page1.html", domainRepository);
         page.setVerified(1);
         log.info("Adding page to db:"+page);
+        /*
         db.save(page.getDomain());
         db.save(page);
+        */
+        Transaction tx = session.beginTransaction();
+        session.save(page.getDomain());
+        session.save(page);
+        tx.commit();
+        log.info("Committed save");
+        session.close();
+        log.info("closed session");
     }
 
     private static Db db = getDb();

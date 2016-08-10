@@ -3,6 +3,7 @@ package jwm.ir.workers;
 import jwm.ir.crawler.WebPage;
 import jwm.ir.message.WebResource;
 import jwm.ir.service.Service;
+import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.AssertUtils;
 import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
@@ -46,6 +47,7 @@ public class CrawlerWorker implements Runnable {
 
 	@Override
 	public void run() {
+		log.info("Started crawler.");
 		mainCrawl();
 	}
 	
@@ -58,6 +60,9 @@ public class CrawlerWorker implements Runnable {
             log.info("Starting populate frontier");
             populateUrlFrontier(_frontier);
             log.info("Populated URL frontier from database with " + _frontier.size() + " links: " + (System.currentTimeMillis() - start) + "ms");
+			for(String s : _frontier) {
+				log.debug("Frontier link:"+s);
+			}
 
             ArrayList<String> tempUrlList = new ArrayList<>();
             for (String url : _frontier) tempUrlList.add(url);
@@ -85,6 +90,7 @@ public class CrawlerWorker implements Runnable {
                     if (!noIndex) {
 						log.info("Adding page to queue:"+p.getPageTitle());
 						indexQueue.add(p.getWebResource());
+						log.info("ADDED page to queue:"+p.getPageTitle());
                     }
 
                     if (!noFollow) {
