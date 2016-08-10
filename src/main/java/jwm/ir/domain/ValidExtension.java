@@ -30,24 +30,4 @@ public class ValidExtension {
         return ext;
     }
 
-    public void setExt(String ext) {
-        this.ext = ext;
-    }
-
-    public long getExtensionId() {
-        return extensionId;
-    }
-
-    public void setExtensionId(long extensionId) {
-        this.extensionId = extensionId;
-    }
-
-    public int getExtType() {
-        return extType;
-    }
-
-    public void setExtType(int extType) {
-        this.extType = extType;
-    }
-
 }

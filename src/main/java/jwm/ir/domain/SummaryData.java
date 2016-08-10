@@ -21,24 +21,7 @@ public class SummaryData {
         this.item = item;
     }
 
-    public long getVal() {
-        return val;
-    }
-
-    public void setVal(long val) {
-        this.val = val;
-    }
-
-    public Date getUpdatedate() {
-        return updatedate;
-    }
-
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate = updatedate;
-    }
-
     @Id
-
     @Column(nullable = false)
     private String item;
 

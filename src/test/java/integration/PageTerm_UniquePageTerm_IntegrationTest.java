@@ -26,9 +26,7 @@ public class PageTerm_UniquePageTerm_IntegrationTest {
 
         Domain domain = Domain.createFromUrl("google.com");
         Page page = Page.create(domain, "google.com/foo");
-        Term term = new Term();
-        term.setDocumentFrequency(1);
-        term.setTerm("hiya");
+        Term term = new Term("hiya");
 
         PageTerm pt1 = new PageTerm();
         pt1.setPage(page);

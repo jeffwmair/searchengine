@@ -18,29 +18,8 @@ public class Term {
         this.term = term;
     }
 
-
     public String getTerm() {
         return term;
-    }
-
-    public void setTerm(String term) {
-        this.term = term;
-    }
-
-    public long getTermId() {
-        return termId;
-    }
-
-    public void setTermId(long termId) {
-        this.termId = termId;
-    }
-
-    public int getDocumentFrequency() {
-        return documentFrequency;
-    }
-
-    public void setDocumentFrequency(int documentFrequency) {
-        this.documentFrequency = documentFrequency;
     }
 
     @Column(nullable = false, unique = true)
