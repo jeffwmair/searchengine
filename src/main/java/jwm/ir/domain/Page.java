@@ -1,7 +1,7 @@
 package jwm.ir.domain;
 
 import jwm.ir.crawler.UrlUtils;
-import jwm.ir.domain.persistence.DomainDao;
+import jwm.ir.domain.dao.DomainDao;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,6 +20,11 @@ public class Page {
      * @return
      */
     public static Page create(String url, DomainDao domainDao) {
+
+        /**
+         * Todo: move this to the pagedao, I think
+         */
+
         Page p = new Page();
         p.setUrl(url);
         String domainName = UrlUtils.getDomainFromAbsoluteUrl(url);

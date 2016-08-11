@@ -1,6 +1,6 @@
 package integration;
 
-import jwm.ir.domain.persistence.DomainDao;
+import jwm.ir.domain.dao.DomainDao;
 import jwm.ir.domain.Page;
 import org.junit.Assert;
 import org.junit.Test;

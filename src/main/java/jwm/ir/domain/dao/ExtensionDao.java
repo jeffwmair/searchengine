@@ -1,6 +1,4 @@
-package jwm.ir.domain.persistence;
-
-import jwm.ir.domain.ValidExtension;
+package jwm.ir.domain.dao;
 
 import java.util.List;
 

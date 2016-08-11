@@ -4,7 +4,7 @@ import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageTerm;
 import jwm.ir.domain.Term;
-import jwm.ir.domain.persistence.*;
+import jwm.ir.domain.dao.*;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.DbImpl;
 import jwm.ir.utils.HibernateUtil;

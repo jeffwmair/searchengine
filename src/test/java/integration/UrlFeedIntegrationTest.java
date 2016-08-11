@@ -4,7 +4,7 @@ import jwm.ir.crawler.UrlFeed;
 import jwm.ir.crawler.UrlFeedRunner;
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
-import jwm.ir.domain.DaoFactory;
+import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.service.Service;
 import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.HibernateUtil;

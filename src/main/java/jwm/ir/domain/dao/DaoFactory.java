@@ -1,6 +1,5 @@
-package jwm.ir.domain;
+package jwm.ir.domain.dao;
 
-import jwm.ir.domain.persistence.*;
 import org.hibernate.Session;
 
 /**

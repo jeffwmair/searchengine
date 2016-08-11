@@ -1,7 +1,7 @@
 package integration;
 
-import jwm.ir.domain.persistence.DomainDao;
-import jwm.ir.domain.persistence.DomainDaoImpl;
+import jwm.ir.domain.dao.DomainDao;
+import jwm.ir.domain.dao.DomainDaoImpl;
 import jwm.ir.utils.HibernateUtil;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package jwm.ir.domain.persistence;
+package jwm.ir.domain.dao;
 
 import jwm.ir.domain.Term;
 import org.hibernate.Session;

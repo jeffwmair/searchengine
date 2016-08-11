@@ -1,6 +1,6 @@
 package jwm.ir.domain;
 
-import jwm.ir.domain.persistence.DomainDao;
+import jwm.ir.domain.dao.DomainDao;
 import org.junit.Assert;
 import org.junit.Test;
 

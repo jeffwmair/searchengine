@@ -1,4 +1,4 @@
-package jwm.ir.domain.persistence;
+package jwm.ir.domain.dao;
 
 /**
  * Created by Jeff on 2016-08-05.
