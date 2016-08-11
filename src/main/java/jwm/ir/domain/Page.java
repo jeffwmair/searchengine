@@ -131,14 +131,6 @@ public class Page {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -157,14 +149,6 @@ public class Page {
 
     public int getFailCount() {
         return failCount;
-    }
-
-    public void setFailCount(int failCount) {
-        this.failCount = failCount;
-    }
-
-    public double getPageRank() {
-        return pageRank;
     }
 
     public void setPageRank(double pageRank) {

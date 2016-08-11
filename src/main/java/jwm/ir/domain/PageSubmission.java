@@ -32,18 +32,6 @@ public class PageSubmission {
                 '}';
     }
 
-    public String getIp() {
-        return Ip;
-    }
-
-    public void setIp(String ip) {
-        Ip = ip;
-    }
-
-    public long getId() {
-        return id;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -54,14 +42,6 @@ public class PageSubmission {
 
     public void setPage(Page page) {
         this.page = page;
-    }
-
-    public Date getSubmitDate() {
-        return submitDate;
-    }
-
-    public void setSubmitDate(Date submitDate) {
-        this.submitDate = submitDate;
     }
 
     @Column

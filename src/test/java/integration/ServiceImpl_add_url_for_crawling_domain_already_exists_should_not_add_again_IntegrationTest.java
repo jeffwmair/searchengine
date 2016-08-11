@@ -2,7 +2,7 @@ package integration;
 
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
-import jwm.ir.domain.RepositoryFactory;
+import jwm.ir.domain.DaoFactory;
 import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.DbImpl;
@@ -39,6 +39,6 @@ public class ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_a
     public void setup() {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         db = new DbImpl(sessionFactory);
-        sut = new ServiceImpl(sessionFactory, new RepositoryFactory());
+        sut = new ServiceImpl(sessionFactory, new DaoFactory());
     }
 }

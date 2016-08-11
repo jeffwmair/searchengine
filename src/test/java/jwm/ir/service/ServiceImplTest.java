@@ -25,16 +25,16 @@ public class ServiceImplTest {
 	private PageLinkRepository pageLinkRepository;
 	private DomainRepository domainRepository;
 	private SessionFactory sessionFactory;
-	private RepositoryFactory repositoryFactory;
+	private DaoFactory daoFactory;
 	private Session session;
 
 	@Test
 	public void test_add_document_term_when_term_does_not_exist_should_add_term_too() {
 
-		ServiceImpl sut = new ServiceImpl(sessionFactory, repositoryFactory);
+		ServiceImpl sut = new ServiceImpl(sessionFactory, daoFactory);
 
 		PageTermDao pageTermDao = mock(PageTermDao.class);
-		when(repositoryFactory.createPageTermDao(session)).thenReturn(pageTermDao);
+		when(daoFactory.createPageTermDao(session)).thenReturn(pageTermDao);
 
 		long pageId = 1;
 		Map<String, Integer> terms = new HashMap<>();
@@ -52,7 +52,7 @@ public class ServiceImplTest {
 
 		String url = "www.google.com/a";
 		String parentUrl = "www.google.com/b";
-		Service sut = new ServiceImpl(sessionFactory, repositoryFactory);
+		Service sut = new ServiceImpl(sessionFactory, daoFactory);
 		when(pageRepository.pageExists(url)).thenReturn(true);
 		sut.addUrlForCrawling(url, parentUrl);
 
@@ -64,7 +64,7 @@ public class ServiceImplTest {
 		Page page = new Page();
 		page.setUrl(url);
 		String parenturl = "www.google.com/b";
-		ServiceImpl sut = new ServiceImpl(sessionFactory, repositoryFactory);
+		ServiceImpl sut = new ServiceImpl(sessionFactory, daoFactory);
 		when(pageRepository.pageExists(url)).thenReturn(false);
 		when(pageRepository.create(url, domainRepository)).thenReturn(page);
 		when(domainRepository.domainExists("google.com")).thenReturn(false);
@@ -81,7 +81,7 @@ public class ServiceImplTest {
 		String url = "www.google.com/a";
 		Page page = new Page();
 		page.setUrl(url);
-		ServiceImpl sut = new ServiceImpl(sessionFactory, repositoryFactory);
+		ServiceImpl sut = new ServiceImpl(sessionFactory, daoFactory);
 		when(pageRepository.pageExists(url)).thenReturn(false);
 		when(pageRepository.create(url, domainRepository)).thenReturn(page);
 		when(domainRepository.domainExists("google.com")).thenReturn(true);
@@ -102,10 +102,10 @@ public class ServiceImplTest {
 		when(session.beginTransaction()).thenReturn(tx);
 		pageRepository = mock(PageRepository.class);
 		domainRepository = mock(DomainRepository.class);
-		repositoryFactory = mock(RepositoryFactory.class);
+		daoFactory = mock(DaoFactory.class);
 		pageLinkRepository = mock(PageLinkRepository.class);
-		when(repositoryFactory.createDomainRepository(session)).thenReturn(domainRepository);
-		when(repositoryFactory.createPageRepository(session)).thenReturn(pageRepository);
-		when(repositoryFactory.createPageLinkRepository(session)).thenReturn(pageLinkRepository);
+		when(daoFactory.createDomainRepository(session)).thenReturn(domainRepository);
+		when(daoFactory.createPageRepository(session)).thenReturn(pageRepository);
+		when(daoFactory.createPageLinkRepository(session)).thenReturn(pageLinkRepository);
 	}
 }

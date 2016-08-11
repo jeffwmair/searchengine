@@ -1,7 +1,6 @@
 package jwm.ir.main;
 
-import jwm.ir.domain.Page;
-import jwm.ir.domain.RepositoryFactory;
+import jwm.ir.domain.DaoFactory;
 import jwm.ir.indexer.StopwordsFileLoader;
 import jwm.ir.message.WebResource;
 import jwm.ir.service.Service;
@@ -13,7 +12,6 @@ import jwm.ir.workers.PerformanceStatsUpdateWorker;
 import jwm.ir.workers.RobotWorker;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -57,7 +55,7 @@ public class IrMain {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Db db = new Database(host);
 		//Db db = new DbImpl(sessionFactory);
-		Service service = new ServiceImpl(sessionFactory, new RepositoryFactory());
+		Service service = new ServiceImpl(sessionFactory, new DaoFactory());
 
 		List<String> domainExtensions = service.getValidDomainExtensions();
 		if (log.isDebugEnabled()) {

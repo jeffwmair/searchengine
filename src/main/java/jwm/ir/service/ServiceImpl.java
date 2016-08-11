@@ -3,7 +3,7 @@ package jwm.ir.service;
 import jwm.ir.crawler.UrlUtils;
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
-import jwm.ir.domain.RepositoryFactory;
+import jwm.ir.domain.DaoFactory;
 import jwm.ir.domain.persistence.*;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
@@ -15,7 +15,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,11 +25,11 @@ public class ServiceImpl implements Service {
 
     private static final Logger log = LogManager.getLogger(ServiceImpl.class);
     private final SessionFactory sessionFactory;
-    private final RepositoryFactory repositoryFactory;
-    public ServiceImpl(SessionFactory sessionFactory, RepositoryFactory repositoryFactory) {
+    private final DaoFactory daoFactory;
+    public ServiceImpl(SessionFactory sessionFactory, DaoFactory daoFactory) {
         AssertUtils.notNull(sessionFactory, "Must provide sessionFactory");
         this.sessionFactory = sessionFactory;
-        this.repositoryFactory = repositoryFactory;
+        this.daoFactory = daoFactory;
     }
 
     @Override
@@ -43,9 +42,9 @@ public class ServiceImpl implements Service {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
-        DomainRepository domainRepository = repositoryFactory.createDomainRepository(session);
-        PageRepository pageRepository = repositoryFactory.createPageRepository(session);
-        PageLinkRepository pageLinkRepository = repositoryFactory.createPageLinkRepository(session);
+        DomainRepository domainRepository = daoFactory.createDomainRepository(session);
+        PageRepository pageRepository = daoFactory.createPageRepository(session);
+        PageLinkRepository pageLinkRepository = daoFactory.createPageLinkRepository(session);
 
         // only run if the page doesn't exist
         if (pageRepository.pageExists(url)) {
@@ -87,7 +86,7 @@ public class ServiceImpl implements Service {
 
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        PageRepository pageRepository = repositoryFactory.createPageRepository(session);
+        PageRepository pageRepository = daoFactory.createPageRepository(session);
 
         pageRepository.setPageCrawlResult(url, pageTitle, pageDesc, result);
 
@@ -98,7 +97,7 @@ public class ServiceImpl implements Service {
     @Override
     public List<String> getValidDomainExtensions() {
         Session session = sessionFactory.openSession();
-        ExtensionDao dao = repositoryFactory.createExtensionDao(session);
+        ExtensionDao dao = daoFactory.createExtensionDao(session);
         List<String> extensions = dao.getAllValidExtensions();
         session.close();
         return extensions;
@@ -138,7 +137,7 @@ public class ServiceImpl implements Service {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
-        PageRepository pageRepository = repositoryFactory.createPageRepository(session);
+        PageRepository pageRepository = daoFactory.createPageRepository(session);
         log.info("Beginning to update pageranks for " + pageRanks.size() + " pages");
         pageRepository.updatePageRanks(pageRanks);
         log.info("Completed updating pageranks");
@@ -152,7 +151,7 @@ public class ServiceImpl implements Service {
 
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        PageTermDao pageTermDao = repositoryFactory.createPageTermDao(session);
+        PageTermDao pageTermDao = daoFactory.createPageTermDao(session);
 
         if (pageTermDao.termsAlreadyExist(pageId)) {
             log.warn("Page terms already exist for page with id '"+pageId+"', so not indexing again");

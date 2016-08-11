@@ -1,7 +1,7 @@
 package integration;
 
 import jwm.ir.domain.Page;
-import jwm.ir.domain.RepositoryFactory;
+import jwm.ir.domain.DaoFactory;
 import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.HibernateUtil;
 import org.junit.Assert;
@@ -19,7 +19,7 @@ public class ServiceImpl_add_crawl_result_IntegrationTest extends DbTestBase {
         Page p = createTransientPage(url);
         saveNewPageWithDomain(p);
 
-        ServiceImpl sut = new ServiceImpl(HibernateUtil.getSessionFactory(), new RepositoryFactory());
+        ServiceImpl sut = new ServiceImpl(HibernateUtil.getSessionFactory(), new DaoFactory());
         sut.addCrawlResult(url, "title", "desc", Page.CrawlResult.Fail);
 
         Page p_again = fetchPageFromDb(url);

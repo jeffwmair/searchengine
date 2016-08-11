@@ -4,11 +4,9 @@ import jwm.ir.crawler.UrlFeed;
 import jwm.ir.crawler.UrlFeedRunner;
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
-import jwm.ir.domain.RepositoryFactory;
+import jwm.ir.domain.DaoFactory;
 import jwm.ir.service.Service;
 import jwm.ir.service.ServiceImpl;
-import jwm.ir.utils.Db;
-import jwm.ir.utils.DbImpl;
 import jwm.ir.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,7 +43,7 @@ public class UrlFeedIntegrationTest {
         tx.commit();
         session.close();
 
-        Service service = new ServiceImpl(sessionFactory, new RepositoryFactory());
+        Service service = new ServiceImpl(sessionFactory, new DaoFactory());
         BlockingQueue<String> output = new LinkedBlockingQueue<>();
         UrlFeed sut = new UrlFeed(service, output);
 
@@ -70,7 +68,7 @@ public class UrlFeedIntegrationTest {
     public static void main(String[] args) {
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Service service = new ServiceImpl(sessionFactory, new RepositoryFactory());
+        Service service = new ServiceImpl(sessionFactory, new DaoFactory());
         final BlockingQueue<String> out = new LinkedBlockingQueue<>();
         UrlFeed feeder = new UrlFeed(service, out);
         UrlFeedRunner x = new UrlFeedRunner(executorService, feeder);

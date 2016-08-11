@@ -32,14 +32,6 @@ public class PageTerm {
 
     }
 
-    public long getPostingTermId() {
-        return postingTermId;
-    }
-
-    public void setPostingTermId(long postingTermId) {
-        this.postingTermId = postingTermId;
-    }
-
     public Page getPage() {
         return page;
     }
@@ -54,13 +46,5 @@ public class PageTerm {
 
     public void setTerm(Term term) {
         this.term = term;
-    }
-
-    public int getTermFrequency() {
-        return termFrequency;
-    }
-
-    public void setTermFrequency(int termFrequency) {
-        this.termFrequency = termFrequency;
     }
 }

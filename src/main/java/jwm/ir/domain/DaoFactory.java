@@ -6,7 +6,7 @@ import org.hibernate.Session;
 /**
  * Created by Jeff on 2016-08-04.
  */
-public class RepositoryFactory {
+public class DaoFactory {
 
     public PageRepository createPageRepository(Session session) {
         return new PageRepositoryImpl(session);

@@ -1,7 +1,7 @@
 package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
-import jwm.ir.domain.RepositoryFactory;
+import jwm.ir.domain.DaoFactory;
 import jwm.ir.domain.ValidExtension;
 import jwm.ir.domain.persistence.DomainRepository;
 import jwm.ir.domain.persistence.DomainRepositoryImpl;
@@ -82,7 +82,7 @@ public class IntegrationTestDataSetup {
     private static Service service = getService();
     private static Service getService() {
         if (service == null) {
-            service = new ServiceImpl(HibernateUtil.getSessionFactory(), new RepositoryFactory());
+            service = new ServiceImpl(HibernateUtil.getSessionFactory(), new DaoFactory());
         }
         return service;
     }
