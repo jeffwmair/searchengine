@@ -9,17 +9,15 @@ import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
 class PageRankCalculatorWorker implements Runnable {
 
-	final private static Logger log = LogManager.getLogger(PageRankCalculatorWorker.class);
-	private Db _db;
-	private DirectedSparseGraph<String, Integer> _graph = null;
-
+	private final static Logger log = LogManager.getLogger(PageRankCalculatorWorker.class);
+	private final Db db;
+	private final DirectedSparseGraph<Long, Integer> graph;
 	private final double TOLERANCE = 0.05;
 	private final double ALPHA = 0.15;
 	private final int MAX_ITERATIONS = 50;
@@ -27,8 +25,8 @@ class PageRankCalculatorWorker implements Runnable {
 
 	public PageRankCalculatorWorker(Db db, Service service) {
 		this.service = service;
-		_db = db;
-		_graph = new DirectedSparseGraph<>();
+		this.db = db;
+		graph = new DirectedSparseGraph<>();
 	}
 
 	@Override
@@ -40,39 +38,38 @@ class PageRankCalculatorWorker implements Runnable {
 
 		log.info("beginning page-rank calculation");
 
-		// get the verticies of the graph
-		long start = System.currentTimeMillis();
-
 		List<Page> pages = service.getAllPages();
 		int edgeNumber = 1;
 		for(Page page : pages) {
-			_graph.addVertex(Long.toString(page.getId()));
+			graph.addVertex(page.getId());
 			for (PageLink edge : page.getPageLinks()) {
-				String edgeStart = Long.toString(edge.getPage().getId());
-				String edgeEnd = Long.toString(edge.getDestinationPage().getId());
-				_graph.addEdge(edgeNumber++, edgeStart, edgeEnd);
+				graph.addEdge(edgeNumber++, edge.getSourcePageId(), edge.getDestinationPageId());
 			}
 		}
 
 		// calculate PR
-		start = System.currentTimeMillis() ;
-		PageRank<String, Integer> ranker = new PageRank<>(_graph, ALPHA);
+		long start = System.currentTimeMillis() ;
+		PageRank<Long, Integer> ranker = new PageRank<>(graph, ALPHA);
 		ranker.setTolerance(TOLERANCE) ;
 		ranker.setMaxIterations(MAX_ITERATIONS);
 		ranker.evaluate();
 		log.info("Finished calculating PageRank in " + (System.currentTimeMillis()-start) / 1000.0 + "s on "+pages.size()+" pages");
 
 		double prSum = 0.0;
-		HashMap<Integer, Double> pageRanks = new HashMap<>();
-		for(int i = 1; i <= pages.size(); i++) {
-			String pageId = Long.toString(pages.get(i-1).getId());
-			double pr = ranker.getVertexScore(pageId);
-			log.debug("Got vector score for page '"+pageId+"':"+pr);
-			pageRanks.put(Integer.parseInt(pageId), pr);
+
+
+		/**
+		 * extract the page-ranks here rather than passing around the PageRank api elsewhere in the application
+		 */
+		HashMap<Long, Double> pageRanks = new HashMap<>();
+		for(Page p : pages) {
+			double pr = ranker.getVertexScore(p.getId());
+			log.debug("Got vector score for page '"+p+"':"+pr);
+			pageRanks.put(p.getId(), pr);
 			prSum += pr;
 		}
 
-		_db.updatePageRanks(pageRanks);
+		db.updatePageRanks(pageRanks);
 		log.info("Finished calculating PageRank on all pages; sum of all PR scores was: " + prSum);
 	}
 }

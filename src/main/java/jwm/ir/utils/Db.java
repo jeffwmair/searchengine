@@ -17,7 +17,7 @@ public interface Db {
     void addDocumentTerms(String json, long pageId);
     List<String> getPageLinks(List<String> pageIds);
     String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit);
-    void updatePageRanks(HashMap<Integer,Double> pageRanks);
+    void updatePageRanks(HashMap<Long,Double> pageRanks);
     long getPageIdFromUrl(String url);
     void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults);
     List<String> getUnverifiedPagesForVerification();

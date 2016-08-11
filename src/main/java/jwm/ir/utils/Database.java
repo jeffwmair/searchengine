@@ -108,13 +108,13 @@ public class Database implements Db {
 	}
 
 	@Override
-	public void updatePageRanks(HashMap<Integer,Double> pageRanks) {
+	public void updatePageRanks(HashMap<Long,Double> pageRanks) {
 		
 		if (pageRanks.size() == 0) return;
 		
 		StringBuilder json = new StringBuilder();
 		json.append("[");
-		for(Map.Entry<Integer,Double> item : pageRanks.entrySet()) {
+		for(Map.Entry<Long,Double> item : pageRanks.entrySet()) {
 			if (!json.toString().equals("[")) json.append(",");
 			json.append("{");
 			json.append(JsonUtils.getJsonItem("id", item.getKey()) + ",");

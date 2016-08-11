@@ -63,4 +63,11 @@ public class PageLink {
         this.page = page;
     }
 
+    public long getSourcePageId() {
+        return getPage().getId();
+    }
+
+    public long getDestinationPageId() {
+        return getDestinationPage().getId();
+    }
 }

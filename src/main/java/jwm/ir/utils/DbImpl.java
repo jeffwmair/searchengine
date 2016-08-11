@@ -94,7 +94,7 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public void updatePageRanks(HashMap<Integer, Double> pageRanks) {
+    public void updatePageRanks(HashMap<Long, Double> pageRanks) {
         phpDb.updatePageRanks(pageRanks);
     }
 
