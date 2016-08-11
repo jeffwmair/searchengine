@@ -2,9 +2,9 @@ package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Jeff on 2016-07-25.
@@ -17,7 +17,7 @@ public interface Db {
     void addDocumentTerms(String json, long pageId);
     List<String> getPageLinks(List<String> pageIds);
     String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit);
-    void updatePageRanks(HashMap<Long,Double> pageRanks);
+    void updatePageRanks(Map<Long,Double> pageRanks);
     long getPageIdFromUrl(String url);
     void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults);
     List<String> getUnverifiedPagesForVerification();

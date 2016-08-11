@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 class PageRankCalculatorWorker implements Runnable {
@@ -37,12 +38,13 @@ class PageRankCalculatorWorker implements Runnable {
 	private void calculatePageRanks() {
 
 		log.info("beginning page-rank calculation");
-
 		List<Page> pages = service.getAllPages();
+
+		// construct our graph of vertices and edges
 		int edgeNumber = 1;
-		for(Page page : pages) {
-			graph.addVertex(page.getId());
-			for (PageLink edge : page.getPageLinks()) {
+		for(Page vertex : pages) {
+			graph.addVertex(vertex.getId());
+			for (PageLink edge : vertex.getPageLinks()) {
 				graph.addEdge(edgeNumber++, edge.getSourcePageId(), edge.getDestinationPageId());
 			}
 		}
@@ -55,13 +57,11 @@ class PageRankCalculatorWorker implements Runnable {
 		ranker.evaluate();
 		log.info("Finished calculating PageRank in " + (System.currentTimeMillis()-start) / 1000.0 + "s on "+pages.size()+" pages");
 
-		double prSum = 0.0;
-
-
 		/**
 		 * extract the page-ranks here rather than passing around the PageRank api elsewhere in the application
 		 */
-		HashMap<Long, Double> pageRanks = new HashMap<>();
+		double prSum = 0.0;
+		Map<Long, Double> pageRanks = new HashMap<>();
 		for(Page p : pages) {
 			double pr = ranker.getVertexScore(p.getId());
 			log.debug("Got vector score for page '"+p+"':"+pr);

@@ -2,8 +2,6 @@ package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageLink;
-import jwm.ir.domain.RepositoryFactory;
-import jwm.ir.domain.persistence.PageRepository;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -13,9 +11,9 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Jeff on 2016-07-25.
@@ -94,7 +92,7 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public void updatePageRanks(HashMap<Long, Double> pageRanks) {
+    public void updatePageRanks(Map<Long, Double> pageRanks) {
         phpDb.updatePageRanks(pageRanks);
     }
 

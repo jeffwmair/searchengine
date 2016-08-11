@@ -4,9 +4,10 @@ import jwm.ir.domain.Page;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import javax.management.relation.RelationNotFoundException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Database implements Db {
 
@@ -108,7 +109,7 @@ public class Database implements Db {
 	}
 
 	@Override
-	public void updatePageRanks(HashMap<Long,Double> pageRanks) {
+	public void updatePageRanks(Map<Long,Double> pageRanks) {
 		
 		if (pageRanks.size() == 0) return;
 		
