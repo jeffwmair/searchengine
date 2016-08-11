@@ -109,25 +109,6 @@ public class Database implements Db {
 	}
 
 	@Override
-	public void updatePageRanks(Map<Long,Double> pageRanks) {
-		
-		if (pageRanks.size() == 0) return;
-		
-		StringBuilder json = new StringBuilder();
-		json.append("[");
-		for(Map.Entry<Long,Double> item : pageRanks.entrySet()) {
-			if (!json.toString().equals("[")) json.append(",");
-			json.append("{");
-			json.append(JsonUtils.getJsonItem("id", item.getKey()) + ",");
-			json.append(JsonUtils.getJsonItem("pr", item.getValue()));
-			json.append("}");
-		}
-		json.append("]");
-		
-		HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "UpdatePageRanks.php", false);
-	}
-
-	@Override
 	public long getPageIdFromUrl(String url) {
 		url = HttpUtils.cleanUrl(url);
 		Map json = HttpUtils.httpPost(_webServiceHost, "url", url, "GetPageIdFromUrl.php", true);
@@ -137,9 +118,9 @@ public class Database implements Db {
 
 	@Override
 	public void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults) {
-			
+
 		if (urlVerificationResults.size() == 0) return;
-		
+
 		StringBuilder json = new StringBuilder();
 		json.append("[");
 		for(Map.Entry<String,Integer> item : urlVerificationResults.entrySet()) {

@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by Jeff on 2016-08-01.
@@ -60,6 +61,20 @@ public class PageRepositoryImpl implements PageRepository {
         p.getDomain().updateLastCrawl();
         p.updateFromCrawl(pageTitle, pageDesc, result);
         session.update(p.getDomain());
+        session.update(p);
+    }
+
+    @Override
+    public void updatePageRanks(Map<Long, Double> pageRanks) {
+        for(Long pageId : pageRanks.keySet()) {
+            Double pageRankValue = pageRanks.get(pageId);
+            setPageRank(pageId, pageRankValue);
+        }
+    }
+
+    private void setPageRank(Long pageId, Double pageRankValue) {
+        Page p = getPage(pageId);
+        p.setPageRank(pageRankValue);
         session.update(p);
     }
 

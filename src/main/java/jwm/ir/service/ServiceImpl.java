@@ -134,6 +134,20 @@ public class ServiceImpl implements Service {
     }
 
     @Override
+    public void updatePageRanks(Map<Long, Double> pageRanks) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+
+        PageRepository pageRepository = repositoryFactory.createPageRepository(session);
+        log.info("Beginning to update pageranks for " + pageRanks.size() + " pages");
+        pageRepository.updatePageRanks(pageRanks);
+        log.info("Completed updating pageranks");
+
+        tx.commit();
+        session.close();
+    }
+
+    @Override
     public void addDocumentTerms(long pageId, Map<String, Integer> termFrequences) {
 
         Session session = sessionFactory.openSession();

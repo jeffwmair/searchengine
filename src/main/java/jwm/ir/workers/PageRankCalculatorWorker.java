@@ -5,7 +5,6 @@ import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.PageLink;
 import jwm.ir.service.Service;
-import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,16 +16,14 @@ import java.util.Map;
 class PageRankCalculatorWorker implements Runnable {
 
 	private final static Logger log = LogManager.getLogger(PageRankCalculatorWorker.class);
-	private final Db db;
 	private final DirectedSparseGraph<Long, Integer> graph;
 	private final double TOLERANCE = 0.05;
 	private final double ALPHA = 0.15;
 	private final int MAX_ITERATIONS = 50;
 	private final Service service;
 
-	public PageRankCalculatorWorker(Db db, Service service) {
+	public PageRankCalculatorWorker(Service service) {
 		this.service = service;
-		this.db = db;
 		graph = new DirectedSparseGraph<>();
 	}
 
@@ -69,7 +66,7 @@ class PageRankCalculatorWorker implements Runnable {
 			prSum += pr;
 		}
 
-		db.updatePageRanks(pageRanks);
+		service.updatePageRanks(pageRanks);
 		log.info("Finished calculating PageRank on all pages; sum of all PR scores was: " + prSum);
 	}
 }

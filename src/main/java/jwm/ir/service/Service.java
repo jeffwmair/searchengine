@@ -17,4 +17,5 @@ public interface Service {
     List<Page> getAllPages();
     List<String> getValidDomainExtensions();
     List<String> getUrlsToCrawl();
+    void updatePageRanks(Map<Long, Double> pageRanks);
 }

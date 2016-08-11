@@ -13,7 +13,6 @@ import org.hibernate.criterion.Restrictions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Jeff on 2016-07-25.
@@ -89,11 +88,6 @@ public class DbImpl implements Db {
     @Override
     public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit) {
         return phpDb.getPageIdsGreaterThanPageId(lagePageReceived, limit);
-    }
-
-    @Override
-    public void updatePageRanks(Map<Long, Double> pageRanks) {
-        phpDb.updatePageRanks(pageRanks);
     }
 
     @Override

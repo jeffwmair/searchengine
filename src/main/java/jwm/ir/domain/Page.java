@@ -84,7 +84,7 @@ public class Page {
     private int failCount;
 
     @Column
-    private float pageRank;
+    private double pageRank;
 
     @Column(name="last_crawl")
     private Date lastCrawl;
@@ -163,11 +163,11 @@ public class Page {
         this.failCount = failCount;
     }
 
-    public float getPageRank() {
+    public double getPageRank() {
         return pageRank;
     }
 
-    public void setPageRank(float pageRank) {
+    public void setPageRank(double pageRank) {
         this.pageRank = pageRank;
     }
 
