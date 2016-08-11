@@ -56,6 +56,13 @@ public class Domain {
                 '}';
     }
 
+    /**
+     * Increase total crawls by 1
+     */
+    public void incrementTotalCrawls() {
+        this.totalCrawls++;
+    }
+
     public long getId() {
         return id;
     }
@@ -76,41 +83,17 @@ public class Domain {
         return status;
     }
 
+    /**
+     * Update the latest crawl time to now.
+     */
+    public void updateLastCrawl() {
+        this.lastCrawl = new Date();
+    }
+
     public void setStatus(int status) {
         this.status = status;
     }
 
-    public int getCrawlerId() {
-        return crawlerId;
-    }
-
-    public void setCrawlerId(int crawlerId) {
-        this.crawlerId = crawlerId;
-    }
-
-    public int getTotalCrawls() {
-        return totalCrawls;
-    }
-
-    public void setTotalCrawls(int totalCrawls) {
-        this.totalCrawls = totalCrawls;
-    }
-
-    public int getLocked() {
-        return locked;
-    }
-
-    public void setLocked(int locked) {
-        this.locked = locked;
-    }
-
-    public Date getLastCrawl() {
-        return lastCrawl;
-    }
-
-    public void setLastCrawl(Date lastCrawl) {
-        this.lastCrawl = lastCrawl;
-    }
 
     /**
      * Create a new instance from a full page url.

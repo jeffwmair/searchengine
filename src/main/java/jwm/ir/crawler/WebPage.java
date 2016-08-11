@@ -1,6 +1,7 @@
 package jwm.ir.crawler;
 
 
+import jwm.ir.domain.Page;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourcePageImpl;
 import org.apache.log4j.LogManager;
@@ -24,7 +25,7 @@ public class WebPage {
 		_url = url;
 	}
 	
-	public boolean crawl() {
+	public Page.CrawlResult crawl() {
 		try
 		{
 			Response response = 
@@ -37,21 +38,21 @@ public class WebPage {
 			int code = response.statusCode();
 			if (code == 200) {
 				_page = response.parse();
-				return true;
+				return Page.CrawlResult.Success;
 			}
 			else if (code < 400 && code > 499) {
 				log.error("HTTP " + code + ": " + _url);
-				return false;
+				return Page.CrawlResult.Fail;
 			}
 			else {
 				// 400 series
-				return false;
+				return Page.CrawlResult.Fail;
 			}
 			
 		}
 		catch(Exception ex) {
 			log.error("Error loading web page: " + _url +  ex.toString());
-			return false;
+			return Page.CrawlResult.Fail;
 		}
 	}
 	

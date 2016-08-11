@@ -110,11 +110,6 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public void addCrawlResult(String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful) {
-        phpDb.addCrawlResult(url, pageTitle, pageDesc, crawlTime, successful);
-    }
-
-    @Override
     public List<String> getUnverifiedPagesForVerification() {
         return phpDb.getUnverifiedPagesForVerification();
     }
@@ -129,33 +124,5 @@ public class DbImpl implements Db {
         session.close();
     }
 
-    @Override
-    public List<String> popUrls() {
-
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        Criteria criteria = session.createCriteria(Page.class);
-        List<Page> pages;
-
-        try {
-
-            pages = criteria.list();
-        }
-        catch (Exception e) {
-            tx.commit();
-            log.error(e);
-            return new ArrayList<>();
-        }
-
-        List<String> urls = new ArrayList<>();
-        for(Page p : pages) {
-            urls.add(p.getUrl());
-            session.delete(p);
-        }
-
-        tx.commit();
-        session.close();
-        return urls;
-    }
 
 }

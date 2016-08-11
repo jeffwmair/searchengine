@@ -55,6 +55,15 @@ public class Page {
     @JoinColumn(name = "pageId")
     private Set<PageTerm> postingTermId;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "pageId")
+    private Set<PageLink> pageLinks;
+
+    public Set<PageLink> getPageLinks() {
+        return pageLinks;
+    }
+
+
     public Set<PageTerm> getPageTerms() {
         return postingTermId;
     }
@@ -86,6 +95,13 @@ public class Page {
 
     public void setLastCrawl(Date lastCrawl) {
         this.lastCrawl = lastCrawl;
+    }
+
+    public void updateFromCrawl(String title, String description, CrawlResult result) {
+        this.lastCrawl = new Date();
+        this.title = title;
+        this.description = description;
+        updateFailCount(result);
     }
 
     public Page() {
@@ -184,6 +200,16 @@ public class Page {
                 ", pageRank=" + pageRank +
                 ", lastCrawl=" + lastCrawl +
                 '}';
+    }
+
+    public enum CrawlResult { Success, Fail }
+
+    /**
+     * Update the fail count by -1 or 1 if successful or unsuccessful.
+     * @param result
+     */
+    public void updateFailCount(CrawlResult result) {
+        failCount += Math.max(0, result == CrawlResult.Fail ? 1 : -1);
     }
 }
 

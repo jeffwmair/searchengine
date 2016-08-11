@@ -8,10 +8,14 @@ import jwm.ir.domain.persistence.*;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -79,12 +83,54 @@ public class ServiceImpl implements Service {
     }
 
     @Override
+    public void addCrawlResult(String url, String pageTitle, String pageDesc, Page.CrawlResult result) {
+
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        PageRepository pageRepository = repositoryFactory.createPageRepository(session);
+
+        pageRepository.setPageCrawlResult(url, pageTitle, pageDesc, result);
+
+        tx.commit();
+        session.close();
+    }
+
+    @Override
     public List<String> getValidDomainExtensions() {
         Session session = sessionFactory.openSession();
         ExtensionDao dao = repositoryFactory.createExtensionDao(session);
         List<String> extensions = dao.getAllValidExtensions();
         session.close();
         return extensions;
+    }
+
+    @Override
+    public List<String> getUrlsToCrawl() {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        Criteria criteria = session.createCriteria(Page.class);
+        List<Page> pages;
+
+        try {
+            pages = criteria.add(Restrictions.isNull("lastCrawl")).list();
+        }
+        catch (Exception e) {
+            tx.commit();
+            log.error(e);
+            return new ArrayList<>();
+        }
+
+        List<String> urls = new ArrayList<>();
+
+        for(Page p : pages) {
+            urls.add(p.getUrl());
+            //session.delete(p);
+        }
+
+        tx.commit();
+        session.close();
+        log.debug("Popped Urls:"+urls+", size:"+urls.size());
+        return urls;
     }
 
     @Override
@@ -109,8 +155,26 @@ public class ServiceImpl implements Service {
 
         tx.commit();
         session.close();
+    }
 
+    @Override
+    public List<Long> getPageIdsGreaterThanPageId(long lastPageReceived) {
+        Session session = sessionFactory.openSession();
+        List<Page> pages = session.createCriteria(Page.class).add(Restrictions.gt("id", lastPageReceived)).list();
+        List<Long> pageIds = new ArrayList<>();
+        for (Page p : pages) {
+            pageIds.add(p.getId());
+        }
+        session.close();
+        return pageIds;
+    }
 
+    @Override
+    public List<Page> getAllPages() {
+        Session session = sessionFactory.openSession();
+        List<Page> pages = session.createCriteria(Page.class).list();
+        session.close();
+        return pages;
     }
 
 }

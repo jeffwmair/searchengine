@@ -1,5 +1,8 @@
 package jwm.ir.service;
 
+import jwm.ir.domain.Page;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +11,10 @@ import java.util.Map;
  */
 public interface Service {
     void addUrlForCrawling(String url, String parentUrl);
+    void addCrawlResult(String url, String pageTitle, String pageDesc, Page.CrawlResult result);
     void addDocumentTerms(long pageId, Map<String, Integer> termFrequences);
+    List<Long> getPageIdsGreaterThanPageId(long lastPageIdReceived);
+    List<Page> getAllPages();
     List<String> getValidDomainExtensions();
+    List<String> getUrlsToCrawl();
 }

@@ -1,12 +1,16 @@
 package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
+import javax.management.relation.RelationNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Database implements Db {
 
+	final private static Logger log = LogManager.getLogger(Database.class);
 	private String _webServiceHost;
 	private final int MAX_URLS_FRO_1_DOMAIN_TO_CRAWL = 10;
 
@@ -88,6 +92,8 @@ public class Database implements Db {
 		json.append(JsonUtils.getJsonItem("limit", Integer.toString(limit)));
 		json.append("}");
 		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "GetPageIdsGreaterThanPageId.php", true);
+		log.debug("pagerank-getPageIdsGreater request:"+json);
+		log.debug("pagerank-getPageIdsGreater response:"+jsonOut);
 		if (jsonOut != null && jsonOut.size() > 0) {
 			ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
 			String[] ids = new String[maps.size()];
@@ -150,31 +156,6 @@ public class Database implements Db {
 	}
 
 	@Override
-	public void addCrawlResult(String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful) {
-		url = HttpUtils.cleanUrl(url);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		StringBuilder json = new StringBuilder();
-		json.append("{");
-		json.append(JsonUtils.getJsonItem("url", url) + ",");
-		if (pageTitle != null && pageTitle.length() > 5) {
-			json.append(JsonUtils.getJsonItem("title",  pageTitle) + ",");	
-		}
-		if (pageDesc != null) {
-			json.append(JsonUtils.getJsonItem("description", pageDesc) + ",");
-		}
-		json.append(JsonUtils.getJsonItem("time", sdf.format(crawlTime)) + ",");
-		json.append(JsonUtils.getJsonItem("success", (successful) ? "1" : "0"));
-		json.append("}");
-		
-		HttpUtils.httpPost(_webServiceHost,
-				"data", 
-				json.toString(), 
-				"AddCrawlResult.php",
-				false);
-
-	}
-
-	@Override
 	public ArrayList<String> getUnverifiedPagesForVerification() {
 		
 		Map json = HttpUtils.httpPost(_webServiceHost,
@@ -199,6 +180,10 @@ public class Database implements Db {
 		
 	}
 
+	/*
+
+	Might need this for reference for a while.
+
 	@Override
 	public List<String> popUrls() {
 
@@ -207,21 +192,21 @@ public class Database implements Db {
 				"1",
 				"GetPagesToCrawl.php",
 				true);
-		
-		
+
+
 		HashMap<String, Integer> domainPageCounter = new HashMap<>();
 		List<String> retVal = new ArrayList<>();
-		
+
 		if (json == null) return retVal;
-		
+
 		int pageCount = json.size();
 		for(int i = 1; i <= pageCount; i++) {
 			ArrayList<HashMap<String,String>> list = (ArrayList<HashMap<String, String>>) json.get("root");
 			for(HashMap<String,String> item : list) {
-				
+
 				String domain = item.get("domain");
 				String pageUrl = item.get("url");
-				
+
 				Integer domainPageCount = domainPageCounter.get(domain);
 				if (domainPageCount == null) {
 					domainPageCount = 1;
@@ -230,9 +215,9 @@ public class Database implements Db {
 				{
 					domainPageCount++;
 				}
-			
+
 				domainPageCounter.put(domain, domainPageCount);
-				
+
 				if (domainPageCount < MAX_URLS_FRO_1_DOMAIN_TO_CRAWL) {
 					retVal.add(pageUrl);
 				}
@@ -241,4 +226,5 @@ public class Database implements Db {
 		
 		return retVal;
 	}
+	*/
 }

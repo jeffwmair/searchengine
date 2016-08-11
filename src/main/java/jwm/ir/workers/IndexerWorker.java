@@ -133,7 +133,7 @@ public class IndexerWorker implements Runnable {
 	 */
 	private void startPageRankWorker() {
 		if (_threadPageRankWorker == null || !_threadPageRankWorker.isAlive()) {
-			PageRankCalculatorWorker worker = new PageRankCalculatorWorker(_db);
+			PageRankCalculatorWorker worker = new PageRankCalculatorWorker(_db, service);
 			_threadPageRankWorker = new Thread(worker);
 			_threadPageRankWorker.start();
 		}

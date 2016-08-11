@@ -1,5 +1,6 @@
 package jwm.ir.crawler;
 
+import jwm.ir.service.Service;
 import jwm.ir.utils.AssertUtils;
 import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
@@ -16,12 +17,12 @@ import java.util.concurrent.BlockingQueue;
 public class UrlFeed {
 
     private static final Logger log = LogManager.getLogger(UrlFeed.class);
-    private final Db db;
+    private final Service service;
     private final BlockingQueue<String> output;
-    public UrlFeed(Db db, BlockingQueue<String> output) {
-        AssertUtils.notNull(db, "Must provide a non-null db");
+    public UrlFeed(Service service, BlockingQueue<String> output) {
+        AssertUtils.notNull(service, "Must provide a non-null service");
         AssertUtils.notNull(output, "Must provide a non-null output queue");
-        this.db = db;
+        this.service = service;
         this.output = output;
     }
 
@@ -32,7 +33,7 @@ public class UrlFeed {
 
 
         log.debug("Fetching urls from the db.  Putting onto the queue.");
-        List<String> urls = db.popUrls();
+        List<String> urls = service.getUrlsToCrawl();
         log.debug("Fetched "+urls.size()+" urls from the db.  Putting onto the queue.");
         for(String url : urls) {
             try {

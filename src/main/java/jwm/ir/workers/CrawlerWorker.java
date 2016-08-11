@@ -1,15 +1,18 @@
 package jwm.ir.workers;
 
 import jwm.ir.crawler.WebPage;
+import jwm.ir.domain.Page;
 import jwm.ir.message.WebResource;
 import jwm.ir.service.Service;
-import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.AssertUtils;
 import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -76,8 +79,8 @@ public class CrawlerWorker implements Runnable {
                 WebPage p = new WebPage(url);
                 String title = null;
                 String pageDesc = null;
-                boolean success = p.crawl();
-                if (success) {
+                Page.CrawlResult result = p.crawl();
+                if (result == Page.CrawlResult.Success) {
                     // lets say we just count successful crawls with the performance worker
                     _perfWorker.incrementPagesCrawled();
                     title = p.getPageTitle();
@@ -105,7 +108,7 @@ public class CrawlerWorker implements Runnable {
 
                 start = System.currentTimeMillis();
                 log.info("Starting add page crawl result");
-                _db.addCrawlResult(url, title, pageDesc, new Date(), success);
+				service.addCrawlResult(url, title, pageDesc, result);
                 log.info("Added page crawl result to database (with "+urlsWithAnchorTexts.size()+" outlinks): " + (System.currentTimeMillis() - start) + "ms");
                 _frontier.remove(url);
             }
@@ -119,7 +122,8 @@ public class CrawlerWorker implements Runnable {
 		
 		frontier.clear();
 		
-		List<String> urlsDomains = _db.popUrls();
+		List<String> urlsDomains = service.getUrlsToCrawl();
+		//List<String> urlsDomains = _db.popUrls();
 		if (urlsDomains.size() > 0) {
 			log.info("Retrieved list of domains of size:" + urlsDomains.size());
 		}

@@ -10,7 +10,6 @@ import java.util.List;
  * Created by Jeff on 2016-07-25.
  */
 public interface Db {
-    List<String> popUrls();
     void save(Object entity);
     Page getPage(String url);
     void addPerformanceStats(int verifications, int crawls, int indexes);
@@ -21,6 +20,5 @@ public interface Db {
     void updatePageRanks(HashMap<Integer,Double> pageRanks);
     long getPageIdFromUrl(String url);
     void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults);
-    void addCrawlResult(String url, String pageTitle, String pageDesc, Date crawlTime, boolean successful);
     List<String> getUnverifiedPagesForVerification();
 }

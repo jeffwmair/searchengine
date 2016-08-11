@@ -1,5 +1,6 @@
 package jwm.ir.crawler;
 
+import jwm.ir.service.Service;
 import jwm.ir.utils.Db;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,12 +23,12 @@ public class UrlFeedTest {
     public void test() {
 
         BlockingQueue<String> output = new LinkedBlockingQueue<>();
-        Db db = mock(Db.class);
+        Service service = mock(Service.class);
         List<String> urls = new ArrayList<>();
         urls.add("url1");
         urls.add("url2");
-        when(db.popUrls()).thenReturn(urls);
-        UrlFeed sut = new UrlFeed(db, output);
+        when(service.getUrlsToCrawl()).thenReturn(urls);
+        UrlFeed sut = new UrlFeed(service, output);
 
         sut.process();
         Assert.assertTrue("url1".equals(output.remove()));
