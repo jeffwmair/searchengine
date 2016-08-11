@@ -46,9 +46,15 @@ run_program() {
 	java -jar SearchEngine-1.0.jar --integration_test --host=localhost/searchengine --pagerank_interval=0 > /dev/null &
 	JAVA_PID="$!"
 	echo "Started process with pid $JAVA_PID"
+	cd -
+	echo "$JAVA_PID" > pid.txt
 }
 
+stop_if_running() {
+	./stop.sh
+}
 
+#stop_if_running
 build_program
 deploy_web_services
 setup_test_pages
