@@ -8,11 +8,11 @@ import org.hibernate.criterion.Restrictions;
 /**
  * Created by Jeff on 2016-07-31.
  */
-public class DomainRepositoryImpl implements DomainRepository {
+public class DomainDaoImpl implements DomainDao {
 
     private final Session session;
 
-    public DomainRepositoryImpl(Session session) {
+    public DomainDaoImpl(Session session) {
         this.session = session;
     }
 

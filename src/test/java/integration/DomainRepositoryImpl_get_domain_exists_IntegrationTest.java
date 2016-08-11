@@ -1,8 +1,8 @@
 package integration;
 
 import jwm.ir.domain.Domain;
-import jwm.ir.domain.persistence.DomainRepository;
-import jwm.ir.domain.persistence.DomainRepositoryImpl;
+import jwm.ir.domain.persistence.DomainDao;
+import jwm.ir.domain.persistence.DomainDaoImpl;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.DbImpl;
 import jwm.ir.utils.HibernateUtil;
@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class DomainRepositoryImpl_get_domain_exists_IntegrationTest {
 
-    private DomainRepository sut;
+    private DomainDao sut;
     @Test
     public void get_domain_exists() {
 
@@ -29,6 +29,6 @@ public class DomainRepositoryImpl_get_domain_exists_IntegrationTest {
 
     @Before
     public void setup() {
-        sut = new DomainRepositoryImpl(HibernateUtil.getSessionFactory().openSession());
+        sut = new DomainDaoImpl(HibernateUtil.getSessionFactory().openSession());
     }
 }

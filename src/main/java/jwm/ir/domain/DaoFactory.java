@@ -8,16 +8,16 @@ import org.hibernate.Session;
  */
 public class DaoFactory {
 
-    public PageRepository createPageRepository(Session session) {
-        return new PageRepositoryImpl(session);
+    public PageDao createPageRepository(Session session) {
+        return new PageDaoImpl(session);
     }
 
-    public DomainRepository createDomainRepository(Session session) {
-        return new DomainRepositoryImpl(session);
+    public DomainDao createDomainRepository(Session session) {
+        return new DomainDaoImpl(session);
     }
 
-    public PageLinkRepository createPageLinkRepository(Session session) {
-        return new PageLinkRepositoryImpl(session);
+    public PageLinkDao createPageLinkRepository(Session session) {
+        return new PageLinkDaoImpl(session);
     }
 
     public TermDao createTermDao(Session session) {

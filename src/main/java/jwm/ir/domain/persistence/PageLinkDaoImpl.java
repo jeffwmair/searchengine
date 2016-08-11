@@ -7,10 +7,10 @@ import org.hibernate.Session;
 /**
  * Created by Jeff on 2016-08-02.
  */
-public class PageLinkRepositoryImpl implements PageLinkRepository {
+public class PageLinkDaoImpl implements PageLinkDao {
 
     private final Session session;
-    public PageLinkRepositoryImpl(Session session) {
+    public PageLinkDaoImpl(Session session) {
         this.session = session;
     }
 

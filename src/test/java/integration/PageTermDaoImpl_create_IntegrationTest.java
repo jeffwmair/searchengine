@@ -29,9 +29,9 @@ public class PageTermDaoImpl_create_IntegrationTest {
         db.save(page);
         Session session = sessionFactory.openSession();
         TermDao termDao = new TermDaoImpl(session);
-        PageRepository pageRepository = new PageRepositoryImpl(session);
-        Page p = pageRepository.getPage("google.com/a");
-        pageTermDao = new PageTermDaoImpl(termDao, pageRepository, session);
+        PageDao pageDao = new PageDaoImpl(session);
+        Page p = pageDao.getPage("google.com/a");
+        pageTermDao = new PageTermDaoImpl(termDao, pageDao, session);
         pageTermDao.create(p.getId(), "hello", 1);
     }
 

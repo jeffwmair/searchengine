@@ -1,9 +1,9 @@
 package jwm.ir.service;
 
 import jwm.ir.domain.*;
-import jwm.ir.domain.persistence.DomainRepository;
-import jwm.ir.domain.persistence.PageLinkRepository;
-import jwm.ir.domain.persistence.PageRepository;
+import jwm.ir.domain.persistence.DomainDao;
+import jwm.ir.domain.persistence.PageLinkDao;
+import jwm.ir.domain.persistence.PageDao;
 import jwm.ir.domain.persistence.PageTermDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,9 +21,9 @@ import static org.mockito.Mockito.*;
  */
 public class ServiceImplTest {
 
-	private PageRepository pageRepository;
-	private PageLinkRepository pageLinkRepository;
-	private DomainRepository domainRepository;
+	private PageDao pageDao;
+	private PageLinkDao pageLinkDao;
+	private DomainDao domainDao;
 	private SessionFactory sessionFactory;
 	private DaoFactory daoFactory;
 	private Session session;
@@ -53,7 +53,7 @@ public class ServiceImplTest {
 		String url = "www.google.com/a";
 		String parentUrl = "www.google.com/b";
 		Service sut = new ServiceImpl(sessionFactory, daoFactory);
-		when(pageRepository.pageExists(url)).thenReturn(true);
+		when(pageDao.pageExists(url)).thenReturn(true);
 		sut.addUrlForCrawling(url, parentUrl);
 
 	}
@@ -65,14 +65,14 @@ public class ServiceImplTest {
 		page.setUrl(url);
 		String parenturl = "www.google.com/b";
 		ServiceImpl sut = new ServiceImpl(sessionFactory, daoFactory);
-		when(pageRepository.pageExists(url)).thenReturn(false);
-		when(pageRepository.create(url, domainRepository)).thenReturn(page);
-		when(domainRepository.domainExists("google.com")).thenReturn(false);
+		when(pageDao.pageExists(url)).thenReturn(false);
+		when(pageDao.create(url, domainDao)).thenReturn(page);
+		when(domainDao.domainExists("google.com")).thenReturn(false);
 		sut.addUrlForCrawling(url, parenturl);
 
-		verify(pageRepository).create(url, domainRepository);
-		verify(domainRepository).create("google.com");
-		verify(domainRepository, times(0)).getDomain("google.com");
+		verify(pageDao).create(url, domainDao);
+		verify(domainDao).create("google.com");
+		verify(domainDao, times(0)).getDomain("google.com");
 	}
 
 	@Test
@@ -82,14 +82,14 @@ public class ServiceImplTest {
 		Page page = new Page();
 		page.setUrl(url);
 		ServiceImpl sut = new ServiceImpl(sessionFactory, daoFactory);
-		when(pageRepository.pageExists(url)).thenReturn(false);
-		when(pageRepository.create(url, domainRepository)).thenReturn(page);
-		when(domainRepository.domainExists("google.com")).thenReturn(true);
+		when(pageDao.pageExists(url)).thenReturn(false);
+		when(pageDao.create(url, domainDao)).thenReturn(page);
+		when(domainDao.domainExists("google.com")).thenReturn(true);
 		sut.addUrlForCrawling(url, parentUrl);
 
-		verify(pageRepository).create(url, domainRepository);
-		verify(domainRepository).getDomain("google.com");
-		verify(domainRepository, times(0)).create("google.com");
+		verify(pageDao).create(url, domainDao);
+		verify(domainDao).getDomain("google.com");
+		verify(domainDao, times(0)).create("google.com");
 	}
 
 
@@ -100,12 +100,12 @@ public class ServiceImplTest {
 		when(sessionFactory.openSession()).thenReturn(session);
 		Transaction tx = mock(Transaction.class);
 		when(session.beginTransaction()).thenReturn(tx);
-		pageRepository = mock(PageRepository.class);
-		domainRepository = mock(DomainRepository.class);
+		pageDao = mock(PageDao.class);
+		domainDao = mock(DomainDao.class);
 		daoFactory = mock(DaoFactory.class);
-		pageLinkRepository = mock(PageLinkRepository.class);
-		when(daoFactory.createDomainRepository(session)).thenReturn(domainRepository);
-		when(daoFactory.createPageRepository(session)).thenReturn(pageRepository);
-		when(daoFactory.createPageLinkRepository(session)).thenReturn(pageLinkRepository);
+		pageLinkDao = mock(PageLinkDao.class);
+		when(daoFactory.createDomainRepository(session)).thenReturn(domainDao);
+		when(daoFactory.createPageRepository(session)).thenReturn(pageDao);
+		when(daoFactory.createPageLinkRepository(session)).thenReturn(pageLinkDao);
 	}
 }

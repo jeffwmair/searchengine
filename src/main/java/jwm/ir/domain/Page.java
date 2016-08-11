@@ -1,11 +1,10 @@
 package jwm.ir.domain;
 
 import jwm.ir.crawler.UrlUtils;
-import jwm.ir.domain.persistence.DomainRepository;
+import jwm.ir.domain.persistence.DomainDao;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,13 +19,13 @@ public class Page {
      * @param url
      * @return
      */
-    public static Page create(String url, DomainRepository domainRepository) {
+    public static Page create(String url, DomainDao domainDao) {
         Page p = new Page();
         p.setUrl(url);
         String domainName = UrlUtils.getDomainFromAbsoluteUrl(url);
         Domain d;
-        if (domainRepository.domainExists(domainName)) {
-            d = domainRepository.getDomain(domainName);
+        if (domainDao.domainExists(domainName)) {
+            d = domainDao.getDomain(domainName);
         }
         else {
             d = Domain.createFromUrl(url);

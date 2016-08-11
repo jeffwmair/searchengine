@@ -38,8 +38,8 @@ public class PageTermDao_terms_already_exist_IntegrationTest {
         Session session = sessionFactory.openSession();
         Page p = db.getPage("google.com/a");
         TermDao termDao = new TermDaoImpl(session);
-        PageRepository pageRepository = new PageRepositoryImpl(session);
-        pageTermDao = new PageTermDaoImpl(termDao, pageRepository, session);
+        PageDao pageDao = new PageDaoImpl(session);
+        pageTermDao = new PageTermDaoImpl(termDao, pageDao, session);
         Assert.assertTrue(pageTermDao.termsAlreadyExist(p.getId()));
         session.close();
     }

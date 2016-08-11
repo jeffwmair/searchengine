@@ -1,6 +1,6 @@
 package integration;
 
-import jwm.ir.domain.persistence.DomainRepository;
+import jwm.ir.domain.persistence.DomainDao;
 import jwm.ir.domain.Page;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,8 +15,8 @@ public class DbImpl_FetchPage_IntegrationTest extends DbTestBase {
     @Test
     public void test_fetch_page() {
         String pageUrl = "http://localhost/searchengine_test/page1.html";
-        DomainRepository domainRepository = mock(DomainRepository.class);
-        Page page = Page.create(pageUrl, domainRepository);
+        DomainDao domainDao = mock(DomainDao.class);
+        Page page = Page.create(pageUrl, domainDao);
         db.save(page.getDomain());
         db.save(page);
 

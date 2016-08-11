@@ -42,35 +42,35 @@ public class ServiceImpl implements Service {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
-        DomainRepository domainRepository = daoFactory.createDomainRepository(session);
-        PageRepository pageRepository = daoFactory.createPageRepository(session);
-        PageLinkRepository pageLinkRepository = daoFactory.createPageLinkRepository(session);
+        DomainDao domainDao = daoFactory.createDomainRepository(session);
+        PageDao pageDao = daoFactory.createPageRepository(session);
+        PageLinkDao pageLinkDao = daoFactory.createPageLinkRepository(session);
 
         // only run if the page doesn't exist
-        if (pageRepository.pageExists(url)) {
+        if (pageDao.pageExists(url)) {
             log.warn("Page with url '"+url+"' already exists in the database, so not adding");
             tx.rollback();
             return;
         }
 
-        Page page = pageRepository.create(url, domainRepository);
+        Page page = pageDao.create(url, domainDao);
         Domain pageDomain;
         final String pageDomainName = UrlUtils.getDomainFromAbsoluteUrl(url);
-        if (domainRepository.domainExists(pageDomainName)) {
+        if (domainDao.domainExists(pageDomainName)) {
             log.debug("Domain exists:"+pageDomainName);
-            pageDomain = domainRepository.getDomain(pageDomainName);
+            pageDomain = domainDao.getDomain(pageDomainName);
         }
         else {
             log.debug("Domain does not exist, so creating:"+pageDomainName);
-            pageDomain = domainRepository.create(pageDomainName);
+            pageDomain = domainDao.create(pageDomainName);
         }
 
         page.setDomain(pageDomain);
 
         // we assume that the parent page must have already been indexed; how else can it be the parent?
-        Page referantPage = pageRepository.getPage(parentUrl);
+        Page referantPage = pageDao.getPage(parentUrl);
 
-        pageLinkRepository.create(page, referantPage);
+        pageLinkDao.create(page, referantPage);
 
         tx.commit();
         session.close();
@@ -86,9 +86,9 @@ public class ServiceImpl implements Service {
 
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        PageRepository pageRepository = daoFactory.createPageRepository(session);
+        PageDao pageDao = daoFactory.createPageRepository(session);
 
-        pageRepository.setPageCrawlResult(url, pageTitle, pageDesc, result);
+        pageDao.setPageCrawlResult(url, pageTitle, pageDesc, result);
 
         tx.commit();
         session.close();
@@ -137,9 +137,9 @@ public class ServiceImpl implements Service {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
-        PageRepository pageRepository = daoFactory.createPageRepository(session);
+        PageDao pageDao = daoFactory.createPageRepository(session);
         log.info("Beginning to update pageranks for " + pageRanks.size() + " pages");
-        pageRepository.updatePageRanks(pageRanks);
+        pageDao.updatePageRanks(pageRanks);
         log.info("Completed updating pageranks");
 
         tx.commit();

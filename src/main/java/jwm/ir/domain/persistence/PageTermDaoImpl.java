@@ -14,25 +14,25 @@ public class PageTermDaoImpl implements PageTermDao {
     private static final Logger log = LogManager.getLogger(PageTermDaoImpl.class);
     private final Session session;
     private final TermDao termDao;
-    private final PageRepository pageRepository;
-    public PageTermDaoImpl(TermDao termDao, PageRepository pageRepository, Session session) {
+    private final PageDao pageDao;
+    public PageTermDaoImpl(TermDao termDao, PageDao pageDao, Session session) {
         this.session = session;
         this.termDao = termDao;
-        this.pageRepository = pageRepository;
+        this.pageDao = pageDao;
     }
     @Override
     public void create(long pageId, String termValue, int termFrequency) {
         log.warn("Should be stemming terms before here!  That used to be done in a php script.");
         log.info("pagetermDaoImpl.create pageId:'"+pageId+"', termValue:'"+termValue+"', termFrequency:'"+termFrequency+"'");
         Term term = termDao.createOrIncrementTermFrequency(termValue);
-        Page page = pageRepository.getPage(pageId);
+        Page page = pageDao.getPage(pageId);
         PageTerm pt = new PageTerm(page, term, termFrequency);
         session.save(pt);
     }
 
     @Override
     public boolean termsAlreadyExist(long pageId) {
-        Page page = pageRepository.getPage(pageId);
+        Page page = pageDao.getPage(pageId);
         return page.getPageTerms().size() > 0;
     }
 }

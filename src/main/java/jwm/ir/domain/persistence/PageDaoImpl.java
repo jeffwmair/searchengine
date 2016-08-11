@@ -1,22 +1,20 @@
 package jwm.ir.domain.persistence;
 
-import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
  * Created by Jeff on 2016-08-01.
  */
-public class PageRepositoryImpl implements PageRepository {
+public class PageDaoImpl implements PageDao {
 
     private final Session session;
 
-    public PageRepositoryImpl(Session session) {
+    public PageDaoImpl(Session session) {
         this.session = session;
     }
 
@@ -39,8 +37,8 @@ public class PageRepositoryImpl implements PageRepository {
     }
 
     @Override
-    public Page create(String url, DomainRepository domainRepository) {
-        Page p = Page.create(url, domainRepository);
+    public Page create(String url, DomainDao domainDao) {
+        Page p = Page.create(url, domainDao);
         session.save(p);
         return p;
     }
