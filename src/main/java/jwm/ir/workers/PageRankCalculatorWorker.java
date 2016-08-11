@@ -75,27 +75,4 @@ class PageRankCalculatorWorker implements Runnable {
 		_db.updatePageRanks(pageRanks);
 		log.info("Finished calculating PageRank on all pages; sum of all PR scores was: " + prSum);
 	}
-
-	private void makeSampleGraph() {
-		String[] verticies = { "a", "b", "c" };
-		_graph.addVertex(verticies[0]);
-		_graph.addVertex(verticies[1]);
-		_graph.addVertex(verticies[2]);
-		_graph.addEdge(1, "a", "b");
-		_graph.addEdge(2, "c", "b");
-		_graph.addEdge(3, "b", "c");
-		_graph.addEdge(4, "a", "c");
-
-		long start = System.currentTimeMillis() ;
-		PageRank<String, Integer> ranker = new PageRank<>(_graph, ALPHA);
-		ranker.setTolerance(TOLERANCE) ;
-		ranker.setMaxIterations(MAX_ITERATIONS);
-
-		ranker.evaluate();
-		log.info("PageRank computed in " + (System.currentTimeMillis()-start) + " ms");
-
-		for (String verticy : verticies) {
-			log.info(verticy + " = " + Double.toString(ranker.getVertexScore(verticy)));
-		}
-	}
 }
