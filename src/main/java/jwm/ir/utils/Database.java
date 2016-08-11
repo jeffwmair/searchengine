@@ -13,7 +13,6 @@ public class Database implements Db {
 
 	final private static Logger log = LogManager.getLogger(Database.class);
 	private String _webServiceHost;
-	private final int MAX_URLS_FRO_1_DOMAIN_TO_CRAWL = 10;
 
 	public Database(String webserviceHost) {
 		_webServiceHost = webserviceHost;
@@ -165,6 +164,8 @@ public class Database implements Db {
 	/*
 
 	Might need this for reference for a while.
+
+	private final int MAX_URLS_FRO_1_DOMAIN_TO_CRAWL = 10;
 
 	@Override
 	public List<String> popUrls() {

@@ -6,7 +6,6 @@ import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourceNoneImpl;
 import jwm.ir.service.Service;
-import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;
@@ -23,7 +22,7 @@ public class IndexerWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(IndexerWorker.class);
 	private final List<String> _stopwords;
-	private final Db _db;
+	private final Db db;
 	private final AtomicInteger _indexCount;
 	private final int _indexesBeforePrUpdate;
 	private final TermPreprocessor _tp;
@@ -47,7 +46,7 @@ public class IndexerWorker implements Runnable {
 		this.indexQueue = indexQueue;
 		this.service = service;
 		_stopwords = stopwordsFileLoader.getStopwordsFromFile();
-		_db = db;
+		this.db = db;
 		_indexCount = indexCount;
 		_indexesBeforePrUpdate = indexesBeforePrUpdate;
 		_tp = getTermProcessor();
@@ -145,7 +144,7 @@ public class IndexerWorker implements Runnable {
 	private void startSummarizerWorker() {
 		log.info("Starting summarizer worker");
 		if (_updateStatsWorker == null || !_updateStatsWorker.isAlive()) {
-			DatabaseStatsUpdateWorker worker = new DatabaseStatsUpdateWorker(_db);
+			DatabaseStatsUpdateWorker worker = new DatabaseStatsUpdateWorker(db);
 			_updateStatsWorker = new Thread(worker);
 			_updateStatsWorker.start();
 		}
@@ -165,7 +164,7 @@ public class IndexerWorker implements Runnable {
 		}
 
 		log.info("Beginning processing of " + page.getUrl());
-		long pageId = _db.getPageIdFromUrl(page.getUrl());
+		long pageId = db.getPageIdFromUrl(page.getUrl());
 		log.info("Page id '"+pageId+"' found for:"+page.getUrl());
 		if (pageId < 1) {
 			// ignore this page because the crawler didn't create a db record for it
@@ -214,7 +213,7 @@ public class IndexerWorker implements Runnable {
 
 					// send it
 					long start = System.currentTimeMillis();
-					_db.addDocumentTerms(json.toString(), pageId);
+					db.addDocumentTerms(json.toString(), pageId);
 					log.info("Sent an intermediate batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
 
 					json = new StringBuilder();
@@ -226,7 +225,7 @@ public class IndexerWorker implements Runnable {
 
 				// send the last of it
 				long start = System.currentTimeMillis();
-				_db.addDocumentTerms(json.toString(), pageId);
+				db.addDocumentTerms(json.toString(), pageId);
 				log.info("Sent the last batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
 			}
 		}

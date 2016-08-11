@@ -57,7 +57,11 @@ public class IntegrationTestDataSetup {
         int extensionTypeDefault = 1;
         ValidExtension validExtension = new ValidExtension(extensionTypeDefault, ext);
         log.info("Saving extension "+ext);
-        getDb().save(validExtension);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        session.save(validExtension);
+        tx.commit();
+        session.close();
     }
 
     private static void setupPages() {
@@ -66,10 +70,6 @@ public class IntegrationTestDataSetup {
         Page page = Page.create("http://localhost/searchengine_test/page1.html", domainRepository);
         page.setVerified(1);
         log.info("Adding page to db:"+page);
-        /*
-        db.save(page.getDomain());
-        db.save(page);
-        */
         Transaction tx = session.beginTransaction();
         session.save(page.getDomain());
         session.save(page);
@@ -79,18 +79,11 @@ public class IntegrationTestDataSetup {
         log.info("closed session");
     }
 
-    private static Db db = getDb();
     private static Service service = getService();
     private static Service getService() {
         if (service == null) {
             service = new ServiceImpl(HibernateUtil.getSessionFactory(), new RepositoryFactory());
         }
         return service;
-    }
-    private static Db getDb() {
-        if (db == null) {
-            db = new DbImpl(HibernateUtil.getSessionFactory());
-        }
-        return db;
     }
 }
