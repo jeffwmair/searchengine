@@ -18,23 +18,9 @@ import java.util.List;
 public class DbImpl implements Db {
 
     private final Db phpDb;
-    private static final Logger log = LogManager.getLogger(DbImpl.class);
-    private final SessionFactory sessionFactory;
 
-    public DbImpl(SessionFactory sessionFactory) {
-        AssertUtils.notNull(sessionFactory, "Must provide a sessionFactory");
-        this.sessionFactory = sessionFactory;
+    public DbImpl() {
         this.phpDb = new Database("localhost/searchengine");
-    }
-
-    @Override
-    public Page getPage(String url) {
-        Session session = sessionFactory.openSession();
-        Criteria criteria = session.createCriteria(Page.class);
-        criteria.add(Restrictions.eq("url", url));
-        Object result = criteria.uniqueResult();
-        AssertUtils.notNull(result, "Page with url '"+url+"' could not be found in the database!");
-        return (Page)result;
     }
 
     @Override
@@ -48,22 +34,6 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public void addDocumentTerms(String json, long pageId) {
-        phpDb.addDocumentTerms(json, pageId);
-    }
-
-    @Override
-    public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit) {
-        return phpDb.getPageIdsGreaterThanPageId(lagePageReceived, limit);
-    }
-
-    @Override
-    public long getPageIdFromUrl(String url) {
-        log.debug("Getting pageIdFromUrl '"+url+"'");
-        return getPage(url).getId();
-    }
-
-    @Override
     public void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults) {
         phpDb.setVerificationStatusForUrls(urlVerificationResults);
     }
@@ -71,16 +41,6 @@ public class DbImpl implements Db {
     @Override
     public List<String> getUnverifiedPagesForVerification() {
         return phpDb.getUnverifiedPagesForVerification();
-    }
-
-    @Override
-    public void save(Object entity) {
-
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(entity);
-        tx.commit();
-        session.close();
     }
 
 

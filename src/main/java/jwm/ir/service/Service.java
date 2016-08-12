@@ -13,6 +13,8 @@ public interface Service {
     void addCrawlResult(String url, String pageTitle, String pageDesc, Page.CrawlResult result);
     void addDocumentTerms(long pageId, Map<String, Integer> termFrequences);
     List<Page> getAllPages();
+    boolean pageExists(String url);
+    Page getPage(String url);
     List<String> getValidDomainExtensions();
     List<String> getUrlsToCrawl();
     void updatePageRanks(Map<Long, Double> pageRanks);

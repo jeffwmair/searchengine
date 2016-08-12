@@ -32,7 +32,7 @@ public class IndexerWorker implements Runnable {
 	private final PerformanceStatsUpdateWorker _perfWorker;
 	private final BlockingQueue<WebResource> indexQueue;
 	private final Service service;
-	
+
 	public IndexerWorker(BlockingQueue<WebResource> indexQueue,
 						 Db db,
 						 Service service,
@@ -53,7 +53,7 @@ public class IndexerWorker implements Runnable {
 		_perfWorker = perfWorker;
 		_stopApp = stopApplication;
 	}
-		private static TermPreprocessor getTermProcessor() {
+	private static TermPreprocessor getTermProcessor() {
 
 		ArrayList<String> toReplace = new ArrayList<>();
 		toReplace.add("$");
@@ -89,12 +89,12 @@ public class IndexerWorker implements Runnable {
 		TermPreprocessor tp = new TermPreprocessor(toReplace);
 		return tp;
 	}
-	
+
 	@Override
 	public void run() {
 
 		log.info("Started indexer.");
-		
+
 		while (true && !_stopApp.get()) {
 			
 			/* have one indexer responsible for starting the PR thread */
@@ -117,16 +117,16 @@ public class IndexerWorker implements Runnable {
 			}
 
 			try {
-			processInputFile(parsedWebPage, _tp);
+				processInputFile(parsedWebPage, _tp);
 			}
 			catch(Exception ex) {
 				log.error(ex.getMessage(), ex);
 			}
 
 		}
-		
+
 	}
-	
+
 	/**
 	 * Starts PageRank updates
 	 */
@@ -140,7 +140,7 @@ public class IndexerWorker implements Runnable {
 			log.info("Not starting PageRank worker as it is already running");
 		}
 	}
-	
+
 	private void startSummarizerWorker() {
 		log.info("Starting summarizer worker");
 		if (_updateStatsWorker == null || !_updateStatsWorker.isAlive()) {
@@ -152,7 +152,7 @@ public class IndexerWorker implements Runnable {
 			log.info("Not starting StatsUpdate worker as it is already running");
 		}
 	}
-	
+
 	/**
 	 * Process an input crawled file
 	 */
@@ -164,78 +164,26 @@ public class IndexerWorker implements Runnable {
 		}
 
 		log.info("Beginning processing of " + page.getUrl());
-		long pageId = db.getPageIdFromUrl(page.getUrl());
-		log.info("Page id '"+pageId+"' found for:"+page.getUrl());
-		if (pageId < 1) {
+		if (!service.pageExists(page.getUrl())) {
 			// ignore this page because the crawler didn't create a db record for it
 			return;
 		}
 
-		
+		long pageId = service.getPage(page.getUrl()).getId();
+
+		log.info("Page id '"+pageId+"' found for:"+page.getUrl());
 		boolean useStemming = false;
 		boolean useStopwords = true;
 		CrawledTextParser parser = new CrawledTextParser(useStemming, useStopwords, _stopwords, tp);
 		parser.processInput(page.getContent());
-		log.info("Finished parsing the file, beginning to construct JSON");
-		final String JSON_PAGE_ID = "p";
-		final String JSON_TERMS = "ts";
-		final String JSON_TERM = "t";
-		final String JSON_TERM_FREQ = "tf";
-		final int MAX_JSON_GET_LENGTH = 20000;
 
-		StringBuilder json = new StringBuilder();
-		json.append("{\""+ JSON_PAGE_ID +"\":\""+pageId+"\",\""+JSON_TERMS+"\":[");
-
-		boolean useNewCode = true;
-
-		if (useNewCode) {
-			log.warn("Using new service.addDocumentTerms!");
-			service.addDocumentTerms(pageId, parser.getTermFrequencies());
-		}
-		else {
-			log.warn("Using old deprecated php service");
-			for (Map.Entry<String, Integer> e : parser.getTermFrequencies().entrySet()) {
-
-				String term = e.getKey();
-				String tf = Integer.toString(e.getValue());
-
-				if (!json.toString().endsWith(":[")) json.append(",");
-
-				json.append("{");
-				json.append(JsonUtils.getJsonItem(JSON_TERM, term) + ",");
-				json.append(JsonUtils.getJsonItem(JSON_TERM_FREQ, tf));
-				json.append("}");
-
-				if (json.length() > MAX_JSON_GET_LENGTH) {
-
-					// close off the json
-					json.append("]}");
-
-					// send it
-					long start = System.currentTimeMillis();
-					db.addDocumentTerms(json.toString(), pageId);
-					log.info("Sent an intermediate batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
-
-					json = new StringBuilder();
-					json.append("{\"" + JSON_PAGE_ID + "\":\"" + pageId + "\",\"" + JSON_TERMS + "\":[");
-				}
-			}
-			if (json.length() > 0) {
-				json.append("]}");
-
-				// send the last of it
-				long start = System.currentTimeMillis();
-				db.addDocumentTerms(json.toString(), pageId);
-				log.info("Sent the last batch of JSON: " + (System.currentTimeMillis() - start) + "ms");
-			}
-		}
+		log.warn("Using new service.addDocumentTerms!");
+		service.addDocumentTerms(pageId, parser.getTermFrequencies());
 
 		// delete when done processing
 		_perfWorker.incrementPagesIndexed();
 		_indexCount.incrementAndGet();
 
-
-		
 	}
 
 }

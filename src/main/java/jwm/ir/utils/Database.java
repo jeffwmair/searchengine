@@ -36,57 +36,6 @@ public class Database implements Db {
 	}
 
 	@Override
-	public synchronized void addDocumentTerms(String json, long pageId) {
-		
-		/* TODO: could improve performance if I can get the indexers indexing concurrently -- ie, don't make this method synchronized;
-		 * I made it synchronized because the indexers were deadlocking in the insert_terms mysql procedure.
-		 * 
-		 */
-		HttpUtils.httpPost(_webServiceHost, "data", json, "AddDocumentTerms.php", false);
-	}
-
-	@Override
-	public void save(Object entity) {
-
-	}
-
-	@Override
-	public Page getPage(String url) {
-		return null;
-	}
-
-	@Override
-	public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit) {
-		StringBuilder json = new StringBuilder();
-		json.append("{");
-		json.append(JsonUtils.getJsonItem("pageIdReceived", lagePageReceived) + ",");
-		json.append(JsonUtils.getJsonItem("limit", Integer.toString(limit)));
-		json.append("}");
-		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "GetPageIdsGreaterThanPageId.php", true);
-		log.debug("pagerank-getPageIdsGreater request:"+json);
-		log.debug("pagerank-getPageIdsGreater response:"+jsonOut);
-		if (jsonOut != null && jsonOut.size() > 0) {
-			ArrayList<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
-			String[] ids = new String[maps.size()];
-			for(int i = 0; i < maps.size(); i++) {
-				ids[i] = maps.get(i).get("pageId");
-			}
-			return ids;
-		}
-		else {
-			return new String[0];
-		}
-	}
-
-	@Override
-	public long getPageIdFromUrl(String url) {
-		url = HttpUtils.cleanUrl(url);
-		Map json = HttpUtils.httpPost(_webServiceHost, "url", url, "GetPageIdFromUrl.php", true);
-		String id_s = json.get("pageId").toString();
-		return Integer.parseInt(id_s);
-	}
-
-	@Override
 	public void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults) {
 
 		if (urlVerificationResults.size() == 0) return;

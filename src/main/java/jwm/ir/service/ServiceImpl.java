@@ -177,4 +177,28 @@ public class ServiceImpl implements Service {
         return pages;
     }
 
+    @Override
+    public boolean pageExists(String url) {
+        Session session = sessionFactory.openSession();
+        boolean exists = getPageObject(url, session) != null;
+        session.close();
+        return exists;
+    }
+
+    private Object getPageObject(String url, Session session) {
+        return session.createCriteria(Page.class).add(Restrictions.eq("url", url)).uniqueResult();
+    }
+
+    @Override
+    public Page getPage(String url) {
+        if (!pageExists(url)) {
+            throw new RuntimeException("Page does not exist with url '"+url+"'");
+        }
+
+        Session session = sessionFactory.openSession();
+        Page page = (Page)getPageObject(url, session);
+        session.close();
+        return page;
+    }
+
 }
