@@ -5,12 +5,7 @@ import jwm.ir.domain.Page;
 import jwm.ir.domain.PageLink;
 import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.service.ServiceImpl;
-import jwm.ir.utils.Db;
-import jwm.ir.utils.DbImpl;
-import jwm.ir.utils.HibernateUtil;
-import org.hibernate.SessionFactory;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**

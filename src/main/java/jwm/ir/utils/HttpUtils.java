@@ -120,7 +120,4 @@ private static final String CHAR_SET = "UTF-8";
 		return "http://" + host + "/services/" + phpFunction;
 	}
 	
-	public static String cleanUrl(String url) {
-		return url.replace("\"", "");
-	}
 }

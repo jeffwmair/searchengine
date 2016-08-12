@@ -57,7 +57,6 @@ public class IrMain {
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Db db = new Database(host);
-		//Db db = new DbImpl(sessionFactory);
 		Service service = new ServiceImpl(sessionFactory, new DaoFactory());
 
 		List<String> domainExtensions = service.getValidDomainExtensions();
@@ -74,7 +73,6 @@ public class IrMain {
 		BlockingQueue<WebResource> queue = new LinkedBlockingQueue<>();
 
 		CrawlerWorker c1 = new CrawlerWorker(domainExtensions,
-				db,
 				service,
 				queue,
 				performanceWorker,
