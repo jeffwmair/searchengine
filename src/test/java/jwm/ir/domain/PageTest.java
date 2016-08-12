@@ -20,10 +20,16 @@ public class PageTest {
     }
 
     @Test
-    public void test_create_page_from_url_with_domain() {
+    public void test_create_page_with_domain() {
         String url = "http://www.google.com/foo";
-        DomainDao domainRepo = mock(DomainDao.class);
-        Page page = Page.create(url, domainRepo);
-        Assert.assertEquals(url, page.getUrl());
+        Page page = new Page(url, Page.MakeNewDomain.Yes);
+        Assert.assertEquals("google.com", page.getDomain().getDomain());
+    }
+
+    @Test
+    public void test_create_page_without_domain() {
+        String url = "http://www.google.com/foo";
+        Page page = new Page(url, Page.MakeNewDomain.No);
+        Assert.assertNull(page.getDomain());
     }
 }

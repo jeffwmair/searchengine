@@ -1,7 +1,6 @@
 package jwm.ir.domain;
 
 import jwm.ir.crawler.UrlUtils;
-import jwm.ir.domain.dao.DomainDao;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,16 +13,24 @@ import java.util.Set;
 @Table(name="pages")
 public class Page {
 
+
+    public enum MakeNewDomain {Yes, No}
+
+    public Page() { }
+
+    public Page(String url, MakeNewDomain makeNewDomain) {
+        this.url = url;
+        if (makeNewDomain == MakeNewDomain.Yes) {
+            Domain d = new Domain(UrlUtils.getDomainFromAbsoluteUrl(url));
+            setDomain(d);
+        }
+    }
+
     /**
      * Create a new page object from a given url
      * @param url
      * @return
-     */
     public static Page create(String url, DomainDao domainDao) {
-
-        /**
-         * Todo: move this to the pagedao, I think
-         */
 
         Page p = new Page();
         p.setUrl(url);
@@ -38,6 +45,7 @@ public class Page {
         p.setDomain(d);
         return p;
     }
+     */
 
     public static Page create(Domain domain, String url) {
         Page p = new Page();
@@ -93,22 +101,11 @@ public class Page {
     @Column(name="last_crawl")
     private Date lastCrawl;
 
-    public Date getLastCrawl() {
-        return lastCrawl;
-    }
-
-    public void setLastCrawl(Date lastCrawl) {
-        this.lastCrawl = lastCrawl;
-    }
-
     public void updateFromCrawl(String title, String description, CrawlResult result) {
         this.lastCrawl = new Date();
         this.title = title;
         this.description = description;
         updateFailCount(result);
-    }
-
-    public Page() {
     }
 
     public long getId() {

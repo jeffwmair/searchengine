@@ -1,5 +1,6 @@
 package jwm.ir.utils;
 
+import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.domain.ValidExtension;
@@ -66,8 +67,7 @@ public class IntegrationTestDataSetup {
 
     private static void setupPages() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        DomainDao domainDao = new DomainDaoImpl(session);
-        Page page = Page.create("http://localhost/searchengine_test/page1.html", domainDao);
+        Page page = new Page("http://localhost/searchengine_test/page1.html", Page.MakeNewDomain.Yes);
         page.setVerified(1);
         log.info("Adding page to db:"+page);
         Transaction tx = session.beginTransaction();

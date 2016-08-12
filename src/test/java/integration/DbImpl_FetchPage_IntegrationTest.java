@@ -15,8 +15,7 @@ public class DbImpl_FetchPage_IntegrationTest extends DbTestBase {
     @Test
     public void test_fetch_page() {
         String pageUrl = "http://localhost/searchengine_test/page1.html";
-        DomainDao domainDao = mock(DomainDao.class);
-        Page page = Page.create(pageUrl, domainDao);
+        Page page = new Page(pageUrl, Page.MakeNewDomain.Yes);
         db.save(page.getDomain());
         db.save(page);
 

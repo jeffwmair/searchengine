@@ -1,5 +1,7 @@
 package jwm.ir.domain.dao;
 
+import jwm.ir.crawler.UrlUtils;
+import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
@@ -38,7 +40,15 @@ public class PageDaoImpl implements PageDao {
 
     @Override
     public Page create(String url, DomainDao domainDao) {
-        Page p = Page.create(url, domainDao);
+        Page p = new Page(url, Page.MakeNewDomain.No);
+        String domainName = UrlUtils.getDomainFromAbsoluteUrl(url);
+        if (domainDao.domainExists(domainName)) {
+            p.setDomain(domainDao.getDomain(domainName));
+        }
+        else {
+            Domain d = new Domain(domainName);
+            p.setDomain(d);
+        }
         session.save(p);
         return p;
     }
