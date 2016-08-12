@@ -14,7 +14,6 @@ public interface Db {
     void addPerformanceStats(int verifications, int crawls, int indexes);
     void updateSummaries();
     void addDocumentTerms(String json, long pageId);
-    List<String> getPageLinks(List<String> pageIds);
     String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit);
     long getPageIdFromUrl(String url);
     void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults);

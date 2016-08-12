@@ -47,34 +47,6 @@ public class Database implements Db {
 	}
 
 	@Override
-	public List<String> getPageLinks(List<String> pageIds) {
-
-		StringBuilder json = new StringBuilder();
-		json.append("[");
-		for (String pageId1 : pageIds) {
-			if (!json.toString().equals("[")) json.append(",");
-			json.append("{");
-			json.append(JsonUtils.getJsonItem("id", pageId1));
-			json.append("}");
-		}
-		json.append("]");
-		
-		Map jsonOut = HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "GetPageOutLinkPageIds.php", true);
-		if (jsonOut != null && jsonOut.size() > 0) {
-			List<HashMap<String, String>> maps = (ArrayList<HashMap<String, String>>) jsonOut.get("root");
-			List<String> pageLinks = new ArrayList<>();
-			for (HashMap<String, String> map : maps) {
-				String pageId = map.get("id");
-				String destPageId = map.get("destId");
-				pageLinks.add(pageId + "," + destPageId);
-			}
-			return pageLinks;
-		}
-		else {
-			return new ArrayList<>();
-		}
-	}
-
 	public void save(Object entity) {
 
 	}

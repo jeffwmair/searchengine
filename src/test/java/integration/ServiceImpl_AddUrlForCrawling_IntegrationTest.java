@@ -2,6 +2,7 @@ package integration;
 
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
+import jwm.ir.domain.PageLink;
 import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.Db;
@@ -38,15 +39,10 @@ public class ServiceImpl_AddUrlForCrawling_IntegrationTest {
         sut.addUrlForCrawling(url, parentUrl);
 
         // assert
-        List<String> parentUrls = new ArrayList<>();
-        String parentUrlId = Long.toString(db.getPage(parentUrl).getId());
-        parentUrls.add(parentUrlId);
-        Page page = db.getPage(url);
-        List<String> links = db.getPageLinks(parentUrls);
-        Assert.assertEquals(url, page.getUrl());
-        Assert.assertEquals("Should be 1 outlink", 1, links.size());
-        Assert.assertEquals("Outlink should be 'www.google.com/b'", "www.google.com/b", links.get(0));
-
+        Page page = db.getPage(parentUrl);
+        PageLink firstPageLink = page.getPageLinks().get(0);
+        Assert.assertEquals("Should be 1 outlink", 1, page.getPageLinks().size());
+        Assert.assertEquals("Outlink should be 'www.google.com/b'", "www.google.com/b", firstPageLink.getDestinationPage().getUrl());
 
     }
 

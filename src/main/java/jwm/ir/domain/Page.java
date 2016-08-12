@@ -4,6 +4,7 @@ import jwm.ir.crawler.UrlUtils;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -48,9 +49,9 @@ public class Page {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "pageId")
-    private Set<PageLink> pageLinks;
+    private List<PageLink> pageLinks;
 
-    public Set<PageLink> getPageLinks() {
+    public List<PageLink> getPageLinks() {
         return pageLinks;
     }
 

@@ -55,37 +55,6 @@ public class DbImpl implements Db {
     }
 
     @Override
-    public List<String> getPageLinks(List<String> pageIds) {
-
-        if (pageIds.isEmpty()) {
-            log.warn("getPageLinks: Empty list of pageIds provided, so returning empty list");
-            return new ArrayList<>();
-        }
-
-        // todo: change the interface to ids (long), or better yet (maybe) urls
-        log.debug("getPageLinks for pageIds:"+pageIds.toString());
-        List<Long> pageIds_long = new ArrayList<>();
-        for (String s : pageIds) {
-            log.debug("\tgetPageLinks for pageId:"+s);
-            pageIds_long.add(Long.parseLong(s));
-        }
-
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        List<String> allLinks = new ArrayList<>();
-        Criteria crit = session.createCriteria(PageLink.class);
-        log.debug("creating criteria");
-        List<PageLink> pageLinks = crit.add(Restrictions.in("page.id", pageIds_long)).list();
-        log.debug("listed objects");
-        for (PageLink pl : pageLinks) {
-            allLinks.add(pl.getDestinationPage().getUrl());
-        }
-        tx.commit();
-        session.close();
-        return allLinks;
-    }
-
-    @Override
     public String[] getPageIdsGreaterThanPageId(String lagePageReceived, int limit) {
         return phpDb.getPageIdsGreaterThanPageId(lagePageReceived, limit);
     }
