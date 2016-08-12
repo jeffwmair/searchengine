@@ -1,11 +1,8 @@
 package jwm.ir.utils;
 
-import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
-import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.domain.ValidExtension;
-import jwm.ir.domain.dao.DomainDao;
-import jwm.ir.domain.dao.DomainDaoImpl;
+import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.service.Service;
 import jwm.ir.service.ServiceImpl;
 import org.apache.log4j.LogManager;

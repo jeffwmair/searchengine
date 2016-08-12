@@ -26,27 +26,6 @@ public class Page {
         }
     }
 
-    /**
-     * Create a new page object from a given url
-     * @param url
-     * @return
-    public static Page create(String url, DomainDao domainDao) {
-
-        Page p = new Page();
-        p.setUrl(url);
-        String domainName = UrlUtils.getDomainFromAbsoluteUrl(url);
-        Domain d;
-        if (domainDao.domainExists(domainName)) {
-            d = domainDao.getDomain(domainName);
-        }
-        else {
-            d = Domain.createFromUrl(url);
-        }
-        p.setDomain(d);
-        return p;
-    }
-     */
-
     public static Page create(Domain domain, String url) {
         Page p = new Page();
         p.setUrl(url);

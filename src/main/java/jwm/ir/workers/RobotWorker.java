@@ -19,11 +19,11 @@ public class RobotWorker implements Runnable {
 	final private static Logger log = LogManager.getLogger(RobotWorker.class);
 
 	private final int MAX_ROBOT_CACHE_SIZE = 250;
-	private final Db _db;
+	private final Db db;
 	private AtomicBoolean _stopApp;
 	private PerformanceStatsUpdateWorker _perfWorker;
 	public RobotWorker(AtomicBoolean stopApp, PerformanceStatsUpdateWorker perfWorker, Db db) {
-		_db = db;
+		this.db = db;
 		_stopApp = stopApp;
 		_perfWorker = perfWorker;
 	}
@@ -64,7 +64,7 @@ public class RobotWorker implements Runnable {
 			
 			long start = System.currentTimeMillis();
 			log.info("Starting to get urls to verify");
-			List<String> pages = _db.getUnverifiedPagesForVerification();
+			List<String> pages = db.getUnverifiedPagesForVerification();
 			log.info("Got urls to verify:" + (System.currentTimeMillis() - start) + "ms");
 			if (pages.size() == 0) {
 				log.info("No unverified pages found");
@@ -87,7 +87,7 @@ public class RobotWorker implements Runnable {
 				
 				start = System.currentTimeMillis();
 				log.info("Starting to update verification status");
-				_db.setVerificationStatusForUrls(verificationResults);
+				db.setVerificationStatusForUrls(verificationResults);
 				log.info("Updated verification status in database for " + pages.size() + " pages:" + (System.currentTimeMillis() - start) + "ms");
 				
 			} 

@@ -1,11 +1,8 @@
 package integration;
 
-import jwm.ir.domain.dao.DomainDao;
 import jwm.ir.domain.Page;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
 
 /**
  * Created by Jeff on 2016-07-26.
