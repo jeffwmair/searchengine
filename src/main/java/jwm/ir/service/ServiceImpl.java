@@ -3,7 +3,6 @@ package jwm.ir.service;
 import jwm.ir.crawler.UrlUtils;
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
-import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.domain.dao.*;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
@@ -168,18 +167,6 @@ public class ServiceImpl implements Service {
 
         tx.commit();
         session.close();
-    }
-
-    @Override
-    public List<Long> getPageIdsGreaterThanPageId(long lastPageReceived) {
-        Session session = sessionFactory.openSession();
-        List<Page> pages = session.createCriteria(Page.class).add(Restrictions.gt("id", lastPageReceived)).list();
-        List<Long> pageIds = new ArrayList<>();
-        for (Page p : pages) {
-            pageIds.add(p.getId());
-        }
-        session.close();
-        return pageIds;
     }
 
     @Override

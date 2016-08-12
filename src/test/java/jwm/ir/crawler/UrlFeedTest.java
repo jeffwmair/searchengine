@@ -1,7 +1,6 @@
 package jwm.ir.crawler;
 
 import jwm.ir.service.Service;
-import jwm.ir.utils.Db;
 import org.junit.Assert;
 import org.junit.Test;
 

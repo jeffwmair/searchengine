@@ -3,8 +3,8 @@ package integration;
 import jwm.ir.domain.dao.DomainDao;
 import jwm.ir.domain.dao.DomainDaoImpl;
 import jwm.ir.utils.HibernateUtil;
+import org.hibernate.Session;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -12,20 +12,19 @@ import org.junit.Test;
  */
 public class DomainRepositoryImpl_get_domain_not_exists_throws_IntegrationTest {
 
-    private DomainDao sut;
     @Test
     public void get_domain_not_exists_throws() {
 
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        DomainDao sut = new DomainDaoImpl(session);
         try {
             Assert.assertNotNull(sut.getDomain("google.com"));
             Assert.fail("Should throw an exception!");
         }
         catch (NullPointerException ex) { }
+        finally {
+            session.close();
+        }
 
-    }
-
-    @Before
-    public void setup() {
-        sut = new DomainDaoImpl(HibernateUtil.getSessionFactory().openSession());
     }
 }

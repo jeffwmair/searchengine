@@ -13,10 +13,9 @@ public class DbImpl_FetchPage_IntegrationTest extends DbTestBase {
     public void test_fetch_page() {
         String pageUrl = "http://localhost/searchengine_test/page1.html";
         Page page = new Page(pageUrl, Page.MakeNewDomain.Yes);
-        db.save(page.getDomain());
-        db.save(page);
-
-        Page p = db.getPage(pageUrl);
+        save(page.getDomain());
+        save(page);
+        Page p = fetchPageFromDb(pageUrl);
         Assert.assertEquals(p, page);
     }
 

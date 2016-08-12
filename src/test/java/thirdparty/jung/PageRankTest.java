@@ -2,7 +2,6 @@ package thirdparty.jung;
 
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
-import jwm.ir.utils.IntegrationTestDataSetup;
 import org.junit.Assert;
 import org.junit.Test;
 

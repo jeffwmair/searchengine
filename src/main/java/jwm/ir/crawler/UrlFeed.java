@@ -2,7 +2,6 @@ package jwm.ir.crawler;
 
 import jwm.ir.service.Service;
 import jwm.ir.utils.AssertUtils;
-import jwm.ir.utils.Db;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

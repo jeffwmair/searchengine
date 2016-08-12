@@ -4,20 +4,12 @@ import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
 import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.service.ServiceImpl;
-import jwm.ir.utils.Db;
-import jwm.ir.utils.DbImpl;
-import jwm.ir.utils.HibernateUtil;
-import org.hibernate.SessionFactory;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Created by Jeff on 2016-07-27.
  */
-public class ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_add_again_IntegrationTest {
-    private ServiceImpl sut;
-    private Db db;
-
+public class ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_add_again_IntegrationTest extends DbTestBase {
     @Test
     public void add_url_for_crawling_domain_already_exists_should_not_add_again() {
 
@@ -27,18 +19,13 @@ public class ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_a
         String url = "www.google.com/b";
         Domain domain = Domain.createFromUrl(url);
         Page parent = Page.create(domain, parentUrl);
-        db.save(domain);
-        db.save(parent);
+        save(domain);
+        save(parent);
 
         // act
+        ServiceImpl sut = new ServiceImpl(sessionFactory, new DaoFactory());
         sut.addUrlForCrawling(url, parentUrl);
 
     }
 
-    @Before
-    public void setup() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        db = new DbImpl(sessionFactory);
-        sut = new ServiceImpl(sessionFactory, new DaoFactory());
-    }
 }

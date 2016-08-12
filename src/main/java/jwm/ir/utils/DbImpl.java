@@ -1,7 +1,6 @@
 package jwm.ir.utils;
 
 import jwm.ir.domain.Page;
-import jwm.ir.domain.PageLink;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -10,7 +9,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
