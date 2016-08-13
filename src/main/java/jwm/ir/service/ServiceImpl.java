@@ -146,6 +146,11 @@ public class ServiceImpl implements Service {
     }
 
     @Override
+    public List<String> getUnverifiedPagesForVerification() {
+        return null;
+    }
+
+    @Override
     public void addDocumentTerms(long pageId, Map<String, Integer> termFrequences) {
 
         Session session = sessionFactory.openSession();

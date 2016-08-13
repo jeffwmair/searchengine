@@ -16,7 +16,7 @@ header('Content-Type: text/html;charset=utf-8');
 	<div id='nav'>
 		<a href='WebSearch.php'>Search</a>
 		<a href='Stats.php'>Stats</a>
-		<a href='SubmitSite.php'>Submit Site</a>
+		<a href=''>Submit Site (gone)</a>
 		<div id='navBorder' ></div>
 	</div>
 	<?php

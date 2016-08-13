@@ -18,4 +18,5 @@ public interface Service {
     List<String> getValidDomainExtensions();
     List<String> getUrlsToCrawl();
     void updatePageRanks(Map<Long, Double> pageRanks);
+    List<String> getUnverifiedPagesForVerification();
 }
