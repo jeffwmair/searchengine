@@ -120,12 +120,13 @@ public class Page {
         this.url = url;
     }
 
-    public int getVerified() {
-        return verified;
+    private static final int IS_VERIFIED = 1;
+    public boolean getIsVerified() {
+        return verified == IS_VERIFIED;
     }
 
-    public void setVerified(int verified) {
-        this.verified = verified;
+    public void setIsVerified() {
+        this.verified = IS_VERIFIED;
     }
 
     public int getFailCount() {

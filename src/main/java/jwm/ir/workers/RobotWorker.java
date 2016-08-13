@@ -2,6 +2,7 @@ package jwm.ir.workers;
 
 import jwm.ir.crawler.RobotsTxt;
 import jwm.ir.crawler.UrlUtils;
+import jwm.ir.service.Service;
 import jwm.ir.utils.Db;
 import jwm.ir.utils.HttpUtils;
 import org.apache.log4j.LogManager;
@@ -19,11 +20,11 @@ public class RobotWorker implements Runnable {
 	final private static Logger log = LogManager.getLogger(RobotWorker.class);
 
 	private final int MAX_ROBOT_CACHE_SIZE = 250;
-	private final Db db;
+	private final Service service;
 	private AtomicBoolean _stopApp;
 	private PerformanceStatsUpdateWorker _perfWorker;
-	public RobotWorker(AtomicBoolean stopApp, PerformanceStatsUpdateWorker perfWorker, Db db) {
-		this.db = db;
+	public RobotWorker(AtomicBoolean stopApp, PerformanceStatsUpdateWorker perfWorker, Service service) {
+		this.service = service;
 		_stopApp = stopApp;
 		_perfWorker = perfWorker;
 	}
@@ -64,7 +65,7 @@ public class RobotWorker implements Runnable {
 			
 			long start = System.currentTimeMillis();
 			log.info("Starting to get urls to verify");
-			List<String> pages = db.getUnverifiedPagesForVerification();
+			List<String> pages = service.getUnverifiedPageUrls();
 			log.info("Got urls to verify:" + (System.currentTimeMillis() - start) + "ms");
 			if (pages.size() == 0) {
 				log.info("No unverified pages found");
@@ -72,7 +73,7 @@ public class RobotWorker implements Runnable {
 				continue;
 			}
 			
-				HashMap<String, Integer> verificationResults = new HashMap<>();
+				List<String> verificationResults = new ArrayList<>();
 			
 			try 
 			{
@@ -81,13 +82,13 @@ public class RobotWorker implements Runnable {
 					start = System.currentTimeMillis();
 					if (rbt.canCrawl(url)) {
 						_perfWorker.incrementPagesVerified();
-						verificationResults.put(url, 1);
+						verificationResults.add(url);
 					}
 				}
 				
 				start = System.currentTimeMillis();
 				log.info("Starting to update verification status");
-				db.setVerificationStatusForUrls(verificationResults);
+				service.setUrlsAsVerified(verificationResults);
 				log.info("Updated verification status in database for " + pages.size() + " pages:" + (System.currentTimeMillis() - start) + "ms");
 				
 			} 

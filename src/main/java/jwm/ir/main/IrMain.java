@@ -80,7 +80,7 @@ public class IrMain {
 		Thread t = new Thread(c1, "Crawler#");
 		t.start();
 
-		RobotWorker r = new RobotWorker(stopApplication, performanceWorker, db);
+		RobotWorker r = new RobotWorker(stopApplication, performanceWorker, service);
 		Thread robotThread = new Thread(r, "RobotWorker#");
 		robotThread.start();
 

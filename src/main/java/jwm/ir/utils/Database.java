@@ -35,52 +35,6 @@ public class Database implements Db {
 		HttpUtils.httpPost(_webServiceHost, "data", json.toString(), "AddPerformanceStats.php", false);
 	}
 
-	@Override
-	public void setVerificationStatusForUrls(HashMap<String, Integer> urlVerificationResults) {
-
-		if (urlVerificationResults.size() == 0) return;
-
-		StringBuilder json = new StringBuilder();
-		json.append("[");
-		for(Map.Entry<String,Integer> item : urlVerificationResults.entrySet()) {
-			if (!json.toString().equals("[")) json.append(",");
-			json.append("{");
-			json.append(JsonUtils.getJsonItem("url", item.getKey()) + ",");
-			json.append(JsonUtils.getJsonItem("status", item.getValue()));
-			json.append("}");
-		}
-		json.append("]");
-		
-		HttpUtils.httpPost(_webServiceHost, "data",
-				json.toString(), 
-				"SetUrlVerificationStatusMultiple.php", false);
-	}
-
-	@Override
-	public ArrayList<String> getUnverifiedPagesForVerification() {
-		
-		Map json = HttpUtils.httpPost(_webServiceHost,
-				"crawlerid",
-				"1", // worker id - just 1
-				"GetUnverifiedPages.php",
-				true);
-		
-		ArrayList<String> pages = new ArrayList<>();
-		if (json == null) return pages;
-		int pageCount = json.size();
-		for(int i = 1; i <= pageCount; i++) {
-			ArrayList<HashMap<String,String>> list = (ArrayList<HashMap<String, String>>) json.get("root");
-			for(HashMap<String,String> item : list) {
-				
-				String pageUrl = item.get("url");
-				pages.add(pageUrl);
-			}
-		}
-		
-		return pages;
-		
-	}
-
 	/*
 
 	Might need this for reference for a while.

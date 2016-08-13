@@ -2,6 +2,7 @@ package jwm.ir.service;
 
 import jwm.ir.domain.Page;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,5 +19,6 @@ public interface Service {
     List<String> getValidDomainExtensions();
     List<String> getUrlsToCrawl();
     void updatePageRanks(Map<Long, Double> pageRanks);
-    List<String> getUnverifiedPagesForVerification();
+    List<String> getUnverifiedPageUrls();
+    void setUrlsAsVerified(List<String> verifiedUrls);
 }

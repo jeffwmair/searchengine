@@ -24,6 +24,19 @@ public class DbTestBase {
         session.close();
     }
 
+    protected Domain createAndSaveDomain(String domainName) {
+        Domain d = Domain.createFromUrl(domainName);
+        save(d);
+        return d;
+    }
+
+    protected Page createAndSavePage(String url, Domain d) {
+        Page p = createTransientPage(url);
+        p.setDomain(d);
+        save(p);
+        return p;
+    }
+
     protected Page createTransientPage(String url) {
         Domain d = Domain.createFromUrl(url);
         Page p = Page.create(d, url);

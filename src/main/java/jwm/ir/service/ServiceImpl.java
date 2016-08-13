@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -146,8 +147,27 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public List<String> getUnverifiedPagesForVerification() {
-        return null;
+    public List<String> getUnverifiedPageUrls() {
+        List<Page> pages = getAllPages();
+        List<String> urlsUnverified = new ArrayList<>();
+        for(Page p : pages) {
+            if (!p.getIsVerified()) {
+                urlsUnverified.add(p.getUrl());
+            }
+        }
+        return urlsUnverified;
+    }
+
+    @Override
+    public void setUrlsAsVerified(List<String> verifiedUrls) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        for(String url : verifiedUrls) {
+            Page p = (Page)getPageObject(url, session);
+            p.setIsVerified();
+        }
+        tx.commit();
+        session.close();
     }
 
     @Override

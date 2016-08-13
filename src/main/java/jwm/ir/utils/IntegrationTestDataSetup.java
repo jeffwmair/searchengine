@@ -65,7 +65,7 @@ public class IntegrationTestDataSetup {
     private static void setupPages() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Page page = new Page("http://localhost/searchengine_test/page1.html", Page.MakeNewDomain.Yes);
-        page.setVerified(1);
+        page.setIsVerified();
         log.info("Adding page to db:"+page);
         Transaction tx = session.beginTransaction();
         session.save(page.getDomain());
