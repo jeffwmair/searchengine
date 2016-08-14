@@ -2,6 +2,7 @@ package jwm.ir.workers;
 
 import jwm.ir.crawler.RobotsTxt;
 import jwm.ir.crawler.UrlUtils;
+import jwm.ir.entity.Page;
 import jwm.ir.service.Service;
 import jwm.ir.utils.HttpUtils;
 import org.apache.log4j.LogManager;
@@ -62,9 +63,9 @@ public class RobotWorker implements Runnable {
 			
 			long start = System.currentTimeMillis();
 			log.info("Starting to get urls to verify");
-			List<String> pages = service.getUnverifiedPageUrls();
+			List<Page> unverifiedPages = service.getPages(Service.FilterVerified.UnverifiedOnly);
 			log.info("Got urls to verify:" + (System.currentTimeMillis() - start) + "ms");
-			if (pages.size() == 0) {
+			if (unverifiedPages.size() == 0) {
 				log.info("No unverified pages found");
 				sleep(1);
 				continue;
@@ -74,19 +75,26 @@ public class RobotWorker implements Runnable {
 			
 			try 
 			{
-				for(String url : pages) {
-					RobotsTxt rbt = getRobot(url, domainRobots);
-					start = System.currentTimeMillis();
-					if (rbt.canCrawl(url)) {
-						verificationResults.add(url);
+				for(Page p : unverifiedPages) {
+					RobotsTxt rbt = getRobot(p.getUrl(), domainRobots);
+					if (rbt.canCrawl(p.getUrl())) {
+						verificationResults.add(p.getUrl());
 					}
 				}
 				
 				start = System.currentTimeMillis();
 				log.info("Starting to update verification status");
+				for(String s : verificationResults) {
+					log.debug("Verified -> "+s);
+				}
 				service.setUrlsAsVerified(verificationResults);
-				log.info("Updated verification status in database for " + pages.size() + " pages:" + (System.currentTimeMillis() - start) + "ms");
-				
+				log.info("Updated verification status in database for " + unverifiedPages.size() + " pages:" + (System.currentTimeMillis() - start) + "ms");
+
+				PageRankCalculatorWorker pageRankCalculatorWorker = new PageRankCalculatorWorker(service);
+				pageRankCalculatorWorker.run();
+				DatabaseStatsUpdateWorker statsUpdater = new DatabaseStatsUpdateWorker(service);
+				statsUpdater.run();
+
 			} 
 			catch (Exception ex) {
 				log.error("Error in robotWorker:" + ex.toString() + "\n Line:" + Thread.currentThread().getStackTrace()[0].getLineNumber());
@@ -102,7 +110,7 @@ public class RobotWorker implements Runnable {
 		
 		/* get from cache or from the source */
 		
-		RobotsTxt rbt = null;
+		RobotsTxt rbt;
 		String domain = null;
 		
 		try {

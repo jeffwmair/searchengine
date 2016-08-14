@@ -177,22 +177,13 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public List<String> getUnverifiedPageUrls() {
-        List<Page> pages = getAllPages(FilterVerified.UnverifiedOnly);
-        List<String> urlsUnverified = new ArrayList<>();
-        for(Page p : pages) {
-            urlsUnverified.add(p.getUrl());
-        }
-        return urlsUnverified;
-    }
-
-    @Override
     public void setUrlsAsVerified(List<String> verifiedUrls) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         for(String url : verifiedUrls) {
             Page p = (Page)getPageObject(url, session);
             p.setIsVerified();
+            log.debug("setting page as verified:"+p);
         }
         tx.commit();
         session.close();
@@ -223,7 +214,7 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public List<Page> getAllPages(FilterVerified filterVerified) {
+    public List<Page> getPages(FilterVerified filterVerified) {
         Session session = sessionFactory.openSession();
         Criteria crit = session.createCriteria(Page.class);
         if (filterVerified == FilterVerified.VerifiedOnly) {

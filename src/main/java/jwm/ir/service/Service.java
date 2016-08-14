@@ -20,9 +20,8 @@ public interface Service {
     void updateSummaries();
     boolean pageExists(String url);
     Page getPage(String url);
-    List<Page> getAllPages(FilterVerified filterVerified);
+    List<Page> getPages(FilterVerified filterVerified);
     List<String> getValidDomainExtensions();
     List<String> getUrlsToCrawl();
-    List<String> getUnverifiedPageUrls();
 
 }

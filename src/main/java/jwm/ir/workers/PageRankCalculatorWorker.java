@@ -35,7 +35,7 @@ class PageRankCalculatorWorker implements Runnable {
 	private void calculatePageRanks() {
 
 		log.info("beginning page-rank calculation");
-		List<Page> pages = service.getAllPages(Service.FilterVerified.VerifiedOnly);
+		List<Page> pages = service.getPages(Service.FilterVerified.VerifiedOnly);
 
 		// construct our graph of vertices and edges
 		int edgeNumber = 1;

@@ -23,8 +23,6 @@ public class IndexerWorker implements Runnable {
 	private final int _indexesBeforePrUpdate;
 	private final TermPreprocessor _tp;
 	private final AtomicBoolean _stopApp;
-	private Thread _threadPageRankWorker;
-	private Thread _updateStatsWorker;
 	private final BlockingQueue<WebResource> indexQueue;
 	private final Service service;
 
@@ -91,8 +89,8 @@ public class IndexerWorker implements Runnable {
 			/* have one indexer responsible for starting the PR thread */
 			if (_indexCount.get() >= _indexesBeforePrUpdate) {
 				log.info("We have indexed " + _indexCount.get() + " files, now starting PageRankUpdater");
-				startPageRankWorker();
-				startSummarizerWorker();
+				//startPageRankWorker();
+				//startSummarizerWorker();
 				_indexCount.set(0);
 			}
 
@@ -120,7 +118,6 @@ public class IndexerWorker implements Runnable {
 
 	/**
 	 * Starts PageRank updates
-	 */
 	private void startPageRankWorker() {
 		if (_threadPageRankWorker == null || !_threadPageRankWorker.isAlive()) {
 			PageRankCalculatorWorker worker = new PageRankCalculatorWorker(service);
@@ -135,7 +132,6 @@ public class IndexerWorker implements Runnable {
 	private void startSummarizerWorker() {
 		log.info("Starting summarizer worker");
 		if (_updateStatsWorker == null || !_updateStatsWorker.isAlive()) {
-			DatabaseStatsUpdateWorker worker = new DatabaseStatsUpdateWorker(service);
 			_updateStatsWorker = new Thread(worker);
 			_updateStatsWorker.start();
 		}
@@ -143,6 +139,7 @@ public class IndexerWorker implements Runnable {
 			log.info("Not starting StatsUpdate worker as it is already running");
 		}
 	}
+	 */
 
 	/**
 	 * Process an input crawled file

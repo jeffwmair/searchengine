@@ -1,7 +1,9 @@
 package integration;
 
 import jwm.ir.entity.Domain;
+import jwm.ir.entity.Page;
 import jwm.ir.entity.dao.DaoFactory;
+import jwm.ir.service.Service;
 import jwm.ir.service.ServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,11 +24,9 @@ public class ServiceImpl_get_unverified_pages_IntegrationTest extends DbTestBase
         createAndSavePage("google.com/b", d);
 
         ServiceImpl sut = new ServiceImpl(sessionFactory, new DaoFactory());
-        List<String> unverifiedPageUrls = sut.getUnverifiedPageUrls();
+        List<Page> unverifiedPages = sut.getPages(Service.FilterVerified.UnverifiedOnly);
 
-        Assert.assertEquals("should be 2 urls", 2, unverifiedPageUrls.size());
-        Assert.assertTrue(unverifiedPageUrls.contains("google.com/a"));
-        Assert.assertTrue(unverifiedPageUrls.contains("google.com/b"));
+        Assert.assertEquals("should be 2 urls", 2, unverifiedPages.size());
 
     }
 }
