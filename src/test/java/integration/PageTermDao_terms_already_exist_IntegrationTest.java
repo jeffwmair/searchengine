@@ -21,11 +21,11 @@ public class PageTermDao_terms_already_exist_IntegrationTest extends DbTestBase 
         Domain domain = Domain.createFromUrl("google.com");
         Page page = Page.create(domain, "google.com/a");
         Term term = new Term("hello");
-        save(domain);
-        save(page);
-        save(term);
+        saveOrUpdate(domain);
+        saveOrUpdate(page);
+        saveOrUpdate(term);
         PageTerm pt = new PageTerm(page, term, 1);
-        save(pt);
+        saveOrUpdate(pt);
 
         Session session = sessionFactory.openSession();
         Page p = fetchPageFromDb("google.com/a");

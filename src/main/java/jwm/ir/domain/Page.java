@@ -15,6 +15,7 @@ import java.util.Set;
 public class Page {
 
 
+
     public enum MakeNewDomain {Yes, No}
 
     public Page() { }
@@ -75,7 +76,7 @@ public class Page {
     @Column(name = "fail_count")
     private int failCount;
 
-    @Column
+    @Column(nullable = true)
     private double pageRank;
 
     @Column(name="last_crawl")
@@ -120,13 +121,14 @@ public class Page {
         this.url = url;
     }
 
-    private static final int IS_VERIFIED = 1;
+    public static final int IsVerified = 1;
+    public static final int UnVerified = 0;
     public boolean getIsVerified() {
-        return verified == IS_VERIFIED;
+        return verified == IsVerified;
     }
 
     public void setIsVerified() {
-        this.verified = IS_VERIFIED;
+        this.verified = IsVerified;
     }
 
     public int getFailCount() {
@@ -134,6 +136,9 @@ public class Page {
     }
 
     public void setPageRank(double pageRank) {
+        if (!getIsVerified()) {
+            throw new IllegalStateException("Cannot set the page rank if the page is not yet verified");
+        }
         this.pageRank = pageRank;
     }
 
@@ -177,5 +182,6 @@ public class Page {
     public void updateFailCount(CrawlResult result) {
         failCount += Math.max(0, result == CrawlResult.Fail ? 1 : -1);
     }
+
 }
 

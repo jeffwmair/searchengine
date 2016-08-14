@@ -9,6 +9,17 @@ import org.junit.Test;
 public class PageTest {
 
     @Test
+    public void try_setting_pagerank_when_not_verified_throws() {
+       try {
+           // not verified, by default
+           Page p = new Page();
+           p.setPageRank(1);
+           Assert.fail("should have thrown an exception");
+       }
+       catch (IllegalStateException ex) {}
+    }
+
+    @Test
     public void increment_fail_count_from_zero_should_not_go_negative() {
         Page page = new Page();
         page.updateFailCount(Page.CrawlResult.Success);

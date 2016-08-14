@@ -19,8 +19,8 @@ public class ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_a
         String url = "www.google.com/b";
         Domain domain = Domain.createFromUrl(url);
         Page parent = Page.create(domain, parentUrl);
-        save(domain);
-        save(parent);
+        saveOrUpdate(domain);
+        saveOrUpdate(parent);
 
         // act
         ServiceImpl sut = new ServiceImpl(sessionFactory, new DaoFactory());

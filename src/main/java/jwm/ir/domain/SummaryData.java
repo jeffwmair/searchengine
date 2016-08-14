@@ -13,22 +13,22 @@ import java.util.Date;
 @Table(name="summarydata_i")
 public class SummaryData {
 
-    public String getItem() {
-        return item;
-    }
-
-    public void setItem(String item) {
-        this.item = item;
-    }
+    public static final String ItemIndexedPageCount = "IndexedPageCount";
 
     @Id
     @Column(nullable = false)
     private String item;
 
     @Column(nullable = false)
-    private long val;
+    public long value;
 
     @Column(nullable = false)
     private Date updatedate;
+
+    public void update(String itemName, long value) {
+        this.item = itemName;
+        this.value = value;
+        this.updatedate = new Date();
+    }
 
 }

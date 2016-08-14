@@ -25,20 +25,17 @@ public class CrawlerWorker implements Runnable {
 	private final Service service;
 	private final List<String> _validDomainExtensions;
 	AtomicBoolean _stopApp;
-	PerformanceStatsUpdateWorker _perfWorker;
 	private final BlockingQueue<WebResource> indexQueue;
 
 	public CrawlerWorker( List<String> validDomainExtensions,
 						  Service service,
 						  BlockingQueue<WebResource> indexQueue,
-						  PerformanceStatsUpdateWorker perfWorker,
 						  AtomicBoolean stopApp) {
 		AssertUtils.notNull(indexQueue, "must provide indexQueue");
 		AssertUtils.notNull(service, "must provide service");
 		this.indexQueue = indexQueue;
 		this.service = service;
 		_validDomainExtensions = validDomainExtensions;
-		_perfWorker = perfWorker;
 		_stopApp = stopApp;
 
 		log.info("Starting...");
@@ -78,7 +75,6 @@ public class CrawlerWorker implements Runnable {
 				Page.CrawlResult result = p.crawl();
 				if (result == Page.CrawlResult.Success) {
 					// lets say we just count successful crawls with the performance worker
-					_perfWorker.incrementPagesCrawled();
 					title = p.getPageTitle();
 					pageDesc = p.getPageDescription();
 					boolean[] robotRules = new boolean[2];

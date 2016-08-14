@@ -6,14 +6,11 @@ import jwm.ir.indexer.TermPreprocessor;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourceNoneImpl;
 import jwm.ir.service.Service;
-import jwm.ir.utils.Db;
-import jwm.ir.utils.JsonUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,22 +19,18 @@ public class IndexerWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(IndexerWorker.class);
 	private final List<String> _stopwords;
-	private final Db db;
 	private final AtomicInteger _indexCount;
 	private final int _indexesBeforePrUpdate;
 	private final TermPreprocessor _tp;
 	private final AtomicBoolean _stopApp;
 	private Thread _threadPageRankWorker;
 	private Thread _updateStatsWorker;
-	private final PerformanceStatsUpdateWorker _perfWorker;
 	private final BlockingQueue<WebResource> indexQueue;
 	private final Service service;
 
 	public IndexerWorker(BlockingQueue<WebResource> indexQueue,
-						 Db db,
 						 Service service,
 						 StopwordsFileLoader stopwordsFileLoader,
-						 PerformanceStatsUpdateWorker perfWorker,
 						 AtomicInteger indexCount,
 						 int indexesBeforePrUpdate,
 						 AtomicBoolean stopApplication) {
@@ -46,11 +39,9 @@ public class IndexerWorker implements Runnable {
 		this.indexQueue = indexQueue;
 		this.service = service;
 		_stopwords = stopwordsFileLoader.getStopwordsFromFile();
-		this.db = db;
 		_indexCount = indexCount;
 		_indexesBeforePrUpdate = indexesBeforePrUpdate;
 		_tp = getTermProcessor();
-		_perfWorker = perfWorker;
 		_stopApp = stopApplication;
 	}
 	private static TermPreprocessor getTermProcessor() {
@@ -144,7 +135,7 @@ public class IndexerWorker implements Runnable {
 	private void startSummarizerWorker() {
 		log.info("Starting summarizer worker");
 		if (_updateStatsWorker == null || !_updateStatsWorker.isAlive()) {
-			DatabaseStatsUpdateWorker worker = new DatabaseStatsUpdateWorker(db);
+			DatabaseStatsUpdateWorker worker = new DatabaseStatsUpdateWorker(service);
 			_updateStatsWorker = new Thread(worker);
 			_updateStatsWorker.start();
 		}
@@ -181,7 +172,6 @@ public class IndexerWorker implements Runnable {
 		service.addDocumentTerms(pageId, parser.getTermFrequencies());
 
 		// delete when done processing
-		_perfWorker.incrementPagesIndexed();
 		_indexCount.incrementAndGet();
 
 	}

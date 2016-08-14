@@ -5,13 +5,10 @@ import jwm.ir.indexer.StopwordsFileLoader;
 import jwm.ir.message.WebResource;
 import jwm.ir.service.Service;
 import jwm.ir.service.ServiceImpl;
-import jwm.ir.utils.Database;
-import jwm.ir.utils.Db;
 import jwm.ir.utils.HibernateUtil;
 import jwm.ir.utils.IntegrationTestDataSetup;
 import jwm.ir.workers.CrawlerWorker;
 import jwm.ir.workers.IndexerWorker;
-import jwm.ir.workers.PerformanceStatsUpdateWorker;
 import jwm.ir.workers.RobotWorker;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -56,7 +53,6 @@ public class IrMain {
 		log.info("pagerank_interval=" + Integer.toString(prInterval));
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Db db = new Database(host);
 		Service service = new ServiceImpl(sessionFactory, new DaoFactory());
 
 		List<String> domainExtensions = service.getValidDomainExtensions();
@@ -69,36 +65,28 @@ public class IrMain {
 		// indexed file counter tells Indexer#1 when to run PageRank update
 		AtomicInteger indexCounter = new AtomicInteger(0);
 
-		PerformanceStatsUpdateWorker performanceWorker = new PerformanceStatsUpdateWorker(db, stopApplication);
 		BlockingQueue<WebResource> queue = new LinkedBlockingQueue<>();
 
 		CrawlerWorker c1 = new CrawlerWorker(domainExtensions,
 				service,
 				queue,
-				performanceWorker,
 				stopApplication);
 		Thread t = new Thread(c1, "Crawler#");
 		t.start();
 
-		RobotWorker r = new RobotWorker(stopApplication, performanceWorker, service);
+		RobotWorker r = new RobotWorker(stopApplication, service);
 		Thread robotThread = new Thread(r, "RobotWorker#");
 		robotThread.start();
 
 		StopwordsFileLoader stopwordsFileLoader = new StopwordsFileLoader("./stopwords.txt");
 		IndexerWorker indexer = new IndexerWorker(queue,
-				db,
 				service,
 				stopwordsFileLoader,
-				performanceWorker,
 				indexCounter,
 				prInterval,
 				stopApplication);
 		Thread indexerThread = new Thread(indexer, "IndexWorker#");
 		indexerThread.start();
-
-		/* start the performance worker */
-		Thread perfWorkerThread = new Thread(performanceWorker);
-		perfWorkerThread.start();
 
 		TerminationWatcher terminationWatcher = new TerminationWatcher(stopApplication);
 		Thread terminationWatcherThread = new Thread(terminationWatcher);

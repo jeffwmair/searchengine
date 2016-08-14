@@ -16,24 +16,24 @@ public class DbTestBase {
 
     protected SessionFactory sessionFactory;
 
-    protected void save(Object o) {
+    protected void saveOrUpdate(Object o) {
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        session.save(o);
+        session.saveOrUpdate(o);
         tx.commit();
         session.close();
     }
 
     protected Domain createAndSaveDomain(String domainName) {
         Domain d = Domain.createFromUrl(domainName);
-        save(d);
+        saveOrUpdate(d);
         return d;
     }
 
     protected Page createAndSavePage(String url, Domain d) {
         Page p = createTransientPage(url);
         p.setDomain(d);
-        save(p);
+        saveOrUpdate(p);
         return p;
     }
 

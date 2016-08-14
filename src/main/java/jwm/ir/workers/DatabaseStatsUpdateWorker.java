@@ -1,22 +1,22 @@
 package jwm.ir.workers;
 
-import jwm.ir.utils.Db;
+import jwm.ir.service.Service;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 class DatabaseStatsUpdateWorker implements Runnable {
 
 	final private static Logger log = LogManager.getLogger(DatabaseStatsUpdateWorker.class);
-	private Db _db;
-	public DatabaseStatsUpdateWorker(Db db) {
-		_db = db;
+	private Service service;
+	public DatabaseStatsUpdateWorker(Service service) {
+		this.service = service;
 	}
 	
 	@Override
 	public void run() {
 	
 		log.info("Beginning to run database summarizer");
-		_db.updateSummaries();
+		service.updateSummaries();
 		log.info("Finished running database summarizer");
 	}
 

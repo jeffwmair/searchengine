@@ -3,7 +3,6 @@ package jwm.ir.workers;
 import jwm.ir.crawler.RobotsTxt;
 import jwm.ir.crawler.UrlUtils;
 import jwm.ir.service.Service;
-import jwm.ir.utils.Db;
 import jwm.ir.utils.HttpUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -22,11 +21,9 @@ public class RobotWorker implements Runnable {
 	private final int MAX_ROBOT_CACHE_SIZE = 250;
 	private final Service service;
 	private AtomicBoolean _stopApp;
-	private PerformanceStatsUpdateWorker _perfWorker;
-	public RobotWorker(AtomicBoolean stopApp, PerformanceStatsUpdateWorker perfWorker, Service service) {
+	public RobotWorker(AtomicBoolean stopApp, Service service) {
 		this.service = service;
 		_stopApp = stopApp;
-		_perfWorker = perfWorker;
 	}
 	
 	@Override
@@ -81,7 +78,6 @@ public class RobotWorker implements Runnable {
 					RobotsTxt rbt = getRobot(url, domainRobots);
 					start = System.currentTimeMillis();
 					if (rbt.canCrawl(url)) {
-						_perfWorker.incrementPagesVerified();
 						verificationResults.add(url);
 					}
 				}

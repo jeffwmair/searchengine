@@ -3,6 +3,7 @@ package jwm.ir.service;
 import jwm.ir.crawler.UrlUtils;
 import jwm.ir.domain.Domain;
 import jwm.ir.domain.Page;
+import jwm.ir.domain.SummaryData;
 import jwm.ir.domain.dao.*;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
@@ -14,7 +15,6 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -147,13 +147,41 @@ public class ServiceImpl implements Service {
     }
 
     @Override
+    public void updateSummaries() {
+
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+
+
+        // fetch the total number of page-ranked pages
+        int rankedPageCount = session
+                .createCriteria(Page.class)
+                .add(Restrictions.isNotNull("pageRank"))
+                .add(Restrictions.eq("verified", 1)).list().size();
+
+        Object record = session.createCriteria(SummaryData.class).add(Restrictions.eq("item", SummaryData.ItemIndexedPageCount)).uniqueResult();
+        SummaryData summaryData;
+        if (record != null) {
+            summaryData = (SummaryData)record;
+        }
+        else {
+            summaryData = new SummaryData();
+        }
+
+        summaryData.update(SummaryData.ItemIndexedPageCount, rankedPageCount);
+        session.saveOrUpdate(summaryData);
+
+        tx.commit();
+        session.close();
+
+    }
+
+    @Override
     public List<String> getUnverifiedPageUrls() {
-        List<Page> pages = getAllPages();
+        List<Page> pages = getAllPages(FilterVerified.UnverifiedOnly);
         List<String> urlsUnverified = new ArrayList<>();
         for(Page p : pages) {
-            if (!p.getIsVerified()) {
-                urlsUnverified.add(p.getUrl());
-            }
+            urlsUnverified.add(p.getUrl());
         }
         return urlsUnverified;
     }
@@ -195,9 +223,16 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public List<Page> getAllPages() {
+    public List<Page> getAllPages(FilterVerified filterVerified) {
         Session session = sessionFactory.openSession();
-        List<Page> pages = session.createCriteria(Page.class).list();
+        Criteria crit = session.createCriteria(Page.class);
+        if (filterVerified == FilterVerified.VerifiedOnly) {
+            crit.add(Restrictions.eq("verified", Page.IsVerified));
+        }
+        else if (filterVerified == FilterVerified.UnverifiedOnly) {
+            crit.add(Restrictions.eq("verified", Page.UnVerified));
+        }
+        List<Page> pages = crit.list();
         session.close();
         return pages;
     }
@@ -225,5 +260,53 @@ public class ServiceImpl implements Service {
         session.close();
         return page;
     }
+	/*
 
+	Might need this for reference for a while.
+
+	private final int MAX_URLS_FRO_1_DOMAIN_TO_CRAWL = 10;
+
+	@Override
+	public List<String> popUrls() {
+
+		Map json = HttpUtils.httpPost(_webServiceHost,
+				"crawlerid",
+				"1",
+				"GetPagesToCrawl.php",
+				true);
+
+
+		HashMap<String, Integer> domainPageCounter = new HashMap<>();
+		List<String> retVal = new ArrayList<>();
+
+		if (json == null) return retVal;
+
+		int pageCount = json.size();
+		for(int i = 1; i <= pageCount; i++) {
+			ArrayList<HashMap<String,String>> list = (ArrayList<HashMap<String, String>>) json.get("root");
+			for(HashMap<String,String> item : list) {
+
+				String domain = item.get("domain");
+				String pageUrl = item.get("url");
+
+				Integer domainPageCount = domainPageCounter.get(domain);
+				if (domainPageCount == null) {
+					domainPageCount = 1;
+				}
+				else
+				{
+					domainPageCount++;
+				}
+
+				domainPageCounter.put(domain, domainPageCount);
+
+				if (domainPageCount < MAX_URLS_FRO_1_DOMAIN_TO_CRAWL) {
+					retVal.add(pageUrl);
+				}
+			}
+		}
+
+		return retVal;
+	}
+	*/
 }

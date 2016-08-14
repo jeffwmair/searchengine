@@ -22,8 +22,8 @@ public class ServiceImpl_AddUrlForCrawling_IntegrationTest extends DbTestBase {
         Domain d = Domain.createFromUrl("google.com");
         Page parent = Page.create(d, "www.google.com/a");
         // the parent page needs to exist before-hand
-        save(d);
-        save(parent);
+        saveOrUpdate(d);
+        saveOrUpdate(parent);
 
         // act
         ServiceImpl sut = new ServiceImpl(sessionFactory, new DaoFactory());

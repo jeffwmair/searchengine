@@ -16,8 +16,8 @@ public class PageTermDaoImpl_create_IntegrationTest extends DbTestBase {
 
         Domain domain = Domain.createFromUrl("google.com");
         Page page = Page.create(domain, "google.com/a");
-        save(domain);
-        save(page);
+        saveOrUpdate(domain);
+        saveOrUpdate(page);
         Session session = sessionFactory.openSession();
         TermDao termDao = new TermDaoImpl(session);
         PageDao pageDao = new PageDaoImpl(session);

@@ -16,7 +16,7 @@ public class DomainRepositoryImpl_get_domain_exists_IntegrationTest extends DbTe
     public void get_domain_exists() {
 
         Domain domain = Domain.createFromUrl("www.google.com");
-        save(domain);
+        saveOrUpdate(domain);
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         DomainDaoImpl sut = new DomainDaoImpl(session);

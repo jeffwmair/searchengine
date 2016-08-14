@@ -20,8 +20,8 @@ public class ServiceImpl_AddDocumentTerm_IntegrationTest extends DbTestBase {
 
         Domain domain = Domain.createFromUrl("google.com");
         Page page = Page.create(domain, "google.com/a");
-        save(domain);
-        save(page);
+        saveOrUpdate(domain);
+        saveOrUpdate(page);
         long pageId = fetchPageFromDb("google.com/a").getId();
         Map<String, Integer> termFrequency = new HashMap<>();
         termFrequency.put("hello", 1);
