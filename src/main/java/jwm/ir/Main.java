@@ -1,7 +1,8 @@
-package jwm.ir.main;
+package jwm.ir;
 
 import jwm.ir.domain.dao.DaoFactory;
 import jwm.ir.indexer.StopwordsFileLoader;
+import jwm.ir.main.TerminationWatcher;
 import jwm.ir.message.WebResource;
 import jwm.ir.service.Service;
 import jwm.ir.service.ServiceImpl;
@@ -21,9 +22,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
-public class IrMain {
+public class Main {
 
-	final private static Logger log = LogManager.getLogger(IrMain.class);
+	final private static Logger log = LogManager.getLogger(Main.class);
 
 	public static void main(String[] args) {
 
