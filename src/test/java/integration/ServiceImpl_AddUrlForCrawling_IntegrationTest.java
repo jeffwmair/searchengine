@@ -1,9 +1,9 @@
 package integration;
 
-import jwm.ir.domain.Domain;
-import jwm.ir.domain.Page;
-import jwm.ir.domain.PageLink;
-import jwm.ir.domain.dao.DaoFactory;
+import jwm.ir.entity.Domain;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.PageLink;
+import jwm.ir.entity.dao.DaoFactory;
 import jwm.ir.service.ServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;

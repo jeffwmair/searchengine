@@ -1,10 +1,10 @@
 package jwm.ir.service;
 
 import jwm.ir.crawler.UrlUtils;
-import jwm.ir.domain.Domain;
-import jwm.ir.domain.Page;
-import jwm.ir.domain.SummaryData;
-import jwm.ir.domain.dao.*;
+import jwm.ir.entity.Domain;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.SummaryData;
+import jwm.ir.entity.dao.*;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

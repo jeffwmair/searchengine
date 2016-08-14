@@ -1,7 +1,7 @@
-package jwm.ir.domain.dao;
+package jwm.ir.entity.dao;
 
-import jwm.ir.domain.Page;
-import jwm.ir.domain.PageLink;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.PageLink;
 import org.hibernate.Session;
 
 /**

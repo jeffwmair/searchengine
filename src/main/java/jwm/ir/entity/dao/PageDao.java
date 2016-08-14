@@ -1,6 +1,6 @@
-package jwm.ir.domain.dao;
+package jwm.ir.entity.dao;
 
-import jwm.ir.domain.Page;
+import jwm.ir.entity.Page;
 
 import java.util.Map;
 

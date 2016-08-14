@@ -1,6 +1,6 @@
-package jwm.ir.domain.dao;
+package jwm.ir.entity.dao;
 
-import jwm.ir.domain.ValidExtension;
+import jwm.ir.entity.ValidExtension;
 import org.hibernate.Session;
 
 import java.util.ArrayList;

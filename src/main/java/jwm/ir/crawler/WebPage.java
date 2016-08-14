@@ -1,7 +1,7 @@
 package jwm.ir.crawler;
 
 
-import jwm.ir.domain.Page;
+import jwm.ir.entity.Page;
 import jwm.ir.message.WebResource;
 import jwm.ir.message.WebResourcePageImpl;
 import org.apache.log4j.LogManager;

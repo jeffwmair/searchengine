@@ -1,8 +1,8 @@
 package integration;
 
-import jwm.ir.domain.ValidExtension;
-import jwm.ir.domain.dao.ExtensionDao;
-import jwm.ir.domain.dao.ExtensionDaoImpl;
+import jwm.ir.entity.ValidExtension;
+import jwm.ir.entity.dao.ExtensionDao;
+import jwm.ir.entity.dao.ExtensionDaoImpl;
 import jwm.ir.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

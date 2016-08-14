@@ -1,4 +1,4 @@
-package jwm.ir.domain.dao;
+package jwm.ir.entity.dao;
 
 /**
  * Created by Jeff on 2016-08-05.

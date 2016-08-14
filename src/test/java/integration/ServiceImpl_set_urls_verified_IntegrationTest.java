@@ -1,7 +1,7 @@
 package integration;
 
-import jwm.ir.domain.Domain;
-import jwm.ir.domain.dao.DaoFactory;
+import jwm.ir.entity.Domain;
+import jwm.ir.entity.dao.DaoFactory;
 import jwm.ir.service.ServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;

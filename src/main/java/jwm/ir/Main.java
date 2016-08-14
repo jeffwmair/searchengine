@@ -1,6 +1,6 @@
 package jwm.ir;
 
-import jwm.ir.domain.dao.DaoFactory;
+import jwm.ir.entity.dao.DaoFactory;
 import jwm.ir.indexer.StopwordsFileLoader;
 import jwm.ir.main.TerminationWatcher;
 import jwm.ir.message.WebResource;

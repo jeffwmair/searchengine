@@ -1,7 +1,7 @@
 package jwm.ir.service;
 
-import jwm.ir.domain.Page;
-import jwm.ir.domain.dao.*;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.dao.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

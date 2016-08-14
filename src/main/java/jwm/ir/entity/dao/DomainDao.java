@@ -1,6 +1,6 @@
-package jwm.ir.domain.dao;
+package jwm.ir.entity.dao;
 
-import jwm.ir.domain.Domain;
+import jwm.ir.entity.Domain;
 
 /**
  * Created by Jeff on 2016-07-31.

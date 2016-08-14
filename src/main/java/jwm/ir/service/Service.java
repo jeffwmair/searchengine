@@ -1,8 +1,7 @@
 package jwm.ir.service;
 
-import jwm.ir.domain.Page;
+import jwm.ir.entity.Page;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

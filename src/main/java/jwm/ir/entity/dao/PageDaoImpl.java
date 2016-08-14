@@ -1,8 +1,8 @@
-package jwm.ir.domain.dao;
+package jwm.ir.entity.dao;
 
 import jwm.ir.crawler.UrlUtils;
-import jwm.ir.domain.Domain;
-import jwm.ir.domain.Page;
+import jwm.ir.entity.Domain;
+import jwm.ir.entity.Page;
 import jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;

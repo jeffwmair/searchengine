@@ -1,9 +1,9 @@
 package integration;
 
-import jwm.ir.domain.Domain;
-import jwm.ir.domain.Page;
-import jwm.ir.domain.PageTerm;
-import jwm.ir.domain.Term;
+import jwm.ir.entity.Domain;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.PageTerm;
+import jwm.ir.entity.Term;
 import jwm.ir.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

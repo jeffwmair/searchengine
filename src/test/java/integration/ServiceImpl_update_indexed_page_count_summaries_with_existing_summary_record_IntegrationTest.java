@@ -1,9 +1,9 @@
 package integration;
 
-import jwm.ir.domain.Domain;
-import jwm.ir.domain.Page;
-import jwm.ir.domain.SummaryData;
-import jwm.ir.domain.dao.DaoFactory;
+import jwm.ir.entity.Domain;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.SummaryData;
+import jwm.ir.entity.dao.DaoFactory;
 import jwm.ir.service.ServiceImpl;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;

@@ -1,8 +1,8 @@
-package jwm.ir.domain.dao;
+package jwm.ir.entity.dao;
 
-import jwm.ir.domain.Page;
-import jwm.ir.domain.PageTerm;
-import jwm.ir.domain.Term;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.PageTerm;
+import jwm.ir.entity.Term;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;

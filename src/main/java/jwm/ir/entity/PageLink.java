@@ -1,4 +1,4 @@
-package jwm.ir.domain;
+package jwm.ir.entity;
 
 import javax.persistence.*;
 

@@ -1,4 +1,4 @@
-package jwm.ir.domain.dao;
+package jwm.ir.entity.dao;
 
 import java.util.List;
 

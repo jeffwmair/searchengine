@@ -1,7 +1,7 @@
 package integration;
 
-import jwm.ir.domain.Page;
-import jwm.ir.domain.dao.DaoFactory;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.dao.DaoFactory;
 import jwm.ir.service.ServiceImpl;
 import jwm.ir.utils.HibernateUtil;
 import org.junit.Assert;

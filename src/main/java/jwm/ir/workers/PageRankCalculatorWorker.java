@@ -2,8 +2,8 @@ package jwm.ir.workers;
 
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
-import jwm.ir.domain.Page;
-import jwm.ir.domain.PageLink;
+import jwm.ir.entity.Page;
+import jwm.ir.entity.PageLink;
 import jwm.ir.service.Service;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
