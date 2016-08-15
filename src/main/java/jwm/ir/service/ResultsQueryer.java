@@ -9,11 +9,12 @@ import java.util.List;
  */
 public class ResultsQueryer {
 
-    private final List<Page> pages;
-    public ResultsQueryer(List<Page> pages) {
-        this.pages = pages;
+    private final List<Page> indexedPages;
+    public ResultsQueryer(List<Page> indexedPages) {
+        this.indexedPages = indexedPages;
     }
     public List<Page> queryPages(String query) {
+
        throw new RuntimeException("not implemented");
     }
 }
