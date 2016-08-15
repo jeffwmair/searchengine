@@ -28,6 +28,7 @@ public class StemmerWrapper {
     }
 
     static {
+        // todo: fill this out as needed
         keep_same.add("this");
     }
 }

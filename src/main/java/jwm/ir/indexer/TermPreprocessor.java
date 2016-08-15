@@ -34,13 +34,11 @@ public class TermPreprocessor {
 		}
 		
 	}
-	
+
 	public void stemTerm() {
-		Stemmer stemmer = new Stemmer();
-		stemmer.add(_term.toCharArray(), _term.length());
-		stemmer.stem();
-		_term = stemmer.toString();
+		// todo: combine TermProcessor with StemmerWrapper; no need for both
+		_term = StemmerWrapper.stem(_term);
 	}
-		
+
 	public String getOutput() { return _term; }
 }
