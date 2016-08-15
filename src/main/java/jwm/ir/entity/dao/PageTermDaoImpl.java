@@ -22,7 +22,6 @@ public class PageTermDaoImpl implements PageTermDao {
     }
     @Override
     public void create(long pageId, String termValue, int termFrequency) {
-        log.warn("Should be stemming terms before here!  That used to be done in a php script.");
         log.info("pagetermDaoImpl.create pageId:'"+pageId+"', termValue:'"+termValue+"', termFrequency:'"+termFrequency+"'");
         Term term = termDao.createOrIncrementTermFrequency(termValue);
         Page page = pageDao.getPage(pageId);

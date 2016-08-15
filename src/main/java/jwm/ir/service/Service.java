@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public interface Service {
 
-    public enum FilterVerified { VerifiedOnly, UnverifiedOnly, Any }
+    enum FilterVerified { VerifiedOnly, UnverifiedOnly, Any }
 
     void addCrawlResult(String url, String pageTitle, String pageDesc, Page.CrawlResult result);
     void addDocumentTerms(long pageId, Map<String, Integer> termFrequences);
@@ -21,6 +21,7 @@ public interface Service {
     boolean pageExists(String url);
     Page getPage(String url);
     List<Page> getPages(FilterVerified filterVerified);
+    List<Page> getScoredPagesFromQuery(String query);
     List<String> getValidDomainExtensions();
     List<String> getUrlsToCrawl();
 

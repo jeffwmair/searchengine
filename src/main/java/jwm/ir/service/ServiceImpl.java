@@ -5,6 +5,7 @@ import jwm.ir.entity.Domain;
 import jwm.ir.entity.Page;
 import jwm.ir.entity.SummaryData;
 import jwm.ir.entity.dao.*;
+import jwm.ir.indexer.StemmerWrapper;
 import jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -205,7 +206,8 @@ public class ServiceImpl implements Service {
 
             String termValue = e.getKey();
             int tf = e.getValue();
-            pageTermDao.create(pageId, termValue, tf);
+            String stemmedTermValue = StemmerWrapper.stem(termValue);
+            pageTermDao.create(pageId, stemmedTermValue, tf);
 
         }
 
@@ -226,6 +228,11 @@ public class ServiceImpl implements Service {
         List<Page> pages = crit.list();
         session.close();
         return pages;
+    }
+
+    @Override
+    public List<Page> getScoredPagesFromQuery(String query) {
+        throw new  RuntimeException("not impl");
     }
 
     @Override
