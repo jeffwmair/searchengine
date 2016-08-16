@@ -3,6 +3,7 @@ package jwm.ir.service;
 import jwm.ir.entity.Page;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Jeff on 2016-08-14.
@@ -15,6 +16,7 @@ public class ResultsQueryer {
     }
     public List<Page> queryPages(String query) {
 
-       throw new RuntimeException("not implemented");
+        Map<String, Integer> queryMap = QueryHelper.getMapOfQueryTerms(query);
+        throw new RuntimeException("not implemented");
     }
 }
