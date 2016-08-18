@@ -1,6 +1,7 @@
 package jwm.ir.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by Jeff on 2016-07-24.
@@ -12,6 +13,11 @@ public class Term {
     @Id
     @GeneratedValue
     private long termId;
+
+    @OneToMany
+    @Column(name = "termId")
+    public Collection<PageTerm> pageTerms;
+
 
     public Term() { }
     public Term(String term) {

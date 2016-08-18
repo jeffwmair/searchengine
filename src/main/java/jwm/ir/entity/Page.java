@@ -14,8 +14,6 @@ import java.util.Set;
 @Table(name="pages")
 public class Page {
 
-
-
     public enum MakeNewDomain {Yes, No}
 
     public Page() { }
