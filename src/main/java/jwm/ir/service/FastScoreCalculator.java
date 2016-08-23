@@ -1,25 +1,60 @@
 package jwm.ir.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FastScoreCalculator {
 
-    private final WeightedTermFrequencyCalculator termFrequencyCalculator;
+	public Map<Integer,Double> scorePagesAgainstQuery(Map<Integer, Document> documents, 
+			Map<String, List<Document>> termPostings,
+			List<String> queryTerms, 
+			int totalNumberOfDocuments, 
+			Map<String, Integer> documentFrequencies) {
 
-    public FastScoreCalculator(WeightedTermFrequencyCalculator termFrequencyCalculator) {
-        this.termFrequencyCalculator = termFrequencyCalculator;
-    }
+		if (totalNumberOfDocuments <= 0) throw new IllegalArgumentException("There must be at least 1 document indexed");
+		if (queryTerms.size() == 0) throw new IllegalArgumentException("There must be at least 1 query term provided");
 
-    public double calculateScore(Map<String,Integer> queryTermFrequencies) {
+		Map<Integer,Double> scores = new HashMap<>();
 
-        for(String term : queryTermFrequencies.keySet()) {
-            
-            double weightedFrequency = termFrequencyCalculator.calculateTermFrequency(queryTermFrequencies.get(term));
-            //$q_idf = log(($numDocs/ $allTermIds[$qt]), 10);
-            //$w_tq = $q_idf * $q_tf;
+		for(String qt : queryTerms) {
 
-        }
-        return 0;
-    }
+			double weightedQueryTerm = calculateIdf(totalNumberOfDocuments, documentFrequencies.get(qt));
+			List<Document> termPostingsList = termPostings.get(qt);
+
+			for(Document d : termPostingsList) {
+				int docTermFrequency = d.getTermFrequency(qt);
+				int documentId = d.getDocumentId();
+				// note: can use an alternate weighting like idf, etc here instead.
+				int weightedTermFrequency = docTermFrequency;
+				initializeScoreIfNotThere(scores, documentId);
+				double currentScore = scores.get(documentId);
+				scores.put(documentId, currentScore + weightedTermFrequency);
+			}
+		}
+
+		// normalize (?) the scores based on the document length
+		for (Integer documentId : scores.keySet()) {
+			double normalizedScore = scores.get(documentId) / documents.get(documentId).getLength();
+			scores.put(documentId, normalizedScore);
+		}
+
+
+		return scores;
+	}
+
+	private void initializeScoreIfNotThere(Map<Integer, Double> scores, Integer documentId) {
+		if (!scores.containsKey(documentId)) {
+			scores.put(documentId, 0.0);
+		}
+	}
+
+	/**
+	 * Calculate IDF - inverse document frequency
+	 */
+	private double calculateIdf(int totalNumberOfDocuments, int termFrequency) {
+		return Math.log10(totalNumberOfDocuments / termFrequency);
+	}
 
 }

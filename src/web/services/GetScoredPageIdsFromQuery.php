@@ -63,10 +63,10 @@
 		array_push($pageIds, $pageId);
 		if (count($pageIds) == $batch_size) {
 			if ($fastSearch) {
-				fastScorePages($conn, $queryTermIds, $allTermIds, $pageIds, $numDocs, $documentScores, $documentDetails);				
+				fastScorePages($conn, $queryTermIds, $allTermIds, $pageIds, $numDocs, $documentScores, $documentDetails);
 			}
 			else {
-				scorePages($conn, $queryVector, $allTermIds, $pageIds, $numDocs, $documentScores);	
+				scorePages($conn, $queryVector, $allTermIds, $pageIds, $numDocs, $documentScores);
 			}
 
 			unset($pageIds);
@@ -127,6 +127,10 @@
 	
 	function fastScorePages($conn, $queryTerms, $allTermIds, $pageIds, $numDocs, &$documentScores, $docDetails) {
 		$interimScores = array();
+
+		/*
+		    getTermsForDocuments returns an array of pageIds -> (array[termId] -> termFreq)
+		*/
 		$docsTermIds = getTermsForDocuments($conn, $pageIds);
 		foreach($queryTerms as $qt => $f) {
 			// w = tf * idf
