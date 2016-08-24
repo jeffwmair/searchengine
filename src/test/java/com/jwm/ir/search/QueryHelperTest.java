@@ -1,4 +1,4 @@
-package com.jwm.ir.service;
+package com.jwm.ir.search;
 
 import com.jwm.ir.search.QueryHelper;
 import org.junit.Assert;
