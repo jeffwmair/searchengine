@@ -1,13 +1,37 @@
 package com.jwm.ir.search;
 
+import com.jwm.ir.entity.Page;
+import com.jwm.ir.entity.PageTerm;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class DocumentImpl implements Document {
 
-	private final int id;
+	private final long id;
 	private final int length;
 	private final Map<String, Integer> termFrequency;
+
+	/**
+	 * Create a new Document from Page (entity) object
+	 * @param page
+     */
+	public DocumentImpl(Page page) {
+		this.id = page.getId();
+		this.termFrequency = new HashMap<>();
+		int localLength = 0;
+		for(PageTerm pageTerm : page.getPageTerms()) {
+			localLength += pageTerm.getTermFrequency();
+			this.termFrequency.put(pageTerm.getTerm().getTerm(), pageTerm.getTermFrequency());
+		}
+		this.length = localLength;
+	}
+
+	/**
+	 * Create a new Document from String content
+	 * @param id
+	 * @param content
+     */
 	public DocumentImpl(int id, String content) {
 		this.id = id;
 		String[] terms = content.split(" ");
@@ -23,7 +47,7 @@ public class DocumentImpl implements Document {
 		}
 	}
 
-	public int getDocumentId() {
+	public long getDocumentId() {
 		return id;
 	}
 

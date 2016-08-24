@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class FastCosineScoreCalculator {
 
-	public Set<RankedDocument> scorePagesAgainstQuery(Map<Integer, Document> documents,
+	public Set<RankedDocument> scorePagesAgainstQuery(Map<Long, Document> documents,
 													  Map<String, List<Document>> termPostings,
 													  List<String> queryTerms,
 													  int totalNumberOfDocuments) {
@@ -15,7 +15,7 @@ public class FastCosineScoreCalculator {
 		if (totalNumberOfDocuments <= 0) throw new IllegalArgumentException("There must be at least 1 document indexed");
 		if (queryTerms.size() == 0) throw new IllegalArgumentException("There must be at least 1 query term provided");
 
-		Map<Integer,Double> scores = new HashMap<>();
+		Map<Long,Double> scores = new HashMap<>();
 
 		for(String qt : queryTerms) {
 
@@ -23,7 +23,7 @@ public class FastCosineScoreCalculator {
 
 			for(Document d : termPostingsList) {
 				int docTermFrequency = d.getTermFrequency(qt);
-				int documentId = d.getDocumentId();
+				long documentId = d.getDocumentId();
 				// note: can use an alternate weighting like idf, etc here instead.
 				int weightedTermFrequency = docTermFrequency;
 				initializeScoreIfNotThere(scores, documentId);
@@ -33,14 +33,14 @@ public class FastCosineScoreCalculator {
 		}
 
 		// normalize (?) the scores based on the document length
-		for (Integer documentId : scores.keySet()) {
+		for (Long documentId : scores.keySet()) {
 			double normalizedScore = scores.get(documentId) / documents.get(documentId).getLength();
 			scores.put(documentId, normalizedScore);
 		}
 
 
 		Set<RankedDocument> rankedDocuments = new TreeSet<>();
-		for(Integer documentId : scores.keySet()) {
+		for(Long documentId : scores.keySet()) {
 			Document doc = documents.get(documentId);
 			double score = scores.get(documentId);
 			rankedDocuments.add(new RankedDocument(score, doc));
@@ -49,7 +49,7 @@ public class FastCosineScoreCalculator {
 		return rankedDocuments;
 	}
 
-	private void initializeScoreIfNotThere(Map<Integer, Double> scores, Integer documentId) {
+	private void initializeScoreIfNotThere(Map<Long, Double> scores, Long documentId) {
 		if (!scores.containsKey(documentId)) {
 			scores.put(documentId, 0.0);
 		}

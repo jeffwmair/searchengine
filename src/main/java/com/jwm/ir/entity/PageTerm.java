@@ -24,6 +24,10 @@ public class PageTerm {
     @Column(nullable = false, name = "term_frequency")
     private int termFrequency;
 
+    public int getTermFrequency() {
+        return termFrequency;
+    }
+
     public PageTerm() {}
     public PageTerm(Page page, Term term, int termFrequency) {
         this.page = page;

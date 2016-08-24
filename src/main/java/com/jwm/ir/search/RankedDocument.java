@@ -14,7 +14,7 @@ public class RankedDocument implements Document, Comparable<RankedDocument> {
     }
 
     @Override
-    public int getDocumentId() {
+    public long getDocumentId() {
         return document.getDocumentId();
     }
 

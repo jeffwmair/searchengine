@@ -5,25 +5,26 @@ import com.jwm.ir.entity.Page;
 import com.jwm.ir.entity.Term;
 import com.jwm.ir.indexer.StemmerWrapper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Jeff on 2016-08-14.
  */
 public class ResultsQueryer {
 
-    private final List<Page> indexedPages;
+    private final int totalIndexedPages;
     private final List<Term> terms;
+    private final FastCosineScoreCalculator scoreCalculator;
 
     /**
      * New instance of ResultsQueryer with all the indexed pages to query.
-     * @param indexedPages
      */
-    public ResultsQueryer(List<Term> terms, List<Page> indexedPages) {
-        this.indexedPages = indexedPages;
+    public ResultsQueryer(List<Term> terms,
+                          int totalIndexedPages,
+                          FastCosineScoreCalculator scoreCalculator) {
+        this.totalIndexedPages = totalIndexedPages;
         this.terms = terms;
+        this.scoreCalculator = scoreCalculator;
     }
 
 
@@ -32,12 +33,14 @@ public class ResultsQueryer {
      * @param query
      * @return
      */
-    public List<Page> queryPages(String query) {
+    public Set<RankedDocument> queryPages(String query) {
 
         String query_lowercase = query.toLowerCase();
         Map<String, Integer> queryMap = QueryHelper.getMapOfQueryTerms(query_lowercase);
 
-        List<Page> documents = new ArrayList<>();
+        Map<Long, Document> documents = new HashMap<>();
+        Map<String, List<Document>> termPostings = new HashMap<>();
+        List<String> queryTerms = new ArrayList<>();
 
         for (String term_raw : queryMap.keySet()) {
 
@@ -57,17 +60,25 @@ public class ResultsQueryer {
                 continue;
             }
 
+            List<Document> postingsList = new ArrayList<>();
+            termPostings.put(term_stemmed, postingsList);
+
             // add the page(s) associated with the matched term
             for(PageTerm pt : matchedTerm.pageTerms) {
-                if (!documents.contains(pt.getPage())) {
-                    documents.add(pt.getPage());
+                Document document = new DocumentImpl(pt.getPage());
+                if (!documents.containsKey(document.getDocumentId())) {
+                    documents.put(document.getDocumentId(), new DocumentImpl(pt.getPage()));
+                }
+
+                if (!postingsList.contains(document)) {
+                    postingsList.add(document);
                 }
             }
 
-
+            queryTerms.add(term_stemmed);
         }
 
+        return scoreCalculator.scorePagesAgainstQuery(documents, termPostings, queryTerms, totalIndexedPages);
 
-        throw new RuntimeException("not implemented");
     }
 }

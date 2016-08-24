@@ -1,7 +1,7 @@
 package com.jwm.ir.search;
 
 public interface Document {
-	int getDocumentId();
+	long getDocumentId();
 	int getLength();
 	int getTermFrequency(String term);
 }

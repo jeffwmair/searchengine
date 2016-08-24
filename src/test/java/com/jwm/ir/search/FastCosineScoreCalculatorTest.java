@@ -29,10 +29,10 @@ public class FastCosineScoreCalculatorTest {
 		Document d1 = new DocumentImpl(1, "big blue dog");
 		Document d2 = new DocumentImpl(2, "small red cat");
 		Document d3 = new DocumentImpl(3, "big car");
-		Map<Integer, Document> docsWithQueryTerm = new HashMap<>();
-		docsWithQueryTerm.put(1, d1);
+		Map<Long, Document> docsWithQueryTerm = new HashMap<>();
+		docsWithQueryTerm.put(1L, d1);
 		// d2 doesn't have the query term
-		docsWithQueryTerm.put(3, d3);
+		docsWithQueryTerm.put(3L, d3);
 
 		Map<String, List<Document>> termPostings = new HashMap<>();
 		termPostings.put("big", Arrays.asList(new Document[] { d1, d3 }));
