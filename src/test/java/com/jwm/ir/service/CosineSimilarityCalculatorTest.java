@@ -1,6 +1,8 @@
 package com.jwm.ir.service;
 
 import java.util.*;
+
+import com.jwm.ir.search.CosineSimilarityCalculator;
 import org.junit.Assert;
 import org.junit.Test;
 

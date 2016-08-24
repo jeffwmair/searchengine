@@ -1,4 +1,4 @@
-package com.jwm.ir.service;
+package com.jwm.ir.search;
 
 /**
  * Created by Jeff on 2016-08-18.

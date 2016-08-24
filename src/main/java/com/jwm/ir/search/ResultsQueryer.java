@@ -1,4 +1,4 @@
-package com.jwm.ir.service;
+package com.jwm.ir.search;
 
 import com.jwm.ir.entity.PageTerm;
 import com.jwm.ir.entity.Page;

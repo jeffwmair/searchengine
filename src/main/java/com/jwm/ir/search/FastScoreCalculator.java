@@ -1,4 +1,4 @@
-package com.jwm.ir.service;
+package com.jwm.ir.search;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,8 +9,7 @@ public class FastScoreCalculator {
 	public Map<Integer,Double> scorePagesAgainstQuery(Map<Integer, Document> documents, 
 			Map<String, List<Document>> termPostings,
 			List<String> queryTerms, 
-			int totalNumberOfDocuments, 
-			Map<String, Integer> documentFrequencies) {
+			int totalNumberOfDocuments) {
 
 		if (totalNumberOfDocuments <= 0) throw new IllegalArgumentException("There must be at least 1 document indexed");
 		if (queryTerms.size() == 0) throw new IllegalArgumentException("There must be at least 1 query term provided");
@@ -19,7 +18,6 @@ public class FastScoreCalculator {
 
 		for(String qt : queryTerms) {
 
-			double weightedQueryTerm = calculateIdf(totalNumberOfDocuments, documentFrequencies.get(qt));
 			List<Document> termPostingsList = termPostings.get(qt);
 
 			for(Document d : termPostingsList) {
@@ -47,13 +45,6 @@ public class FastScoreCalculator {
 		if (!scores.containsKey(documentId)) {
 			scores.put(documentId, 0.0);
 		}
-	}
-
-	/**
-	 * Calculate IDF - inverse document frequency
-	 */
-	private double calculateIdf(int totalNumberOfDocuments, int termFrequency) {
-		return Math.log10(totalNumberOfDocuments / termFrequency);
 	}
 
 }

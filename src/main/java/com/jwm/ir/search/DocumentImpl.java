@@ -1,4 +1,4 @@
-package com.jwm.ir.service;
+package com.jwm.ir.search;
 
 import java.util.HashMap;
 import java.util.Map;

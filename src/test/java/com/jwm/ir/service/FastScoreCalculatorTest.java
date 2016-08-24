@@ -1,6 +1,10 @@
 package com.jwm.ir.service;
 
 import java.util.*;
+
+import com.jwm.ir.search.Document;
+import com.jwm.ir.search.DocumentImpl;
+import com.jwm.ir.search.FastScoreCalculator;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,7 +19,7 @@ public class FastScoreCalculatorTest {
 	public void zero_documents_indexed_should_throw_exception() {
 		FastScoreCalculator sut = new FastScoreCalculator();
 		try {
-			sut.scorePagesAgainstQuery(null, null, null, 0, null);
+			sut.scorePagesAgainstQuery(null, null, null, 0);
 			Assert.fail("should have thrown exception");
 		}
 		catch(IllegalArgumentException ex) { }
@@ -47,16 +51,7 @@ public class FastScoreCalculatorTest {
 
 		int totalDocumentsIndexed = 3;
 
-		Map<String, Integer> documentFrequencies = new HashMap<>();
-		documentFrequencies.put("big", 2);
-		documentFrequencies.put("blue", 1);
-		documentFrequencies.put("dog", 1);
-		documentFrequencies.put("small", 1);
-		documentFrequencies.put("red", 1);
-		documentFrequencies.put("cat", 1);
-		documentFrequencies.put("car", 1);
-
-		Map<Integer,Double> scores = sut.scorePagesAgainstQuery(docsWithQueryTerm, termPostings, queryTerms, totalDocumentsIndexed, documentFrequencies);
+		Map<Integer,Double> scores = sut.scorePagesAgainstQuery(docsWithQueryTerm, termPostings, queryTerms, totalDocumentsIndexed);
 		for(Integer docId : scores.keySet()) {
 			System.out.println("doc:'"+docId+"', score:'"+scores.get(docId)+"'");
 		}

@@ -1,5 +1,6 @@
 package com.jwm.ir.service;
 
+import com.jwm.ir.search.QueryHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
