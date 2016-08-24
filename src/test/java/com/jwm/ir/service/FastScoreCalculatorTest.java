@@ -5,6 +5,7 @@ import java.util.*;
 import com.jwm.ir.search.Document;
 import com.jwm.ir.search.DocumentImpl;
 import com.jwm.ir.search.FastScoreCalculator;
+import com.jwm.ir.search.RankedDocument;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,7 +29,6 @@ public class FastScoreCalculatorTest {
 	@Test
 	public void basic_test() {
 		FastScoreCalculator sut = new FastScoreCalculator();
-		int N = 3;
 
 		Document d1 = new DocumentImpl(1, "big blue dog");
 		Document d2 = new DocumentImpl(2, "small red cat");
@@ -51,11 +51,10 @@ public class FastScoreCalculatorTest {
 
 		int totalDocumentsIndexed = 3;
 
-		Map<Integer,Double> scores = sut.scorePagesAgainstQuery(docsWithQueryTerm, termPostings, queryTerms, totalDocumentsIndexed);
-		for(Integer docId : scores.keySet()) {
-			System.out.println("doc:'"+docId+"', score:'"+scores.get(docId)+"'");
-		}
-
+		Set<RankedDocument> rankedDocuments = sut.scorePagesAgainstQuery(docsWithQueryTerm, termPostings, queryTerms, totalDocumentsIndexed);
+		Iterator<RankedDocument> itr = rankedDocuments.iterator();
+		Assert.assertEquals("first doc should have a score of 0.667", 0.667, itr.next().getRanking(), ERROR_DELTA);
+		Assert.assertEquals("second doc should have a score of 0.5", 0.5, itr.next().getRanking(), ERROR_DELTA);
 
 	}
 

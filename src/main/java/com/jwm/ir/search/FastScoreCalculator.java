@@ -1,15 +1,13 @@
 package com.jwm.ir.search;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FastScoreCalculator {
 
-	public Map<Integer,Double> scorePagesAgainstQuery(Map<Integer, Document> documents, 
-			Map<String, List<Document>> termPostings,
-			List<String> queryTerms, 
-			int totalNumberOfDocuments) {
+	public Set<RankedDocument> scorePagesAgainstQuery(Map<Integer, Document> documents,
+													  Map<String, List<Document>> termPostings,
+													  List<String> queryTerms,
+													  int totalNumberOfDocuments) {
 
 		if (totalNumberOfDocuments <= 0) throw new IllegalArgumentException("There must be at least 1 document indexed");
 		if (queryTerms.size() == 0) throw new IllegalArgumentException("There must be at least 1 query term provided");
@@ -38,7 +36,14 @@ public class FastScoreCalculator {
 		}
 
 
-		return scores;
+		Set<RankedDocument> rankedDocuments = new TreeSet<>();
+		for(Integer documentId : scores.keySet()) {
+			Document doc = documents.get(documentId);
+			double score = scores.get(documentId);
+			rankedDocuments.add(new RankedDocument(score, doc));
+		}
+
+		return rankedDocuments;
 	}
 
 	private void initializeScoreIfNotThere(Map<Integer, Double> scores, Integer documentId) {
