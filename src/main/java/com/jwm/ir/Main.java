@@ -8,8 +8,6 @@ import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.index.workers.CrawlerWorker;
 import com.jwm.ir.index.workers.IndexerWorker;
 import com.jwm.ir.index.workers.RobotWorker;
-import com.jwm.ir.utils.HibernateUtil;
-import com.jwm.ir.utils.IntegrationTestDataSetup;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;

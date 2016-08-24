@@ -1,4 +1,4 @@
-package com.jwm.ir.utils;
+package com.jwm.ir;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

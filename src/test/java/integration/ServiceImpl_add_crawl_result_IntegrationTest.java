@@ -3,7 +3,7 @@ package integration;
 import com.jwm.ir.entity.Page;
 import com.jwm.ir.entity.dao.DaoFactory;
 import com.jwm.ir.index.service.ServiceImpl;
-import com.jwm.ir.utils.HibernateUtil;
+import com.jwm.ir.HibernateUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

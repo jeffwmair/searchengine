@@ -1,4 +1,4 @@
-package com.jwm.ir.utils;
+package com.jwm.ir.index.workers;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -10,7 +10,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 
-public class HttpUtils {
+class HttpUtils {
 
 	
 private static final String CHAR_SET = "UTF-8";

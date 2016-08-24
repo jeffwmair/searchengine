@@ -4,7 +4,6 @@ import com.jwm.ir.entity.Page;
 import com.jwm.ir.index.crawler.RobotsTxt;
 import com.jwm.ir.index.crawler.UrlUtils;
 import com.jwm.ir.index.service.Service;
-import com.jwm.ir.utils.HttpUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

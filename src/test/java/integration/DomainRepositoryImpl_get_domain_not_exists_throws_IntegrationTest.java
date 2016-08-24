@@ -2,7 +2,7 @@ package integration;
 
 import com.jwm.ir.entity.dao.DomainDao;
 import com.jwm.ir.entity.dao.DomainDaoImpl;
-import com.jwm.ir.utils.HibernateUtil;
+import com.jwm.ir.HibernateUtil;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;

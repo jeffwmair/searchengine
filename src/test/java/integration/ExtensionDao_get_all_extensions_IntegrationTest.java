@@ -3,7 +3,7 @@ package integration;
 import com.jwm.ir.entity.ValidExtension;
 import com.jwm.ir.entity.dao.ExtensionDao;
 import com.jwm.ir.entity.dao.ExtensionDaoImpl;
-import com.jwm.ir.utils.HibernateUtil;
+import com.jwm.ir.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

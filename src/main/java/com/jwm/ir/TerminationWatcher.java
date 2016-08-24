@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Created by Jeff on 2016-07-28.
  */
-public class TerminationWatcher implements Runnable {
+class TerminationWatcher implements Runnable {
 	final private static Logger log = LogManager.getLogger(TerminationWatcher.class);
 	private AtomicBoolean stopApplication;
 

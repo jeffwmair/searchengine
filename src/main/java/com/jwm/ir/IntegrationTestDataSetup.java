@@ -1,4 +1,4 @@
-package com.jwm.ir.utils;
+package com.jwm.ir;
 
 import com.jwm.ir.entity.Page;
 import com.jwm.ir.entity.ValidExtension;
@@ -13,7 +13,7 @@ import org.hibernate.Transaction;
 /**
  * Created by Jeff on 2016-07-26.
  */
-public class IntegrationTestDataSetup {
+class IntegrationTestDataSetup {
     final private static Logger log = LogManager.getLogger(IntegrationTestDataSetup.class);
     public static void setup() {
         log.info("Doing integration-test setup");
