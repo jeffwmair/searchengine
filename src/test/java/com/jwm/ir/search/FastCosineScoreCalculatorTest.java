@@ -2,23 +2,19 @@ package com.jwm.ir.search;
 
 import java.util.*;
 
-import com.jwm.ir.search.Document;
-import com.jwm.ir.search.DocumentImpl;
-import com.jwm.ir.search.FastScoreCalculator;
-import com.jwm.ir.search.RankedDocument;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * Created by Jeff on 2016-08-18
  */
-public class FastScoreCalculatorTest {
+public class FastCosineScoreCalculatorTest {
 
 	private static final double ERROR_DELTA = 0.001;
 
 	@Test
 	public void zero_documents_indexed_should_throw_exception() {
-		FastScoreCalculator sut = new FastScoreCalculator();
+		FastCosineScoreCalculator sut = new FastCosineScoreCalculator();
 		try {
 			sut.scorePagesAgainstQuery(null, null, null, 0);
 			Assert.fail("should have thrown exception");
@@ -28,7 +24,7 @@ public class FastScoreCalculatorTest {
 
 	@Test
 	public void basic_test() {
-		FastScoreCalculator sut = new FastScoreCalculator();
+		FastCosineScoreCalculator sut = new FastCosineScoreCalculator();
 
 		Document d1 = new DocumentImpl(1, "big blue dog");
 		Document d2 = new DocumentImpl(2, "small red cat");

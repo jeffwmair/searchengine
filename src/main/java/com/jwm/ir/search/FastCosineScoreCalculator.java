@@ -2,7 +2,10 @@ package com.jwm.ir.search;
 
 import java.util.*;
 
-public class FastScoreCalculator {
+/**
+ * Implementation (roughly) of FastCosineScore algorithm from Introduction to Information Retrieval, Chapter 7. (figure 7.1)
+ */
+public class FastCosineScoreCalculator {
 
 	public Set<RankedDocument> scorePagesAgainstQuery(Map<Integer, Document> documents,
 													  Map<String, List<Document>> termPostings,
