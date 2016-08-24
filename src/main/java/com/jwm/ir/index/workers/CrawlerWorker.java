@@ -1,7 +1,7 @@
 package com.jwm.ir.index.workers;
 
-import com.jwm.ir.index.crawler.WebPage;
 import com.jwm.ir.entity.Page;
+import com.jwm.ir.index.crawler.WebPage;
 import com.jwm.ir.index.message.WebResource;
 import com.jwm.ir.index.service.Service;
 import com.jwm.ir.utils.AssertUtils;

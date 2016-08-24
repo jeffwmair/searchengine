@@ -1,8 +1,8 @@
 package com.jwm.ir.index.workers;
 
+import com.jwm.ir.index.CrawledTextParser;
 import com.jwm.ir.index.StopwordsFileLoader;
 import com.jwm.ir.index.TermPreprocessor;
-import com.jwm.ir.index.CrawledTextParser;
 import com.jwm.ir.index.message.WebResource;
 import com.jwm.ir.index.message.WebResourceNoneImpl;
 import com.jwm.ir.index.service.Service;

@@ -1,7 +1,5 @@
 package com.jwm.ir.search;
 
-import com.jwm.ir.search.Document;
-import com.jwm.ir.search.DocumentImpl;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,8 +1,5 @@
-package com.jwm.ir.index.crawler;
+package com.jwm.ir.index.robotverifier;
 
-import com.jwm.ir.index.robotverifier.RobotDisallows;
-import com.jwm.ir.index.robotverifier.RobotUserAgentCache;
-import com.jwm.ir.utils.Clock;
 import org.junit.Assert;
 import org.junit.Test;
 

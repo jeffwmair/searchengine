@@ -1,9 +1,7 @@
 package com.jwm.ir.index.robotverifier;
 
-import com.jwm.ir.utils.AssertUtils;
-import com.jwm.ir.utils.Clock;
 import com.jwm.ir.index.crawler.UrlUtils;
-import com.jwm.ir.utils.Cleanable;
+import com.jwm.ir.utils.AssertUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

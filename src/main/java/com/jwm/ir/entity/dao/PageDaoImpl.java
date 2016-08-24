@@ -1,9 +1,9 @@
 package com.jwm.ir.entity.dao;
 
 import com.jwm.ir.entity.Domain;
-import com.jwm.ir.utils.AssertUtils;
-import com.jwm.ir.index.crawler.UrlUtils;
 import com.jwm.ir.entity.Page;
+import com.jwm.ir.index.crawler.UrlUtils;
+import com.jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 

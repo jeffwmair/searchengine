@@ -1,9 +1,9 @@
-package com.jwm.ir.utils;
+package com.jwm.ir.index.robotverifier;
 
 /**
  * Created by Jeff on 2016-07-20.
  */
-public class Clock {
+class Clock {
     public long getTime() {
         return System.currentTimeMillis();
     }

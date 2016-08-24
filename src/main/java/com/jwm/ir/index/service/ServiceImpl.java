@@ -1,12 +1,12 @@
 package com.jwm.ir.index.service;
 
-import com.jwm.ir.index.crawler.UrlUtils;
 import com.jwm.ir.entity.Domain;
 import com.jwm.ir.entity.Page;
+import com.jwm.ir.entity.SummaryData;
 import com.jwm.ir.entity.dao.*;
 import com.jwm.ir.index.StemmerWrapper;
+import com.jwm.ir.index.crawler.UrlUtils;
 import com.jwm.ir.utils.AssertUtils;
-import com.jwm.ir.entity.SummaryData;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;

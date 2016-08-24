@@ -1,7 +1,6 @@
 package com.jwm.ir.index.robotverifier;
 
 import com.jwm.ir.index.crawler.ResourceFetcher;
-import com.jwm.ir.utils.Clock;
 import org.junit.Before;
 import org.junit.Test;
 

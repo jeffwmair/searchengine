@@ -1,10 +1,10 @@
 package com.jwm.ir.index.workers;
 
-import edu.uci.ics.jung.algorithms.scoring.PageRank;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import com.jwm.ir.entity.Page;
 import com.jwm.ir.entity.PageLink;
 import com.jwm.ir.index.service.Service;
+import edu.uci.ics.jung.algorithms.scoring.PageRank;
+import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 

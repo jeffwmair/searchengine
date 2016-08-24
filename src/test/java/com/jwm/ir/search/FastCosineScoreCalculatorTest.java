@@ -1,9 +1,9 @@
 package com.jwm.ir.search;
 
-import java.util.*;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.*;
 
 /**
  * Created by Jeff on 2016-08-18
