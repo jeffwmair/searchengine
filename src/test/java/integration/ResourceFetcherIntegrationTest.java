@@ -1,7 +1,7 @@
 package integration;
 
-import com.jwm.ir.crawler.ResourceFetcher;
-import com.jwm.ir.message.WebResource;
+import com.jwm.ir.index.crawler.ResourceFetcher;
+import com.jwm.ir.index.message.WebResource;
 import org.junit.Assert;
 import org.junit.Test;
 

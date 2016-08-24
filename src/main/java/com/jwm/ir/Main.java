@@ -1,16 +1,15 @@
 package com.jwm.ir;
 
 import com.jwm.ir.entity.dao.DaoFactory;
-import com.jwm.ir.indexer.StopwordsFileLoader;
-import com.jwm.ir.main.TerminationWatcher;
-import com.jwm.ir.message.WebResource;
-import com.jwm.ir.service.Service;
-import com.jwm.ir.service.ServiceImpl;
+import com.jwm.ir.index.StopwordsFileLoader;
+import com.jwm.ir.index.message.WebResource;
+import com.jwm.ir.index.service.Service;
+import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.utils.HibernateUtil;
 import com.jwm.ir.utils.IntegrationTestDataSetup;
-import com.jwm.ir.workers.CrawlerWorker;
-import com.jwm.ir.workers.IndexerWorker;
-import com.jwm.ir.workers.RobotWorker;
+import com.jwm.ir.index.workers.CrawlerWorker;
+import com.jwm.ir.index.workers.IndexerWorker;
+import com.jwm.ir.index.workers.RobotWorker;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;

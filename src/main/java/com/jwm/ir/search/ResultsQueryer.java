@@ -1,9 +1,8 @@
 package com.jwm.ir.search;
 
 import com.jwm.ir.entity.PageTerm;
-import com.jwm.ir.entity.Page;
 import com.jwm.ir.entity.Term;
-import com.jwm.ir.indexer.StemmerWrapper;
+import com.jwm.ir.index.StemmerWrapper;
 
 import java.util.*;
 

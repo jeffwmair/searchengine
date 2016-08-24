@@ -4,7 +4,7 @@ import com.jwm.ir.entity.Domain;
 import com.jwm.ir.entity.Page;
 import com.jwm.ir.entity.SummaryData;
 import com.jwm.ir.entity.dao.DaoFactory;
-import com.jwm.ir.service.ServiceImpl;
+import com.jwm.ir.index.service.ServiceImpl;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Assert;

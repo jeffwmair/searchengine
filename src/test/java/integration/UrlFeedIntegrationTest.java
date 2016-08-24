@@ -1,12 +1,12 @@
 package integration;
 
-import com.jwm.ir.crawler.UrlFeed;
-import com.jwm.ir.crawler.UrlFeedRunner;
+import com.jwm.ir.index.crawler.UrlFeed;
+import com.jwm.ir.index.crawler.UrlFeedRunner;
 import com.jwm.ir.entity.Domain;
 import com.jwm.ir.entity.Page;
 import com.jwm.ir.entity.dao.DaoFactory;
-import com.jwm.ir.service.Service;
-import com.jwm.ir.service.ServiceImpl;
+import com.jwm.ir.index.service.Service;
+import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

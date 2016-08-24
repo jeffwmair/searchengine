@@ -1,7 +1,6 @@
 package com.jwm.ir.entity;
 
-import com.jwm.ir.crawler.UrlUtils;
-import com.jwm.ir.search.Document;
+import com.jwm.ir.index.crawler.UrlUtils;
 
 import javax.persistence.*;
 import java.util.Date;
