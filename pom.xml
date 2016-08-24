@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<mainClass>jwm.ir.Main</mainClass>
+		<mainClass>com.jwm.ir.Main</mainClass>
 		<javaVersion>1.7</javaVersion>
 	</properties>
 

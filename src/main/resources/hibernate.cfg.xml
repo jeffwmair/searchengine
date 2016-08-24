@@ -33,14 +33,14 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">create-drop</property>
 
-		<mapping class="jwm.ir.entity.Domain" />
-		<mapping class="jwm.ir.entity.Page" />
-		<mapping class="jwm.ir.entity.PageLink" />
-		<mapping class="jwm.ir.entity.PageTerm" />
-		<mapping class="jwm.ir.entity.PageSubmission" />
-		<mapping class="jwm.ir.entity.SummaryData" />
-		<mapping class="jwm.ir.entity.Term" />
-		<mapping class="jwm.ir.entity.ValidExtension" />
+		<mapping class="com.jwm.ir.entity.Domain" />
+		<mapping class="com.jwm.ir.entity.Page" />
+		<mapping class="com.jwm.ir.entity.PageLink" />
+		<mapping class="com.jwm.ir.entity.PageTerm" />
+		<mapping class="com.jwm.ir.entity.PageSubmission" />
+		<mapping class="com.jwm.ir.entity.SummaryData" />
+		<mapping class="com.jwm.ir.entity.Term" />
+		<mapping class="com.jwm.ir.entity.ValidExtension" />
 	</session-factory>
 
 </hibernate-configuration>

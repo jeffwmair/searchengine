@@ -18,7 +18,7 @@
 
   <listener>
 	  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-      <listener-class>jwm.ir.webapp.listener.StartupListener</listener-class>
+      <listener-class>com.jwm.ir.webapp.listener.StartupListener</listener-class>
   </listener>
 
 </web-app>
