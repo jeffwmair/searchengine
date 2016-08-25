@@ -1,8 +1,9 @@
 package com.jwm.ir;
 
-import com.jwm.ir.entity.dao.DaoFactory;
+import com.jwm.ir.persistence.HibernateUtil;
+import com.jwm.ir.persistence.dao.DaoFactory;
 import com.jwm.ir.index.StopwordsFileLoader;
-import com.jwm.ir.index.message.WebResource;
+import com.jwm.ir.index.resource.WebResource;
 import com.jwm.ir.index.service.Service;
 import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.index.workers.CrawlerWorker;

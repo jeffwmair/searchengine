@@ -1,9 +1,9 @@
 package com.jwm.ir.index.service;
 
-import com.jwm.ir.entity.Domain;
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.entity.SummaryData;
-import com.jwm.ir.entity.dao.*;
+import com.jwm.ir.persistence.Domain;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.SummaryData;
+import com.jwm.ir.persistence.dao.*;
 import com.jwm.ir.index.StemmerWrapper;
 import com.jwm.ir.index.crawler.UrlUtils;
 import org.apache.log4j.LogManager;

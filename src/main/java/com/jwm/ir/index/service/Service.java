@@ -1,6 +1,6 @@
 package com.jwm.ir.index.service;
 
-import com.jwm.ir.entity.Page;
+import com.jwm.ir.persistence.Page;
 
 import java.util.List;
 import java.util.Map;

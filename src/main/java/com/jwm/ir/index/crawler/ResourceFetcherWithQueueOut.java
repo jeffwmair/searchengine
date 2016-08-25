@@ -1,6 +1,6 @@
 package com.jwm.ir.index.crawler;
 
-import com.jwm.ir.index.message.WebResource;
+import com.jwm.ir.index.resource.WebResource;
 
 import java.util.concurrent.BlockingQueue;
 

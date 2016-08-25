@@ -1,8 +1,9 @@
 package com.jwm.ir;
 
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.entity.ValidExtension;
-import com.jwm.ir.entity.dao.DaoFactory;
+import com.jwm.ir.persistence.HibernateUtil;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.ValidExtension;
+import com.jwm.ir.persistence.dao.DaoFactory;
 import com.jwm.ir.index.service.Service;
 import com.jwm.ir.index.service.ServiceImpl;
 import org.apache.log4j.LogManager;

@@ -1,8 +1,8 @@
 package integration;
 
-import com.jwm.ir.entity.Domain;
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.HibernateUtil;
+import com.jwm.ir.persistence.Domain;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

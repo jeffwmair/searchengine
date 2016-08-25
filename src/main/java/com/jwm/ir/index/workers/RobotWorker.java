@@ -1,6 +1,6 @@
 package com.jwm.ir.index.workers;
 
-import com.jwm.ir.entity.Page;
+import com.jwm.ir.persistence.Page;
 import com.jwm.ir.index.crawler.RobotsTxt;
 import com.jwm.ir.index.crawler.UrlUtils;
 import com.jwm.ir.index.service.Service;

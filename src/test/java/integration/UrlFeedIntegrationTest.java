@@ -1,9 +1,9 @@
 package integration;
 
-import com.jwm.ir.HibernateUtil;
-import com.jwm.ir.entity.Domain;
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.entity.dao.DaoFactory;
+import com.jwm.ir.persistence.HibernateUtil;
+import com.jwm.ir.persistence.Domain;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.dao.DaoFactory;
 import com.jwm.ir.index.crawler.UrlFeed;
 import com.jwm.ir.index.crawler.UrlFeedRunner;
 import com.jwm.ir.index.service.Service;

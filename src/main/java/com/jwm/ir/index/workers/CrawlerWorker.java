@@ -1,8 +1,8 @@
 package com.jwm.ir.index.workers;
 
-import com.jwm.ir.entity.Page;
+import com.jwm.ir.persistence.Page;
 import com.jwm.ir.index.crawler.WebPage;
-import com.jwm.ir.index.message.WebResource;
+import com.jwm.ir.index.resource.WebResource;
 import com.jwm.ir.index.service.Service;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

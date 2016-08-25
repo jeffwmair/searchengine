@@ -1,9 +1,9 @@
 package integration;
 
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.entity.dao.DaoFactory;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.dao.DaoFactory;
 import com.jwm.ir.index.service.ServiceImpl;
-import com.jwm.ir.HibernateUtil;
+import com.jwm.ir.persistence.HibernateUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

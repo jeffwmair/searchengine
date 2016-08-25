@@ -1,8 +1,8 @@
 package integration;
 
-import com.jwm.ir.entity.dao.DomainDao;
-import com.jwm.ir.entity.dao.DomainDaoImpl;
-import com.jwm.ir.HibernateUtil;
+import com.jwm.ir.persistence.dao.DomainDao;
+import com.jwm.ir.persistence.dao.DomainDaoImpl;
+import com.jwm.ir.persistence.HibernateUtil;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class DomainRepositoryImpl_get_domain_not_exists_throws_IntegrationTest {
             Assert.assertNotNull(sut.getDomain("google.com"));
             Assert.fail("Should throw an exception!");
         }
-        catch (NullPointerException ex) { }
+        catch (IllegalArgumentException ex) { }
         finally {
             session.close();
         }

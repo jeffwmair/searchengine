@@ -1,7 +1,7 @@
 package com.jwm.ir.index.workers;
 
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.entity.PageLink;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.PageLink;
 import com.jwm.ir.index.service.Service;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;

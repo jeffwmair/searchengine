@@ -1,7 +1,7 @@
 package com.jwm.ir.index.crawler;
 
-import com.jwm.ir.index.message.WebResource;
-import com.jwm.ir.index.message.WebResourcePageImpl;
+import com.jwm.ir.index.resource.WebResource;
+import com.jwm.ir.index.resource.WebResourcePageImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;

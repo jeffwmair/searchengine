@@ -1,7 +1,7 @@
 package com.jwm.ir.index.robotverifier;
 
 import com.jwm.ir.index.crawler.ResourceFetcher;
-import com.jwm.ir.index.message.WebResourcePageImpl;
+import com.jwm.ir.index.resource.WebResourcePageImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

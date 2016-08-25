@@ -1,10 +1,10 @@
 package integration;
 
-import com.jwm.ir.entity.Domain;
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.entity.PageTerm;
-import com.jwm.ir.entity.Term;
-import com.jwm.ir.entity.dao.*;
+import com.jwm.ir.persistence.Domain;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.PageTerm;
+import com.jwm.ir.persistence.Term;
+import com.jwm.ir.persistence.dao.*;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;

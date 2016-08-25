@@ -1,7 +1,7 @@
 package com.jwm.ir.search;
 
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.entity.PageTerm;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.PageTerm;
 
 import java.util.HashMap;
 import java.util.Map;

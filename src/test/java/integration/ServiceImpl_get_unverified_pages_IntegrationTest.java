@@ -1,8 +1,8 @@
 package integration;
 
-import com.jwm.ir.entity.Domain;
-import com.jwm.ir.entity.Page;
-import com.jwm.ir.entity.dao.DaoFactory;
+import com.jwm.ir.persistence.Domain;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.dao.DaoFactory;
 import com.jwm.ir.index.service.Service;
 import com.jwm.ir.index.service.ServiceImpl;
 import org.junit.Assert;

@@ -35,7 +35,7 @@ public class UrlUtils {
 
 		Assert.hasLength(url, "must provide a url");
 		Assert.isTrue(!url.startsWith("."), "The url " + url + " is not an absolute url");
-		Assert.isTrue(url.contains(".") && !url.contains("localhost"), "The url " + url +" is missing an extension");
+		Assert.isTrue(url.contains(".") || url.contains("localhost"), "The url " + url +" is missing an extension");
 
 		String domain;
 		if (url.toLowerCase().startsWith("http")) {

@@ -2,7 +2,7 @@ package com.jwm.ir.index.robotverifier;
 
 import com.jwm.ir.index.crawler.ResourceFetcher;
 import com.jwm.ir.index.crawler.UrlUtils;
-import com.jwm.ir.index.message.WebResource;
+import com.jwm.ir.index.resource.WebResource;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;
