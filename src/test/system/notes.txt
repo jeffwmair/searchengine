@@ -1,6 +1,0 @@
-construct http requests to exercise the web page functionality:
-	do a search
-	submit a page for indexing
-	view stats page
-
-
