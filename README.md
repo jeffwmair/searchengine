@@ -4,9 +4,17 @@
 
 In the process of reworking the project....
 
+## Bits and Pieces
+
 ## Setup
 
 ## Testing
 
-## Running
+### Unit Tests
+
+### Integration Tests
+
+### Smoke Tests
+
+## Running the System
 
