@@ -2,8 +2,7 @@
 
 # Vector Space Search Engine
 
-overview
-- architecture diagram
+In the process of reworking the project....
 
 ## Setup
 
