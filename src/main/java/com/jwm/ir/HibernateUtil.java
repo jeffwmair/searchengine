@@ -7,7 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Special thanks to SO since the session factory from the hibernate documentation doesn't work!
+ * Special thanks to Stackoverflow since the session factory from the hibernate documentation doesn't work!
  * http://stackoverflow.com/questions/7986750/create-session-factory-in-hibernate-4
  * @author Jeff
  */
@@ -30,8 +30,7 @@ public class HibernateUtil {
 			// not sure about these flags: script, export, justDrop, justCreate
 			schemaExport.execute(false, false, false, false);
 			*/
-			
-			
+
 			return configuration.buildSessionFactory(ssrb.build());
 		} catch (Throwable ex) {
 			log.error("Initial SessionFactory creation failed." + ex, ex);

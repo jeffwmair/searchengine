@@ -64,7 +64,7 @@ public class UrlUtilsTest {
             UrlUtils.getDomainFromAbsoluteUrl(null);
             Assert.fail("should throw illegal arg exception");
         }
-        catch (NullPointerException e) {}
+        catch (IllegalArgumentException e) {}
     }
 
 

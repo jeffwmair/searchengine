@@ -1,8 +1,8 @@
 package com.jwm.ir.index.crawler;
 
-import com.jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -33,9 +33,9 @@ public class UrlUtils {
 	 */
 	public static String getDomainFromAbsoluteUrl(String url) {
 
-		AssertUtils.notEmpty(url, "must provide a url");
-		AssertUtils.failState(url.startsWith("."), "The url " + url +" is not an absolute url");
-		AssertUtils.failState(!url.contains(".") && !url.contains("localhost"), "The url " + url +" is missing an extension");
+		Assert.hasLength(url, "must provide a url");
+		Assert.isTrue(!url.startsWith("."), "The url " + url + " is not an absolute url");
+		Assert.isTrue(url.contains(".") && !url.contains("localhost"), "The url " + url +" is missing an extension");
 
 		String domain;
 		if (url.toLowerCase().startsWith("http")) {

@@ -1,7 +1,7 @@
 package com.jwm.ir.index.robotverifier;
 
 import com.jwm.ir.index.crawler.UrlUtils;
-import com.jwm.ir.utils.AssertUtils;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class RobotUserAgentCache implements Cleanable {
     private final Clock clock;
 
     public RobotUserAgentCache(Clock clock) {
-        AssertUtils.notNull(clock, "provide a clock");
+        Assert.notNull(clock, "provide a clock");
         this.clock = clock;
         cache = new HashMap<>();
 
@@ -47,7 +47,7 @@ public class RobotUserAgentCache implements Cleanable {
      * @param item
      */
     public synchronized void add(String url, RobotDisallows item) {
-        AssertUtils.failState(!UrlUtils.isDomain(url), "Must provide a jwm.ir.domain, but was provided with:"+url);
+        Assert.isTrue(UrlUtils.isDomain(url), "Must provide a jwm.ir.domain, but was provided with:"+url);
         cache.put(url, new RobotDisallowsDateWrapper(clock.getTime(), item));
     }
 

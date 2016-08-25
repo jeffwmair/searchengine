@@ -1,6 +1,6 @@
 package com.jwm.ir.index.message;
 
-import com.jwm.ir.utils.AssertUtils;
+import org.springframework.util.Assert;
 
 /**
  * Created by Jeff on 2016-07-17.
@@ -10,8 +10,8 @@ public class WebResourcePageImpl implements WebResource {
     private final String url, content;
     public WebResourcePageImpl(String url, String content) {
 
-        AssertUtils.notEmpty(url, "Must provide url");
-        AssertUtils.notNull(content, "Must provide content");
+        Assert.hasLength(url, "must provide url");
+        Assert.notNull(content, "Must provide content");
         this.url = url;
         this.content = content;
 

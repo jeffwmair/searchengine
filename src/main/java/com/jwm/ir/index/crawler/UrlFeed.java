@@ -1,9 +1,9 @@
 package com.jwm.ir.index.crawler;
 
 import com.jwm.ir.index.service.Service;
-import com.jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -19,8 +19,8 @@ public class UrlFeed {
     private final Service service;
     private final BlockingQueue<String> output;
     public UrlFeed(Service service, BlockingQueue<String> output) {
-        AssertUtils.notNull(service, "Must provide a non-null service");
-        AssertUtils.notNull(output, "Must provide a non-null output queue");
+        Assert.notNull(service, "Must provide a non-null service");
+        Assert.notNull(output, "Must provide a non-null output queue");
         this.service = service;
         this.output = output;
     }

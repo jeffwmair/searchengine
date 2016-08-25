@@ -1,9 +1,9 @@
 package com.jwm.ir.entity.dao;
 
 import com.jwm.ir.entity.Domain;
-import com.jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.util.Assert;
 
 /**
  * Created by Jeff on 2016-07-31.
@@ -24,7 +24,7 @@ public class DomainDaoImpl implements DomainDao {
     @Override
     public Domain getDomain(String domain) {
         Object domainObject = getByDomainName(domain);
-        AssertUtils.notNull(domainObject, "Could not find jwm.ir.domain object with name '"+domain+"'");
+        Assert.notNull(domainObject, "Could not find jwm.ir.domain object with name '"+domain+"'");
         return (Domain)domainObject;
     }
 

@@ -6,7 +6,6 @@ import com.jwm.ir.entity.SummaryData;
 import com.jwm.ir.entity.dao.*;
 import com.jwm.ir.index.StemmerWrapper;
 import com.jwm.ir.index.crawler.UrlUtils;
-import com.jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -14,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class ServiceImpl implements Service {
     private final SessionFactory sessionFactory;
     private final DaoFactory daoFactory;
     public ServiceImpl(SessionFactory sessionFactory, DaoFactory daoFactory) {
-        AssertUtils.notNull(sessionFactory, "Must provide sessionFactory");
+        Assert.notNull(sessionFactory, "Must provide sessionFactory");
         this.sessionFactory = sessionFactory;
         this.daoFactory = daoFactory;
     }

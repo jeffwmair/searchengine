@@ -3,9 +3,9 @@ package com.jwm.ir.index.robotverifier;
 import com.jwm.ir.index.crawler.ResourceFetcher;
 import com.jwm.ir.index.crawler.UrlUtils;
 import com.jwm.ir.index.message.WebResource;
-import com.jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.util.Assert;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -25,10 +25,10 @@ public class UrlVerifier implements Runnable {
 					   ResourceFetcher fetcher,
 					   RobotUserAgentCache cache,
 					   BlockingQueue<String> outputQueue) {
-		AssertUtils.notEmpty(url, "Must provide a url");
-        AssertUtils.notNull(fetcher, "Must provide non-null fetcher");
-        AssertUtils.notNull(cache, "Must provide non-null cache");
-        AssertUtils.notNull(outputQueue, "Must provide non-null outputQueue");
+		Assert.hasLength(url, "Must provide a url");
+        Assert.notNull(fetcher, "Must provide non-null fetcher");
+        Assert.notNull(cache, "Must provide non-null cache");
+        Assert.notNull(outputQueue, "Must provide non-null outputQueue");
 		this.url = url;
         this.fetcher = fetcher;
         this.cache = cache;

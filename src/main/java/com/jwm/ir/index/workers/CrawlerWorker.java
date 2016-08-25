@@ -4,9 +4,9 @@ import com.jwm.ir.entity.Page;
 import com.jwm.ir.index.crawler.WebPage;
 import com.jwm.ir.index.message.WebResource;
 import com.jwm.ir.index.service.Service;
-import com.jwm.ir.utils.AssertUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +31,9 @@ public class CrawlerWorker implements Runnable {
 						  Service service,
 						  BlockingQueue<WebResource> indexQueue,
 						  AtomicBoolean stopApp) {
-		AssertUtils.notNull(indexQueue, "must provide indexQueue");
-		AssertUtils.notNull(service, "must provide service");
+
+		Assert.notNull(indexQueue, "must provide indexQueue");
+		Assert.notNull(service, "must provide service");
 		this.indexQueue = indexQueue;
 		this.service = service;
 		_validDomainExtensions = validDomainExtensions;

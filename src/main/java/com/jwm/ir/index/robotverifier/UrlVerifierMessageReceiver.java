@@ -1,6 +1,6 @@
 package com.jwm.ir.index.robotverifier;
 
-import com.jwm.ir.utils.AssertUtils;
+import org.springframework.util.Assert;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
@@ -20,8 +20,8 @@ public class UrlVerifierMessageReceiver {
 									  BlockingQueue<String> input,
 									  UrlVerifierFactory urlVerifierFactory ) {
 
-		AssertUtils.notNull(input, "must provide input queue");
-		AssertUtils.notNull(urlVerifierExecutor, "must provide executor");
+		Assert.notNull(input, "must provide input queue");
+		Assert.notNull(urlVerifierExecutor, "must provide executor");
 
 		this.urlVerifierFactory = urlVerifierFactory;
 		this.input = input;

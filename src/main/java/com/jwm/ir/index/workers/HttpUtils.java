@@ -47,8 +47,4 @@ private static final String CHAR_SET = "UTF-8";
 
 	}
 
-	private static String getServiceLocation(String host, String phpFunction) {
-		return "http://" + host + "/services/" + phpFunction;
-	}
-
 }

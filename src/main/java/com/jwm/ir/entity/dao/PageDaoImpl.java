@@ -3,9 +3,9 @@ package com.jwm.ir.entity.dao;
 import com.jwm.ir.entity.Domain;
 import com.jwm.ir.entity.Page;
 import com.jwm.ir.index.crawler.UrlUtils;
-import com.jwm.ir.utils.AssertUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.util.Assert;
 
 import java.util.Map;
 
@@ -29,7 +29,7 @@ public class PageDaoImpl implements PageDao {
     public Page getPage(String url) {
 
         Object obj = getByUrl(url);
-        AssertUtils.notNull(obj, "Could not find page object with url '"+url+"'");
+        Assert.notNull(obj, "Could not find page object with url '"+url+"'");
         return (Page)obj;
     }
 
