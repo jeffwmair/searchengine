@@ -56,7 +56,7 @@ stop_if_running() {
 
 #stop_if_running
 build_program
-deploy_web_services
+#deploy_web_services
 setup_test_pages
 setup_db
 run_program
