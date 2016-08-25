@@ -1,4 +1,4 @@
-package com.jwm.ir.util;
+package com.jwm.ir.index.robotverifier;
 
 /**
  * Created by Jeff on 2016-07-19.

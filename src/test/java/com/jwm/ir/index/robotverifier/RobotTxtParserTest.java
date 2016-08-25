@@ -1,7 +1,6 @@
 package com.jwm.ir.index.robotverifier;
 
 
-import com.jwm.ir.util.StringBuilderWithNewline;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
