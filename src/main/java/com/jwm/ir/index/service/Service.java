@@ -21,7 +21,6 @@ public interface Service {
     boolean pageExists(String url);
     Page getPage(String url);
     List<Page> getPages(FilterVerified filterVerified);
-    List<Page> getScoredPagesFromQuery(String query);
     List<String> getValidDomainExtensions();
     List<String> getUrlsToCrawl();
 

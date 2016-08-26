@@ -1,26 +1,27 @@
-package com.jwm.ir.search;
+package com.jwm.ir.search.service;
 
 import com.jwm.ir.persistence.PageTerm;
 import com.jwm.ir.persistence.Term;
 import com.jwm.ir.index.StemmerWrapper;
+import com.jwm.ir.search.*;
 
 import java.util.*;
 
 /**
  * Created by Jeff on 2016-08-14.
  */
-public class ResultsQueryer {
+public class SearchServiceImpl implements SearchService {
 
     private final int totalIndexedPages;
     private final List<Term> terms;
     private final FastCosineScoreCalculator scoreCalculator;
 
     /**
-     * New instance of ResultsQueryer with all the indexed pages to query.
+     * New instance of SearchServiceImpl with all the indexed pages to query.
      */
-    public ResultsQueryer(List<Term> terms,
-                          int totalIndexedPages,
-                          FastCosineScoreCalculator scoreCalculator) {
+    public SearchServiceImpl(List<Term> terms,
+                             int totalIndexedPages,
+                             FastCosineScoreCalculator scoreCalculator) {
         this.totalIndexedPages = totalIndexedPages;
         this.terms = terms;
         this.scoreCalculator = scoreCalculator;
@@ -32,7 +33,8 @@ public class ResultsQueryer {
      * @param query
      * @return
      */
-    public Set<RankedDocument> queryPages(String query) {
+    @Override
+    public Set<RankedDocument> getRankedDocumentsForQuery(String query) {
 
         String query_lowercase = query.toLowerCase();
         Map<String, Integer> queryMap = QueryHelper.getMapOfQueryTerms(query_lowercase);

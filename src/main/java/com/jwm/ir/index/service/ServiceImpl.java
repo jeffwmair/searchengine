@@ -106,6 +106,9 @@ public class ServiceImpl implements Service {
 
     @Override
     public List<String> getUrlsToCrawl() {
+
+        log.warn("Todo: implement 'polite crawling' by preventing hitting the same domain in quick succession");
+
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         Criteria criteria = session.createCriteria(Page.class);
@@ -124,7 +127,6 @@ public class ServiceImpl implements Service {
 
         for(Page p : pages) {
             urls.add(p.getUrl());
-            //session.delete(p);
         }
 
         tx.commit();
@@ -228,11 +230,6 @@ public class ServiceImpl implements Service {
         List<Page> pages = crit.list();
         session.close();
         return pages;
-    }
-
-    @Override
-    public List<Page> getScoredPagesFromQuery(String query) {
-        throw new  RuntimeException("not impl");
     }
 
     @Override

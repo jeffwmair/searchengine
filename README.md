@@ -2,19 +2,13 @@
 
 # Vector Space Search Engine
 
-In the process of reworking the project....
+**In the process of reworking the project....**
 
-## Bits and Pieces
+This project was originally developed for a University course (CPS842 Information Retrieval).  I have revived the project and rewritten parts from PHP to Java, which I prefer.  And in general, cleaned up the overall implementation including adding appropriate tests (unit, integration, etc). 
 
 ## Setup
 
 ## Testing
-
-### Unit Tests
-
-### Integration Tests
-
-### Smoke Tests
 
 ## Running the System
 
