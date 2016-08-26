@@ -4,6 +4,8 @@ import com.jwm.ir.persistence.Term;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import java.util.*;
+
 /**
  * Created by Jeff on 2016-08-05.
  */
@@ -15,6 +17,11 @@ public class TermDaoImpl implements TermDao {
         this.session = session;
     }
 
+    /**
+     * Add the document Term to the database if not exists, otherwise just increment its Document Frequency
+     * @param termValue
+     * @return
+     */
     @Override
     public Term createOrIncrementTermFrequency(String termValue) {
         Term term;
@@ -28,6 +35,11 @@ public class TermDaoImpl implements TermDao {
         term.incrementDocumentFrequency();
         session.saveOrUpdate(term);
         return term;
+    }
+
+    @Override
+    public List<Term> getDocumentTermsMatching(Set<String> terms) {
+        return session.createCriteria(Term.class).add(Restrictions.in("term", terms)).list();
     }
 
     private Term getTerm(String term) {

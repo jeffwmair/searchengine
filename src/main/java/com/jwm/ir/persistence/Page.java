@@ -75,7 +75,7 @@ public class Page {
     private int failCount;
 
     @Column(nullable = true)
-    private double pageRank;
+    private Double pageRank;
 
     @Column(name="last_crawl")
     private Date lastCrawl;

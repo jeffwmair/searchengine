@@ -14,4 +14,5 @@ public interface PageDao {
     Page create(String url, DomainDao domainDao);
     void setPageCrawlResult(String url, String pageTitle, String pageDesc, Page.CrawlResult result);
     void updatePageRanks(Map<Long,Double> pageRanks);
+    int getIndexedPageCount();
 }

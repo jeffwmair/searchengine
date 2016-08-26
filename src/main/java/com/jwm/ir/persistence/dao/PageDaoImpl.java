@@ -80,6 +80,11 @@ public class PageDaoImpl implements PageDao {
         }
     }
 
+    @Override
+    public int getIndexedPageCount() {
+        return session.createCriteria(Page.class).add(Restrictions.isNotNull("pageRank")).list().size();
+    }
+
     private void setPageRank(Long pageId, Double pageRankValue) {
         Page p = getPage(pageId);
         p.setPageRank(pageRankValue);

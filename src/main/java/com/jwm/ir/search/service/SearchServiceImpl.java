@@ -3,6 +3,8 @@ package com.jwm.ir.search.service;
 import com.jwm.ir.persistence.PageTerm;
 import com.jwm.ir.persistence.Term;
 import com.jwm.ir.index.StemmerWrapper;
+import com.jwm.ir.persistence.dao.PageDao;
+import com.jwm.ir.persistence.dao.TermDao;
 import com.jwm.ir.search.*;
 import com.jwm.ir.search.document.Document;
 import com.jwm.ir.search.document.DocumentImpl;
@@ -15,19 +17,19 @@ import java.util.*;
  */
 public class SearchServiceImpl implements SearchService {
 
-    private final int totalIndexedPages;
-    private final List<Term> terms;
     private final FastCosineScoreCalculator scoreCalculator;
+    private final TermDao termDao;
+    private final PageDao pageDao;
 
     /**
      * New instance of SearchServiceImpl with all the indexed pages to query.
      */
-    public SearchServiceImpl(List<Term> terms,
-                             int totalIndexedPages,
-                             FastCosineScoreCalculator scoreCalculator) {
-        this.totalIndexedPages = totalIndexedPages;
-        this.terms = terms;
+    public SearchServiceImpl(FastCosineScoreCalculator scoreCalculator,
+                             TermDao termDao,
+                             PageDao pageDao) {
         this.scoreCalculator = scoreCalculator;
+        this.termDao = termDao;
+        this.pageDao = pageDao;
     }
 
 
@@ -40,12 +42,14 @@ public class SearchServiceImpl implements SearchService {
     public Set<RankedDocument> getRankedDocumentsForQuery(String query) {
 
         String query_lowercase = query.toLowerCase();
-        Map<String, Integer> queryMap = QueryHelper.getMapOfQueryTerms(query_lowercase);
+        Map<String, Integer> queryMap = StemmerWrapper.convertToStemmed(QueryHelper.getMapOfQueryTerms(query_lowercase));
+
+        List<String> queryTerms = new ArrayList<>();
+        List<Term> terms = termDao.getDocumentTermsMatching(queryMap.keySet());
+        int totalIndexedPages = pageDao.getIndexedPageCount();
 
         Map<Long, Document> documents = new HashMap<>();
         Map<String, List<Document>> termPostings = new HashMap<>();
-        List<String> queryTerms = new ArrayList<>();
-
         for (String term_raw : queryMap.keySet()) {
 
             String term_stemmed = StemmerWrapper.stem(term_raw);
