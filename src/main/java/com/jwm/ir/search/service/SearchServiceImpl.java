@@ -4,6 +4,9 @@ import com.jwm.ir.persistence.PageTerm;
 import com.jwm.ir.persistence.Term;
 import com.jwm.ir.index.StemmerWrapper;
 import com.jwm.ir.search.*;
+import com.jwm.ir.search.document.Document;
+import com.jwm.ir.search.document.DocumentImpl;
+import com.jwm.ir.search.document.RankedDocument;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package com.jwm.ir.search;
+package com.jwm.ir.search.document;
 
 import com.jwm.ir.persistence.Page;
 import com.jwm.ir.persistence.PageTerm;

@@ -1,6 +1,6 @@
 package com.jwm.ir.search.service;
 
-import com.jwm.ir.search.RankedDocument;
+import com.jwm.ir.search.document.RankedDocument;
 
 import java.util.Set;
 

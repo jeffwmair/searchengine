@@ -1,5 +1,8 @@
 package com.jwm.ir.search;
 
+import com.jwm.ir.search.document.Document;
+import com.jwm.ir.search.document.RankedDocument;
+
 import java.util.*;
 
 /**
