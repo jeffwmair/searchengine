@@ -10,7 +10,5 @@ This project was originally developed for a University course (CPS842 Informatio
 
 ## Testing
 
-.
-
 ## Running the System
 
