@@ -1,6 +1,7 @@
 pid.txt
 .idea/
 logs/*
+logs
 target
 toindex
 *.iml
