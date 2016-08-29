@@ -1,0 +1,97 @@
+2016-08-29 18:54:02,608 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetching urls from the db.  Putting onto the queue.
+2016-08-29 18:54:02,609 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetched 2 urls from the db.  Putting onto the queue.
+2016-08-29 18:54:02,775 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:02,776 WARN [com.jwm.ir.index.service.ServiceImpl] - (main) Page with url 'www.google.com/a' already exists in the database, so not adding
+2016-08-29 18:54:02,779 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:02,779 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain does not exist, so creating:google.com
+2016-08-29 18:54:02,780 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:54:02,788 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:02,789 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-29 18:54:02,789 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:54:02,871 INFO [com.jwm.ir.index.robotverifier.UrlVerifier] - (main) Url cannot be indexed because its robots.txt restricts it.  Url:http://foobar.com/searchengine_test/page1.html
+2016-08-29 18:54:33,971 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetching urls from the db.  Putting onto the queue.
+2016-08-29 18:54:33,973 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetched 2 urls from the db.  Putting onto the queue.
+2016-08-29 18:54:34,181 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:34,183 WARN [com.jwm.ir.index.service.ServiceImpl] - (main) Page with url 'www.google.com/a' already exists in the database, so not adding
+2016-08-29 18:54:34,188 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:34,189 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain does not exist, so creating:google.com
+2016-08-29 18:54:34,190 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:54:34,203 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:34,204 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-29 18:54:34,204 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:54:34,284 INFO [com.jwm.ir.index.robotverifier.UrlVerifier] - (main) Url cannot be indexed because its robots.txt restricts it.  Url:http://foobar.com/searchengine_test/page1.html
+2016-08-29 18:54:57,311 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetching urls from the db.  Putting onto the queue.
+2016-08-29 18:54:57,315 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetched 2 urls from the db.  Putting onto the queue.
+2016-08-29 18:54:57,533 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:57,535 WARN [com.jwm.ir.index.service.ServiceImpl] - (main) Page with url 'www.google.com/a' already exists in the database, so not adding
+2016-08-29 18:54:57,543 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:57,546 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain does not exist, so creating:google.com
+2016-08-29 18:54:57,547 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:54:57,561 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:54:57,562 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-29 18:54:57,563 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:54:57,624 INFO [com.jwm.ir.index.robotverifier.UrlVerifier] - (main) Url cannot be indexed because its robots.txt restricts it.  Url:http://foobar.com/searchengine_test/page1.html
+2016-08-29 18:55:23,013 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetching urls from the db.  Putting onto the queue.
+2016-08-29 18:55:23,015 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetched 2 urls from the db.  Putting onto the queue.
+2016-08-29 18:55:23,220 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:55:23,222 WARN [com.jwm.ir.index.service.ServiceImpl] - (main) Page with url 'www.google.com/a' already exists in the database, so not adding
+2016-08-29 18:55:23,225 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:55:23,228 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain does not exist, so creating:google.com
+2016-08-29 18:55:23,229 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:55:23,249 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:55:23,251 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-29 18:55:23,251 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:55:23,329 INFO [com.jwm.ir.index.robotverifier.UrlVerifier] - (main) Url cannot be indexed because its robots.txt restricts it.  Url:http://foobar.com/searchengine_test/page1.html
+2016-08-29 18:55:43,236 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetching urls from the db.  Putting onto the queue.
+2016-08-29 18:55:43,238 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetched 2 urls from the db.  Putting onto the queue.
+2016-08-29 18:55:43,390 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:55:43,391 WARN [com.jwm.ir.index.service.ServiceImpl] - (main) Page with url 'www.google.com/a' already exists in the database, so not adding
+2016-08-29 18:55:43,395 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:55:43,396 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain does not exist, so creating:google.com
+2016-08-29 18:55:43,396 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:55:43,412 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:55:43,413 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-29 18:55:43,413 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:55:43,502 INFO [com.jwm.ir.index.robotverifier.UrlVerifier] - (main) Url cannot be indexed because its robots.txt restricts it.  Url:http://foobar.com/searchengine_test/page1.html
+2016-08-29 18:55:48,137 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) HHH000389: Unsuccessful: alter table pagelinks drop foreign key FK_hvrcvlgxvthkbp737jd8t9mm1
+2016-08-29 18:55:48,137 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) Table 'searchengine_test.pagelinks' doesn't exist
+2016-08-29 18:55:48,138 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) HHH000389: Unsuccessful: alter table pagelinks drop foreign key FK_762k1vulh7bgsk8cx8cq20qyu
+2016-08-29 18:55:48,138 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) Table 'searchengine_test.pagelinks' doesn't exist
+2016-08-29 18:55:48,139 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) HHH000389: Unsuccessful: alter table pages drop foreign key FK_71j3h4rg7x8apdh7nw9wsla2p
+2016-08-29 18:55:48,139 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) Table 'searchengine_test.pages' doesn't exist
+2016-08-29 18:55:48,140 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) HHH000389: Unsuccessful: alter table pagesubmissions drop foreign key FK_ceaxmtkfu4jrpxrh5blsg4ni8
+2016-08-29 18:55:48,140 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) Table 'searchengine_test.pagesubmissions' doesn't exist
+2016-08-29 18:55:48,141 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) HHH000389: Unsuccessful: alter table pageterms drop foreign key FK_7249552vcc3bmrvrh8qqcygns
+2016-08-29 18:55:48,141 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) Table 'searchengine_test.pageterms' doesn't exist
+2016-08-29 18:55:48,141 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) HHH000389: Unsuccessful: alter table pageterms drop foreign key FK_hwws2pmr644nonw3tf508w5b1
+2016-08-29 18:55:48,141 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) Table 'searchengine_test.pageterms' doesn't exist
+2016-08-29 18:55:48,143 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) HHH000389: Unsuccessful: alter table terms_pageterms drop foreign key FK_iepdn8jsyhua1cy0ume2jrfbm
+2016-08-29 18:55:48,143 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) Table 'searchengine_test.terms_pageterms' doesn't exist
+2016-08-29 18:55:48,145 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) HHH000389: Unsuccessful: alter table terms_pageterms drop foreign key FK_poqh6a8gyhrlirem4gq77krg5
+2016-08-29 18:55:48,145 ERROR [org.hibernate.tool.hbm2ddl.SchemaExport] - (main) Table 'searchengine_test.terms_pageterms' doesn't exist
+2016-08-29 18:55:58,659 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/b; parentUrlwww.google.com/a
+2016-08-29 18:55:58,707 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-29 18:55:58,729 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/b
+2016-08-29 18:56:02,307 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) setting page as verified:Page{id=1, domain=Domain{id=1, domain='google.com', status=0, crawlerId=1, totalCrawls=0, locked=0, lastCrawl=null}, title='null', description='null', url='google.com/a', verified=1, failCount=0, pageRank=null, lastCrawl=null}
+2016-08-29 18:56:05,526 WARN [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - (main) SQL Error: 1062, SQLState: 23000
+2016-08-29 18:56:05,527 ERROR [org.hibernate.engine.jdbc.spi.SqlExceptionHelper] - (main) Duplicate entry '1-1' for key 'UK_l177h3lxd7fj9jl1o1etxyyoc'
+2016-08-29 18:56:18,852 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/b; parentUrlwww.google.com/a
+2016-08-29 18:56:18,930 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-29 18:56:18,965 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/b
+2016-08-29 18:56:22,234 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetching urls from the db.  Putting onto the queue.
+2016-08-29 18:56:22,236 WARN [com.jwm.ir.index.service.ServiceImpl] - (main) Todo: implement 'polite crawling' by preventing hitting the same domain in quick succession
+2016-08-29 18:56:22,297 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Popped Urls:[http://localhost/searchengine_test/page1.html, http://localhost/searchengine_test/page2.html], size:2
+2016-08-29 18:56:22,297 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetched 2 urls from the db.  Putting onto the queue.
+2016-08-29 18:56:29,120 INFO [com.jwm.ir.persistence.dao.PageTermDaoImpl] - (main) pagetermDaoImpl.create pageId:'1', termValue:'hello', termFrequency:'1'
+2016-08-29 18:56:36,250 INFO [com.jwm.ir.persistence.dao.PageTermDaoImpl] - (main) pagetermDaoImpl.create pageId:'1', termValue:'hello', termFrequency:'1'
+2016-08-29 18:57:21,384 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetching urls from the db.  Putting onto the queue.
+2016-08-29 18:57:21,385 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetched 2 urls from the db.  Putting onto the queue.
+2016-08-29 18:57:21,547 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:57:21,548 WARN [com.jwm.ir.index.service.ServiceImpl] - (main) Page with url 'www.google.com/a' already exists in the database, so not adding
+2016-08-29 18:57:21,555 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:57:21,555 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain does not exist, so creating:google.com
+2016-08-29 18:57:21,556 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:57:21,572 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-29 18:57:21,572 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-29 18:57:21,573 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-29 18:57:21,639 INFO [com.jwm.ir.index.robotverifier.UrlVerifier] - (main) Url cannot be indexed because its robots.txt restricts it.  Url:http://foobar.com/searchengine_test/page1.html

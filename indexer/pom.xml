@@ -4,11 +4,11 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>searchengine</groupId>
-	<artifactId>SearchEngine</artifactId>
-	<packaging>war</packaging>
+	<groupId>com.jwm</groupId>
+	<artifactId>SearchEngineIndexer</artifactId>
+	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>SearchEngine</name>
+	<name>SearchEngine-Indexer</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
