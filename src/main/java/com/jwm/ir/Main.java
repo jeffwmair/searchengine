@@ -33,12 +33,8 @@ public class Main {
 		AtomicBoolean stopApplication = new AtomicBoolean(false);
 
 		int prInterval = 500;
-		String host = "localhost";
 		for(String arg : args) {
-			if (arg.startsWith("--host=")) {
-				host = arg.split("=")[1];
-			}
-			else if (arg.startsWith("--integration_test")) {
+			if (arg.startsWith("--integration_test")) {
 				// hack!
 				IntegrationTestDataSetup.setup();
 			}
@@ -47,12 +43,11 @@ public class Main {
 			}
 			else {
 				log.error("Unknown argument: " + arg);
-				log.error("Valid arguments include: --crawl={true/false} --index={true/false} --checkrobots={true/false} --pagerank_interval={int} --numworkers={int} --host={webservername}" + arg);
+				log.error("Valid arguments include: --pagerank_interval={int}" + arg);
 				System.exit(0);
 			}
 		}
 
-		log.info("host=" + host);
 		log.info("pagerank_interval=" + Integer.toString(prInterval));
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();

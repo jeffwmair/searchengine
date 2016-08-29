@@ -6,7 +6,7 @@
 
 	<groupId>searchengine</groupId>
 	<artifactId>SearchEngine</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<version>1.0</version>
 	<name>SearchEngine</name>
 

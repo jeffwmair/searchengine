@@ -4,6 +4,7 @@ set -e
 
 WEB_TEST_DIR="$JWM_PROD/website/searchengine_test/"
 CRAWL_HOST="http://localhost/searchengine_test/"
+HERE=`pwd`
 
 build_program() {
 	# build the java program
@@ -38,16 +39,20 @@ JAVA_PID=''
 run_program() {
 	echo "Starting program"
 	cd $JWM_DEV/searchengine/target/
+	rm -rf SearchEngine-1.0/
+	mkdir SearchEngine-1.0
+	cp SearchEngine-1.0.war SearchEngine-1.0/
+	cd SearchEngine-1.0
+	tar -xf SearchEngine-1.0.war
+	cd WEB-INF/classes
 	mkdir flags
 	# create a stop command file already; the test will finish before this is observed, actually.
 	#touch flags/stop.txt
 	# requires a stopwords.txt for now...
 	touch stopwords.txt
-	java -jar SearchEngine-1.0.jar --integration_test --host=localhost/searchengine --pagerank_interval=0 > /dev/null &
-	JAVA_PID="$!"
-	echo "Started process with pid $JAVA_PID"
-	cd -
-	echo "$JAVA_PID" > pid.txt
+	./bin/startengine-integration.sh
+	cp pid.txt $HERE
+	cd $HERE
 }
 
 stop_if_running() {
