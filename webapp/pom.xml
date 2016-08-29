@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jwm.ir</groupId>
-  <artifactId>webapp</artifactId>
+  <artifactId>searchengine-webapp</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>webapp Maven Webapp</name>
@@ -99,6 +99,6 @@
 
   </dependencies>
   <build>
-    <finalName>webapp</finalName>
+    <finalName>searchengine-webapp</finalName>
   </build>
 </project>
