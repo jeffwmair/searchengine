@@ -11,7 +11,7 @@
         <!-- Searchengine core -->
         <dependency>
             <groupId>com.jwm.ir</groupId>
-            <artifactId>searchengine-indexer-foobar</artifactId>
+            <artifactId>searchengine-indexer</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
