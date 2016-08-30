@@ -1,9 +1,0 @@
-Started on Aug 29, 2016 10:56:01 PM
-Using strategy: Default
-[poll] Last Built Revision: Revision 7cb5595167f7bec72cc2b023c0920435c85b64b1 (refs/remotes/origin/master)
- > git --version # timeout=10
- > git -c core.askpass=true ls-remote -h https://github.com/jeffwmair/searchengine.git # timeout=10
-Found 1 remote heads on https://github.com/jeffwmair/searchengine.git
-[poll] Latest remote head revision on refs/heads/master is: c522957f79da69e4b3b0d007b8e313312a709da0
-Done. Took 1.3 sec
-Changes found

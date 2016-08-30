@@ -1,227 +1,0 @@
-Started by user [8mha:AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0mjeff
-Building in workspace /var/lib/jenkins/workspace/search engine - indexer
-Cloning the remote Git repository
-Cloning repository https://github.com/jeffwmair/searchengine.git
- > git init /var/lib/jenkins/workspace/search engine - indexer # timeout=10
-Fetching upstream changes from https://github.com/jeffwmair/searchengine.git
- > git --version # timeout=10
- > git -c core.askpass=true fetch --tags --progress https://github.com/jeffwmair/searchengine.git +refs/heads/*:refs/remotes/origin/*
- > git config remote.origin.url https://github.com/jeffwmair/searchengine.git # timeout=10
- > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
- > git config remote.origin.url https://github.com/jeffwmair/searchengine.git # timeout=10
-Fetching upstream changes from https://github.com/jeffwmair/searchengine.git
- > git -c core.askpass=true fetch --tags --progress https://github.com/jeffwmair/searchengine.git +refs/heads/*:refs/remotes/origin/*
- > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
- > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
-Checking out Revision 4137a383f265868d4e4936bcb23ce372f821f480 (refs/remotes/origin/master)
- > git config core.sparsecheckout # timeout=10
- > git checkout -f 4137a383f265868d4e4936bcb23ce372f821f480
- > git rev-list 4137a383f265868d4e4936bcb23ce372f821f480 # timeout=10
-[search engine - indexer] $ mvn -f indexer/pom.xml install
-[INFO] Scanning for projects...
-[INFO]                                                                         
-[INFO] ------------------------------------------------------------------------
-[INFO] Building SearchEngine-Indexer 1.0
-[INFO] ------------------------------------------------------------------------
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.5.2/maven-install-plugin-2.5.2.pom
-3/7 KB   5/7 KB   7/7 KB            Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.5.2/maven-install-plugin-2.5.2.pom (7 KB at 9.7 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.5.2/maven-install-plugin-2.5.2.jar
-3/33 KB   5/33 KB   8/33 KB   11/33 KB   13/33 KB   16/33 KB   19/33 KB   21/33 KB   24/33 KB   27/33 KB   29/33 KB   32/33 KB   33/33 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-install-plugin/2.5.2/maven-install-plugin-2.5.2.jar (33 KB at 557.6 KB/sec)
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ SearchEngineIndexer ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] Copying 3 resources
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-compiler-plugin:2.1:compile (default-compile) @ SearchEngineIndexer ---
-[INFO] Compiling 65 source files to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/classes
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ SearchEngineIndexer ---
-[INFO] Using 'UTF-8' encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/search engine - indexer/indexer/src/test/resources
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-compiler-plugin:2.1:testCompile (default-testCompile) @ SearchEngineIndexer ---
-[INFO] Compiling 37 source files to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/test-classes
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-surefire-plugin:2.9:test (default-test) @ SearchEngineIndexer ---
-[INFO] Tests are skipped.
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-surefire-plugin:2.9:test (run-unit-test) @ SearchEngineIndexer ---
-[INFO] Surefire report directory: /var/lib/jenkins/workspace/search engine - indexer/indexer/target/surefire-reports
-
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running com.jwm.ir.index.crawler.UrlUtilsTest
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.164 sec
-Running com.jwm.ir.index.crawler.UrlFeedTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.221 sec
-Running com.jwm.ir.index.crawler.ResourceFetcherTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 sec
-Running com.jwm.ir.index.service.ServiceImplTest
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.204 sec
-Running com.jwm.ir.index.StemmerWrapperTest
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 sec
-Running com.jwm.ir.index.robotverifier.UrlVerifierMessageReceiverTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 sec
-Running com.jwm.ir.index.robotverifier.RobotUserAgentImplCacheTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 sec
-Running com.jwm.ir.index.robotverifier.RobotDisallowsTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
-Running com.jwm.ir.index.robotverifier.UrlVerifierTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec
-Running com.jwm.ir.index.robotverifier.RobotTxtParserTest
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
-Running com.jwm.ir.persistence.DomainTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
-Running com.jwm.ir.persistence.PageTest
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
-Running com.jwm.ir.search.FastCosineScoreCalculatorTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
-Running com.jwm.ir.search.QueryHelperTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
-Running com.jwm.ir.search.document.DocumentImplTest
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
-Running thirdparty.jung.PageRankTest
-a = 0.049999999999999996
-b = 0.475
-c = 0.475
-1000 = 0.049999999999999996
-1001 = 0.475
-1002 = 0.475
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 sec
-
-Results :
-
-Tests run: 47, Failures: 0, Errors: 0, Skipped: 0
-
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ SearchEngineIndexer ---
-[INFO] Building jar: /var/lib/jenkins/workspace/search engine - indexer/indexer/target/SearchEngineIndexer-1.0.jar
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-dependency-plugin:2.5.1:copy-dependencies (copy-dependencies) @ SearchEngineIndexer ---
-[INFO] Copying collections-generic-4.01.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/collections-generic-4.01.jar
-[INFO] Copying mchange-commons-java-0.2.3.4.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/mchange-commons-java-0.2.3.4.jar
-[INFO] Copying mockito-all-1.9.5.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/mockito-all-1.9.5.jar
-[INFO] Copying hibernate-jpa-2.1-api-1.0.0.Final.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar
-[INFO] Copying jandex-1.1.0.Final.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/jandex-1.1.0.Final.jar
-[INFO] Copying mysql-connector-java-5.1.6.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/mysql-connector-java-5.1.6.jar
-[INFO] Copying xml-apis-1.0.b2.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/xml-apis-1.0.b2.jar
-[INFO] Copying jboss-logging-3.1.3.GA.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/jboss-logging-3.1.3.GA.jar
-[INFO] Copying quick-json-1.0.4.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/quick-json-1.0.4.jar
-[INFO] Copying antlr-2.7.7.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/antlr-2.7.7.jar
-[INFO] Copying jung-algorithms-2.0.1.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/jung-algorithms-2.0.1.jar
-[INFO] Copying javassist-3.18.1-GA.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/javassist-3.18.1-GA.jar
-[INFO] Copying hibernate-commons-annotations-4.0.5.Final.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/hibernate-commons-annotations-4.0.5.Final.jar
-[INFO] Copying jsoup-1.8.1.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/jsoup-1.8.1.jar
-[INFO] Copying colt-1.2.0.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/colt-1.2.0.jar
-[INFO] Copying log4j-1.2.14.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/log4j-1.2.14.jar
-[INFO] Copying stax2-api-3.1.4.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/stax2-api-3.1.4.jar
-[INFO] Copying jboss-logging-annotations-1.2.0.Beta1.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/jboss-logging-annotations-1.2.0.Beta1.jar
-[INFO] Copying woodstox-core-asl-4.4.1.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/woodstox-core-asl-4.4.1.jar
-[INFO] Copying jung-graph-impl-2.0.1.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/jung-graph-impl-2.0.1.jar
-[INFO] Copying stax-api-1.0-2.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/stax-api-1.0-2.jar
-[INFO] Copying commons-logging-1.1.3.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/commons-logging-1.1.3.jar
-[INFO] Copying jboss-transaction-api_1.2_spec-1.0.0.Final.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/jboss-transaction-api_1.2_spec-1.0.0.Final.jar
-[INFO] Copying jung-api-2.0.1.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/jung-api-2.0.1.jar
-[INFO] Copying concurrent-1.3.4.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/concurrent-1.3.4.jar
-[INFO] Copying spring-expression-4.3.2.RELEASE.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/spring-expression-4.3.2.RELEASE.jar
-[INFO] Copying c3p0-0.9.2.1.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/c3p0-0.9.2.1.jar
-[INFO] Copying spring-core-4.3.2.RELEASE.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/spring-core-4.3.2.RELEASE.jar
-[INFO] Copying c3p0-0.9.1.2.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/c3p0-0.9.1.2.jar
-[INFO] Copying dom4j-1.6.1.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/dom4j-1.6.1.jar
-[INFO] Copying hibernate-core-4.3.10.Final.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/hibernate-core-4.3.10.Final.jar
-[INFO] Copying hibernate-c3p0-4.3.10.Final.jar to /var/lib/jenkins/workspace/search engine - indexer/indexer/target/lib/hibernate-c3p0-4.3.10.Final.jar
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-surefire-plugin:2.9:test (run-integration-test) @ SearchEngineIndexer ---
-[INFO] Surefire report directory: /var/lib/jenkins/workspace/search engine - indexer/indexer/target/surefire-reports
-
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running integration.ServiceImpl_get_unverified_pages_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.746 sec
-Running integration.DomainRepositoryImpl_get_domain_exists_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.015 sec
-Running integration.PageTermDao_terms_already_exist_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.25 sec
-Running integration.ServiceImpl_AddUrlForCrawling_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.737 sec
-Running integration.ServiceImpl_set_urls_verified_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.331 sec
-Running integration.PageTerm_UniquePageTerm_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.057 sec
-Running integration.ExtensionDao_get_all_extensions_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.073 sec
-Running integration.ServiceImpl_add_crawl_result_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.334 sec
-Running integration.DomainRepositoryImpl_get_domain_not_exists_throws_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.148 sec
-Running integration.ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_add_again_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.152 sec
-Running integration.UrlFeedIntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.245 sec
-Running integration.ServiceImpl_update_indexed_page_count_summaries_with_existing_summary_record_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.17 sec
-Running integration.PageTermDaoImpl_create_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.308 sec
-Running integration.ResourceFetcherIntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.164 sec
-Running integration.TermDao_Fetch_Terms_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.272 sec
-Running integration.ServiceImpl_AddDocumentTerm_IntegrationTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.153 sec
-
-Results :
-
-Tests run: 16, Failures: 0, Errors: 0, Skipped: 0
-
-[INFO] 
-[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-install-plugin:2.5.2:install (default-install) @ SearchEngineIndexer ---
-Downloading: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.6/commons-codec-1.6.pom
-3/11 KB    5/11 KB   8/11 KB   11/11 KB   11/11 KB              Downloaded: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.6/commons-codec-1.6.pom (11 KB at 209.5 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/0.4/maven-shared-utils-0.4.pom
-3/4 KB     4/4 KB            Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/0.4/maven-shared-utils-0.4.pom (4 KB at 98.8 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.15/plexus-utils-3.0.15.pom
-3/4 KB   4/4 KB            Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.15/plexus-utils-3.0.15.pom (4 KB at 60.2 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.2.1/maven-plugin-api-2.2.1.jar
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1.jar
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.2.1/maven-profile-2.2.1.jar
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.2.1/maven-project-2.2.1.jar
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.2.1/maven-plugin-registry-2.2.1.jar
-3/13 KB   5/13 KB   8/13 KB   11/13 KB   13/13 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.2.1/maven-plugin-api-2.2.1.jar (13 KB at 262.7 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11.jar
-3/50 KB    5/50 KB   8/50 KB   11/50 KB   13/50 KB   16/50 KB   19/50 KB   21/50 KB   24/50 KB   27/50 KB   29/50 KB   32/50 KB   36/50 KB   40/50 KB   44/50 KB   48/50 KB   50/50 KB              Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-interpolation/1.11/plexus-interpolation-1.11.jar (50 KB at 448.1 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.2.1/maven-model-2.2.1.jar
-4/86 KB    8/86 KB   12/86 KB   16/86 KB   20/86 KB   24/86 KB   28/86 KB   32/86 KB   36/86 KB   40/86 KB   44/86 KB   48/86 KB   52/86 KB   56/86 KB   60/86 KB   64/86 KB   3/35 KB   64/86 KB   5/35 KB   64/86 KB   8/35 KB   64/86 KB   11/35 KB   64/86 KB   13/35 KB   64/86 KB   13/35 KB   64/86 KB   3/30 KB   13/35 KB   3/48 KB   64/86 KB   3/30 KB   13/35 KB   5/48 KB   64/86 KB   3/30 KB   13/35 KB   8/48 KB   64/86 KB   3/30 KB   13/35 KB   11/48 KB   64/86 KB   3/30 KB   13/35 KB   13/48 KB   64/86 KB   3/30 KB   13/35 KB   13/48 KB   64/86 KB   3/153 KB   3/30 KB   13/35 KB   13/48 KB   64/86 KB   5/153 KB   3/30 KB   13/35 KB   13/48 KB   64/86 KB   8/153 KB   3/30 KB   13/35 KB   13/48 KB   64/86 KB   11/153 KB   3/30 KB   13/35 KB   13/48 KB   64/86 KB   13/153 KB   3/30 KB   13/35 KB   13/48 KB   64/86 KB   13/153 KB   5/30 KB   13/35 KB   13/48 KB   64/86 KB   13/153 KB   8/30 KB   13/35 KB   13/48 KB   64/86 KB   13/153 KB   11/30 KB   13/35 KB   13/48 KB   64/86 KB   13/153 KB   13/30 KB   13/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   16/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   19/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   21/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   24/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   27/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   29/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   32/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   35/35 KB   13/48 KB   68/86 KB   13/153 KB   13/30 KB   35/35 KB   13/48 KB   68/86 KB   16/153 KB   13/30 KB   35/35 KB   13/48 KB   68/86 KB   19/153 KB   13/30 KB   35/35 KB   13/48 KB   68/86 KB   21/153 KB   13/30 KB   35/35 KB   13/48 KB   68/86 KB   24/153 KB   13/30 KB   35/35 KB   13/48 KB   68/86 KB   27/153 KB   13/30 KB   35/35 KB   13/48 KB   68/86 KB   29/153 KB   13/30 KB   35/35 KB   13/48 KB   68/86 KB   32/153 KB   13/30 KB   35/35 KB   16/48 KB   68/86 KB   32/153 KB   13/30 KB   35/35 KB   19/48 KB   68/86 KB   32/153 KB   13/30 KB   35/35 KB   21/48 KB   68/86 KB   32/153 KB   13/30 KB   35/35 KB   24/48 KB   68/86 KB   32/153 KB   13/30 KB   35/35 KB   27/48 KB   68/86 KB   32/153 KB   13/30 KB   35/35 KB   29/48 KB   68/86 KB   32/153 KB   13/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   13/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   16/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   19/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   21/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   24/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   27/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   29/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   30/30 KB   35/35 KB   32/48 KB   68/86 KB   32/153 KB   30/30 KB   35/35 KB   32/48 KB   72/86 KB   32/153 KB   30/30 KB   35/35 KB   32/48 KB   76/86 KB   32/153 KB   30/30 KB   35/35 KB   32/48 KB   80/86 KB   32/153 KB   30/30 KB   35/35 KB   32/48 KB   84/86 KB   32/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   32/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   36/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   40/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   44/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   48/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   52/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   56/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   60/153 KB   30/30 KB   35/35 KB   32/48 KB   86/86 KB   64/153 KB   30/30 KB   35/35 KB   36/48 KB   86/86 KB   64/153 KB   30/30 KB   35/35 KB   40/48 KB   86/86 KB   64/153 KB   30/30 KB   35/35 KB   44/48 KB   86/86 KB   64/153 KB   30/30 KB   35/35 KB   48/48 KB   86/86 KB   64/153 KB   30/30 KB   35/35 KB   48/48 KB   86/86 KB   64/153 KB   30/30 KB   35/35 KB   48/48 KB   86/86 KB   68/153 KB   30/30 KB   35/35 KB   48/48 KB   86/86 KB   72/153 KB   30/30 KB   35/35 KB   48/48 KB   86/86 KB   76/153 KB   30/30 KB   35/35 KB   48/48 KB   86/86 KB   80/153 KB   30/30 KB                                                           Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.2.1/maven-plugin-registry-2.2.1.jar (30 KB at 155.2 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.2.1/maven-artifact-manager-2.2.1.jar
-35/35 KB   48/48 KB   86/86 KB   84/153 KB              48/48 KB   88/153 KB                         48/48 KB   92/153 KB   48/48 KB   96/153 KB   48/48 KB   100/153 KB   48/48 KB   104/153 KB   48/48 KB   108/153 KB                                                                                             Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.2.1/maven-profile-2.2.1.jar (35 KB at 177.1 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.2.1/maven-repository-metadata-2.2.1.jar
-Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.2.1/maven-model-2.2.1.jar (86 KB at 440.9 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar
-                        Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.2.1/maven-settings-2.2.1.jar (48 KB at 239.5 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.2.1/maven-artifact-2.2.1.jar
-112/153 KB              112/153 KB   3/66 KB   112/153 KB   5/66 KB   112/153 KB   8/66 KB   112/153 KB   11/66 KB   112/153 KB   13/66 KB   116/153 KB   13/66 KB   120/153 KB   13/66 KB   124/153 KB   13/66 KB   128/153 KB   13/66 KB   128/153 KB   4/79 KB   13/66 KB   128/153 KB   8/79 KB   13/66 KB   128/153 KB   12/79 KB   13/66 KB   128/153 KB   16/79 KB   13/66 KB   128/153 KB   20/79 KB   13/66 KB   128/153 KB   24/79 KB   13/66 KB   128/153 KB   28/79 KB   13/66 KB   128/153 KB   32/79 KB   13/66 KB   128/153 KB   32/79 KB   16/66 KB   128/153 KB   32/79 KB   19/66 KB   128/153 KB   32/79 KB   21/66 KB   128/153 KB   32/79 KB   24/66 KB   128/153 KB   32/79 KB   27/66 KB   128/153 KB   32/79 KB   29/66 KB   128/153 KB   32/79 KB   32/66 KB   128/153 KB   4/26 KB   32/79 KB   32/66 KB   128/153 KB   8/26 KB   32/79 KB   32/66 KB   128/153 KB   12/26 KB   32/79 KB   32/66 KB   128/153 KB   16/26 KB   32/79 KB   32/66 KB   128/153 KB   20/26 KB   32/79 KB   32/66 KB   128/153 KB   24/26 KB   32/79 KB   32/66 KB   128/153 KB   26/26 KB   32/79 KB   32/66 KB   132/153 KB   26/26 KB   32/79 KB   32/66 KB   136/153 KB   26/26 KB   32/79 KB   32/66 KB   140/153 KB   26/26 KB   32/79 KB   32/66 KB   144/153 KB   26/26 KB   32/79 KB   32/66 KB   144/153 KB   26/26 KB   36/79 KB   32/66 KB   144/153 KB   26/26 KB   40/79 KB   32/66 KB   144/153 KB   26/26 KB   44/79 KB   32/66 KB   144/153 KB   26/26 KB   48/79 KB   32/66 KB   144/153 KB   26/26 KB   52/79 KB   32/66 KB   144/153 KB   26/26 KB   56/79 KB   32/66 KB   144/153 KB   26/26 KB   60/79 KB   32/66 KB   144/153 KB   26/26 KB   64/79 KB   32/66 KB   148/153 KB   26/26 KB   64/79 KB   32/66 KB   152/153 KB   26/26 KB   64/79 KB   32/66 KB   153/153 KB   26/26 KB   64/79 KB   32/66 KB   153/153 KB   26/26 KB   64/79 KB   36/66 KB   153/153 KB   26/26 KB   64/79 KB   40/66 KB   153/153 KB   26/26 KB   64/79 KB   44/66 KB   153/153 KB   26/26 KB   64/79 KB   48/66 KB                                                 Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.2.1/maven-repository-metadata-2.2.1.jar (26 KB at 99.8 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.6/commons-codec-1.6.jar
-153/153 KB   68/79 KB   48/66 KB              153/153 KB   72/79 KB   48/66 KB   153/153 KB   76/79 KB   48/66 KB   153/153 KB   79/79 KB   48/66 KB   153/153 KB   3/324 KB   79/79 KB   48/66 KB   153/153 KB   5/324 KB   79/79 KB   48/66 KB   153/153 KB   8/324 KB   79/79 KB   48/66 KB   153/153 KB   11/324 KB   79/79 KB   48/66 KB   153/153 KB   13/324 KB   79/79 KB   48/66 KB   153/153 KB   16/324 KB   79/79 KB   48/66 KB   153/153 KB   19/324 KB   79/79 KB   48/66 KB   153/153 KB   21/324 KB   79/79 KB   48/66 KB   153/153 KB   24/324 KB   79/79 KB   48/66 KB   153/153 KB   27/324 KB   79/79 KB   48/66 KB   153/153 KB   29/324 KB   79/79 KB   48/66 KB   153/153 KB   32/324 KB   79/79 KB   48/66 KB   153/153 KB   32/324 KB   79/79 KB   52/66 KB   153/153 KB   32/324 KB   79/79 KB   56/66 KB   153/153 KB   32/324 KB   79/79 KB   60/66 KB                                                  32/324 KB   79/79 KB   64/66 KB                Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.2.1/maven-project-2.2.1.jar (153 KB at 575.9 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/0.4/maven-shared-utils-0.4.jar
-32/324 KB   79/79 KB   66/66 KB   36/324 KB   79/79 KB   66/66 KB   36/324 KB   79/79 KB   66/66 KB   4/228 KB   36/324 KB   79/79 KB   66/66 KB   8/228 KB   36/324 KB   79/79 KB   66/66 KB   12/228 KB   36/324 KB   79/79 KB   66/66 KB   16/228 KB   36/324 KB   79/79 KB   66/66 KB   20/228 KB   36/324 KB   79/79 KB   66/66 KB   24/228 KB   36/324 KB   79/79 KB   66/66 KB   28/228 KB   36/324 KB   79/79 KB   66/66 KB   32/228 KB                                                 Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.2.1/maven-artifact-2.2.1.jar (79 KB at 286.3 KB/sec)
-Downloading: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.15/plexus-utils-3.0.15.jar
-40/324 KB   66/66 KB   36/228 KB   44/324 KB   66/66 KB   36/228 KB   48/324 KB   66/66 KB   36/228 KB   52/324 KB   66/66 KB   36/228 KB   36/324 KB   66/66 KB   36/228 KB              52/324 KB   66/66 KB   40/228 KB   52/324 KB   66/66 KB   44/228 KB   52/324 KB   66/66 KB   48/228 KB   52/324 KB   66/66 KB   52/228 KB   52/324 KB   66/66 KB   56/228 KB   52/324 KB   66/66 KB   60/228 KB   52/324 KB   4/152 KB   66/66 KB   60/228 KB   52/324 KB   8/152 KB   66/66 KB   60/228 KB   52/324 KB   12/152 KB   66/66 KB   60/228 KB   52/324 KB   16/152 KB   66/66 KB   60/228 KB   56/324 KB   16/152 KB   66/66 KB   60/228 KB   60/324 KB   16/152 KB   66/66 KB   60/228 KB   64/324 KB   16/152 KB   66/66 KB   60/228 KB   68/324 KB   16/152 KB   66/66 KB   60/228 KB   72/324 KB   16/152 KB   66/66 KB   60/228 KB   76/324 KB   16/152 KB   66/66 KB   60/228 KB   80/324 KB   16/152 KB   66/66 KB   60/228 KB                                                  Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.2.1/maven-artifact-manager-2.2.1.jar (66 KB at 229.1 KB/sec)
-84/324 KB   16/152 KB   60/228 KB              88/324 KB   20/152 KB   60/228 KB   88/324 KB   24/152 KB   60/228 KB   88/324 KB   28/152 KB   60/228 KB   88/324 KB   32/152 KB   60/228 KB   88/324 KB   32/152 KB   64/228 KB   88/324 KB   32/152 KB   68/228 KB   88/324 KB   32/152 KB   72/228 KB   88/324 KB   16/152 KB   60/228 KB   92/324 KB   32/152 KB   76/228 KB   96/324 KB   32/152 KB   76/228 KB   100/324 KB   32/152 KB   76/228 KB   100/324 KB   4/234 KB   36/152 KB   76/228 KB   100/324 KB   4/234 KB   32/152 KB   76/228 KB   100/324 KB   4/234 KB   40/152 KB   76/228 KB   100/324 KB   8/234 KB   40/152 KB   76/228 KB   100/324 KB   8/234 KB   44/152 KB   76/228 KB   100/324 KB   12/234 KB   44/152 KB   76/228 KB   100/324 KB   12/234 KB   48/152 KB   76/228 KB   100/324 KB   16/234 KB   48/152 KB   76/228 KB   100/324 KB   16/234 KB   52/152 KB   76/228 KB   100/324 KB   20/234 KB   52/152 KB   76/228 KB   100/324 KB   24/234 KB   56/152 KB   76/228 KB   100/324 KB   24/234 KB   60/152 KB   76/228 KB   104/324 KB   24/234 KB   60/152 KB   76/228 KB   88/324 KB   32/152 KB   76/228 KB    100/324 KB   24/234 KB   56/152 KB   76/228 KB   104/324 KB   24/234 KB   60/152 KB   80/228 KB   104/324 KB   28/234 KB   60/152 KB   80/228 KB   104/324 KB   32/234 KB   60/152 KB   80/228 KB   104/324 KB   32/234 KB   60/152 KB   84/228 KB   104/324 KB   32/234 KB   60/152 KB   88/228 KB   104/324 KB   32/234 KB   60/152 KB   92/228 KB   104/324 KB   36/234 KB   60/152 KB   92/228 KB   104/324 KB   36/234 KB   60/152 KB   96/228 KB   104/324 KB   40/234 KB   60/152 KB   96/228 KB   104/324 KB   44/234 KB   60/152 KB   96/228 KB   104/324 KB   48/234 KB   60/152 KB   96/228 KB   104/324 KB   48/234 KB   60/152 KB   100/228 KB   108/324 KB   48/234 KB   60/152 KB   100/228 KB   112/324 KB   52/234 KB   64/152 KB   104/228 KB   116/324 KB   52/234 KB   64/152 KB   104/228 KB   108/324 KB   48/234 KB   60/152 KB   104/228 KB   108/324 KB   52/234 KB   64/152 KB   104/228 KB   120/324 KB   52/234 KB   64/152 KB   108/228 KB   120/324 KB   56/234 KB   64/152 KB   108/228 KB   120/324 KB   56/234 KB   64/152 KB   112/228 KB   120/324 KB   60/234 KB   64/152 KB   112/228 KB   120/324 KB   64/234 KB   64/152 KB   112/228 KB   120/324 KB   64/234 KB   64/152 KB   116/228 KB   120/324 KB   68/234 KB   64/152 KB   116/228 KB   120/324 KB   68/234 KB   64/152 KB   120/228 KB   120/324 KB   72/234 KB   64/152 KB   120/228 KB   120/324 KB   72/234 KB   64/152 KB   124/228 KB   120/324 KB   76/234 KB   64/152 KB   124/228 KB   120/324 KB   76/234 KB   64/152 KB   128/228 KB   120/324 KB   80/234 KB   64/152 KB   128/228 KB   120/324 KB   80/234 KB   64/152 KB   132/228 KB   120/324 KB   80/234 KB   64/152 KB   136/228 KB   120/324 KB   84/234 KB   64/152 KB   140/228 KB   120/324 KB   84/234 KB   64/152 KB   144/228 KB   120/324 KB   84/234 KB   64/152 KB   148/228 KB   120/324 KB   84/234 KB   64/152 KB   152/228 KB   120/324 KB   84/234 KB   64/152 KB   156/228 KB   120/324 KB   84/234 KB   64/152 KB   160/228 KB   120/324 KB   84/234 KB   64/152 KB   164/228 KB   120/324 KB   84/234 KB   64/152 KB   168/228 KB   120/324 KB   84/234 KB   64/152 KB   172/228 KB   120/324 KB   84/234 KB   64/152 KB   176/228 KB   108/324 KB   48/234 KB   64/152 KB   104/228 KB   120/324 KB   84/234 KB   64/152 KB   180/228 KB   120/324 KB   84/234 KB   68/152 KB   180/228 KB   120/324 KB   84/234 KB   72/152 KB   184/228 KB   120/324 KB   84/234 KB   64/152 KB   136/228 KB   120/324 KB   84/234 KB   72/152 KB   188/228 KB   120/324 KB   88/234 KB   72/152 KB   188/228 KB   120/324 KB   88/234 KB   72/152 KB   192/228 KB   120/324 KB   92/234 KB   72/152 KB   192/228 KB   120/324 KB   96/234 KB   72/152 KB   192/228 KB   120/324 KB   96/234 KB   72/152 KB   196/228 KB   120/324 KB   52/234 KB   64/152 KB   104/228 KB   120/324 KB   96/234 KB   72/152 KB   200/228 KB   124/324 KB   96/234 KB   72/152 KB   200/228 KB   124/324 KB   96/234 KB   72/152 KB   204/228 KB   128/324 KB   96/234 KB   72/152 KB   204/228 KB   128/324 KB   96/234 KB   72/152 KB   208/228 KB   132/324 KB   96/234 KB   72/152 KB   212/228 KB   120/324 KB   84/234 KB   72/152 KB   184/228 KB   132/324 KB   96/234 KB   72/152 KB   216/228 KB   132/324 KB   96/234 KB   72/152 KB   212/228 KB   132/324 KB   96/234 KB   72/152 KB   220/228 KB   136/324 KB   96/234 KB   72/152 KB   220/228 KB   136/324 KB   96/234 KB   72/152 KB   224/228 KB   140/324 KB   96/234 KB   72/152 KB   224/228 KB   144/324 KB   96/234 KB   72/152 KB   224/228 KB   144/324 KB   96/234 KB   72/152 KB   228/228 KB   144/324 KB   96/234 KB   76/152 KB   228/228 KB   144/324 KB   96/234 KB   80/152 KB   228/228 KB   148/324 KB   96/234 KB   80/152 KB   228/228 KB   148/324 KB   100/234 KB   80/152 KB   228/228 KB   152/324 KB   100/234 KB   80/152 KB   228/228 KB   152/324 KB   104/234 KB   80/152 KB   228/228 KB   156/324 KB   104/234 KB   80/152 KB   228/228 KB   156/324 KB   108/234 KB   80/152 KB   228/228 KB   160/324 KB   108/234 KB   80/152 KB   228/228 KB   160/324 KB   112/234 KB   80/152 KB   228/228 KB   164/324 KB   112/234 KB   80/152 KB   228/228 KB   168/324 KB   112/234 KB   80/152 KB   228/228 KB   168/324 KB   112/234 KB   84/152 KB   228/228 KB   172/324 KB   112/234 KB   84/152 KB   228/228 KB   176/324 KB   112/234 KB   88/152 KB   228/228 KB   176/324 KB   112/234 KB   88/152 KB   228/228 KB   176/324 KB   116/234 KB   88/152 KB   228/228 KB   176/324 KB   120/234 KB   88/152 KB   228/228 KB   176/324 KB   124/234 KB   88/152 KB   228/228 KB   176/324 KB   128/234 KB   88/152 KB   228/228 KB   180/324 KB   128/234 KB   88/152 KB   228/228 KB   184/324 KB   128/234 KB   88/152 KB   228/228 KB   188/324 KB   128/234 KB   88/152 KB   228/228 KB   192/324 KB   128/234 KB   88/152 KB   228/228 KB   196/324 KB   128/234 KB   88/152 KB   228/228 KB   200/324 KB   128/234 KB   92/152 KB   228/228 KB   200/324 KB   128/234 KB   96/152 KB   228/228 KB   200/324 KB   128/234 KB   100/152 KB   228/228 KB   200/324 KB   128/234 KB   104/152 KB   228/228 KB   200/324 KB   128/234 KB   108/152 KB   228/228 KB   200/324 KB   128/234 KB   112/152 KB   228/228 KB   200/324 KB   128/234 KB   92/152 KB   228/228 KB   204/324 KB   132/234 KB   112/152 KB   228/228 KB   204/324 KB   132/234 KB   112/152 KB   228/228 KB   208/324 KB   132/234 KB   112/152 KB   228/228 KB   212/324 KB   132/234 KB   116/152 KB   228/228 KB   216/324 KB   132/234 KB   116/152 KB   228/228 KB   216/324 KB   136/234 KB   116/152 KB   228/228 KB   220/324 KB   136/234 KB   116/152 KB   228/228 KB   224/324 KB   136/234 KB   116/152 KB   228/228 KB   224/324 KB   140/234 KB   116/152 KB   228/228 KB   224/324 KB   144/234 KB   116/152 KB   228/228 KB   228/324 KB   144/234 KB   116/152 KB   228/228 KB   232/324 KB   144/234 KB   116/152 KB   228/228 KB   236/324 KB   144/234 KB   116/152 KB   228/228 KB   212/324 KB   132/234 KB   116/152 KB   228/228 KB   240/324 KB   144/234 KB   116/152 KB   228/228 KB   240/324 KB   144/234 KB   120/152 KB   228/228 KB   244/324 KB   148/234 KB   124/152 KB   228/228 KB   244/324 KB   148/234 KB   128/152 KB   228/228 KB   244/324 KB   148/234 KB   132/152 KB   228/228 KB   244/324 KB   148/234 KB   136/152 KB   228/228 KB   244/324 KB   148/234 KB   140/152 KB   228/228 KB   244/324 KB   148/234 KB   144/152 KB   228/228 KB   244/324 KB   148/234 KB   148/152 KB   228/228 KB   244/324 KB   148/234 KB   152/152 KB   228/228 KB   244/324 KB   148/234 KB   152/152 KB   228/228 KB   244/324 KB   148/234 KB   120/152 KB   228/228 KB   240/324 KB   148/234 KB   120/152 KB   228/228 KB   248/324 KB   148/234 KB   152/152 KB   228/228 KB   248/324 KB   152/234 KB   152/152 KB   228/228 KB   252/324 KB   152/234 KB   152/152 KB   228/228 KB   252/324 KB   156/234 KB   152/152 KB   228/228 KB   256/324 KB   156/234 KB   152/152 KB   228/228 KB   256/324 KB   160/234 KB   152/152 KB   228/228 KB   260/324 KB   160/234 KB   152/152 KB   228/228 KB   264/324 KB   164/234 KB   152/152 KB   228/228 KB   260/324 KB   164/234 KB   152/152 KB   228/228 KB   268/324 KB   164/234 KB   152/152 KB   228/228 KB   268/324 KB   168/234 KB   152/152 KB   228/228 KB   272/324 KB   172/234 KB   152/152 KB   228/228 KB   272/324 KB   172/234 KB   152/152 KB   228/228 KB   272/324 KB   176/234 KB   152/152 KB   228/228 KB   276/324 KB   176/234 KB   152/152 KB   228/228 KB   280/324 KB   176/234 KB   152/152 KB   228/228 KB   284/324 KB   176/234 KB   152/152 KB   228/228 KB   288/324 KB   176/234 KB   152/152 KB   228/228 KB                                                       288/324 KB   180/234 KB   152/152 KB                288/324 KB   184/234 KB   152/152 KB   288/324 KB   188/234 KB   152/152 KB   288/324 KB   192/234 KB   152/152 KB   292/324 KB   192/234 KB   152/152 KB   292/324 KB   196/234 KB   152/152 KB   296/324 KB   196/234 KB   152/152 KB   300/324 KB   196/234 KB   152/152 KB   304/324 KB   196/234 KB   152/152 KB   304/324 KB   200/234 KB   152/152 KB   Downloaded: https://repo.maven.apache.org/maven2/commons-codec/commons-codec/1.6/commons-codec-1.6.jar (228 KB at 604.6 KB/sec)
-308/324 KB   200/234 KB   152/152 KB   312/324 KB   200/234 KB   152/152 KB   316/324 KB   200/234 KB   152/152 KB   320/324 KB   200/234 KB   152/152 KB   320/324 KB   204/234 KB   152/152 KB   324/324 KB   204/234 KB   152/152 KB   324/324 KB   208/234 KB   152/152 KB   324/324 KB   208/234 KB   152/152 KB   324/324 KB   212/234 KB   152/152 KB   324/324 KB   216/234 KB   152/152 KB   324/324 KB   220/234 KB   152/152 KB   324/324 KB   224/234 KB   152/152 KB   324/324 KB   228/234 KB   152/152 KB   324/324 KB   232/234 KB   152/152 KB   324/324 KB   234/234 KB   152/152 KB                                          Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-shared-utils/0.4/maven-shared-utils-0.4.jar (152 KB at 375.8 KB/sec)
-                                                                              Downloaded: https://repo.maven.apache.org/maven2/backport-util-concurrent/backport-util-concurrent/3.1/backport-util-concurrent-3.1.jar (324 KB at 788.2 KB/sec)
-Downloaded: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.15/plexus-utils-3.0.15.jar (234 KB at 566.4 KB/sec)
-[INFO] Installing /var/lib/jenkins/workspace/search engine - indexer/indexer/target/SearchEngineIndexer-1.0.jar to /var/lib/jenkins/.m2/repository/com/jwm/SearchEngineIndexer/1.0/SearchEngineIndexer-1.0.jar
-[INFO] Installing /var/lib/jenkins/workspace/search engine - indexer/indexer/pom.xml to /var/lib/jenkins/.m2/repository/com/jwm/SearchEngineIndexer/1.0/SearchEngineIndexer-1.0.pom
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 01:01 min
-[INFO] Finished at: 2016-08-29T22:52:28-04:00
-[INFO] Final Memory: 30M/210M
-[INFO] ------------------------------------------------------------------------
-Finished: SUCCESS

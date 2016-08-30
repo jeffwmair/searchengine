@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
-  <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties/>
@@ -27,7 +26,7 @@
   <triggers>
     <jenkins.triggers.ReverseBuildTrigger>
       <spec></spec>
-      <upstreamProjects>searchengine-indexer, </upstreamProjects>
+      <upstreamProjects>searchengine-indexer</upstreamProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
@@ -40,7 +39,7 @@
   <builders>
     <hudson.tasks.Maven>
       <targets>package</targets>
-      <pom>webapp/pom.xml</pom>
+      <pom>webapp</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
