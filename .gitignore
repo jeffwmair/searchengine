@@ -1,9 +1,9 @@
 pid.txt
-.idea/
-logs/*
 logs
 target
 toindex
-*.iml
-src/main/web/sqlbackup
 *.swp
+
+*.iml
+.idea/
+

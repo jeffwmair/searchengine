@@ -4,11 +4,12 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.jwm</groupId>
-	<artifactId>SearchEngineIndexer</artifactId>
+	<groupId>com.jwm.ir</groupId>
+	<artifactId>searchengine-indexer</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>SearchEngine-Indexer</name>
+	<name>Search Engine Indexer</name>
+	<url>github.com/jeffwmair/searchengine</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -111,7 +112,6 @@
 					<skip>true</skip>
 				</configuration>
 				<executions>
-
 					<execution>
 						<id>run-unit-test</id>
 						<phase>test</phase>
