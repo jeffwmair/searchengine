@@ -33,7 +33,7 @@
   <builders>
     <hudson.tasks.Maven>
       <targets>install</targets>
-      <pom>indexer/pom</pom>
+      <pom>indexer/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>

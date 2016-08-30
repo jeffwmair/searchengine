@@ -39,7 +39,7 @@
   <builders>
     <hudson.tasks.Maven>
       <targets>package</targets>
-      <pom>webapp</pom>
+      <pom>webapp/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
