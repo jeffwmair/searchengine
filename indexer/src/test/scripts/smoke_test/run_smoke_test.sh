@@ -16,14 +16,6 @@ build_program() {
 	cd -
 }
 
-deploy_web_services() {
-	# need to deploy the php services to the apache web dir
-	echo "Updating deployment of php services"
-	rsync -r $SEARCH_ENGINE/src/web/* $JWM_PROD/website/searchengine/
-	echo "Updating credentials"
-	cp utils.php $JWM_PROD/website/searchengine/services/
-}
-
 setup_test_pages() {
 	rm -rf "$WEB_TEST_DIR"
 	mkdir -p "$WEB_TEST_DIR"
@@ -38,7 +30,7 @@ setup_db() {
 JAVA_PID=''
 run_program() {
 	echo "Starting program"
-	cd $INDEXER_HOME/target/
+	cd ../../../../target/
 	mkdir flags
 	# create a stop command file already; the test will finish before this is observed, actually.
 	#touch flags/stop.txt
