@@ -1,0 +1,44 @@
+Started by user [8mha:AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0mjeff
+Building in workspace /var/lib/jenkins/workspace/searchengine
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/jeffwmair/searchengine.git # timeout=10
+Fetching upstream changes from https://github.com/jeffwmair/searchengine.git
+ > git --version # timeout=10
+ > git -c core.askpass=true fetch --tags --progress https://github.com/jeffwmair/searchengine.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision b006d7a998aa061e596701466bf8b0bcf94e0044 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f b006d7a998aa061e596701466bf8b0bcf94e0044
+First time build. Skipping changelog.
+[searchengine] $ mvn compile test
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building SearchEngine 1.0
+[INFO] ------------------------------------------------------------------------
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.pom
+3/8 KB   5/8 KB   8/8 KB   8/8 KB            Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.pom (8 KB at 9.5 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pom
+3/9 KB   5/9 KB   8/9 KB   9/9 KB            Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/23/maven-plugins-23.pom (9 KB at 169.5 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pom
+3/30 KB   6/30 KB   9/30 KB   11/30 KB   14/30 KB   16/30 KB   19/30 KB   22/30 KB   25/30 KB   27/30 KB   30/30 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/22/maven-parent-22.pom (30 KB at 446.9 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pom
+3/15 KB    5/15 KB   8/15 KB   11/15 KB   13/15 KB   15/15 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/apache/11/apache-11.pom (15 KB at 176.4 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar
+3/29 KB    5/29 KB   8/29 KB   11/29 KB   13/29 KB   16/29 KB   19/29 KB   21/29 KB   24/29 KB   27/29 KB   29/29 KB   29/29 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/2.6/maven-resources-plugin-2.6.jar (29 KB at 406.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/2.1/maven-compiler-plugin-2.1.pom
+2/6 KB     4/6 KB   6/6 KB   6/6 KB            Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/2.1/maven-compiler-plugin-2.1.pom (6 KB at 109.8 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/16/maven-plugins-16.pom
+3/13 KB   5/13 KB   8/13 KB   11/13 KB   13/13 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/16/maven-plugins-16.pom (13 KB at 204.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/15/maven-parent-15.pom
+3/24 KB    5/24 KB   8/24 KB   11/24 KB   13/24 KB   16/24 KB   19/24 KB   21/24 KB   24/24 KB   24/24 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/maven-parent/15/maven-parent-15.pom (24 KB at 293.0 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/apache/6/apache-6.pom
+3/13 KB    5/13 KB   8/13 KB   11/13 KB   13/13 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/apache/6/apache-6.pom (13 KB at 113.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/2.1/maven-compiler-plugin-2.1.jar
+3/28 KB    5/28 KB   8/28 KB   11/28 KB   13/28 KB   16/28 KB   19/28 KB   21/28 KB   24/28 KB   27/28 KB   28/28 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/2.1/maven-compiler-plugin-2.1.jar (28 KB at 70.6 KB/sec)
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.9/maven-surefire-plugin-2.9.pom
+3/10 KB    5/10 KB   8/10 KB   10/10 KB              Downloaded: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-plugin/2.9/maven-surefire-plugin-2.9.pom (10 KB at 15.4 KB/sec)
+Build step 'Invoke top-level Maven targets' marked build as failure
+Finished: FAILURE

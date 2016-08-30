@@ -1,0 +1,349 @@
+Started by user [8mha:AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0mjeff
+Building in workspace /var/lib/jenkins/workspace/searchengine
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/jeffwmair/searchengine.git # timeout=10
+Fetching upstream changes from https://github.com/jeffwmair/searchengine.git
+ > git --version # timeout=10
+ > git -c core.askpass=true fetch --tags --progress https://github.com/jeffwmair/searchengine.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision b006d7a998aa061e596701466bf8b0bcf94e0044 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f b006d7a998aa061e596701466bf8b0bcf94e0044
+ > git rev-list b006d7a998aa061e596701466bf8b0bcf94e0044 # timeout=10
+[searchengine] $ mvn compile test integration-test
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building SearchEngine 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ SearchEngine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-compiler-plugin:2.1:compile (default-compile) @ SearchEngine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ SearchEngine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-compiler-plugin:2.1:compile (default-compile) @ SearchEngine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ SearchEngine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/searchengine/src/test/resources
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-compiler-plugin:2.1:testCompile (default-testCompile) @ SearchEngine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-surefire-plugin:2.9:test (default-test) @ SearchEngine ---
+[INFO] Tests are skipped.
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-surefire-plugin:2.9:test (run-unit-test) @ SearchEngine ---
+[INFO] Surefire report directory: /var/lib/jenkins/workspace/searchengine/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.jwm.ir.index.crawler.UrlUtilsTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.268 sec
+Running com.jwm.ir.index.crawler.UrlFeedTest
+2016-08-28 03:39:39,533 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetching urls from the db.  Putting onto the queue.
+2016-08-28 03:39:39,538 DEBUG [com.jwm.ir.index.crawler.UrlFeed] - (main) Fetched 2 urls from the db.  Putting onto the queue.
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.255 sec
+Running com.jwm.ir.index.crawler.ResourceFetcherTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running com.jwm.ir.index.service.ServiceImplTest
+2016-08-28 03:39:39,751 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-28 03:39:39,761 WARN [com.jwm.ir.index.service.ServiceImpl] - (main) Page with url 'www.google.com/a' already exists in the database, so not adding
+2016-08-28 03:39:39,770 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-28 03:39:39,771 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain does not exist, so creating:google.com
+2016-08-28 03:39:39,773 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+2016-08-28 03:39:39,789 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Beginning to add url for crawling:www.google.com/a; parentUrlwww.google.com/b
+2016-08-28 03:39:39,790 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Domain exists:google.com
+2016-08-28 03:39:39,791 DEBUG [com.jwm.ir.index.service.ServiceImpl] - (main) Completed to add url for crawling:www.google.com/a
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.254 sec
+Running com.jwm.ir.index.StemmerWrapperTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
+Running com.jwm.ir.index.robotverifier.UrlVerifierMessageReceiverTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec
+Running com.jwm.ir.index.robotverifier.RobotUserAgentImplCacheTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 sec
+Running com.jwm.ir.index.robotverifier.RobotDisallowsTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running com.jwm.ir.index.robotverifier.UrlVerifierTest
+2016-08-28 03:39:39,892 INFO [com.jwm.ir.index.robotverifier.UrlVerifier] - (main) Url cannot be indexed because its robots.txt restricts it.  Url:http://foobar.com/searchengine_test/page1.html
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 sec
+Running com.jwm.ir.index.robotverifier.RobotTxtParserTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running com.jwm.ir.persistence.DomainTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running com.jwm.ir.persistence.PageTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running com.jwm.ir.search.FastCosineScoreCalculatorTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 sec
+Running com.jwm.ir.search.QueryHelperTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.jwm.ir.search.document.DocumentImplTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running thirdparty.jung.PageRankTest
+a = 0.049999999999999996
+b = 0.475
+c = 0.475
+1000 = 0.049999999999999996
+1001 = 0.475
+1002 = 0.475
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 sec
+
+Results :
+
+Tests run: 47, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ SearchEngine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-compiler-plugin:2.1:compile (default-compile) @ SearchEngine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ SearchEngine ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/searchengine/src/test/resources
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-compiler-plugin:2.1:testCompile (default-testCompile) @ SearchEngine ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-surefire-plugin:2.9:test (default-test) @ SearchEngine ---
+[INFO] Tests are skipped.
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-surefire-plugin:2.9:test (run-unit-test) @ SearchEngine ---
+[INFO] Skipping execution of surefire because it has already been run for this configuration
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ SearchEngine ---
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-dependency-plugin:2.5.1:copy-dependencies (copy-dependencies) @ SearchEngine ---
+[INFO] collections-generic-4.01.jar already exists in destination.
+[INFO] spring-web-4.3.2.RELEASE.jar already exists in destination.
+[INFO] mchange-commons-java-0.2.3.4.jar already exists in destination.
+[INFO] aopalliance-1.0.jar already exists in destination.
+[INFO] mockito-all-1.9.5.jar already exists in destination.
+[INFO] hibernate-jpa-2.1-api-1.0.0.Final.jar already exists in destination.
+[INFO] jandex-1.1.0.Final.jar already exists in destination.
+[INFO] mysql-connector-java-5.1.6.jar already exists in destination.
+[INFO] xml-apis-1.0.b2.jar already exists in destination.
+[INFO] spring-context-4.3.2.RELEASE.jar already exists in destination.
+[INFO] jboss-logging-3.1.3.GA.jar already exists in destination.
+[INFO] quick-json-1.0.4.jar already exists in destination.
+[INFO] antlr-2.7.7.jar already exists in destination.
+[INFO] jung-algorithms-2.0.1.jar already exists in destination.
+[INFO] javassist-3.18.1-GA.jar already exists in destination.
+[INFO] spring-webmvc-4.3.2.RELEASE.jar already exists in destination.
+[INFO] hibernate-commons-annotations-4.0.5.Final.jar already exists in destination.
+[INFO] jsoup-1.8.1.jar already exists in destination.
+[INFO] spring-beans-4.3.2.RELEASE.jar already exists in destination.
+[INFO] colt-1.2.0.jar already exists in destination.
+[INFO] log4j-1.2.14.jar already exists in destination.
+[INFO] stax2-api-3.1.4.jar already exists in destination.
+[INFO] jboss-logging-annotations-1.2.0.Beta1.jar already exists in destination.
+[INFO] woodstox-core-asl-4.4.1.jar already exists in destination.
+[INFO] jung-graph-impl-2.0.1.jar already exists in destination.
+[INFO] stax-api-1.0-2.jar already exists in destination.
+[INFO] commons-logging-1.1.3.jar already exists in destination.
+[INFO] servlet-api-2.5.jar already exists in destination.
+[INFO] jboss-transaction-api_1.2_spec-1.0.0.Final.jar already exists in destination.
+[INFO] jung-api-2.0.1.jar already exists in destination.
+[INFO] concurrent-1.3.4.jar already exists in destination.
+[INFO] spring-expression-4.3.2.RELEASE.jar already exists in destination.
+[INFO] c3p0-0.9.2.1.jar already exists in destination.
+[INFO] spring-core-4.3.2.RELEASE.jar already exists in destination.
+[INFO] c3p0-0.9.1.2.jar already exists in destination.
+[INFO] dom4j-1.6.1.jar already exists in destination.
+[INFO] spring-aop-4.3.2.RELEASE.jar already exists in destination.
+[INFO] hibernate-core-4.3.10.Final.jar already exists in destination.
+[INFO] hibernate-c3p0-4.3.10.Final.jar already exists in destination.
+[INFO] 
+[8mha:AAAAYB+LCAAAAAAAAP9b85aBtbiIQSmjNKU4P0+vJLE4u1gvPjexLDVPzxdEGvvmZ+X75ZekLlOVfvTjc8FPJgaGiiIGKaiG5Py84vycVD1nCA1SyAABjCCFBQCV27OjYAAAAA==[0m[INFO] --- maven-surefire-plugin:2.9:test (run-integration-test) @ SearchEngine ---
+[INFO] Surefire report directory: /var/lib/jenkins/workspace/searchengine/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running integration.ServiceImpl_get_unverified_pages_IntegrationTest
+2016-08-28 03:40:14,268 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#2) com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@7feb149a -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: 
+com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Access denied for user 'se_test_user'@'localhost' to database 'searchengine_test'
+	at sun.reflect.GeneratedConstructorAccessor8.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.Util.getInstance(Util.java:381)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1030)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:956)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3491)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3423)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:910)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3923)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1273)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2031)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:718)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:46)
+	at sun.reflect.GeneratedConstructorAccessor4.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:302)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:282)
+	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:146)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:195)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:184)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:200)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1086)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquireAndDecrementPendingAcquiresWithinLockOnSuccess(BasicResourcePool.java:1073)
+	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:44)
+	at com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask.run(BasicResourcePool.java:1810)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:648)
+2016-08-28 03:40:14,272 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#0) com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@20ef7444 -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: 
+com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Access denied for user 'se_test_user'@'localhost' to database 'searchengine_test'
+	at sun.reflect.GeneratedConstructorAccessor8.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.Util.getInstance(Util.java:381)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1030)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:956)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3491)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3423)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:910)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3923)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1273)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2031)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:718)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:46)
+	at sun.reflect.GeneratedConstructorAccessor4.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:302)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:282)
+	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:146)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:195)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:184)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:200)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1086)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquireAndDecrementPendingAcquiresWithinLockOnSuccess(BasicResourcePool.java:1073)
+	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:44)
+	at com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask.run(BasicResourcePool.java:1810)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:648)
+2016-08-28 03:40:14,272 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#1) com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@115813c1 -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: 
+com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Access denied for user 'se_test_user'@'localhost' to database 'searchengine_test'
+	at sun.reflect.GeneratedConstructorAccessor8.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.Util.getInstance(Util.java:381)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1030)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:956)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3491)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3423)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:910)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3923)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1273)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2031)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:718)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:46)
+	at sun.reflect.GeneratedConstructorAccessor4.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:302)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:282)
+	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:146)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:195)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:184)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:200)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1086)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquireAndDecrementPendingAcquiresWithinLockOnSuccess(BasicResourcePool.java:1073)
+	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:44)
+	at com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask.run(BasicResourcePool.java:1810)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:648)
+2016-08-28 03:40:14,291 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#1) Having failed to acquire a resource, com.mchange.v2.resourcepool.BasicResourcePool@8f4ea7c is interrupting all Threads waiting on a resource to check out. Will try again in response to new client requests.
+2016-08-28 03:40:14,298 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#0) Having failed to acquire a resource, com.mchange.v2.resourcepool.BasicResourcePool@8f4ea7c is interrupting all Threads waiting on a resource to check out. Will try again in response to new client requests.
+2016-08-28 03:40:14,299 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#0) com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@5985c0e8 -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: 
+com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Access denied for user 'se_test_user'@'localhost' to database 'searchengine_test'
+	at sun.reflect.GeneratedConstructorAccessor8.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.Util.getInstance(Util.java:381)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1030)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:956)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3491)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3423)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:910)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3923)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1273)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2031)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:718)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:46)
+	at sun.reflect.GeneratedConstructorAccessor4.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:302)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:282)
+	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:146)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:195)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:184)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:200)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1086)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquireAndDecrementPendingAcquiresWithinLockOnSuccess(BasicResourcePool.java:1073)
+	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:44)
+	at com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask.run(BasicResourcePool.java:1810)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:648)
+2016-08-28 03:40:14,302 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#2) Having failed to acquire a resource, com.mchange.v2.resourcepool.BasicResourcePool@8f4ea7c is interrupting all Threads waiting on a resource to check out. Will try again in response to new client requests.
+2016-08-28 03:40:14,300 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#1) com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask@7f74acfb -- Acquisition Attempt Failed!!! Clearing pending acquires. While trying to acquire a needed new resource, we failed to succeed more than the maximum number of allowed acquisition attempts (30). Last acquisition attempt exception: 
+com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Access denied for user 'se_test_user'@'localhost' to database 'searchengine_test'
+	at sun.reflect.GeneratedConstructorAccessor8.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.Util.getInstance(Util.java:381)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1030)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:956)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3491)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3423)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:910)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:3923)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1273)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2031)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:718)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:46)
+	at sun.reflect.GeneratedConstructorAccessor4.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:406)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:302)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:282)
+	at com.mchange.v2.c3p0.DriverManagerDataSource.getConnection(DriverManagerDataSource.java:146)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:195)
+	at com.mchange.v2.c3p0.WrapperConnectionPoolDataSource.getPooledConnection(WrapperConnectionPoolDataSource.java:184)
+	at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool$1PooledConnectionResourcePoolManager.acquireResource(C3P0PooledConnectionPool.java:200)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquire(BasicResourcePool.java:1086)
+	at com.mchange.v2.resourcepool.BasicResourcePool.doAcquireAndDecrementPendingAcquiresWithinLockOnSuccess(BasicResourcePool.java:1073)
+	at com.mchange.v2.resourcepool.BasicResourcePool.access$800(BasicResourcePool.java:44)
+	at com.mchange.v2.resourcepool.BasicResourcePool$ScatteredAcquireTask.run(BasicResourcePool.java:1810)
+	at com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread.run(ThreadPoolAsynchronousRunner.java:648)
+2016-08-28 03:40:14,308 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#0) Having failed to acquire a resource, com.mchange.v2.resourcepool.BasicResourcePool@8f4ea7c is interrupting all Threads waiting on a resource to check out. Will try again in response to new client requests.
+2016-08-28 03:40:14,312 WARN [com.mchange.v2.resourcepool.BasicResourcePool] - (C3P0PooledConnectionPoolManager[identityToken->z8kfsx9i1lhz7gw1nb61jn|41fbdac4]-HelperThread-#1) Having failed to acquire a resource, com.mchange.v2.resourcepool.BasicResourcePool@8f4ea7c is interrupting all Threads waiting on a resource to check out. Will try again in response to new client requests.
+2016-08-28 03:40:14,344 WARN [org.hibernate.engine.jdbc.internal.JdbcServicesImpl] - (main) HHH000342: Could not obtain connection to query metadata : Connections could not be acquired from the underlying database!
+Build was aborted
+Aborted by [8mha:AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyWEgZu/dLi1CL9xJTczDwAZ3pnlMAAAAA=[0mjeff
+Finished: ABORTED

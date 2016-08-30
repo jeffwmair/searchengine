@@ -1,0 +1,288 @@
+commit b54458e3fa0510b704a137a40d26bb39e873c720
+tree 988db0167eb220ba3add0fedcf6e3bed6e0952e8
+parent b566f4ec18dc0f0ecb92bac7e998c547047ade78
+author Jeff Mair <jeffwmair@gmail.com> 2016-08-29 21:36:18 -0400
+committer Jeff Mair <jeffwmair@gmail.com> 2016-08-29 21:36:18 -0400
+
+    fixed recently broken run_smoke_tes.sh for the indexer
+
+
+
+:100755 100755 00b0c53961944052cb8387ce17803a8b27587355 772eca05860eeb36b9def3696d53a9f28cad4a14 M	indexer/activate_environment.sh
+:100644 100644 01ea46440c9f4cd0521750a860e9a6967a762d36 bae8b38bdbc645e9416c929d85fbe03fe9047c9f M	indexer/src/main/resources/log4j.properties
+:100755 100755 4fdb241b1b157352e0d04f6a66e302ba87b69107 771d37924b1791ab3e34bc13c935a71768f75e96 M	indexer/src/test/scripts/smoke_test/run_smoke_test.sh
+commit b566f4ec18dc0f0ecb92bac7e998c547047ade78
+tree 4fdcf237eb4e479f850fb51ba9e1675e9faa5439
+parent dca9efe7404252b3e1f37d57d0c60c32f8b2a6ac
+author root <jeffwmair@gmail.com> 2016-08-29 20:03:26 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 20:03:26 +0000
+
+    renamed searchengine webapp output war file
+
+
+
+:100644 100644 08328819ead85fe115fa253c8ec2d3208a5be6d8 15f31c286cda9a3e45bd640e3cf7401f42d63e67 M	webapp/pom.xml
+commit dca9efe7404252b3e1f37d57d0c60c32f8b2a6ac
+tree 6decd1b775d456c84c6ecf019e54e077ad22999b
+parent 00fdbde6f0d24b89b1880dd7b04795d1eaab455c
+author root <jeffwmair@gmail.com> 2016-08-29 20:01:10 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 20:01:10 +0000
+
+    moved webapp stuff from indexer project to webapp project
+
+
+
+:100644 100644 ed51a1c9f9a3348b40aebf1fb05f3c9c22093d74 a4dc9e7993198baccd35baa1eacdc315049a7d08 M	indexer/pom.xml
+:000000 100644 0000000000000000000000000000000000000000 08328819ead85fe115fa253c8ec2d3208a5be6d8 A	webapp/pom.xml
+:100644 100644 71cd21b56b57d1c7b652b9d6e722175985a32432 71cd21b56b57d1c7b652b9d6e722175985a32432 R100	indexer/src/main/java/com/jwm/ir/webapp/controller/IndexController.java	webapp/src/main/java/com/jwm/ir/webapp/controller/IndexController.java
+:100644 100644 02d18e6b8e27a52da617568b04fd08258d75f8b3 02d18e6b8e27a52da617568b04fd08258d75f8b3 R100	indexer/src/main/java/com/jwm/ir/webapp/listener/StartupListener.java	webapp/src/main/java/com/jwm/ir/webapp/listener/StartupListener.java
+:100644 100644 b87940633d40b70e82d05c0553d405273588b086 b87940633d40b70e82d05c0553d405273588b086 R100	indexer/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml	webapp/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml
+:100644 100644 4b5e3ac708a13aafd25585bfce704f8045afe44c 4b5e3ac708a13aafd25585bfce704f8045afe44c R100	indexer/src/main/webapp/WEB-INF/pages/index.jsp	webapp/src/main/webapp/WEB-INF/pages/index.jsp
+:100644 100644 0b28c544fa5430006c5f4a7dc545bb7c628b363b 0b28c544fa5430006c5f4a7dc545bb7c628b363b R100	indexer/src/main/webapp/WEB-INF/web.xml	webapp/src/main/webapp/WEB-INF/web.xml
+commit 00fdbde6f0d24b89b1880dd7b04795d1eaab455c
+tree e89de6a43b5aceb34b5c95d8604b1422ae049a95
+parent bb1f6f0a831286615c13ab797b9681742caf36fc
+author root <jeffwmair@gmail.com> 2016-08-29 19:18:52 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 19:18:52 +0000
+
+    added before_install to travis
+
+
+
+:100644 100644 dff5f3a5d02a71dcf47f617135ac04564aa75973 643f3c1a9d923bbed1edcd9a8b2179a2327ae7cd M	.travis.yml
+commit bb1f6f0a831286615c13ab797b9681742caf36fc
+tree 5d6a3a11fd43e1c7dc5b937a854bdece3c0006eb
+parent 7b288e82ea1ef4a2df2404ac3dad2211b8c707ec
+author root <jeffwmair@gmail.com> 2016-08-29 19:17:45 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 19:17:45 +0000
+
+    moved travis config back to root
+
+
+
+:000000 100644 0000000000000000000000000000000000000000 dff5f3a5d02a71dcf47f617135ac04564aa75973 A	.travis.yml
+commit 7b288e82ea1ef4a2df2404ac3dad2211b8c707ec
+tree d3d938badf748f630a05b6aecbfa644bcd0b2afc
+parent a1776a3a740f7c38569a3c0c44d22aad886dd4ec
+author root <jeffwmair@gmail.com> 2016-08-29 19:16:52 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 19:16:52 +0000
+
+    moved travis config back to root
+
+
+
+:100644 000000 dff5f3a5d02a71dcf47f617135ac04564aa75973 0000000000000000000000000000000000000000 D	indexer/.travis.yml
+commit a1776a3a740f7c38569a3c0c44d22aad886dd4ec
+tree 270d9fed17765e4afe0c260e404549d20a7c17d8
+parent cf555d52d6778f6a0031f4861886e9b311dc444b
+author root <jeffwmair@gmail.com> 2016-08-29 19:07:29 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 19:07:29 +0000
+
+    updated travis build status badge link
+
+
+
+:100644 100644 1d29feb890c0632d408e1e126e4d296bb9e0a69c 1f42a02a46adc445718030ff4e40847e7557472e M	README.md
+commit cf555d52d6778f6a0031f4861886e9b311dc444b
+tree 95cb32b12d165368143750d37174950f53e14f8d
+parent fb92d7d1c7b8660c1db27fd83be0d6b39269e82e
+author root <jeffwmair@gmail.com> 2016-08-29 19:02:51 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 19:02:51 +0000
+
+    moved travis config
+
+
+
+:100644 100644 dff5f3a5d02a71dcf47f617135ac04564aa75973 dff5f3a5d02a71dcf47f617135ac04564aa75973 R100	.travis.yml	indexer/.travis.yml
+commit fb92d7d1c7b8660c1db27fd83be0d6b39269e82e
+tree 3717ed5adcabf3b83769e37024038f2a14a62c5f
+parent beb6c47ac1c0ee1c28062f1ed79137068a5ecb95
+author root <jeffwmair@gmail.com> 2016-08-29 19:01:58 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 19:01:58 +0000
+
+    removed logs dir
+
+
+
+:100644 100644 abaf370c1cf42e905b0c9e578c2f644d4bde7b41 e287261d6859d8606434ade97c0e116c6b7118e3 M	.gitignore
+:100644 000000 2a319ac5dc02525a14e7fc40383df68a342f69b4 0000000000000000000000000000000000000000 D	indexer/logs/SearchEngine.log
+commit beb6c47ac1c0ee1c28062f1ed79137068a5ecb95
+tree 9cdc2102077dfe950af82fbc0f87d7b16bf0bc2d
+parent 065b7ae0286d768ff1a48d19ff1533f8ecdecc96
+author root <jeffwmair@gmail.com> 2016-08-29 19:00:30 +0000
+committer root <jeffwmair@gmail.com> 2016-08-29 19:00:30 +0000
+
+    moved code into sub-directory "indexer"; there will be two (or more)
+    maven modules including indexer and webapp
+
+
+
+:100755 100755 00b0c53961944052cb8387ce17803a8b27587355 00b0c53961944052cb8387ce17803a8b27587355 R100	activate_environment.sh	indexer/activate_environment.sh
+:000000 100644 0000000000000000000000000000000000000000 2a319ac5dc02525a14e7fc40383df68a342f69b4 A	indexer/logs/SearchEngine.log
+:100644 100644 d4994b1c5e020314e35c6c3599f7d4f127e6506b ed51a1c9f9a3348b40aebf1fb05f3c9c22093d74 R098	pom.xml	indexer/pom.xml
+:100644 100644 e00f125bc9a775d843760197841e7ce752c70875 e00f125bc9a775d843760197841e7ce752c70875 R100	src/main/java/com/jwm/ir/Main.java	indexer/src/main/java/com/jwm/ir/Main.java
+:100644 100644 4ed47b876ead27b208811287568edb5c6e4f5625 4ed47b876ead27b208811287568edb5c6e4f5625 R100	src/main/java/com/jwm/ir/index/CrawledTextParser.java	indexer/src/main/java/com/jwm/ir/index/CrawledTextParser.java
+:100644 100644 cba8dc43bfb2787c1615b06d51de73f7c06b8016 cba8dc43bfb2787c1615b06d51de73f7c06b8016 R100	src/main/java/com/jwm/ir/index/Stemmer.java	indexer/src/main/java/com/jwm/ir/index/Stemmer.java
+:100644 100644 c41b59f3d940d537939e6e48261f25041b7ff5e9 c41b59f3d940d537939e6e48261f25041b7ff5e9 R100	src/main/java/com/jwm/ir/index/StemmerWrapper.java	indexer/src/main/java/com/jwm/ir/index/StemmerWrapper.java
+:100644 100644 6e6188b5f9dcbfb2187789b042d4abfab5980f9d 6e6188b5f9dcbfb2187789b042d4abfab5980f9d R100	src/main/java/com/jwm/ir/index/StopwordsFileLoader.java	indexer/src/main/java/com/jwm/ir/index/StopwordsFileLoader.java
+:100644 100644 99f735174e962221cc04404f1ad9ef03a75236c6 99f735174e962221cc04404f1ad9ef03a75236c6 R100	src/main/java/com/jwm/ir/index/TermPreprocessor.java	indexer/src/main/java/com/jwm/ir/index/TermPreprocessor.java
+:100644 100644 caf23cc8de3ece8b2b6c51c3dd28d8e81127f924 caf23cc8de3ece8b2b6c51c3dd28d8e81127f924 R100	src/main/java/com/jwm/ir/index/crawler/ResourceFetcher.java	indexer/src/main/java/com/jwm/ir/index/crawler/ResourceFetcher.java
+:100644 100644 5a233981fb8c4464de2da4cacde11506fa622121 5a233981fb8c4464de2da4cacde11506fa622121 R100	src/main/java/com/jwm/ir/index/crawler/ResourceFetcherWithQueueOut.java	indexer/src/main/java/com/jwm/ir/index/crawler/ResourceFetcherWithQueueOut.java
+:100644 100644 973e69447ba90c929b61bd038a417466fd998282 973e69447ba90c929b61bd038a417466fd998282 R100	src/main/java/com/jwm/ir/index/crawler/RobotsTxt.java	indexer/src/main/java/com/jwm/ir/index/crawler/RobotsTxt.java
+:100644 100644 b52a4ef56ea65c869aa7734622de638a8cc3e820 b52a4ef56ea65c869aa7734622de638a8cc3e820 R100	src/main/java/com/jwm/ir/index/crawler/UrlFeed.java	indexer/src/main/java/com/jwm/ir/index/crawler/UrlFeed.java
+:100644 100644 524c19b2ed36ac7f95d397578e19839429346357 524c19b2ed36ac7f95d397578e19839429346357 R100	src/main/java/com/jwm/ir/index/crawler/UrlFeedRunner.java	indexer/src/main/java/com/jwm/ir/index/crawler/UrlFeedRunner.java
+:100644 100644 247dc789b3d141cee5c11be9ced709ba6fc9dac5 247dc789b3d141cee5c11be9ced709ba6fc9dac5 R100	src/main/java/com/jwm/ir/index/crawler/UrlUtils.java	indexer/src/main/java/com/jwm/ir/index/crawler/UrlUtils.java
+:100644 100644 8e1130583bbab5bc85c81c4a4dc2ac86a3207109 8e1130583bbab5bc85c81c4a4dc2ac86a3207109 R100	src/main/java/com/jwm/ir/index/crawler/WebPage.java	indexer/src/main/java/com/jwm/ir/index/crawler/WebPage.java
+:100644 100644 64d808ff37a71153cab7d5b6f263b2eeb5811580 64d808ff37a71153cab7d5b6f263b2eeb5811580 R100	src/main/java/com/jwm/ir/index/resource/WebResource.java	indexer/src/main/java/com/jwm/ir/index/resource/WebResource.java
+:100644 100644 a87adeace0de4e154a54207c8941a24186ddae68 a87adeace0de4e154a54207c8941a24186ddae68 R100	src/main/java/com/jwm/ir/index/resource/WebResourceNoneImpl.java	indexer/src/main/java/com/jwm/ir/index/resource/WebResourceNoneImpl.java
+:100644 100644 f3edba746b7cef1c300cfe1ca309355464d40800 f3edba746b7cef1c300cfe1ca309355464d40800 R100	src/main/java/com/jwm/ir/index/resource/WebResourcePageImpl.java	indexer/src/main/java/com/jwm/ir/index/resource/WebResourcePageImpl.java
+:100644 100644 c5dfb12b45b3a0cd46770c0d0a1584c966dd3b3b c5dfb12b45b3a0cd46770c0d0a1584c966dd3b3b R100	src/main/java/com/jwm/ir/index/robotverifier/Cleanable.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/Cleanable.java
+:100644 100644 5578372cb5173eb852a5b96f5e3d6184ed333db5 5578372cb5173eb852a5b96f5e3d6184ed333db5 R100	src/main/java/com/jwm/ir/index/robotverifier/Clock.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/Clock.java
+:100644 100644 bbea7858ec046634c20c15092dc70721bf849759 bbea7858ec046634c20c15092dc70721bf849759 R100	src/main/java/com/jwm/ir/index/robotverifier/RobotDisallows.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/RobotDisallows.java
+:100644 100644 51df391a11747dc266933deef965f93aa9a75f6a 51df391a11747dc266933deef965f93aa9a75f6a R100	src/main/java/com/jwm/ir/index/robotverifier/RobotDisallowsDateWrapper.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/RobotDisallowsDateWrapper.java
+:100644 100644 f45da464b594b497c42fb466b0e3f8404035cc73 f45da464b594b497c42fb466b0e3f8404035cc73 R100	src/main/java/com/jwm/ir/index/robotverifier/RobotTxtParser.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/RobotTxtParser.java
+:100644 100644 76c150444cbcf037ad7b19071370bd0fc2b9f4bc 76c150444cbcf037ad7b19071370bd0fc2b9f4bc R100	src/main/java/com/jwm/ir/index/robotverifier/RobotUserAgent.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/RobotUserAgent.java
+:100644 100644 47e4772f26ffe4b6cc378e815028703f84730302 47e4772f26ffe4b6cc378e815028703f84730302 R100	src/main/java/com/jwm/ir/index/robotverifier/RobotUserAgentCache.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/RobotUserAgentCache.java
+:100644 100644 1d9679d01fdf929ed8c4ce9cf8b6ba6cd52938c1 1d9679d01fdf929ed8c4ce9cf8b6ba6cd52938c1 R100	src/main/java/com/jwm/ir/index/robotverifier/RobotUserAgentImpl.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/RobotUserAgentImpl.java
+:100644 100644 97c3eaf63466a64be3abaa6323815736d2dd5807 97c3eaf63466a64be3abaa6323815736d2dd5807 R100	src/main/java/com/jwm/ir/index/robotverifier/RobotUserAgentNone.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/RobotUserAgentNone.java
+:100644 100644 cb4b98223a8bd2704c9e803c174953006ace5ad0 cb4b98223a8bd2704c9e803c174953006ace5ad0 R100	src/main/java/com/jwm/ir/index/robotverifier/UrlVerifier.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/UrlVerifier.java
+:100644 100644 1dc463e40737ca45087e9b8320decd9923a1a5d5 1dc463e40737ca45087e9b8320decd9923a1a5d5 R100	src/main/java/com/jwm/ir/index/robotverifier/UrlVerifierFactory.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/UrlVerifierFactory.java
+:100644 100644 21c6330f3a7dec7ff3a9a3a1f71aeba54851edd2 21c6330f3a7dec7ff3a9a3a1f71aeba54851edd2 R100	src/main/java/com/jwm/ir/index/robotverifier/UrlVerifierMessageReceiver.java	indexer/src/main/java/com/jwm/ir/index/robotverifier/UrlVerifierMessageReceiver.java
+:100644 100644 e47bbdc0f4c8f956aa65af2e2f662c99a53bdb2b e47bbdc0f4c8f956aa65af2e2f662c99a53bdb2b R100	src/main/java/com/jwm/ir/index/service/Service.java	indexer/src/main/java/com/jwm/ir/index/service/Service.java
+:100644 100644 6086708c748d6feb0f8650e8e502bbd9b1bec58c 6086708c748d6feb0f8650e8e502bbd9b1bec58c R100	src/main/java/com/jwm/ir/index/service/ServiceImpl.java	indexer/src/main/java/com/jwm/ir/index/service/ServiceImpl.java
+:100644 100644 8ce898e311d9331b82eab91572a044e42631a349 8ce898e311d9331b82eab91572a044e42631a349 R100	src/main/java/com/jwm/ir/index/workers/CrawlerWorker.java	indexer/src/main/java/com/jwm/ir/index/workers/CrawlerWorker.java
+:100644 100644 2027fd8b7305f4fce05144d5a3faa94f9bb6977e 2027fd8b7305f4fce05144d5a3faa94f9bb6977e R100	src/main/java/com/jwm/ir/index/workers/DatabaseStatsUpdateWorker.java	indexer/src/main/java/com/jwm/ir/index/workers/DatabaseStatsUpdateWorker.java
+:100644 100644 96d046e204d8b5e68d8c183adcc2cfcfb3f98943 96d046e204d8b5e68d8c183adcc2cfcfb3f98943 R100	src/main/java/com/jwm/ir/index/workers/HttpUtils.java	indexer/src/main/java/com/jwm/ir/index/workers/HttpUtils.java
+:100644 100644 166e267b89544867e4489f2cdfff8f4c31a859ee 166e267b89544867e4489f2cdfff8f4c31a859ee R100	src/main/java/com/jwm/ir/index/workers/IndexerWorker.java	indexer/src/main/java/com/jwm/ir/index/workers/IndexerWorker.java
+:100644 100644 f00f988f711b11041fac88abb091220d686a6cee f00f988f711b11041fac88abb091220d686a6cee R100	src/main/java/com/jwm/ir/index/workers/PageRankCalculatorWorker.java	indexer/src/main/java/com/jwm/ir/index/workers/PageRankCalculatorWorker.java
+:100644 100644 1a78e71bf7ff2bd75be4e9c15418fdc0320da2ca 1a78e71bf7ff2bd75be4e9c15418fdc0320da2ca R100	src/main/java/com/jwm/ir/index/workers/RobotWorker.java	indexer/src/main/java/com/jwm/ir/index/workers/RobotWorker.java
+:100644 100644 5fe5740ad3a52d906f4bdf048c4f9322232d4461 5fe5740ad3a52d906f4bdf048c4f9322232d4461 R100	src/main/java/com/jwm/ir/persistence/Domain.java	indexer/src/main/java/com/jwm/ir/persistence/Domain.java
+:100644 100644 2d4ce38ddf258eabc640c5f7ebc76858fd6c2761 2d4ce38ddf258eabc640c5f7ebc76858fd6c2761 R100	src/main/java/com/jwm/ir/persistence/HibernateUtil.java	indexer/src/main/java/com/jwm/ir/persistence/HibernateUtil.java
+:100644 100644 cab2b1158b353df36139348c09fc81427d0437e9 cab2b1158b353df36139348c09fc81427d0437e9 R100	src/main/java/com/jwm/ir/persistence/Page.java	indexer/src/main/java/com/jwm/ir/persistence/Page.java
+:100644 100644 fd6691d17ebb0cb98e008f73ce0f861e15fe5205 fd6691d17ebb0cb98e008f73ce0f861e15fe5205 R100	src/main/java/com/jwm/ir/persistence/PageLink.java	indexer/src/main/java/com/jwm/ir/persistence/PageLink.java
+:100644 100644 42f8cd1fbbb48d08e3c63b91491c82473f684dc8 42f8cd1fbbb48d08e3c63b91491c82473f684dc8 R100	src/main/java/com/jwm/ir/persistence/PageSubmission.java	indexer/src/main/java/com/jwm/ir/persistence/PageSubmission.java
+:100644 100644 f34c5fff957a89b1ad62b03ff27c621d6c2533a1 f34c5fff957a89b1ad62b03ff27c621d6c2533a1 R100	src/main/java/com/jwm/ir/persistence/PageTerm.java	indexer/src/main/java/com/jwm/ir/persistence/PageTerm.java
+:100644 100644 c592599a952e09ac684fd52835c244ca210c8760 c592599a952e09ac684fd52835c244ca210c8760 R100	src/main/java/com/jwm/ir/persistence/SummaryData.java	indexer/src/main/java/com/jwm/ir/persistence/SummaryData.java
+:100644 100644 cf2812f825d34bb454f83ae0c9d1da970e6545ac cf2812f825d34bb454f83ae0c9d1da970e6545ac R100	src/main/java/com/jwm/ir/persistence/Term.java	indexer/src/main/java/com/jwm/ir/persistence/Term.java
+:100644 100644 101765909a2bc6a940ac09a984044c81958bdba6 101765909a2bc6a940ac09a984044c81958bdba6 R100	src/main/java/com/jwm/ir/persistence/ValidExtension.java	indexer/src/main/java/com/jwm/ir/persistence/ValidExtension.java
+:100644 100644 ca083c934da8e053dbcf3e40096a4ce4ed86699e ca083c934da8e053dbcf3e40096a4ce4ed86699e R100	src/main/java/com/jwm/ir/persistence/dao/DaoFactory.java	indexer/src/main/java/com/jwm/ir/persistence/dao/DaoFactory.java
+:100644 100644 53191f6c5e1c08eff4576dd82927965731a606df 53191f6c5e1c08eff4576dd82927965731a606df R100	src/main/java/com/jwm/ir/persistence/dao/DomainDao.java	indexer/src/main/java/com/jwm/ir/persistence/dao/DomainDao.java
+:100644 100644 1ed4cbe28761a18d5062f33ae3c8d5a801f5cb2d 1ed4cbe28761a18d5062f33ae3c8d5a801f5cb2d R100	src/main/java/com/jwm/ir/persistence/dao/DomainDaoImpl.java	indexer/src/main/java/com/jwm/ir/persistence/dao/DomainDaoImpl.java
+:100644 100644 bdc573794529f3564f3b7f2b235e996f8da93cb8 bdc573794529f3564f3b7f2b235e996f8da93cb8 R100	src/main/java/com/jwm/ir/persistence/dao/ExtensionDao.java	indexer/src/main/java/com/jwm/ir/persistence/dao/ExtensionDao.java
+:100644 100644 61514443d904628d8981c8dfa61e05c953593c10 61514443d904628d8981c8dfa61e05c953593c10 R100	src/main/java/com/jwm/ir/persistence/dao/ExtensionDaoImpl.java	indexer/src/main/java/com/jwm/ir/persistence/dao/ExtensionDaoImpl.java
+:100644 100644 a3b0bc4a43f8cd5ff21ced126d0331c82d455180 a3b0bc4a43f8cd5ff21ced126d0331c82d455180 R100	src/main/java/com/jwm/ir/persistence/dao/PageDao.java	indexer/src/main/java/com/jwm/ir/persistence/dao/PageDao.java
+:100644 100644 9c1e2035a085cc6862bf16c114856e5f4bce079e 9c1e2035a085cc6862bf16c114856e5f4bce079e R100	src/main/java/com/jwm/ir/persistence/dao/PageDaoImpl.java	indexer/src/main/java/com/jwm/ir/persistence/dao/PageDaoImpl.java
+:100644 100644 b2dda93dd20500fd8b5de701653bf655fd41ccf6 b2dda93dd20500fd8b5de701653bf655fd41ccf6 R100	src/main/java/com/jwm/ir/persistence/dao/PageLinkDao.java	indexer/src/main/java/com/jwm/ir/persistence/dao/PageLinkDao.java
+:100644 100644 e19a8e1ef5cf49f61fc34ccc39f3aec33242fb32 e19a8e1ef5cf49f61fc34ccc39f3aec33242fb32 R100	src/main/java/com/jwm/ir/persistence/dao/PageLinkDaoImpl.java	indexer/src/main/java/com/jwm/ir/persistence/dao/PageLinkDaoImpl.java
+:100644 100644 584dc3936b3b8eb401d6f5d44dcfa88e336999c5 584dc3936b3b8eb401d6f5d44dcfa88e336999c5 R100	src/main/java/com/jwm/ir/persistence/dao/PageTermDao.java	indexer/src/main/java/com/jwm/ir/persistence/dao/PageTermDao.java
+:100644 100644 bc8c5f550be8a8d90d02a6c2ba4a1cbed7acef46 bc8c5f550be8a8d90d02a6c2ba4a1cbed7acef46 R100	src/main/java/com/jwm/ir/persistence/dao/PageTermDaoImpl.java	indexer/src/main/java/com/jwm/ir/persistence/dao/PageTermDaoImpl.java
+:100644 100644 c0e4ff00a004f3e1c26863a69ac2b39c1379dee0 c0e4ff00a004f3e1c26863a69ac2b39c1379dee0 R100	src/main/java/com/jwm/ir/persistence/dao/TermDao.java	indexer/src/main/java/com/jwm/ir/persistence/dao/TermDao.java
+:100644 100644 e5c63af1cd9a6449f91bbbbf41da669e2e5606e3 e5c63af1cd9a6449f91bbbbf41da669e2e5606e3 R100	src/main/java/com/jwm/ir/persistence/dao/TermDaoImpl.java	indexer/src/main/java/com/jwm/ir/persistence/dao/TermDaoImpl.java
+:100644 100644 3e40100bd89fd4e2f2f4e3fd2c4da3253b6f443d 3e40100bd89fd4e2f2f4e3fd2c4da3253b6f443d R100	src/main/java/com/jwm/ir/search/FastCosineScoreCalculator.java	indexer/src/main/java/com/jwm/ir/search/FastCosineScoreCalculator.java
+:100644 100644 188e7ee29be4cc5301f3f15a7b6ab3dea0717544 188e7ee29be4cc5301f3f15a7b6ab3dea0717544 R100	src/main/java/com/jwm/ir/search/QueryHelper.java	indexer/src/main/java/com/jwm/ir/search/QueryHelper.java
+:100644 100644 0e1bd9d0e0b34ddf02112893968c240f67d6aaf7 0e1bd9d0e0b34ddf02112893968c240f67d6aaf7 R100	src/main/java/com/jwm/ir/search/document/Document.java	indexer/src/main/java/com/jwm/ir/search/document/Document.java
+:100644 100644 8506e7feeb722a1ab965e38c41172654d9f18a0f 8506e7feeb722a1ab965e38c41172654d9f18a0f R100	src/main/java/com/jwm/ir/search/document/DocumentImpl.java	indexer/src/main/java/com/jwm/ir/search/document/DocumentImpl.java
+:100644 100644 186fe2648540f36c3d66583cbc5a6f63d7113cc3 186fe2648540f36c3d66583cbc5a6f63d7113cc3 R100	src/main/java/com/jwm/ir/search/document/RankedDocument.java	indexer/src/main/java/com/jwm/ir/search/document/RankedDocument.java
+:100644 100644 8c534aa5ad44bc550963fb934e41eddcc8bd4dcd 8c534aa5ad44bc550963fb934e41eddcc8bd4dcd R100	src/main/java/com/jwm/ir/search/service/SearchService.java	indexer/src/main/java/com/jwm/ir/search/service/SearchService.java
+:100644 100644 4b29e0b16c0bfe3e971b7b194750434daf7f229c 4b29e0b16c0bfe3e971b7b194750434daf7f229c R100	src/main/java/com/jwm/ir/search/service/SearchServiceImpl.java	indexer/src/main/java/com/jwm/ir/search/service/SearchServiceImpl.java
+:100644 100644 71cd21b56b57d1c7b652b9d6e722175985a32432 71cd21b56b57d1c7b652b9d6e722175985a32432 R100	src/main/java/com/jwm/ir/webapp/controller/IndexController.java	indexer/src/main/java/com/jwm/ir/webapp/controller/IndexController.java
+:100644 100644 02d18e6b8e27a52da617568b04fd08258d75f8b3 02d18e6b8e27a52da617568b04fd08258d75f8b3 R100	src/main/java/com/jwm/ir/webapp/listener/StartupListener.java	indexer/src/main/java/com/jwm/ir/webapp/listener/StartupListener.java
+:100755 100755 8801db5bd7aac12dfeb06b1277f916372d9d8be2 8801db5bd7aac12dfeb06b1277f916372d9d8be2 R100	src/main/resources/bin/startengine-integration.sh	indexer/src/main/resources/bin/startengine-integration.sh
+:100644 100644 3a78a9b33f64f9e49664822cfae06c6f1c62ddd3 3a78a9b33f64f9e49664822cfae06c6f1c62ddd3 R100	src/main/resources/hibernate.cfg.xml	indexer/src/main/resources/hibernate.cfg.xml
+:100644 100644 01ea46440c9f4cd0521750a860e9a6967a762d36 01ea46440c9f4cd0521750a860e9a6967a762d36 R100	src/main/resources/log4j.properties	indexer/src/main/resources/log4j.properties
+:100644 100644 b87940633d40b70e82d05c0553d405273588b086 b87940633d40b70e82d05c0553d405273588b086 R100	src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml	indexer/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml
+:100644 100644 4b5e3ac708a13aafd25585bfce704f8045afe44c 4b5e3ac708a13aafd25585bfce704f8045afe44c R100	src/main/webapp/WEB-INF/pages/index.jsp	indexer/src/main/webapp/WEB-INF/pages/index.jsp
+:100644 100644 0b28c544fa5430006c5f4a7dc545bb7c628b363b 0b28c544fa5430006c5f4a7dc545bb7c628b363b R100	src/main/webapp/WEB-INF/web.xml	indexer/src/main/webapp/WEB-INF/web.xml
+:100644 100644 80f4c9c8b1be9b4bc6e55de303ceb306963f3794 80f4c9c8b1be9b4bc6e55de303ceb306963f3794 R100	src/test/java/com/jwm/ir/index/StemmerWrapperTest.java	indexer/src/test/java/com/jwm/ir/index/StemmerWrapperTest.java
+:100644 100644 eedf9132ad53dd43ee3a4055ef03e88f28545e77 eedf9132ad53dd43ee3a4055ef03e88f28545e77 R100	src/test/java/com/jwm/ir/index/crawler/ResourceFetcherTest.java	indexer/src/test/java/com/jwm/ir/index/crawler/ResourceFetcherTest.java
+:100644 100644 b7724d39a2834563833900a188755990e30bf309 b7724d39a2834563833900a188755990e30bf309 R100	src/test/java/com/jwm/ir/index/crawler/UrlFeedTest.java	indexer/src/test/java/com/jwm/ir/index/crawler/UrlFeedTest.java
+:100644 100644 ae25f88be416616bc75e6fe0c8ceb390021a4c90 ae25f88be416616bc75e6fe0c8ceb390021a4c90 R100	src/test/java/com/jwm/ir/index/crawler/UrlUtilsTest.java	indexer/src/test/java/com/jwm/ir/index/crawler/UrlUtilsTest.java
+:100644 100644 61d8a7a7558f6e0daa19bc8c1f629c8aa08a8e69 61d8a7a7558f6e0daa19bc8c1f629c8aa08a8e69 R100	src/test/java/com/jwm/ir/index/robotverifier/RobotDisallowsTest.java	indexer/src/test/java/com/jwm/ir/index/robotverifier/RobotDisallowsTest.java
+:100644 100644 c3c7ee196c2c17e011f055aa7de92bf2f9933e44 c3c7ee196c2c17e011f055aa7de92bf2f9933e44 R100	src/test/java/com/jwm/ir/index/robotverifier/RobotTxtParserTest.java	indexer/src/test/java/com/jwm/ir/index/robotverifier/RobotTxtParserTest.java
+:100644 100644 9cd954ff2071240eff92ed9e1c99f4afa2e377c4 9cd954ff2071240eff92ed9e1c99f4afa2e377c4 R100	src/test/java/com/jwm/ir/index/robotverifier/RobotUserAgentImplCacheTest.java	indexer/src/test/java/com/jwm/ir/index/robotverifier/RobotUserAgentImplCacheTest.java
+:100644 100644 2a9a0332cde009385fe1ce0c5d0bc1c2947bbc78 2a9a0332cde009385fe1ce0c5d0bc1c2947bbc78 R100	src/test/java/com/jwm/ir/index/robotverifier/StringBuilderWithNewline.java	indexer/src/test/java/com/jwm/ir/index/robotverifier/StringBuilderWithNewline.java
+:100644 100644 04193da3dfb5765c795880c692c0906a0cae4464 04193da3dfb5765c795880c692c0906a0cae4464 R100	src/test/java/com/jwm/ir/index/robotverifier/UrlVerifierMessageReceiverTest.java	indexer/src/test/java/com/jwm/ir/index/robotverifier/UrlVerifierMessageReceiverTest.java
+:100644 100644 b949c9c2fd5abe196c105d8656449cd842f9cc75 b949c9c2fd5abe196c105d8656449cd842f9cc75 R100	src/test/java/com/jwm/ir/index/robotverifier/UrlVerifierTest.java	indexer/src/test/java/com/jwm/ir/index/robotverifier/UrlVerifierTest.java
+:100644 100644 fe39950ccabb8c20a7e7714da9e7d92d9df17a9c fe39950ccabb8c20a7e7714da9e7d92d9df17a9c R100	src/test/java/com/jwm/ir/index/service/ServiceImplTest.java	indexer/src/test/java/com/jwm/ir/index/service/ServiceImplTest.java
+:100644 100644 5520b18d9a74c398ecb6d5d6f40ed44851c5b78f 5520b18d9a74c398ecb6d5d6f40ed44851c5b78f R100	src/test/java/com/jwm/ir/index/service/UrlAddServiceTest.java	indexer/src/test/java/com/jwm/ir/index/service/UrlAddServiceTest.java
+:100644 100644 d240101156ff54a908a7d1145a56e8be2fbace4a d240101156ff54a908a7d1145a56e8be2fbace4a R100	src/test/java/com/jwm/ir/persistence/DomainTest.java	indexer/src/test/java/com/jwm/ir/persistence/DomainTest.java
+:100644 100644 badf447fa1cf5d55627124f63f5bf4c542571ef4 badf447fa1cf5d55627124f63f5bf4c542571ef4 R100	src/test/java/com/jwm/ir/persistence/PageTest.java	indexer/src/test/java/com/jwm/ir/persistence/PageTest.java
+:100644 100644 4be995d08f6e9ea3395c9009e707f6ff16c049d4 4be995d08f6e9ea3395c9009e707f6ff16c049d4 R100	src/test/java/com/jwm/ir/search/FastCosineScoreCalculatorTest.java	indexer/src/test/java/com/jwm/ir/search/FastCosineScoreCalculatorTest.java
+:100644 100644 ae482604ac6b468adad86096b971953f3d85a8c9 ae482604ac6b468adad86096b971953f3d85a8c9 R100	src/test/java/com/jwm/ir/search/QueryHelperTest.java	indexer/src/test/java/com/jwm/ir/search/QueryHelperTest.java
+:100644 100644 a00ac460fff78fe22e89de38aa2100a4c719858b a00ac460fff78fe22e89de38aa2100a4c719858b R100	src/test/java/com/jwm/ir/search/document/DocumentImplTest.java	indexer/src/test/java/com/jwm/ir/search/document/DocumentImplTest.java
+:100644 100644 105ddb9c22ed2dece31216f4c4a46ee60fd7cfaf 105ddb9c22ed2dece31216f4c4a46ee60fd7cfaf R100	src/test/java/integration/DbTestBase.java	indexer/src/test/java/integration/DbTestBase.java
+:100644 100644 c0b646e707d9b0b82d7bd6266f1bec796f93eee1 c0b646e707d9b0b82d7bd6266f1bec796f93eee1 R100	src/test/java/integration/DomainRepositoryImpl_get_domain_exists_IntegrationTest.java	indexer/src/test/java/integration/DomainRepositoryImpl_get_domain_exists_IntegrationTest.java
+:100644 100644 b265e530caed0229694d941f85004ee695bdd869 b265e530caed0229694d941f85004ee695bdd869 R100	src/test/java/integration/DomainRepositoryImpl_get_domain_not_exists_throws_IntegrationTest.java	indexer/src/test/java/integration/DomainRepositoryImpl_get_domain_not_exists_throws_IntegrationTest.java
+:100644 100644 04e1849d9bae85b8ae436f94c56063b1d8e0038b 04e1849d9bae85b8ae436f94c56063b1d8e0038b R100	src/test/java/integration/ExtensionDao_get_all_extensions_IntegrationTest.java	indexer/src/test/java/integration/ExtensionDao_get_all_extensions_IntegrationTest.java
+:100644 100644 c3ccb24f0301d7a520ad56e0683d3b53035d4a1c c3ccb24f0301d7a520ad56e0683d3b53035d4a1c R100	src/test/java/integration/PageDaoImpl_get_indexed_page_count.java	indexer/src/test/java/integration/PageDaoImpl_get_indexed_page_count.java
+:100644 100644 9cb5d65cd1078dffb68630994afd342538ae7467 9cb5d65cd1078dffb68630994afd342538ae7467 R100	src/test/java/integration/PageTermDaoImpl_create_IntegrationTest.java	indexer/src/test/java/integration/PageTermDaoImpl_create_IntegrationTest.java
+:100644 100644 57fb7468eab042d16135bdfecc837204746adf9b 57fb7468eab042d16135bdfecc837204746adf9b R100	src/test/java/integration/PageTermDao_terms_already_exist_IntegrationTest.java	indexer/src/test/java/integration/PageTermDao_terms_already_exist_IntegrationTest.java
+:100644 100644 57beff6c283dcfd12f44f8efdb83ece7518a2580 57beff6c283dcfd12f44f8efdb83ece7518a2580 R100	src/test/java/integration/PageTerm_UniquePageTerm_IntegrationTest.java	indexer/src/test/java/integration/PageTerm_UniquePageTerm_IntegrationTest.java
+:100644 100644 becbeb1fc069a16efa422a42e1befa6de147e742 becbeb1fc069a16efa422a42e1befa6de147e742 R100	src/test/java/integration/ResourceFetcherIntegrationTest.java	indexer/src/test/java/integration/ResourceFetcherIntegrationTest.java
+:100644 100644 639377ae625e0924a971b26e4c86a509808ddb32 639377ae625e0924a971b26e4c86a509808ddb32 R100	src/test/java/integration/SearchServiceImpl_do_query_basic.java	indexer/src/test/java/integration/SearchServiceImpl_do_query_basic.java
+:100644 100644 66f56f25928f7a25510b4eebf5893afb53ddf573 66f56f25928f7a25510b4eebf5893afb53ddf573 R100	src/test/java/integration/ServiceImpl_AddDocumentTerm_IntegrationTest.java	indexer/src/test/java/integration/ServiceImpl_AddDocumentTerm_IntegrationTest.java
+:100644 100644 79bd5ac67ed6fbf836e58b32f67458b9f0373de5 79bd5ac67ed6fbf836e58b32f67458b9f0373de5 R100	src/test/java/integration/ServiceImpl_AddUrlForCrawling_IntegrationTest.java	indexer/src/test/java/integration/ServiceImpl_AddUrlForCrawling_IntegrationTest.java
+:100644 100644 9fa6990d69c233e7a1995bcf431f1ffbbda0a3de 9fa6990d69c233e7a1995bcf431f1ffbbda0a3de R100	src/test/java/integration/ServiceImpl_add_crawl_result_IntegrationTest.java	indexer/src/test/java/integration/ServiceImpl_add_crawl_result_IntegrationTest.java
+:100644 100644 851d281c8361aee93957da514c256e854fb6f65b 851d281c8361aee93957da514c256e854fb6f65b R100	src/test/java/integration/ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_add_again_IntegrationTest.java	indexer/src/test/java/integration/ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_add_again_IntegrationTest.java
+:100644 100644 de4ba194fd0c14297df8c3200b13de222117fb70 de4ba194fd0c14297df8c3200b13de222117fb70 R100	src/test/java/integration/ServiceImpl_get_unverified_pages_IntegrationTest.java	indexer/src/test/java/integration/ServiceImpl_get_unverified_pages_IntegrationTest.java
+:100644 100644 76c07320765f04c260e41f85b3d4bf16d9fb8291 76c07320765f04c260e41f85b3d4bf16d9fb8291 R100	src/test/java/integration/ServiceImpl_set_urls_verified_IntegrationTest.java	indexer/src/test/java/integration/ServiceImpl_set_urls_verified_IntegrationTest.java
+:100644 100644 d2c94cc7f23d9548e9ee5fb34e2f713f0cfa6f5d d2c94cc7f23d9548e9ee5fb34e2f713f0cfa6f5d R100	src/test/java/integration/ServiceImpl_update_indexed_page_count_summaries_with_existing_summary_record_IntegrationTest.java	indexer/src/test/java/integration/ServiceImpl_update_indexed_page_count_summaries_with_existing_summary_record_IntegrationTest.java
+:100644 100644 40f5768ad4979813166ac259c96fca05162aec00 40f5768ad4979813166ac259c96fca05162aec00 R100	src/test/java/integration/TermDao_Fetch_Terms_IntegrationTest.java	indexer/src/test/java/integration/TermDao_Fetch_Terms_IntegrationTest.java
+:100644 100644 6b13684c8d993f8cf741a00c8667eaf7ca6878e3 6b13684c8d993f8cf741a00c8667eaf7ca6878e3 R100	src/test/java/integration/UrlFeedIntegrationTest.java	indexer/src/test/java/integration/UrlFeedIntegrationTest.java
+:100644 100644 1de7f0820fb9d84719147ab6297e8a4c87812f1d 1de7f0820fb9d84719147ab6297e8a4c87812f1d R100	src/test/java/thirdparty/jung/PageRankTest.java	indexer/src/test/java/thirdparty/jung/PageRankTest.java
+:100755 100755 aca4563036e4685cf63abd9ca893b19e01efb23f aca4563036e4685cf63abd9ca893b19e01efb23f R100	src/test/scripts/init_db.sh	indexer/src/test/scripts/init_db.sh
+:100644 100644 81c3de30272ae692516bd937f7ff6b52ab23a7a0 81c3de30272ae692516bd937f7ff6b52ab23a7a0 R100	src/test/scripts/smoke_test/page1.html	indexer/src/test/scripts/smoke_test/page1.html
+:100644 100644 f8f63f26a56dcf3dc6df666ff0306e809f71d65d f8f63f26a56dcf3dc6df666ff0306e809f71d65d R100	src/test/scripts/smoke_test/page2.html	indexer/src/test/scripts/smoke_test/page2.html
+:100644 100644 716aea5e73925d49b93355b49720806a3a2f1f63 716aea5e73925d49b93355b49720806a3a2f1f63 R100	src/test/scripts/smoke_test/page3.html	indexer/src/test/scripts/smoke_test/page3.html
+:100755 100755 4fdb241b1b157352e0d04f6a66e302ba87b69107 4fdb241b1b157352e0d04f6a66e302ba87b69107 R100	src/test/scripts/smoke_test/run_smoke_test.sh	indexer/src/test/scripts/smoke_test/run_smoke_test.sh
+:100755 100755 1d217292ca39ce19e8ef533e67ed8355a0d1cb29 1d217292ca39ce19e8ef533e67ed8355a0d1cb29 R100	src/test/scripts/smoke_test/stop.sh	indexer/src/test/scripts/smoke_test/stop.sh
+:100644 100644 de29df747bf062c1f28f995ce28a5804fa123ec3 de29df747bf062c1f28f995ce28a5804fa123ec3 R100	stopwords.txt	indexer/stopwords.txt
+commit 065b7ae0286d768ff1a48d19ff1533f8ecdecc96
+tree 3d71007d739f1f025fc9e3e22bacfa4a9a0cc8a7
+parent 8521d480e1c652c8981a4bca424d7abc8cab877d
+author Jeff Mair <jeffwmair@gmail.com> 2016-08-28 22:35:19 -0400
+committer Jeff Mair <jeffwmair@gmail.com> 2016-08-28 22:35:19 -0400
+
+    added script to start the crawl/indexer directly via the Main class
+
+
+
+:100644 100644 aaa99c51bebbf82f3a93f554814e4da0ef65f839 d4994b1c5e020314e35c6c3599f7d4f127e6506b M	pom.xml
+:100644 100644 287f79ab8bb5b50ac6794e21c6ba13670d27f910 e00f125bc9a775d843760197841e7ce752c70875 M	src/main/java/com/jwm/ir/Main.java
+:000000 100755 0000000000000000000000000000000000000000 8801db5bd7aac12dfeb06b1277f916372d9d8be2 A	src/main/resources/bin/startengine-integration.sh
+:100644 100644 f524530a18ebc71e1e077950aefe5c3ff5ac51d2 01ea46440c9f4cd0521750a860e9a6967a762d36 M	src/main/resources/log4j.properties
+:100755 100755 a1a05454c6c5eed398693936fc4951a93e2ff89f 4fdb241b1b157352e0d04f6a66e302ba87b69107 M	src/test/scripts/smoke_test/run_smoke_test.sh
+commit 8521d480e1c652c8981a4bca424d7abc8cab877d
+tree 44bfc670e2edaacabfe8057a8687e1220a7752bc
+parent 59ab92c8512d725c5fc1c9320fbaa1e9b185f99a
+author Jeff Mair <jeffwmair@gmail.com> 2016-08-28 11:05:00 -0400
+committer Jeff Mair <jeffwmair@gmail.com> 2016-08-28 11:05:00 -0400
+
+    test commit for ci server
+
+
+
+:100644 100644 661e0e0e1ec42855001f3e9a021efc2856fd3bdc 1d29feb890c0632d408e1e126e4d296bb9e0a69c M	README.md
+commit 59ab92c8512d725c5fc1c9320fbaa1e9b185f99a
+tree a67c118c1538f3f6a2e478d5e6e62c6ea335498d
+parent c3bfba843436f3fb4f30ffb97bc1090bf83c4e8d
+author Jeff Mair <jeffwmair@gmail.com> 2016-08-28 11:01:58 -0400
+committer Jeff Mair <jeffwmair@gmail.com> 2016-08-28 11:01:58 -0400
+
+    test commit for ci server
+
+
+
+:100644 100644 1d29feb890c0632d408e1e126e4d296bb9e0a69c 661e0e0e1ec42855001f3e9a021efc2856fd3bdc M	README.md
+commit c3bfba843436f3fb4f30ffb97bc1090bf83c4e8d
+tree 44bfc670e2edaacabfe8057a8687e1220a7752bc
+parent b006d7a998aa061e596701466bf8b0bcf94e0044
+author Jeff Mair <jeffwmair@gmail.com> 2016-08-26 14:32:04 -0400
+committer Jeff Mair <jeffwmair@gmail.com> 2016-08-26 14:32:04 -0400
+
+    integration test update for SearchService (still in progress)
+
+
+
+:100644 100644 26cb12059c1bcd8bca6dbff43958435026142877 c0b646e707d9b0b82d7bd6266f1bec796f93eee1 M	src/test/java/integration/DomainRepositoryImpl_get_domain_exists_IntegrationTest.java
+:100644 100644 1863add82c0c00938a495ff3b24770c704e6e62b 639377ae625e0924a971b26e4c86a509808ddb32 M	src/test/java/integration/SearchServiceImpl_do_query_basic.java

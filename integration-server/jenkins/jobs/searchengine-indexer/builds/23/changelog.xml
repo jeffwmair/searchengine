@@ -1,0 +1,13 @@
+commit c522957f79da69e4b3b0d007b8e313312a709da0
+tree 1cce423d0f0af50f7d0c7d8d7a80cdbf1559f210
+parent 7cb5595167f7bec72cc2b023c0920435c85b64b1
+author Jeff Mair <jeffwmair@gmail.com> 2016-08-29 22:55:15 -0400
+committer Jeff Mair <jeffwmair@gmail.com> 2016-08-29 22:55:15 -0400
+
+    intentional breakage for ci testing
+
+
+
+:100644 100644 46fe969ee4c25872ac10739d5de3eea9868fc9f7 8bf4cd541be94dceee45e374e939329214168389 M	indexer/pom.xml
+:100644 100644 df3b8d4a1d434b8bab8dc48a0b9a74e1b77c69c6 2c363c251cfb02cb1a1e66f3ea98cd0be9ef8aa7 M	webapp/pom.xml
+:100644 100644 9332d99f9dfb7545899cc4bdf49262a2924e9abe 5d4bfe6be1b7a28027fee41ee87bec13a615595f M	webapp/searchengine-webapp.iml
