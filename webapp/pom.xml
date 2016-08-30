@@ -4,10 +4,16 @@
     <groupId>com.jwm.ir</groupId>
     <artifactId>searchengine-webapp</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>Search Engine Webapp</name>
     <url>github.com/jeffwmair/searchengine</url>
     <dependencies>
+        <!-- Searchengine core -->
+        <dependency>
+            <groupId>com.jwm.ir</groupId>
+            <artifactId>searchengine-indexer</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
