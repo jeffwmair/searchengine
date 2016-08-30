@@ -23,12 +23,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="searchengine-webapp" />
         <module name="SearchEngineIndexer" />
         <module name="webcrawler" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="SearchEngine" target="1.7" />
+      <module name="searchengine-webapp" target="1.5" />
       <module name="SearchEngineIndexer" target="1.7" />
     </bytecodeTargetLevel>
   </component>
