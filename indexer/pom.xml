@@ -111,7 +111,6 @@
 					<skip>true</skip>
 				</configuration>
 				<executions>
-
 					<execution>
 						<id>run-unit-test</id>
 						<phase>test</phase>
