@@ -3,6 +3,7 @@ logs
 target
 toindex
 *.swp
+*.iml
 
 # https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
 # User-specific stuff:
