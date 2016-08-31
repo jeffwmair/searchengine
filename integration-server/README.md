@@ -1,5 +1,10 @@
 # Integration Server Setup
 
 ```shell
-bash <(curl -s https://raw.githubusercontent.com/jeffwmair/searchengine/master/integration-server/server-setup.sh)
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install git -y
+git clone https://github.com/jeffwmair/searchengine.git
+cd searchengine/integration-server
+./server-setup.sh
 ```
