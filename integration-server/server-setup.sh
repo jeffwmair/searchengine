@@ -4,7 +4,6 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get install default-jre -y
 sudo apt-get install default-jdk -y
-#echo "JAVA_HOME=/usr/bin/java" >> /etc/environment
 sudo apt-get install git -y
 sudo apt-get install maven -y
 sudo apt-get install mysql-server -y
@@ -14,7 +13,8 @@ sudo apt-get update -y
 sudo apt-get install jenkins -y
 # wait a few seconds so the jenkins password is generated
 echo "waiting a few seconds jenkins to start..."
-sleep 15
-# the following copying jobs isn't working out so well
-#cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
+sleep 20
+cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
+# set the jobs dirs as writable for the jenkins application
+chmod a+w -R /var/lib/jenkins/jobs/*
 cat /var/lib/jenkins/secrets/initialAdminPassword
