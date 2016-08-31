@@ -12,8 +12,8 @@ wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list
 sudo apt-get update -y
 sudo apt-get install jenkins -y
-cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
 # wait a few seconds so the jenkins password is generated
-echo "jenkins inital admin password:"
-sleep 3
+echo "waiting 10 seconds for jenkins to start..."
+sleep 10
+cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
 cat /var/lib/jenkins/secrets/initialAdminPassword
