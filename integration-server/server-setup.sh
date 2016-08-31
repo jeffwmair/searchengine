@@ -23,3 +23,10 @@ echo "Jenkins is restarting so that the imported jobs will show up"
 service jenkins restart
 echo "Restart is finished"
 
+# add mysql objects so that integration tests will succeed
+echo "Adding mysql objects..."
+mysql --execute="create database searchengine_test;"
+mysql --execute="create user 'se_test_user'@'localhost' identified by 'se_test_user';"
+mysql --execute="grant all on searchengine_test.* to 'se_test_user'@'localhost';"
+
+echo "All done!"
