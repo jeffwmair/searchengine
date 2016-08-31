@@ -15,5 +15,6 @@ sudo apt-get install jenkins -y
 # wait a few seconds so the jenkins password is generated
 echo "waiting 10 seconds for jenkins to start..."
 sleep 10
-cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
+# the following copying jobs isn't working out so well
+#cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
 cat /var/lib/jenkins/secrets/initialAdminPassword
