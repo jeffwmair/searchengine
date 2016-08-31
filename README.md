@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/jeffwmair/searchengine.svg)](https://travis-ci.org/jeffwmair/searchengine)
-
+[![Coverage Status](https://coveralls.io/repos/github/jeffwmair/searchengine/badge.svg)](https://coveralls.io/github/jeffwmair/searchengine)
 # Vector Space Search Engine
 
 **In the process of reworking the project....**
