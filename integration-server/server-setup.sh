@@ -17,4 +17,9 @@ sleep 20
 cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
 # set the jobs dirs as writable for the jenkins application
 chmod a+w -R /var/lib/jenkins/jobs/*
+echo "Jenkins init password:"
 cat /var/lib/jenkins/secrets/initialAdminPassword
+echo "Jenkins is restarting so that the imported jobs will show up"
+service jenkins restart
+echo "Restart is finished"
+
