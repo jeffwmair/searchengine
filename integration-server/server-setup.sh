@@ -7,6 +7,8 @@ sudo apt-get install default-jdk -y
 sudo apt-get install git -y
 sudo apt-get install maven -y
 sudo apt-get install mysql-server -y
+sudo apt-get install apache2 -y
+cp apache-content/* /var/www/html/
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list
 sudo apt-get update -y
