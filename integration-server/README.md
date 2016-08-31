@@ -1,8 +1,7 @@
 # Integration Server Setup
 
+To setup an integration server from scratch, run the following:
+
 ```shell
-sudo apt-get install git -y
-git clone https://github.com/jeffwmair/searchengine.git
-cd searchengine/integration-server
-./server-setup.sh
+git clone https://github.com/jeffwmair/searchengine.git && cd searchengine/integration-server && ./server-setup.sh
 ```
