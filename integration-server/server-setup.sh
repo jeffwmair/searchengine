@@ -21,8 +21,6 @@ sleep 20
 cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
 # set the jobs dirs as writable for the jenkins application
 chmod a+w -R /var/lib/jenkins/jobs/*
-echo "Jenkins init password:"
-cat /var/lib/jenkins/secrets/initialAdminPassword
 
 # add mysql objects so that integration tests will succeed
 echo "Adding mysql objects..."
@@ -35,4 +33,6 @@ sed -i -e 's/8080/8081/g' /var/lib/tomcat7/conf/server.xml
 sed -i -e 's/JAVA_OPTS="-Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC"/JAVA_OPTS="-Djava.security.egd=file:\/dev\/.\/urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"/g' /etc/default/tomcat7
 sudo service tomcat7 restart
 
+echo "Jenkins init password:"
+cat /var/lib/jenkins/secrets/initialAdminPassword
 echo "All done. Please run the following to restart jenkins after entering the inital password and installing plugins: service jenkins restart"
