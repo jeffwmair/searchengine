@@ -14,13 +14,6 @@ echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenk
 sudo apt-get update -y
 sudo apt-get install jenkins -y
 
-# wait a few seconds so the jenkins password is generated
-echo "waiting a few seconds jenkins to start..."
-sleep 20
-
-cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
-# set the jobs dirs as writable for the jenkins application
-chmod a+w -R /var/lib/jenkins/jobs/*
 
 # add mysql objects so that integration tests will succeed
 echo "Adding mysql objects..."
@@ -42,6 +35,13 @@ cp tomcat-settings/tomcat-users.xml /var/lib/tomcat7/conf/
 
 #restart tomcat
 sudo service tomcat7 restart
+
+# wait a few seconds so the jenkins password is generated
+echo "waiting a few seconds jenkins to start..."
+sleep 10
+cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
+# set the jobs dirs as writable for the jenkins application
+chmod a+w -R /var/lib/jenkins/jobs/*
 
 echo "Jenkins init password:"
 cat /var/lib/jenkins/secrets/initialAdminPassword
