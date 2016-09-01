@@ -23,14 +23,16 @@ cp -r jenkins-jobs/* /var/lib/jenkins/jobs/
 chmod a+w -R /var/lib/jenkins/jobs/*
 echo "Jenkins init password:"
 cat /var/lib/jenkins/secrets/initialAdminPassword
-#echo "Jenkins is restarting so that the imported jobs will show up"
-#service jenkins restart
-#echo "Restart is finished"
 
 # add mysql objects so that integration tests will succeed
 echo "Adding mysql objects..."
 mysql --execute="create database searchengine_test;"
 mysql --execute="create user 'se_test_user'@'localhost' identified by 'se_test_user';"
 mysql --execute="grant all on searchengine_test.* to 'se_test_user'@'localhost';"
+
+sudo apt-get install tomcat7 -y
+sed -i -e 's/8080/8081/g' /var/lib/tomcat7/conf/server.xml
+sed -i -e 's/JAVA_OPTS="-Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC"/JAVA_OPTS="-Djava.security.egd=file:\/dev\/.\/urandom -Djava.awt.headless=true -Xmx512m -XX:MaxPermSize=256m -XX:+UseConcMarkSweepGC"/g' /etc/default/tomcat7
+sudo service tomcat7 restart
 
 echo "All done. Please run the following to restart jenkins after entering the inital password and installing plugins: service jenkins restart"
