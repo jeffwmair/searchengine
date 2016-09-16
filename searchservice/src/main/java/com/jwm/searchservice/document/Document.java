@@ -1,4 +1,4 @@
-package com.jwm.ir.search.document;
+package com.jwm.searchservice.document;
 
 public interface Document {
 	long getDocumentId();
