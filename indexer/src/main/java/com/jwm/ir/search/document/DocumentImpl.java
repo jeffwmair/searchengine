@@ -2,6 +2,7 @@ package com.jwm.ir.search.document;
 
 import com.jwm.ir.persistence.Page;
 import com.jwm.ir.persistence.PageTerm;
+import com.jwm.searchservice.document.Document;
 
 import java.util.HashMap;
 import java.util.Map;

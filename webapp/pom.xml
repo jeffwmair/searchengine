@@ -14,6 +14,13 @@
             <artifactId>searchengine-indexer</artifactId>
             <version>1.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.jwm.searchservice</groupId>
+            <artifactId>searchservice</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

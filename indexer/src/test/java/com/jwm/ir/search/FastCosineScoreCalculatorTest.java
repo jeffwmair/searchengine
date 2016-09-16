@@ -1,8 +1,8 @@
 package com.jwm.ir.search;
 
-import com.jwm.ir.search.document.Document;
 import com.jwm.ir.search.document.DocumentImpl;
-import com.jwm.ir.search.document.RankedDocument;
+import com.jwm.searchservice.document.Document;
+import com.jwm.searchservice.document.RankedDocument;
 import org.junit.Assert;
 import org.junit.Test;
 

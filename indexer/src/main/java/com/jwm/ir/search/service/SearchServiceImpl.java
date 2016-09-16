@@ -1,14 +1,16 @@
 package com.jwm.ir.search.service;
 
+import com.jwm.ir.index.StemmerWrapper;
 import com.jwm.ir.persistence.PageTerm;
 import com.jwm.ir.persistence.Term;
-import com.jwm.ir.index.StemmerWrapper;
 import com.jwm.ir.persistence.dao.PageDao;
 import com.jwm.ir.persistence.dao.TermDao;
-import com.jwm.ir.search.*;
-import com.jwm.ir.search.document.Document;
+import com.jwm.ir.search.FastCosineScoreCalculator;
+import com.jwm.ir.search.QueryHelper;
 import com.jwm.ir.search.document.DocumentImpl;
-import com.jwm.ir.search.document.RankedDocument;
+import com.jwm.searchservice.SearchService;
+import com.jwm.searchservice.document.Document;
+import com.jwm.searchservice.document.RankedDocument;
 
 import java.util.*;
 

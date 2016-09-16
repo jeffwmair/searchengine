@@ -1,13 +1,15 @@
 package com.jwm.searchservice;
 
+import com.jwm.searchservice.document.RankedDocument;
+
+import java.util.Set;
+
 /**
- * Hello world!
+ * Interface for the search engine webapp to use to interact
  *
  */
-public class SearchService
+public interface SearchService
 {
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
+
+    Set<RankedDocument> getRankedDocumentsForQuery(String query);
 }
