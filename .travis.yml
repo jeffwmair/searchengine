@@ -1,2 +1,5 @@
 language: java
-before_install: cd indexer
+before_install: 
+- cd searchservice
+- mvn install
+- cd ../indexer
