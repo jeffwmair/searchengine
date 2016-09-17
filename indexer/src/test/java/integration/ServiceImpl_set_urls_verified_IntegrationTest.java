@@ -1,8 +1,8 @@
 package integration;
 
+import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.dao.DaoFactory;
-import com.jwm.ir.index.service.ServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class ServiceImpl_set_urls_verified_IntegrationTest extends DbTestBase {
         createAndSavePage("google.com/a", d);
         createAndSavePage("google.com/b", d);
 
-        ServiceImpl service = new ServiceImpl(sessionFactory, new DaoFactory());
+        ServiceImpl service = new ServiceImpl(sessionFactoryProvider, new DaoFactory());
         List<String> urlsToSetVerified = new ArrayList<>();
         urlsToSetVerified.add("google.com/a");
         service.setUrlsAsVerified(urlsToSetVerified);

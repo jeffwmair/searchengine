@@ -1,10 +1,12 @@
 package integration;
 
-import com.jwm.ir.persistence.dao.*;
-import com.jwm.ir.search.service.*;
-import com.jwm.ir.search.*;
+import com.jwm.ir.persistence.dao.PageDao;
+import com.jwm.ir.persistence.dao.PageDaoImpl;
+import com.jwm.ir.persistence.dao.TermDao;
+import com.jwm.ir.persistence.dao.TermDaoImpl;
+import com.jwm.ir.search.FastCosineScoreCalculator;
+import com.jwm.ir.search.service.SearchServiceImpl;
 import org.hibernate.Session;
-
 import org.junit.Test;
 
 /**

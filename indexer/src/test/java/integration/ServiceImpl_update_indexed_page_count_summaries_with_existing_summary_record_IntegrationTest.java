@@ -1,10 +1,10 @@
 package integration;
 
+import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.Page;
 import com.jwm.ir.persistence.SummaryData;
 import com.jwm.ir.persistence.dao.DaoFactory;
-import com.jwm.ir.index.service.ServiceImpl;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.junit.Assert;
@@ -26,7 +26,7 @@ public class ServiceImpl_update_indexed_page_count_summaries_with_existing_summa
         p.setPageRank(0.1);
         saveOrUpdate(p);
 
-        ServiceImpl sut = new ServiceImpl(sessionFactory, new DaoFactory());
+        ServiceImpl sut = new ServiceImpl(sessionFactoryProvider, new DaoFactory());
         sut.updateSummaries();
 
         // fetch the item

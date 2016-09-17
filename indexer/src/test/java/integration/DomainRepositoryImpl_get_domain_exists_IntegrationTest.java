@@ -2,7 +2,6 @@ package integration;
 
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.dao.DomainDaoImpl;
-import com.jwm.ir.persistence.HibernateUtil;
 import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.Test;

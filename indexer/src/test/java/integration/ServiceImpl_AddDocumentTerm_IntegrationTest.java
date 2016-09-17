@@ -1,9 +1,9 @@
 package integration;
 
+import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.Page;
 import com.jwm.ir.persistence.dao.DaoFactory;
-import com.jwm.ir.index.service.ServiceImpl;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class ServiceImpl_AddDocumentTerm_IntegrationTest extends DbTestBase {
         long pageId = fetchPageFromDb("google.com/a").getId();
         Map<String, Integer> termFrequency = new HashMap<>();
         termFrequency.put("hello", 1);
-        ServiceImpl sut = new ServiceImpl(sessionFactory, new DaoFactory());
+        ServiceImpl sut = new ServiceImpl(sessionFactoryProvider, new DaoFactory());
         sut.addDocumentTerms(pageId, termFrequency);
 
         // get the term

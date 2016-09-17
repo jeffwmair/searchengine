@@ -4,7 +4,8 @@ import com.jwm.ir.persistence.Term;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Jeff on 2016-08-05.

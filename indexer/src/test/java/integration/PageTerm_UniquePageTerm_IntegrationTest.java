@@ -4,9 +4,7 @@ import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.Page;
 import com.jwm.ir.persistence.PageTerm;
 import com.jwm.ir.persistence.Term;
-import com.jwm.ir.persistence.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
@@ -15,11 +13,10 @@ import org.junit.Test;
 /**
  * Created by Jeff on 2016-08-05.
  */
-public class PageTerm_UniquePageTerm_IntegrationTest {
+public class PageTerm_UniquePageTerm_IntegrationTest extends DbTestBase {
 
     @Test
     public void try_insert_duplicate_throws_exception() {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 

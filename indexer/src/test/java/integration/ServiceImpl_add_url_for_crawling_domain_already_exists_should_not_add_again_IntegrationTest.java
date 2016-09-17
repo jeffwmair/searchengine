@@ -1,9 +1,9 @@
 package integration;
 
+import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.Page;
 import com.jwm.ir.persistence.dao.DaoFactory;
-import com.jwm.ir.index.service.ServiceImpl;
 import org.junit.Test;
 
 /**
@@ -23,7 +23,7 @@ public class ServiceImpl_add_url_for_crawling_domain_already_exists_should_not_a
         saveOrUpdate(parent);
 
         // act
-        ServiceImpl sut = new ServiceImpl(sessionFactory, new DaoFactory());
+        ServiceImpl sut = new ServiceImpl(sessionFactoryProvider, new DaoFactory());
         sut.addUrlForCrawling(url, parentUrl);
 
     }

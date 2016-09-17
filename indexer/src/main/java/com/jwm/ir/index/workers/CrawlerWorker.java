@@ -1,9 +1,9 @@
 package com.jwm.ir.index.workers;
 
-import com.jwm.ir.persistence.Page;
 import com.jwm.ir.index.crawler.WebPage;
 import com.jwm.ir.index.resource.WebResource;
 import com.jwm.ir.index.service.Service;
+import com.jwm.ir.persistence.Page;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.util.Assert;

@@ -7,15 +7,15 @@ import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.index.workers.CrawlerWorker;
 import com.jwm.ir.index.workers.IndexerWorker;
 import com.jwm.ir.index.workers.RobotWorker;
-import com.jwm.ir.persistence.HibernateUtil;
 import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.SessionFactoryProvider;
 import com.jwm.ir.persistence.ValidExtension;
-import com.jwm.ir.persistence.dao.DaoFactory;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 import java.util.List;
@@ -30,13 +30,21 @@ public class Main {
 
 	public static void main(String[] args) {
 
+
+		log.info("Starting application.  Beginning to load Spring context");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
+		Service service = applicationContext.getBean(ServiceImpl.class);
+		SessionFactoryProvider sessionFactoryProvider = applicationContext.getBean(SessionFactoryProvider.class);
+		log.info("Spring context loaded");
+
+
 		AtomicBoolean stopApplication = new AtomicBoolean(false);
 
 		int prInterval = 500;
 		for(String arg : args) {
 			if (arg.startsWith("--integration_test")) {
 				// hack!
-				IntegrationTestDataSetup.setup();
+				IntegrationTestDataSetup.setup(sessionFactoryProvider);
 			}
 			else if (arg.startsWith("--pagerank_interval=")) {
 				prInterval = Integer.parseInt(arg.split("=")[1]);
@@ -49,9 +57,6 @@ public class Main {
 		}
 
 		log.info("pagerank_interval=" + Integer.toString(prInterval));
-
-		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		Service service = new ServiceImpl(sessionFactory, new DaoFactory());
 
 		List<String> domainExtensions = service.getValidDomainExtensions();
 		if (log.isDebugEnabled()) {
@@ -97,13 +102,13 @@ public class Main {
 	static class IntegrationTestDataSetup {
 		final private static Logger log = LogManager.getLogger(IntegrationTestDataSetup.class);
 
-		public static void setup() {
+		public static void setup(SessionFactoryProvider sessionFactoryProvider) {
 			log.info("Doing integration-test setup");
-			setupPages();
-			setupValidExtensions();
+			setupPages(sessionFactoryProvider);
+			setupValidExtensions(sessionFactoryProvider);
 		}
 
-		private static void setupValidExtensions() {
+		private static void setupValidExtensions(SessionFactoryProvider sessionFactoryProvider) {
 			String[] validExtesions = {
 					"biz", "com", "edu", "gov", "info", "net",
 					"org", "tv", "io", "at", "ca", "fr", "kr",
@@ -111,24 +116,24 @@ public class Main {
 			};
 
 			for (String s : validExtesions) {
-				saveExtension(s);
+				saveExtension( sessionFactoryProvider, s);
 			}
 
 		}
 
-		private static void saveExtension(String ext) {
+		private static void saveExtension(SessionFactoryProvider sessionFactoryProvider, String ext) {
 			int extensionTypeDefault = 1;
 			ValidExtension validExtension = new ValidExtension(extensionTypeDefault, ext);
 			log.info("Saving extension " + ext);
-			Session session = HibernateUtil.getSessionFactory().openSession();
+			Session session = sessionFactoryProvider.getSessionFactory().openSession();
 			Transaction tx = session.beginTransaction();
 			session.save(validExtension);
 			tx.commit();
 			session.close();
 		}
 
-		private static void setupPages() {
-			Session session = HibernateUtil.getSessionFactory().openSession();
+		private static void setupPages(SessionFactoryProvider sessionFactoryProvider) {
+			Session session = sessionFactoryProvider.getSessionFactory().openSession();
 			Page page = new Page("http://localhost/searchengine_test/page1.html", Page.MakeNewDomain.Yes);
 			page.setIsVerified();
 			log.info("Adding page to db:" + page);
@@ -139,12 +144,6 @@ public class Main {
 			session.close();
 		}
 
-		private static Service service = getService();
-
-		private static Service getService() {
-			if (service == null) service = new ServiceImpl(HibernateUtil.getSessionFactory(), new DaoFactory());
-			return service;
-		}
 	}
 
 	static class TerminationWatcher implements Runnable {

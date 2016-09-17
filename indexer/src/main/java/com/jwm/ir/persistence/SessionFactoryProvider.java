@@ -11,10 +11,10 @@ import org.hibernate.cfg.Configuration;
  * http://stackoverflow.com/questions/7986750/create-session-factory-in-hibernate-4
  * @author Jeff
  */
-public class HibernateUtil {
+public class SessionFactoryProvider {
 
-	private static Logger log = LogManager.getLogger(HibernateUtil.class);
-	private static final SessionFactory sessionFactory = buildSessionFactory();
+	private static Logger log = LogManager.getLogger(SessionFactoryProvider.class);
+	private final SessionFactory sessionFactory = buildSessionFactory();
 
 	private static SessionFactory buildSessionFactory() {
 		try {
@@ -38,8 +38,7 @@ public class HibernateUtil {
 		}
 	}
 
-	public static SessionFactory getSessionFactory() {
+	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-
 }

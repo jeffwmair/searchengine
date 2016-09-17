@@ -1,15 +1,14 @@
 package integration;
 
-import com.jwm.ir.persistence.HibernateUtil;
-import com.jwm.ir.persistence.Domain;
-import com.jwm.ir.persistence.Page;
-import com.jwm.ir.persistence.dao.DaoFactory;
 import com.jwm.ir.index.crawler.UrlFeed;
 import com.jwm.ir.index.crawler.UrlFeedRunner;
 import com.jwm.ir.index.service.Service;
 import com.jwm.ir.index.service.ServiceImpl;
+import com.jwm.ir.persistence.Domain;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.SessionFactoryProvider;
+import com.jwm.ir.persistence.dao.DaoFactory;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,13 +22,12 @@ import java.util.concurrent.ScheduledExecutorService;
 /**
  * Created by Jeff on 2016-07-25.
  */
-public class UrlFeedIntegrationTest {
+public class UrlFeedIntegrationTest extends DbTestBase{
 
     @Test
     public void testUrlFeed() {
 
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        if (sessionFactory.isClosed()) sessionFactory.openSession();
+//        if (sessionFactory.isClosed()) sessionFactory.openSession();
 
         // add some dummy db records
         Domain domain = Domain.createFromUrl("localhost");
@@ -43,7 +41,7 @@ public class UrlFeedIntegrationTest {
         tx.commit();
         session.close();
 
-        Service service = new ServiceImpl(sessionFactory, new DaoFactory());
+        Service service = new ServiceImpl(sessionFactoryProvider, new DaoFactory());
         BlockingQueue<String> output = new LinkedBlockingQueue<>();
         UrlFeed sut = new UrlFeed(service, output);
 
@@ -67,8 +65,7 @@ public class UrlFeedIntegrationTest {
      */
     public static void main(String[] args) {
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Service service = new ServiceImpl(sessionFactory, new DaoFactory());
+        Service service = new ServiceImpl(new SessionFactoryProvider(), new DaoFactory());
         final BlockingQueue<String> out = new LinkedBlockingQueue<>();
         UrlFeed feeder = new UrlFeed(service, out);
         UrlFeedRunner x = new UrlFeedRunner(executorService, feeder);

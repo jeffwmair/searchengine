@@ -1,8 +1,8 @@
 package com.jwm.ir.persistence.dao;
 
+import com.jwm.ir.index.crawler.UrlUtils;
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.Page;
-import com.jwm.ir.index.crawler.UrlUtils;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.util.Assert;

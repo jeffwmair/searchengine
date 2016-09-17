@@ -1,9 +1,9 @@
 package com.jwm.ir.index.crawler;
 
 
-import com.jwm.ir.persistence.Page;
 import com.jwm.ir.index.resource.WebResource;
 import com.jwm.ir.index.resource.WebResourcePageImpl;
+import com.jwm.ir.persistence.Page;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jsoup.Connection.Response;

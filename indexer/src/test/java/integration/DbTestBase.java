@@ -2,7 +2,7 @@ package integration;
 
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.Page;
-import com.jwm.ir.persistence.HibernateUtil;
+import com.jwm.ir.persistence.SessionFactoryProvider;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,6 +14,7 @@ import org.junit.Before;
  */
 public class DbTestBase {
 
+    protected SessionFactoryProvider sessionFactoryProvider;
     protected SessionFactory sessionFactory;
 
     protected void saveOrUpdate(Object o) {
@@ -61,6 +62,7 @@ public class DbTestBase {
 
     @Before
     public void setup() {
-        sessionFactory = HibernateUtil.getSessionFactory();
+        sessionFactoryProvider = new SessionFactoryProvider();
+        sessionFactory = sessionFactoryProvider.getSessionFactory();
     }
 }

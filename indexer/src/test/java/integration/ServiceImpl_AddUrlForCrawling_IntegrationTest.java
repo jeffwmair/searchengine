@@ -1,10 +1,10 @@
 package integration;
 
+import com.jwm.ir.index.service.ServiceImpl;
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.Page;
 import com.jwm.ir.persistence.PageLink;
 import com.jwm.ir.persistence.dao.DaoFactory;
-import com.jwm.ir.index.service.ServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ public class ServiceImpl_AddUrlForCrawling_IntegrationTest extends DbTestBase {
         saveOrUpdate(parent);
 
         // act
-        ServiceImpl sut = new ServiceImpl(sessionFactory, new DaoFactory());
+        ServiceImpl sut = new ServiceImpl(sessionFactoryProvider, new DaoFactory());
         sut.addUrlForCrawling(url, parentUrl);
 
         // assert

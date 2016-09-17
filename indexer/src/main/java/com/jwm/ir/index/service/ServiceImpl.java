@@ -1,16 +1,16 @@
 package com.jwm.ir.index.service;
 
-import com.jwm.ir.persistence.Domain;
-import com.jwm.ir.persistence.Page;
-import com.jwm.ir.persistence.SummaryData;
-import com.jwm.ir.persistence.dao.*;
 import com.jwm.ir.index.StemmerWrapper;
 import com.jwm.ir.index.crawler.UrlUtils;
+import com.jwm.ir.persistence.Domain;
+import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.SessionFactoryProvider;
+import com.jwm.ir.persistence.SummaryData;
+import com.jwm.ir.persistence.dao.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.util.Assert;
@@ -25,11 +25,11 @@ import java.util.Map;
 public class ServiceImpl implements Service {
 
     private static final Logger log = LogManager.getLogger(ServiceImpl.class);
-    private final SessionFactory sessionFactory;
+    private final SessionFactoryProvider sessionFactoryProvider;
     private final DaoFactory daoFactory;
-    public ServiceImpl(SessionFactory sessionFactory, DaoFactory daoFactory) {
-        Assert.notNull(sessionFactory, "Must provide sessionFactory");
-        this.sessionFactory = sessionFactory;
+    public ServiceImpl(SessionFactoryProvider sessionFactoryProvider, DaoFactory daoFactory) {
+        Assert.notNull(sessionFactoryProvider, "Must provide sessionFactoryProvider");
+        this.sessionFactoryProvider = sessionFactoryProvider;
         this.daoFactory = daoFactory;
     }
 
@@ -40,7 +40,7 @@ public class ServiceImpl implements Service {
             log.debug("Beginning to add url for crawling:"+url+"; parentUrl"+parentUrl);
         }
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
         DomainDao domainDao = daoFactory.createDomainRepository(session);
@@ -85,7 +85,7 @@ public class ServiceImpl implements Service {
     @Override
     public void addCrawlResult(String url, String pageTitle, String pageDesc, Page.CrawlResult result) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         PageDao pageDao = daoFactory.createPageRepository(session);
 
@@ -97,7 +97,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public List<String> getValidDomainExtensions() {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         ExtensionDao dao = daoFactory.createExtensionDao(session);
         List<String> extensions = dao.getAllValidExtensions();
         session.close();
@@ -109,7 +109,7 @@ public class ServiceImpl implements Service {
 
         log.warn("Todo: implement 'polite crawling' by preventing hitting the same domain in quick succession");
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         Criteria criteria = session.createCriteria(Page.class);
         List<Page> pages;
@@ -137,7 +137,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public void updatePageRanks(Map<Long, Double> pageRanks) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
         PageDao pageDao = daoFactory.createPageRepository(session);
@@ -152,7 +152,7 @@ public class ServiceImpl implements Service {
     @Override
     public void updateSummaries() {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
 
@@ -181,7 +181,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public void setUrlsAsVerified(List<String> verifiedUrls) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         for(String url : verifiedUrls) {
             Page p = (Page)getPageObject(url, session);
@@ -195,7 +195,7 @@ public class ServiceImpl implements Service {
     @Override
     public void addDocumentTerms(long pageId, Map<String, Integer> termFrequences) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         PageTermDao pageTermDao = daoFactory.createPageTermDao(session);
 
@@ -219,7 +219,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public List<Page> getPages(FilterVerified filterVerified) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Criteria crit = session.createCriteria(Page.class);
         if (filterVerified == FilterVerified.VerifiedOnly) {
             crit.add(Restrictions.eq("verified", Page.IsVerified));
@@ -234,7 +234,7 @@ public class ServiceImpl implements Service {
 
     @Override
     public boolean pageExists(String url) {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         boolean exists = getPageObject(url, session) != null;
         session.close();
         return exists;
@@ -250,7 +250,7 @@ public class ServiceImpl implements Service {
             throw new RuntimeException("Page does not exist with url '"+url+"'");
         }
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactoryProvider.getSessionFactory().openSession();
         Page page = (Page)getPageObject(url, session);
         session.close();
         return page;

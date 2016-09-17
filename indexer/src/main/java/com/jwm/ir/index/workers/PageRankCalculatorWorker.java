@@ -1,8 +1,8 @@
 package com.jwm.ir.index.workers;
 
+import com.jwm.ir.index.service.Service;
 import com.jwm.ir.persistence.Page;
 import com.jwm.ir.persistence.PageLink;
-import com.jwm.ir.index.service.Service;
 import edu.uci.ics.jung.algorithms.scoring.PageRank;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import org.apache.log4j.LogManager;

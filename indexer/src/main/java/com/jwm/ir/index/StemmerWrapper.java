@@ -2,7 +2,10 @@ package com.jwm.ir.index;
 
 import org.springframework.util.Assert;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Jeff on 2016-08-14.

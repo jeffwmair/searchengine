@@ -1,6 +1,7 @@
 package com.jwm.ir.index.service;
 
 import com.jwm.ir.persistence.Page;
+import com.jwm.ir.persistence.SessionFactoryProvider;
 import com.jwm.ir.persistence.dao.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,14 +22,14 @@ public class ServiceImplTest {
 	private PageDao pageDao;
 	private PageLinkDao pageLinkDao;
 	private DomainDao domainDao;
-	private SessionFactory sessionFactory;
+	private SessionFactoryProvider sessionFactoryProvider;
 	private DaoFactory daoFactory;
 	private Session session;
 
 	@Test
 	public void test_add_document_term_when_term_does_not_exist_should_add_term_too() {
 
-		ServiceImpl sut = new ServiceImpl(sessionFactory, daoFactory);
+		ServiceImpl sut = new ServiceImpl(sessionFactoryProvider, daoFactory);
 
 		PageTermDao pageTermDao = mock(PageTermDao.class);
 		when(daoFactory.createPageTermDao(session)).thenReturn(pageTermDao);
@@ -49,7 +50,7 @@ public class ServiceImplTest {
 
 		String url = "www.google.com/a";
 		String parentUrl = "www.google.com/b";
-		Service sut = new ServiceImpl(sessionFactory, daoFactory);
+		Service sut = new ServiceImpl(sessionFactoryProvider, daoFactory);
 		when(pageDao.pageExists(url)).thenReturn(true);
 		sut.addUrlForCrawling(url, parentUrl);
 
@@ -61,7 +62,7 @@ public class ServiceImplTest {
 		Page page = new Page();
 		page.setUrl(url);
 		String parenturl = "www.google.com/b";
-		ServiceImpl sut = new ServiceImpl(sessionFactory, daoFactory);
+		ServiceImpl sut = new ServiceImpl(sessionFactoryProvider, daoFactory);
 		when(pageDao.pageExists(url)).thenReturn(false);
 		when(pageDao.create(url, domainDao)).thenReturn(page);
 		when(domainDao.domainExists("google.com")).thenReturn(false);
@@ -78,7 +79,7 @@ public class ServiceImplTest {
 		String url = "www.google.com/a";
 		Page page = new Page();
 		page.setUrl(url);
-		ServiceImpl sut = new ServiceImpl(sessionFactory, daoFactory);
+		ServiceImpl sut = new ServiceImpl(sessionFactoryProvider, daoFactory);
 		when(pageDao.pageExists(url)).thenReturn(false);
 		when(pageDao.create(url, domainDao)).thenReturn(page);
 		when(domainDao.domainExists("google.com")).thenReturn(true);
@@ -92,8 +93,12 @@ public class ServiceImplTest {
 
 	@Before
 	public void setup() {
-		sessionFactory = mock(SessionFactory.class);
+		sessionFactoryProvider = mock(SessionFactoryProvider.class);
+		SessionFactory sessionFactory = mock(SessionFactory.class);
+
+
 		session = mock(Session.class);
+		when(sessionFactoryProvider.getSessionFactory()).thenReturn(sessionFactory);
 		when(sessionFactory.openSession()).thenReturn(session);
 		Transaction tx = mock(Transaction.class);
 		when(session.beginTransaction()).thenReturn(tx);
