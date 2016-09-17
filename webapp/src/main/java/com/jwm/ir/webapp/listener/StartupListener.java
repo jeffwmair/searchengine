@@ -12,6 +12,7 @@ import javax.servlet.ServletContextEvent;
 public class StartupListener implements javax.servlet.ServletContextListener {
 
     private static final Logger log = LogManager.getLogger(StartupListener.class);
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         log.info("Application startup");
