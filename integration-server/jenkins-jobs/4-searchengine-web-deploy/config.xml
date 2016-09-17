@@ -38,7 +38,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
-      <targets>install tomcat7:deploy</targets>
+      <targets>install tomcat7:redeploy</targets>
       <pom>webapp/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
