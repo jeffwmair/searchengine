@@ -4,6 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--
     <bean id="sessionFactoryProvider" class="com.jwm.ir.persistence.SessionFactoryProvider"/>
     <bean id="daoFactory" class="com.jwm.ir.persistence.dao.DaoFactory" />
     <bean id="indexService" class="com.jwm.ir.index.service.ServiceImpl">
@@ -13,10 +14,14 @@
 
 
     <bean id="fastCosineCalculator" class="com.jwm.ir.search.FastCosineScoreCalculator"/>
+    -->
+    <bean id="searchService" class="com.jwm.ir.webapp.SearchServiceStubImpl"/>
+    <!--
     <bean id="searchService" class="com.jwm.ir.search.service.SearchServiceImpl">
         <constructor-arg ref="fastCosineCalculator"/>
         <constructor-arg ref="sessionFactoryProvider"/>
         <constructor-arg ref="daoFactory"/>
     </bean>
+    -->
 
 </beans>
