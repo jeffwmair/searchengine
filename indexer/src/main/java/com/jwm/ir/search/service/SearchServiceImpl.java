@@ -2,7 +2,9 @@ package com.jwm.ir.search.service;
 
 import com.jwm.ir.index.StemmerWrapper;
 import com.jwm.ir.persistence.PageTerm;
+import com.jwm.ir.persistence.SessionFactoryProvider;
 import com.jwm.ir.persistence.Term;
+import com.jwm.ir.persistence.dao.DaoFactory;
 import com.jwm.ir.persistence.dao.PageDao;
 import com.jwm.ir.persistence.dao.TermDao;
 import com.jwm.ir.search.FastCosineScoreCalculator;
@@ -11,6 +13,8 @@ import com.jwm.ir.search.document.DocumentImpl;
 import com.jwm.searchservice.SearchService;
 import com.jwm.searchservice.document.Document;
 import com.jwm.searchservice.document.RankedDocument;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import java.util.*;
 
@@ -20,18 +24,18 @@ import java.util.*;
 public class SearchServiceImpl implements SearchService {
 
     private final FastCosineScoreCalculator scoreCalculator;
-    private final TermDao termDao;
-    private final PageDao pageDao;
+    private final DaoFactory daoFactory;
+    private final SessionFactory sessionFactory;
 
     /**
      * New instance of SearchServiceImpl with all the indexed pages to query.
      */
     public SearchServiceImpl(FastCosineScoreCalculator scoreCalculator,
-                             TermDao termDao,
-                             PageDao pageDao) {
+                             SessionFactoryProvider sessionFactoryProvider,
+                             DaoFactory daoFactory) {
         this.scoreCalculator = scoreCalculator;
-        this.termDao = termDao;
-        this.pageDao = pageDao;
+        this.daoFactory = daoFactory;
+        this.sessionFactory = sessionFactoryProvider.getSessionFactory();
     }
 
 
@@ -47,6 +51,9 @@ public class SearchServiceImpl implements SearchService {
         Map<String, Integer> queryMap = StemmerWrapper.convertToStemmed(QueryHelper.getMapOfQueryTerms(query_lowercase));
 
         List<String> queryTerms = new ArrayList<>();
+        Session session = sessionFactory.openSession();
+        TermDao termDao = daoFactory.createTermDao(session);
+        PageDao pageDao = daoFactory.createPageRepository(session);
         List<Term> terms = termDao.getDocumentTermsMatching(queryMap.keySet());
         int totalIndexedPages = pageDao.getIndexedPageCount();
 
@@ -88,6 +95,7 @@ public class SearchServiceImpl implements SearchService {
             queryTerms.add(term_stemmed);
         }
 
+        session.close();
         return scoreCalculator.scorePagesAgainstQuery(documents, termPostings, queryTerms, totalIndexedPages);
 
     }

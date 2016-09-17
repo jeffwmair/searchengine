@@ -11,4 +11,12 @@
         <constructor-arg ref="daoFactory" />
     </bean>
 
+
+    <bean id="fastCosineCalculator" class="com.jwm.ir.search.FastCosineScoreCalculator"/>
+    <bean id="searchService" class="com.jwm.ir.search.service.SearchServiceImpl">
+        <constructor-arg ref="fastCosineCalculator"/>
+        <constructor-arg ref="sessionFactoryProvider"/>
+        <constructor-arg ref="daoFactory"/>
+    </bean>
+
 </beans>
