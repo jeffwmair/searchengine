@@ -26,7 +26,7 @@ public class IndexController {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String view(ModelMap model) {
         log.info("Performing search...");
-        model.addAttribute("searchResults", searchService.getRankedDocumentsForQuery("foobar"));
+        model.addAttribute("searchResults", searchService.getRankedDocumentsForQuery("star"));
         return "index";
     }
 

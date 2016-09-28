@@ -13,8 +13,11 @@ import com.jwm.ir.search.document.DocumentImpl;
 import com.jwm.searchservice.SearchService;
 import com.jwm.searchservice.document.Document;
 import com.jwm.searchservice.document.RankedDocument;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -26,6 +29,7 @@ public class SearchServiceImpl implements SearchService {
     private final FastCosineScoreCalculator scoreCalculator;
     private final DaoFactory daoFactory;
     private final SessionFactory sessionFactory;
+    private static final Logger log = LogManager.getLogger(SearchServiceImpl.class);
 
     /**
      * New instance of SearchServiceImpl with all the indexed pages to query.
@@ -47,8 +51,14 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public Set<RankedDocument> getRankedDocumentsForQuery(String query) {
 
+
+        if (log.isDebugEnabled()) {
+            log.debug("getRankedDocumentsForQuery:'"+query+"'");
+        }
         String query_lowercase = query.toLowerCase();
+        Assert.hasLength(query_lowercase, "non-empty query must be provided!");
         Map<String, Integer> queryMap = StemmerWrapper.convertToStemmed(QueryHelper.getMapOfQueryTerms(query_lowercase));
+        Assert.notEmpty(queryMap.keySet(), "stemmed queryMap has an empty keyset!  This was not expected");
 
         List<String> queryTerms = new ArrayList<>();
         Session session = sessionFactory.openSession();
@@ -94,6 +104,8 @@ public class SearchServiceImpl implements SearchService {
 
             queryTerms.add(term_stemmed);
         }
+
+        Assert.notEmpty(queryTerms, "None of the given query terms had any matches in any pages.  Need to improve indexing!");
 
         session.close();
         return scoreCalculator.scorePagesAgainstQuery(documents, termPostings, queryTerms, totalIndexedPages);
