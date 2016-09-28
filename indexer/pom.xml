@@ -179,6 +179,12 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
+					<!-- should exclude resources because they will be provided
+					by the parent application.  That is, if this is just a library jar,
+					it whatever application uses it should provide the configs.  Regardless,
+					the build process should provide them, they shouldn't just get stuffed
+					into a jar file.
+					-->
 					<excludes>
 						<exclude>*.properties</exclude>
 						<exclude>*.xml</exclude>
