@@ -109,11 +109,10 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
-
     </dependencies>
     <build>
         <finalName>searchengine-webapp</finalName>
+        <resources>src/main/resources</resources>
 	<plugins>
 <plugin>
 	<groupId>org.apache.tomcat.maven</groupId>
