@@ -10,6 +10,5 @@ import java.util.Set;
  */
 public interface SearchService
 {
-
     Set<RankedDocument> getRankedDocumentsForQuery(String query);
 }
