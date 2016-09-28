@@ -112,7 +112,11 @@
     </dependencies>
     <build>
         <finalName>searchengine-webapp</finalName>
-        <resources>src/main/resources</resources>
+        <resources>
+            <resource>
+                <directory>src/main/resource</directory>
+            </resource>
+        </resources>
 	<plugins>
 <plugin>
 	<groupId>org.apache.tomcat.maven</groupId>
