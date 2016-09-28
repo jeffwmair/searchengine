@@ -13,7 +13,16 @@ build_program() {
 	rm -rf target/
 	echo "build new search-engine"
 	mvn package 
+	copy_configuations
 	cd -
+}
+
+##
+# assumes to be run from the project root directory
+#
+copy_configuations() {
+	pwd
+	cp src/main/resources/* target/
 }
 
 setup_test_pages() {
