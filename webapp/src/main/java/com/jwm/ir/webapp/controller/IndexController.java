@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,7 +27,9 @@ public class IndexController {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String view(ModelMap model) {
         log.info("Performing search...");
-        model.addAttribute("searchResults", searchService.getRankedDocumentsForQuery("star"));
+        Set<RankedDocument> rankedDocumentList = searchService.getRankedDocumentsForQuery("star");
+        log.info("Fetched ranked documents list, size:"+rankedDocumentList.size());
+        model.addAttribute("searchResults", rankedDocumentList);
         return "index";
     }
 

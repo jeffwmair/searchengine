@@ -2,6 +2,8 @@ package com.jwm.ir.search;
 
 import com.jwm.searchservice.document.Document;
 import com.jwm.searchservice.document.RankedDocument;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -9,6 +11,8 @@ import java.util.*;
  * Implementation (roughly) of FastCosineScore algorithm from Introduction to Information Retrieval, Chapter 7. (figure 7.1)
  */
 public class FastCosineScoreCalculator {
+
+	private static final Logger log = LogManager.getLogger(FastCosineScoreCalculator.class);
 
 	public Set<RankedDocument> scorePagesAgainstQuery(Map<Long, Document> documents,
 													  Map<String, List<Document>> termPostings,
@@ -49,6 +53,7 @@ public class FastCosineScoreCalculator {
 			rankedDocuments.add(new RankedDocument(score, doc));
 		}
 
+		log.debug("total ranked documents:"+rankedDocuments.size());
 		return rankedDocuments;
 	}
 

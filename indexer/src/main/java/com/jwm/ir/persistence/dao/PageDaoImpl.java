@@ -3,10 +3,14 @@ package com.jwm.ir.persistence.dao;
 import com.jwm.ir.index.crawler.UrlUtils;
 import com.jwm.ir.persistence.Domain;
 import com.jwm.ir.persistence.Page;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.util.Assert;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,6 +19,7 @@ import java.util.Map;
 public class PageDaoImpl implements PageDao {
 
     private final Session session;
+    private static final Logger log = LogManager.getLogger(PageDao.class);
 
     public PageDaoImpl(Session session) {
         this.session = session;
