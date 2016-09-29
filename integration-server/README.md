@@ -1,7 +1,13 @@
-# Integration Server Setup
+# Server Setup
 
-To setup an integration server from scratch, run the following:
+## Integration Server Setup
 
 ```shell
 git clone https://github.com/jeffwmair/searchengine.git && cd searchengine/integration-server && ./server-setup.sh
+```
+
+## Simple Build/Test Server Setup
+
+```shell
+git clone https://github.com/jeffwmair/searchengine.git && cd searchengine/integration-server && ./simple-setup.sh
 ```
