@@ -14,12 +14,32 @@ import org.hibernate.cfg.Configuration;
 public class SessionFactoryProvider {
 
 	private static Logger log = LogManager.getLogger(SessionFactoryProvider.class);
-	private final SessionFactory sessionFactory = buildSessionFactory();
+	private final SessionFactory sessionFactory;
+	private final static String ConfigFileProduction = "hibernate.cfg.xml";
+	private final static String ConfigFileTest = "hibernate.test.cfg.xml";
+	private static String configFile;
+	public enum Mode { Production, Test }
+
+	public SessionFactoryProvider(Mode mode) {
+	    switch (mode) {
+			case Production:
+				configFile = ConfigFileProduction;
+				break;
+			case Test:
+				configFile = ConfigFileTest;
+				break;
+			default:
+			    throw new RuntimeException("Unknown mode:"+mode);
+		}
+
+		sessionFactory = buildSessionFactory();
+	}
 
 	private static SessionFactory buildSessionFactory() {
 		try {
 			Configuration configuration = new Configuration();
-			configuration.configure("hibernate.cfg.xml");
+			log.debug("Using hibernate config file:"+configFile);
+			configuration.configure(configFile);
 			StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 			
 			/* export schema to a file */

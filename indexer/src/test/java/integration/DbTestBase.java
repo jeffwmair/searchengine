@@ -62,7 +62,7 @@ public class DbTestBase {
 
     @Before
     public void setup() {
-        sessionFactoryProvider = new SessionFactoryProvider();
+        sessionFactoryProvider = new SessionFactoryProvider(SessionFactoryProvider.Mode.Test);
         sessionFactory = sessionFactoryProvider.getSessionFactory();
     }
 }

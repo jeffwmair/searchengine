@@ -65,7 +65,7 @@ public class UrlFeedIntegrationTest extends DbTestBase{
      */
     public static void main(String[] args) {
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        Service service = new ServiceImpl(new SessionFactoryProvider(), new DaoFactory());
+        Service service = new ServiceImpl(new SessionFactoryProvider(SessionFactoryProvider.Mode.Production), new DaoFactory());
         final BlockingQueue<String> out = new LinkedBlockingQueue<>();
         UrlFeed feeder = new UrlFeed(service, out);
         UrlFeedRunner x = new UrlFeedRunner(executorService, feeder);
