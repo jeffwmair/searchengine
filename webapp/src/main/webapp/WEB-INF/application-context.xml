@@ -4,7 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	   					   http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="sessionFactoryProvider" class="com.jwm.ir.persistence.SessionFactoryProvider"/>
+    <bean id="sessionFactoryProvider" class="com.jwm.ir.persistence.SessionFactoryProvider">
+        <constructor-arg value="Production"/>
+    </bean>
     <bean id="daoFactory" class="com.jwm.ir.persistence.dao.DaoFactory" />
     <bean id="indexService" class="com.jwm.ir.index.service.ServiceImpl">
         <constructor-arg ref="sessionFactoryProvider" />
